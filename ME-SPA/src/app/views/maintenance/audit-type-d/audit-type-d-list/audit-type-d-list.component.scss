@@ -8,3 +8,7 @@ thead {
     width: 20% !important;
     margin-left: 30px;
 }
+.scoll-bottom {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}

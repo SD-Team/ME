@@ -15,37 +15,49 @@
           <div class="card-body">
             <ngx-spinner bdOpacity=0.2 bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
             </ngx-spinner>
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Audit_Type1_ID</th>
-                  <th>Audit_Item_ID</th>
-                  <th>Audit_Item_EN</th>
-                  <th>Rating_0</th>
-                  <th>Rating_1</th>
-                  <th>Rating_2</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of auditTypes;let i = index">
-                  <td>{{ (pagination.currentPage - 1) * pagination.itemsPerPage + i + 1 }}</td>
-                  <td>{{item.audit_Type_ID}}</td>
-                  <td>{{item.audit_Item_ID}}</td>
-                  <td>{{item.audit_Item_EN}}</td>
-                  <td>{{ item.rating_0 }}</td>
-                  <td>{{ item.rating_1 }}</td>
-                  <td>{{ item.rating_2 }}</td>
-                  <td>
-                    <button type="button" class="btn btn-primary btn-sm mr-2" (click)="changeToEdit(item)"><i
-                        class="fa fa-edit fa-lg"></i></button>
-                    <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><i
-                        class="fa fa-trash fa-lg"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="scoll-bottom">
+              <table class="table table-bordered scoll-bottom">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Audit_Type1_ID</th>
+                    <th>Audit_Item_ID</th>
+                    <th>Audit_Item_EN</th>
+                    <th>Audit_Item_LL</th>
+                    <th>Audit_Item_ZW</th>
+                    <th>Rating_0</th>
+                    <th>Rating_1</th>
+                    <th>Rating_2</th>
+                    <th>Version</th>
+                    <th>Update_By</th>
+                    <th>Update_Time</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of auditTypes;let i = index">
+                    <td>{{ (pagination.currentPage - 1) * pagination.itemsPerPage + i + 1 }}</td>
+                    <td>{{item.audit_Type_ID}}</td>
+                    <td>{{item.audit_Item_ID}}</td>
+                    <td>{{item.audit_Item_EN}}</td>
+                    <td>{{item.audit_Item_LL}}</td>
+                    <td>{{item.audit_Item_ZW}}</td>
+                    <td>{{ item.rating_0 }}</td>
+                    <td>{{ item.rating_1 }}</td>
+                    <td>{{ item.rating_2 }}</td>
+                    <td>{{ item.version }}</td>
+                    <td>{{ item.updated_By }}</td>
+                    <td>{{ item.updated_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm mr-2" (click)="changeToEdit(item)"><i
+                          class="fa fa-edit fa-lg"></i></button>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><i
+                          class="fa fa-trash fa-lg"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="d-flex">
               <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
                 [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"

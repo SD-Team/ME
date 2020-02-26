@@ -19,20 +19,22 @@ export class TypeListComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   pagination: Pagination;
   text: string;
-  constructor(private auditTypeService: AuditTypeService, private alertify: AlertifyService,
-    private router: Router,
-    private route: ActivatedRoute, private spinner: NgxSpinnerService) { }
+  constructor(private auditTypeService: AuditTypeService,
+              private alertify: AlertifyService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.spinner.show();
-    this.auditTypeService.currentAuditType.subscribe(auditType => this.auditType = auditType)
+    this.auditTypeService.currentAuditType.subscribe(auditType => this.auditType = auditType);
     this.route.data.subscribe(data => {
-      console.log("Data: ", data);
+      console.log('Data: ', data);
       this.spinner.hide();
       this.auditTypes = data['auditTypes'].result;
       this.pagination = data['auditTypes'].pagination;
     });
-    console.log("pa:", this.pagination);
+    console.log('pa:', this.pagination);
   }
 
   load() {
@@ -48,12 +50,12 @@ export class TypeListComponent implements OnInit {
   }
 
   search() {
-    if (this.text != "") {
+    if (this.text !== '') {
       this.auditTypeService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
         .subscribe((res: PaginatedResult<AuditType[]>) => {
           this.auditTypes = res.result;
           this.pagination = res.pagination;
-          console.log("Search: ", this.auditTypes);
+          console.log('Search: ', this.auditTypes);
         }, error => {
           this.alertify.error(error);
         });
@@ -65,14 +67,14 @@ export class TypeListComponent implements OnInit {
   add() {
     this.auditType = {};
     this.auditTypeService.changeAuditType(this.auditType);
-    this.auditTypeService.changeFlag("0");
-    this.router.navigate(["/maintenance/audit-type/add"]);
+    this.auditTypeService.changeFlag('0');
+    this.router.navigate(['/maintenance/audit-type/add']);
   }
 
   changeToEdit(auditType: AuditType) {
     this.auditTypeService.changeAuditType(auditType);
-    this.auditTypeService.changeFlag("1");
-    this.router.navigate(["/maintenance/audit-type/add"]);
+    this.auditTypeService.changeFlag('1');
+    this.router.navigate(['/maintenance/audit-type/add']);
   }
 
   delete(auditType: AuditType) {

@@ -1,11 +1,10 @@
 <div class="animated fadeIn">
     <div class="row">
-      <div class="col-md-12 demo">
-
+      <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <strong>Add new</strong>
-            <ng-template #elseBlock><strong>Add</strong></ng-template>
+            <strong *ngIf="!auditType.audit_Type_ID;else elseBlock">Add new</strong>
+            <ng-template #elseBlock><strong>Update</strong></ng-template>
             Audit Type
             <button type="button" class="btn btn-sm btn-primary float-right"  (click)="backList()"><i
                 class="fa fa-chevron-left"></i>
@@ -25,29 +24,26 @@
                     <input type="text" name="audit_Item_id" [(ngModel)]="auditType.audit_Item_ID" class="form-control"
                     placeholder="Enter audit item ID..">
                 </div>
-                <label class="col-md-1 col-form-label" for="Audit_Item_EN">Audit_Item_EN</label>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-1 col-form-label" for="Audit_Item_EN">Audit EN</label>
                 <div class="col-md-3">
-                    <input type="text" name="audit_item_en" [(ngModel)]="auditType.audit_Item_EN" class="form-control"
-                    placeholder="Enter Audit Item EN.." required>
+                    <textarea name="audit_item_en" [(ngModel)]="auditType.audit_Item_EN" id="audit_item_en" class="form-control" rows="5"></textarea>
+                </div>
+                <label class="col-md-1 col-form-label" for="audit_item_ll">Audit LL</label>
+                <div class="col-md-3">
+                    <textarea name="audit_item_ll"  [(ngModel)]="auditType.audit_Item_LL" class="form-control" id="audit_item_ll" rows="5"></textarea>
+                </div>
+                <label class="col-md-1 col-form-label" for="audit_Type2">Audit ZW</label>
+                <div class="col-md-3">
+                    <textarea name="audit_Item_ZW"  [(ngModel)]="auditType.audit_Item_ZW" class="form-control" id="audit_Item_ZW" rows="5"></textarea>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-1 col-form-label" for="audit_item_ll">Audit_Item_LL</label>
-                <div class="col-md-3">
-                  <input type="text"  name="audit_Type1" [(ngModel)]="auditType.audit_Item_LL" class="form-control"
-                    placeholder="Audit Item LL..">
-                </div>
-                <label class="col-md-1 col-form-label" for="audit_Type2">Audit_Item_ZW</label>
-                <div class="col-md-3">
-                  <input type="text"  name="audit_Type2" [(ngModel)]="auditType.audit_Item_ZW" class="form-control"
-                    placeholder="Enter Audit Item ZW..">
-                </div>
                 <label class="col-md-1 col-form-label" for="audit_Type2_Name">Racting 0</label>
                 <div class="col-md-3">
                   <input type="number" name="rating_0" [(ngModel)]="auditType.rating_0" class="form-control" placeholder="Enter racting 0..">
                 </div>
-              </div>
-              <div class="form-group row">
                 <label class="col-md-1 col-form-label" for="audit_Type2_Name">Racting 1</label>
                 <div class="col-md-3">
                   <input type="number" name="rating_1" [(ngModel)]="auditType.rating_1" class="form-control" placeholder="Enter racting 1..">
@@ -56,16 +52,12 @@
                 <div class="col-md-3">
                   <input type="number" name="rating_2" [(ngModel)]="auditType.rating_2" class="form-control" placeholder="Enter racting 2..">
                 </div>
-                <label class="col-md-1 col-form-label" for="audit_Type2_Name">Version</label>
-                <div class="col-md-3">
-                  <input type="number" name="version" [(ngModel)]="auditType.version" class="form-control">
-                </div>
               </div>
             </div>
             <div class="card-footer">
               <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-level-up"></i> Upgrade</button>
               <button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-ban"></i> Cancel</button>
-              <button type="submit" class="btn btn-sm btn-primary" [disabled]="!addAuditTypeDForm.valid"><i
+              <button type="submit" class="btn btn-sm btn-primary" *ngIf="flag=='0'" [disabled]="!addAuditTypeDForm.valid"><i
                   class="fa fa-check" ></i> Save & Next</button>
               <button type="button" class="btn btn-sm btn-success" (click)="save()" [disabled]="!addAuditTypeDForm.valid"><i
                   class="fa fa-check"></i> Save</button>

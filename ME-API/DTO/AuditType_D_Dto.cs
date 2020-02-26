@@ -21,6 +21,7 @@ namespace ME_API.DTO
         public DateTime? Updated_Time { get; set; }        
         public AuditType_D_Dto() {
             this.Updated_Time =  DateTime.Now;
+            this.Version = 1;
         }
         
     }

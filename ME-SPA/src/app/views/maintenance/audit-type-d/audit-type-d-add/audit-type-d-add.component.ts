@@ -8,7 +8,7 @@ import { AuditType } from '../../../../_core/_models/audit-type';
 @Component({
   selector: 'app-audit-type-d-add',
   templateUrl: './audit-type-d-add.component.html',
-  styleUrls: ['./audit-type-d-add.component.css']
+  styleUrls: ['./audit-type-d-add.component.scss']
 })
 export class AuditTypeDAddComponent implements OnInit {
 
