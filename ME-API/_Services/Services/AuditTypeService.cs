@@ -54,6 +54,11 @@ namespace ME_API._Services.Services
             return await _repoAuditType.FindAll().ProjectTo<AuditTypeDto>(_configMapper).OrderByDescending(x => x.Updated_Time).ToListAsync();
         }
 
+        public async Task<List<AuditTypeDto>> GetAuditsByAuditType(AuditType1FormDto formdata) {
+            var data = await _repoAuditType.FindAll().ProjectTo<AuditTypeDto>(_configMapper)
+            .Where(x => x.Audit_Type1.Trim() == formdata.Audit_Type_1.Trim()).OrderByDescending(x => x.Updated_Time).ToListAsync();
+            return data;
+        }
         public AuditTypeDto GetById(object id)
         {
             return _mapper.Map<MES_Audit_Type_M, AuditTypeDto>(_repoAuditType.FindById(id));
@@ -79,6 +84,12 @@ namespace ME_API._Services.Services
                 )
             .OrderByDescending(x => x.Updated_Time);
             return await PagedList<AuditTypeDto>.CreateAsync(lists, param.PageNumber, param.PageSize);
+        }
+
+        public async Task<List<string>> GetAllAuditType1()
+        {
+            var lists = await _repoAuditType.FindAll().Select(x => x.Audit_Type1).Distinct().ToListAsync();
+            return lists;
         }
     }
 }

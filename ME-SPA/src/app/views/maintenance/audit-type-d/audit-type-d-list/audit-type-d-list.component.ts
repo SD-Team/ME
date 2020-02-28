@@ -6,6 +6,8 @@ import { AuditTypeDService } from '../../../../_core/_services/audit-type-d.serv
 import { AlertifyService } from '../../../../_core/_services/alertify.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuditTypeService } from '../../../../_core/_services/audit-type.service';
+import { AuditType } from '../../../../_core/_models/audit-type';
 
 @Component({
   selector: 'app-audit-type-d-list',
@@ -18,7 +20,13 @@ export class AuditTypeDListComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   pagination: Pagination;
   text: string;
+  auditType1List: string[];
+  auditType2List: AuditType[];
+  auditType1: string;
+  auditType2: string;
+  checkSearch = '0';
   constructor(  private auditTypeDService: AuditTypeDService,
+                private auditTypeMService: AuditTypeService,
                 private alertify: AlertifyService,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -27,6 +35,7 @@ export class AuditTypeDListComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.auditTypeDService.currentAuditType.subscribe(auditType => this.auditType = auditType);
+    this.getAllAuditType1();
     this.route.data.subscribe(data => {
       console.log('Data: ', data);
       this.spinner.hide();
@@ -38,7 +47,16 @@ export class AuditTypeDListComponent implements OnInit {
 
   load() {
     // this.spinner.show();
-    this.auditTypeDService.getListAll(this.pagination.currentPage, this.pagination.itemsPerPage)
+    if (this.checkSearch === '1' && this.auditType1 !== '') {
+      this.auditTypeDService.searchAuditType(this.pagination.currentPage, this.pagination.itemsPerPage,
+        this.auditType1, this.auditType2).subscribe((res: PaginatedResult<AuditTypeD[]>) => {
+        this.auditTypes = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+      });
+    } else {
+      this.auditTypeDService.getListAll(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res: PaginatedResult<AuditTypeD[]>) => {
         this.auditTypes = res.result;
         this.pagination = res.pagination;
@@ -46,6 +64,7 @@ export class AuditTypeDListComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
+    }
   }
   search() {
     if (this.text !== '') {
@@ -53,7 +72,6 @@ export class AuditTypeDListComponent implements OnInit {
         .subscribe((res: PaginatedResult<AuditTypeD[]>) => {
           this.auditTypes = res.result;
           this.pagination = res.pagination;
-          console.log('Search: ', this.auditTypes);
         }, error => {
           this.alertify.error(error);
         });
@@ -62,6 +80,7 @@ export class AuditTypeDListComponent implements OnInit {
     }
   }
   add() {
+    this.checkSearch = '0';
     this.auditType = {};
     this.auditTypeDService.changeAuditType(this.auditType);
     this.auditTypeDService.changeFlag('0');
@@ -87,5 +106,54 @@ export class AuditTypeDListComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.load();
+  }
+
+  // Khi Click chọn option selection Audit Type 1
+  optionAuditType1(e) {
+    this.auditType1 =  e.target.value;
+    // tslint:disable-next-line:no-var-keyword
+    const ọbject = {
+      audit_type_1: this.auditType1
+    };
+    this.auditTypeMService.getAuditsByAuditType1(ọbject).subscribe(res => {
+      this.auditType2List = res;
+      this.auditType2 = this.auditType2List[0].audit_Type2;
+    });
+  }
+  // Khi Click chọn option selection Audit Type 2
+  optionAuditType2(e) {
+    this.auditType2 = e.target.value;
+  }
+  getAllAuditType1() {
+    this.auditTypeMService.getAllAuditType1().subscribe(res => {
+      this.auditType1List = res;
+    });
+  }
+  searchAuditType() {
+    this.checkSearch = '1';
+    if (this.auditType1 === '' || this.auditType1 === undefined) {
+      this.alertify.error('Please option Audit Type 1');
+    } else {
+      if (this.auditType1 === '精實系統/WS') {
+         // tslint:disable-next-line:max-line-length
+          this.auditTypeDService.search( this.pagination.currentPage, this.pagination.itemsPerPage, 'Audit0006').subscribe((res: PaginatedResult<AuditTypeD[]>) => {
+          this.auditTypes = res.result;
+          this.pagination = res.pagination;
+        });
+      } else if (this.auditType1 === 'Other') {
+          // tslint:disable-next-line:max-line-length
+          this.auditTypeDService.search( this.pagination.currentPage, this.pagination.itemsPerPage, 'Audit0009').subscribe((res: PaginatedResult<AuditTypeD[]>) => {
+            this.auditTypes = res.result;
+            this.pagination = res.pagination;
+          });
+      } else {
+        // tslint:disable-next-line:max-line-length
+        this.auditTypeDService.searchAuditType( this.pagination.currentPage, this.pagination.itemsPerPage,
+          this.auditType1, this.auditType2).subscribe((res: PaginatedResult<AuditTypeD[]>) => {
+          this.auditTypes = res.result;
+          this.pagination = res.pagination;
+        });
+      }
+    }
   }
 }

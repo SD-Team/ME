@@ -28,10 +28,18 @@ namespace ME_API.Controllers
             return Ok(auditTypes);
         }
 
-        [HttpGet("search/{text}", Name = "SearchAuditTypeD")]
+        [HttpGet("search/{text}")]
         public async Task<IActionResult> Search([FromQuery]PaginationParams param, string text)
         {
             var lists = await _auditTypeDService.Search(param, text);
+            Response.AddPagination(lists.CurrentPage, lists.PageSize, lists.TotalCount, lists.TotalPages);
+            return Ok(lists);
+        }
+
+        [HttpGet("search/{audit_Type1}/{audit_Type2}")]
+        public async Task<IActionResult> Search([FromQuery]PaginationParams param, string audit_Type1, string audit_Type2)
+        {
+            var lists = await _auditTypeDService.SearchByAuditType(param, audit_Type1, audit_Type2);
             Response.AddPagination(lists.CurrentPage, lists.PageSize, lists.TotalCount, lists.TotalPages);
             return Ok(lists);
         }

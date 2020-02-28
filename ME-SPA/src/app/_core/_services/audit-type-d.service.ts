@@ -49,7 +49,30 @@ export class AuditTypeDService {
         params = params.append('pageNumber', page);
         params = params.append('pageSize', itemsPerPage);
       }
-      return this.http.get<AuditTypeD[]>(this.baseUrl + 'auditTypeD/search/' + text, { observe: 'response', params })
+      // tslint:disable-next-line:prefer-const
+      let url = this.baseUrl + 'auditTypeD/search/' + text;
+      return this.http.get<AuditTypeD[]>(url , { observe: 'response', params })
+        .pipe(
+          map(response => {
+            console.log(response);
+            paginatedResult.result = response.body;
+            if (response.headers.get('Pagination') != null) {
+              paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+            }
+            return paginatedResult;
+          }),
+        );
+    }
+    searchAuditType(page?, itemsPerPage?, auditType1?, auditType2?): Observable<PaginatedResult<AuditTypeD[]>> {
+      const paginatedResult: PaginatedResult<AuditTypeD[]> = new PaginatedResult<AuditTypeD[]>();
+      let params = new HttpParams();
+      if (page != null && itemsPerPage != null) {
+        params = params.append('pageNumber', page);
+        params = params.append('pageSize', itemsPerPage);
+      }
+      // tslint:disable-next-line:prefer-const
+      let url = this.baseUrl + 'auditTypeD/search/' + auditType1 + '/' + auditType2;
+      return this.http.get<AuditTypeD[]>(url, { observe: 'response', params })
         .pipe(
           map(response => {
             console.log(response);
@@ -68,7 +91,7 @@ export class AuditTypeDService {
     update(auditType: AuditTypeD) {
       return this.http.put(this.baseUrl + 'auditTypeD/', auditType);
     }
-    delete(id: string) {
+    delete(id: number) {
       return this.http.delete(this.baseUrl + 'auditTypeD/' + id, {});
     }
     changeAuditType(auditType: AuditTypeD) {

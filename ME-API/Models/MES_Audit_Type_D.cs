@@ -21,5 +21,8 @@ namespace ME_API.Models
         public int Version {get;set;}
         public string Updated_By {get;set;}
         public DateTime? Updated_Time { get; set; }
+
+        
+
     }
 }

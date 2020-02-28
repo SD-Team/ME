@@ -4,7 +4,8 @@ import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { AuditType } from '../_models/audit-type';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
+import { AuditType1 } from '../_models/audit-type-1';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +20,7 @@ export class AuditTypeService {
   baseUrl = environment.apiUrl;
   auditTypeSource = new BehaviorSubject<Object>({});
   currentAuditType = this.auditTypeSource.asObservable();
-  flagSource = new BehaviorSubject<string>("0");
+  flagSource = new BehaviorSubject<string>('0');
   currentFlag = this.flagSource.asObservable();
   constructor(private http: HttpClient) { }
 
@@ -70,7 +71,6 @@ export class AuditTypeService {
   }
 
   create(auditType: AuditType) {
-    console.log(httpOptions);
     return this.http.post(this.baseUrl + 'auditType/', auditType);
   }
 
@@ -78,6 +78,14 @@ export class AuditTypeService {
     return this.http.get<AuditType[]>(this.baseUrl + 'auditType/all', {});
   }
 
+  getAllAuditType1() {
+    return this.http.get<string[]>(this.baseUrl + 'auditType/allAuditType1', {});
+  }
+  getAuditsByAuditType1(auditType1: AuditType1): Observable<any> {
+    // tslint:disable-next-line:prefer-const
+    let url =  this.baseUrl + 'auditType/searchaudit';
+    return this.http.post<AuditType1>(url, auditType1).pipe(shareReplay());
+  }
   changeStatus(id: number) {
     return this.http.post(this.baseUrl + 'auditType/' + id + '/changeStatus', {});
   }

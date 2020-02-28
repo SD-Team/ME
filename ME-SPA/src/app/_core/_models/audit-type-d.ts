@@ -1,5 +1,5 @@
 export interface AuditTypeD {
-    id: string;
+    id: number;
     audit_Type_ID: string;
     audit_Item_ID: string;
     audit_Type3_ZW: string;

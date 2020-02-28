@@ -10,17 +10,25 @@ using ME_API.Helpers;
 using ME_API.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using ME_API.Data;
+
 namespace ME_API._Services.Services
 {
     public class AuditTypeDService : IAuditTypeDService
     {
         private readonly IAuditTypeDRepository _repoAuditDType;
+        private readonly IAuditTypeRepository _repoAuditMType;
         private readonly IMapper _mapper;
         private readonly MapperConfiguration _configMapper;
-        public AuditTypeDService(IAuditTypeDRepository repoAuditDType, IMapper mapper, MapperConfiguration configMapper) {
+        public AuditTypeDService(   IAuditTypeDRepository repoAuditDType,
+                                    IAuditTypeRepository repoAuditMType,
+                                    IMapper mapper, 
+                                    MapperConfiguration configMapper,
+                                    DataContext db) {
             _configMapper = configMapper;
             _mapper = mapper;
             _repoAuditDType = repoAuditDType;
+            _repoAuditMType = repoAuditMType;
         }
         public async Task<bool> Add(AuditType_D_Dto model)
         {
@@ -51,18 +59,23 @@ namespace ME_API._Services.Services
             var lists = _repoAuditDType.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper).OrderByDescending(x => x.Updated_Time);
             return await PagedList<AuditType_D_Dto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
-
         public async Task<PagedList<AuditType_D_Dto>> Search(PaginationParams param, object text)
         {
-            var lists = _repoAuditDType.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper)
-            .Where( x => x.Audit_Type_ID.Contains(text.ToString()) || 
-                    x.Audit_Item_LL.Contains(text.ToString()) ||
-                    x.Audit_Item_EN.Contains(text.ToString()) ||
-                    x.Audit_Item_ZW.Contains(text.ToString()))
-                    .OrderByDescending(x => x.Updated_Time);
+            var lists =  _repoAuditDType.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper).Where(x => x.Audit_Type_ID.Trim() == text.ToString().Trim()).OrderByDescending(x => x.Updated_Time);
             return await PagedList<AuditType_D_Dto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
 
+        public async Task<PagedList<AuditType_D_Dto>> SearchByAuditType(PaginationParams param, string audit_Type1, string audit_Type2)
+        {
+            MES_Audit_Type_M auditTypeID = null;
+            if(audit_Type2 != null) {
+                auditTypeID = await _repoAuditMType.FindAll().Where(x => x.Audit_Type1.Trim() == audit_Type1.Trim() && x.Audit_Type2.Trim()== audit_Type2).FirstOrDefaultAsync();
+            } else {
+                auditTypeID = await _repoAuditMType.FindAll().Where(x => x.Audit_Type1.Trim() == audit_Type1.Trim()).FirstOrDefaultAsync();
+            }
+            var lists =  _repoAuditDType.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper).Where(x => x.Audit_Type_ID.Trim() == auditTypeID.Audit_Type_ID.Trim()).OrderByDescending(x => x.Updated_Time);
+            return await PagedList<AuditType_D_Dto>.CreateAsync(lists, param.PageNumber, param.PageSize);
+        }
         public async Task<bool> Update(AuditType_D_Dto model)
         {
             var auditType = _mapper.Map<MES_Audit_Type_D>(model);

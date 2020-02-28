@@ -6,7 +6,6 @@ using ME_API._Services.Interface;
 using ME_API.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 namespace ME_API.Controllers
 {
     [Authorize]
@@ -26,6 +25,20 @@ namespace ME_API.Controllers
             var auditTypes = await _auditTypeService.GetAllAsync();
             return Ok(auditTypes);
         }
+
+        [HttpGet("allAuditType1", Name = "GetAllAuditType1")]
+        public async Task<IActionResult> GetAllAuditType1() {
+            var data = await _auditTypeService.GetAllAuditType1();
+            return Ok(data);
+        }
+        
+        [HttpPost("searchaudit")]
+        public async Task<IActionResult> GetAuditsByAuditType(AuditType1FormDto formdata)
+        {
+            var auditType = await _auditTypeService.GetAuditsByAuditType(formdata);
+            return Ok(auditType);
+        }
+
         [HttpGet(Name = "GetAuditTypes")]
         public async Task<IActionResult> GetAuditTypes([FromQuery]PaginationParams param)
         {

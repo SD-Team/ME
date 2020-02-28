@@ -6,11 +6,36 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-align-justify"></i> List Audit Types
-            <input type="text" name="search" id="search" [(ngModel)]="text" class="form-control brand-search"
-              placeholder="Search" (keyup)="search()">
-            <button type="button" class="btn btn-sm btn-primary float-right" (click)="add()"><i
+            <div class="row">
+              <div class="col-lg-2">
+                <i class="fa fa-align-justify"></i> List Audit Types
+              </div>
+              <div class="col-lg-4">
+                <select name="auditType1" 
+                    [(ngModel)]="auditType1"
+                    (change)= "optionAuditType1($event)"
+                    id="auditType1" 
+                    class="select-list">
+                  <option *ngFor="let item of auditType1List" value="{{ item }}">{{ item }}</option>
+                </select>
+                <select [(ngModel)]="auditType2" 
+                        name="auditType2" 
+                        id="auditType2" 
+                        (change)="optionAuditType2($event)" 
+                        class="select-list">
+                  <option *ngFor="let item of auditType2List" value="{{item.audit_Type2}}">{{ item.audit_Type2 }}</option>
+                </select>
+              </div>
+              <div class="col-lg-1">
+                <button type="button" (click)="searchAuditType()" class="btn btn-block btn-query1 float-right btn-secondary">Query</button>
+              </div>
+              <div class="col-lg-5">
+              <!-- <input type="text" name="search" id="search" [(ngModel)]="text" class="form-control brand-search"
+              placeholder="Search" (keyup)="search()"> -->
+              <button type="button" class="btn btn-sm btn-primary float-right" (click)="add()"><i
                 class="fa fa-plus"></i> Add new</button>
+              </div>
+            </div>
           </div>
           <div class="card-body">
             <ngx-spinner bdOpacity=0.2 bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
@@ -51,8 +76,8 @@
                     <td>
                       <button type="button" class="btn btn-primary btn-sm mr-2" (click)="changeToEdit(item)"><i
                           class="fa fa-edit fa-lg"></i></button>
-                      <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><i
-                          class="fa fa-trash fa-lg"></i></button>
+                      <!-- <button type="button" class="btn btn-danger btn-sm" (click)="delete(item)"><i
+                          class="fa fa-trash fa-lg"></i></button> -->
                     </td>
                   </tr>
                 </tbody>
