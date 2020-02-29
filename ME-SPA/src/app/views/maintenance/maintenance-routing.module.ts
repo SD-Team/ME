@@ -10,6 +10,12 @@ import { AuditTypeListResolver } from '../../_core/_resolvers/audit-type-list.re
 import { AuditTypeDListResolver } from '../../_core/_resolvers/audit-typeD-list.resolver';
 import { AuditTypeDListComponent } from './audit-type-d/audit-type-d-list/audit-type-d-list.component';
 import { AuditTypeDAddComponent } from './audit-type-d/audit-type-d-add/audit-type-d-add.component';
+import { AuditPicMListComponent } from './audit-pic-m/audit-pic-m-list/audit-pic-m-list.component';
+import { AuditPicMListResolver } from '../../_core/_resolvers/audit-pic-m-list.resolver';
+import { AuditPicMAddComponent } from './audit-pic-m/audit-pic-m-add/audit-pic-m-add.component';
+import { AuditPicDListComponent } from './audit-pic-d/audit-pic-d-list/audit-pic-d-list.component';
+import { AuditPicDListResolver } from '../../_core/_resolvers/audit-pic-d-list.resolver';
+import { AuditPicDAddComponent } from './audit-pic-d/audit-pic-d-add/audit-pic-d-add.component';
 
 
 
@@ -79,6 +85,48 @@ const routes: Routes = [
               component: AuditTypeDAddComponent,
               data: {
                 title: 'Add new audit type'
+              }
+            }
+          ]
+      },
+      {
+        path: 'audit-pic-m',
+        children:
+          [
+            {
+              path: '',
+              component: AuditPicMListComponent,
+              resolve: { auditPics: AuditPicMListResolver },
+              data: {
+                title: 'Audit Pic M'
+              }
+            },
+            {
+              path: 'add',
+              component: AuditPicMAddComponent,
+              data: {
+                title: 'Add new audit Pic M'
+              }
+            }
+          ]
+      },
+      {
+        path: 'audit-pic-d',
+        children:
+          [
+            {
+              path: '',
+              component: AuditPicDListComponent,
+              resolve: { auditPics: AuditPicDListResolver },
+              data: {
+                title: 'Audit Pic D'
+              }
+            },
+            {
+              path: 'add',
+              component: AuditPicDAddComponent,
+              data: {
+                title: 'Add new audit Pic D'
               }
             }
           ]

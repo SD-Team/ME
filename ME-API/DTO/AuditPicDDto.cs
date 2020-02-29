@@ -1,11 +1,9 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace ME_API.Models
+namespace ME_API.DTO
 {
-    public class MES_Audit_PIC_D
+    public class AuditPicDDto
     {
-        [Key]
         public long ID {get;set;}
         public string PIC_Type_ID { get; set; }
         public string Resp_ID { get; set; }
@@ -20,5 +18,8 @@ namespace ME_API.Models
         public string PDC { get; set; }
         public string Building { get; set; }
         public string Language { get; set; }
+        public AuditPicDDto() {
+            this.Updated_Time = DateTime.Now;
+        }
     }
 }

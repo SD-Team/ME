@@ -41,7 +41,17 @@ export const navItems: INavData[] = [
   {
     name: 'Audit Type D',
     url: '/maintenance/audit-type-d',
-    icon: 'icon-list',
+    icon: 'icon-briefcase',
+  },
+  {
+    name: 'Audit Pic M',
+    url: '/maintenance/audit-pic-m',
+    icon: 'icon-grid',
+  },
+  {
+    name: 'Audit Pic D',
+    url: '/maintenance/audit-pic-d',
+    icon: 'icon-eyeglass',
   },
   {
     title: true,

@@ -40,9 +40,9 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { NgSelectModule } from "@ng-select/ng-select";
+import { NgSelectModule } from '@ng-select/ng-select';
 
-//Import service
+// Import service
 import { AuthService } from '../app/_core/_services/auth.service';
 import { ErrorInterceptorProvider } from './_core/_services/error.interceptor';
 import { AlertifyService } from './_core/_services/alertify.service';
@@ -57,9 +57,11 @@ import { PaginationModule } from 'ngx-bootstrap';
 import { AuditTypeListResolver } from './_core/_resolvers/audit-type-list.resolver';
 import { AuditTypeDListResolver } from './_core/_resolvers/audit-typeD-list.resolver';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AuditPicMListResolver } from './_core/_resolvers/audit-pic-m-list.resolver';
+import { AuditPicDListResolver } from './_core/_resolvers/audit-pic-d-list.resolver';
 
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  return localStorage.getItem('token');
 }
 
 @NgModule({
@@ -85,8 +87,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["localhost:5000"],
-        blacklistedRoutes: ["localhost:5000/api/auth"]
+        whitelistedDomains: ['localhost:5000'],
+        blacklistedRoutes: ['localhost:5000/api/auth']
       }
     })
   ],
@@ -106,6 +108,8 @@ export function tokenGetter() {
     BrandListResolver,
     AuditTypeListResolver,
     AuditTypeDListResolver,
+    AuditPicMListResolver,
+    AuditPicDListResolver,
     CategoryListResolver,
     CategoryEditResolver,
     {

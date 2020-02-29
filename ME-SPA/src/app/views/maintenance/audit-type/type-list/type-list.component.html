@@ -39,7 +39,7 @@
                 <td>{{item.audit_Type2}}</td>
                 <td>{{item.audit_Type2_Name}}</td>
                 <td>{{item.version}}</td>
-                <td *ngIf="item.status=='1';else elseStatus">Valid</td>
+                <td *ngIf="item.status =='1';else elseStatus">Valid</td>
                 <ng-template #elseStatus>
                   <td>Invalid</td>
                 </ng-template>

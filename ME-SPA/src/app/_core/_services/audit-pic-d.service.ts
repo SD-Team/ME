@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { PaginatedResult } from '../_models/pagination';
-import { Brand } from '../_models/brand';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { PaginatedResult } from '../_models/pagination';
+import { AuditPicD } from '../_models/audit-pic-d';
+import { map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,26 +12,41 @@ const httpOptions = {
   }),
 };
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class BrandService {
+export class AuditPicDService {
   baseUrl = environment.apiUrl;
-  brandSource = new BehaviorSubject<Object>({});
-  currentBrand = this.brandSource.asObservable();
+  auditPicDSource = new BehaviorSubject<Object>({});
+  currentAuditPicD = this.auditPicDSource.asObservable();
   flagSource = new BehaviorSubject<string>('0');
   currentFlag = this.flagSource.asObservable();
   constructor(private http: HttpClient) { }
-
-  getBrands(page?, itemsPerPage?): Observable<PaginatedResult<Brand[]>> {
-    const paginatedResult: PaginatedResult<Brand[]> = new PaginatedResult<Brand[]>();
-
+  getListAll(page?, itemsPerPage?): Observable<PaginatedResult<AuditPicD[]>> {
+    const paginatedResult: PaginatedResult<AuditPicD[]> = new PaginatedResult<AuditPicD[]>();
     let params = new HttpParams();
-
     if (page != null && itemsPerPage != null) {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
-    return this.http.get<Brand[]>(this.baseUrl + 'brand', { observe: 'response', params})
+    return this.http.get<AuditPicD[]>(this.baseUrl + 'auditPicM', { observe: 'response', params })
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        }),
+    );
+  }
+  search(page?, itemsPerPage?, text?): Observable<PaginatedResult<AuditPicD[]>> {
+    const paginatedResult: PaginatedResult<AuditPicD[]> = new PaginatedResult<AuditPicD[]>();
+    let params = new HttpParams();
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    return this.http.get<AuditPicD[]>(this.baseUrl + 'auditPicD/search/' + text, { observe: 'response', params })
       .pipe(
         map(response => {
           console.log(response);
@@ -43,58 +58,19 @@ export class BrandService {
         }),
       );
   }
-
-  search(page?, itemsPerPage?, text?): Observable<PaginatedResult<Brand[]>> {
-    const paginatedResult: PaginatedResult<Brand[]> = new PaginatedResult<Brand[]>();
-
-    let params = new HttpParams();
-
-    if (page != null && itemsPerPage != null) {
-      params = params.append('pageNumber', page);
-      params = params.append('pageSize', itemsPerPage);
-    }
-
-
-    return this.http.get<Brand[]>(this.baseUrl + 'brand/search/' + text, { observe: 'response', params})
-      .pipe(
-        map(response => {
-          console.log(response);
-          paginatedResult.result = response.body;
-          if (response.headers.get('Pagination') != null) {
-            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-          }
-          return paginatedResult;
-        }),
-      );
+  create(auditPicD: AuditPicD) {
+    return this.http.post(this.baseUrl + 'auditPicD/', auditPicD);
   }
-
-  createBrand(brand: Brand) {
-    console.log(httpOptions);
-    return this.http.post(this.baseUrl +  'brand/', brand);
+  delete(id: number) {
+    return this.http.delete(this.baseUrl + 'auditPicD/' + id, {});
   }
-
-  getAllBrands() {
-    return this.http.get<Brand[]>(this.baseUrl + 'brand/all', {});
+  update(auditPicD: AuditPicD) {
+    return this.http.put(this.baseUrl + 'auditPicD/', auditPicD);
   }
-
-  changeStatus(id: number) {
-    return this.http.post(this.baseUrl + 'brand/' + id + '/changeStatus', {});
+  changeAuditPicD(auditPicD: AuditPicD) {
+    this.auditPicDSource.next(auditPicD);
   }
-
-  updateBrand(brand: Brand) {
-    return this.http.put(this.baseUrl + 'brand/', brand);
-  }
-
-  deleteBrand(id: string) {
-    return this.http.delete(this.baseUrl + 'brand/' + id, {});
-  }
-
-  changeBrand(brand: Brand) {
-    this.brandSource.next(brand);
-  }
-
   changeFlag(flag: string) {
     this.flagSource.next(flag);
   }
-
 }

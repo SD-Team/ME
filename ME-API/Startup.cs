@@ -47,30 +47,34 @@ namespace ME_API
             });
             services.AddSingleton(AutoMapperConfig.RegisterMappings());
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-               {
-                   options.RequireHttpsMetadata = false;
-                   options.SaveToken = true;
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuerSigningKey = true,
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                           .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                       ValidateIssuer = false,
-                       ValidateAudience = false
-                   };
-               });
+            .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
             //Repository
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IAuditTypeRepository, AuditTypeRepository>();
             services.AddScoped<IAuditTypeDRepository, AuditTypeDRepository>();
+            services.AddScoped<IAuditPicMRepository, AuditPicMRepository>();
+            services.AddScoped<IAuditPicDRepository, AuditPicDRepository>();
 
             //Services
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IAuditTypeService, AuditTypeService>();
             services.AddScoped<IAuditTypeDService, AuditTypeDService>();
+            services.AddScoped<IAuditPicMService, AuditPicMService>();
+            services.AddScoped<IAuditPicDService, AuditPicDService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

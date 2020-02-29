@@ -24,7 +24,7 @@ export class BrandListComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.brandService.currentBrand.subscribe(brand => this.brand = brand)
+    this.brandService.currentBrand.subscribe(brand => this.brand = brand);
     this.route.data.subscribe(data => {
       this.spinner.hide();
       this.brands = data['brands'].result;
@@ -52,8 +52,8 @@ export class BrandListComponent implements OnInit {
   addBrand() {
     this.brand = {};
     this.brandService.changeBrand(this.brand);
-    this.brandService.changeFlag("0");
-    this.router.navigate(["/maintenance/brand/add"]);
+    this.brandService.changeFlag('0');
+    this.router.navigate(['/maintenance/brand/add']);
   }
 
   changeStatus(id: number) {
@@ -67,8 +67,8 @@ export class BrandListComponent implements OnInit {
 
   changeToEdit(brand: Brand) {
     this.brandService.changeBrand(brand);
-    this.brandService.changeFlag("1");
-    this.router.navigate(["/maintenance/brand/add"]);
+    this.brandService.changeFlag('1');
+    this.router.navigate(['/maintenance/brand/add']);
   }
 
   deleteBrand(brand: Brand) {
@@ -84,19 +84,18 @@ export class BrandListComponent implements OnInit {
 
   searchBrand() {
     console.log(this.text);
-    if (this.text != "") {
+    if (this.text !== '') {
       this.brandService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
         .subscribe((res: PaginatedResult<Brand[]>) => {
           this.brands = res.result;
           this.pagination = res.pagination;
-          console.log("Search: ", this.brands);
+          console.log('Search: ', this.brands);
         }, error => {
           this.alertify.error(error);
         });
     } else {
       this.loadBrands();
     }
-    
   }
 
 }

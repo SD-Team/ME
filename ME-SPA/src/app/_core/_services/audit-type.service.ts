@@ -38,7 +38,7 @@ export class AuditTypeService {
         map(response => {
           console.log(response);
           paginatedResult.result = response.body;
-          if (response.headers.get('Pagination') != null) {0
+          if (response.headers.get('Pagination') != null) {
             paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
           }
           return paginatedResult;
@@ -48,15 +48,11 @@ export class AuditTypeService {
 
   search(page?, itemsPerPage?, text?): Observable<PaginatedResult<AuditType[]>> {
     const paginatedResult: PaginatedResult<AuditType[]> = new PaginatedResult<AuditType[]>();
-
     let params = new HttpParams();
-
     if (page != null && itemsPerPage != null) {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
-
-
     return this.http.get<AuditType[]>(this.baseUrl + 'auditType/search/' + text, { observe: 'response', params })
       .pipe(
         map(response => {
