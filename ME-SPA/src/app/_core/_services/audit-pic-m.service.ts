@@ -21,6 +21,8 @@ export class AuditPicMService {
   flagSource = new BehaviorSubject<string>('0');
   currentFlag = this.flagSource.asObservable();
   constructor(private http: HttpClient) { }
+
+   // Lấy hết pic M có trong database có phân trang
   getListAll(page?, itemsPerPage?): Observable<PaginatedResult<AuditPicM[]>> {
     const paginatedResult: PaginatedResult<AuditPicM[]> = new PaginatedResult<AuditPicM[]>();
     let params = new HttpParams();
@@ -67,8 +69,9 @@ export class AuditPicMService {
   update(auditPicM: AuditPicM) {
     return this.http.put(this.baseUrl + 'auditPicM/', auditPicM);
   }
-  getAlls() {
-    return this.http.get(this.baseUrl + 'auditPicM/all', {});
+  // Lấy hết pic M có trong database không phân trang
+  getAlls(): Observable<AuditPicM[]> {
+    return this.http.get<AuditPicM[]>(this.baseUrl + 'auditPicM/all', {});
   }
   changeAuditPicM(auditPicM: AuditPicM) {
     this.auditPicMSource.next(auditPicM);

@@ -18,6 +18,7 @@ export class BrandListComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   pagination: Pagination;
   text: string;
+  searchKey = false;
   constructor(private brandService: BrandService, private alertify: AlertifyService,
     private router: Router,
     private route: ActivatedRoute, private spinner: NgxSpinnerService) { }
@@ -39,14 +40,25 @@ export class BrandListComponent implements OnInit {
 
   loadBrands() {
    // this.spinner.show();
+    if (this.searchKey === false) {
     this.brandService.getBrands(this.pagination.currentPage, this.pagination.itemsPerPage)
-      .subscribe((res: PaginatedResult<Brand[]>) => {
-        this.brands = res.result;
-        this.pagination = res.pagination;
-    //    this.spinner.hide();
-      }, error => {
-        this.alertify.error(error);
-      });
+    .subscribe((res: PaginatedResult<Brand[]>) => {
+      this.brands = res.result;
+      this.pagination = res.pagination;
+  //    this.spinner.hide();
+    }, error => {
+      this.alertify.error(error);
+    });
+  } else {
+    this.brandService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
+    .subscribe((res: PaginatedResult<Brand[]>) => {
+      this.brands = res.result;
+      this.pagination = res.pagination;
+      console.log('Search: ', this.brands);
+    }, error => {
+      this.alertify.error(error);
+    });
+    }
   }
 
   addBrand() {
@@ -83,8 +95,8 @@ export class BrandListComponent implements OnInit {
   }
 
   searchBrand() {
-    console.log(this.text);
     if (this.text !== '') {
+      this.searchKey = true;
       this.brandService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
         .subscribe((res: PaginatedResult<Brand[]>) => {
           this.brands = res.result;
@@ -94,6 +106,7 @@ export class BrandListComponent implements OnInit {
           this.alertify.error(error);
         });
     } else {
+      this.searchKey = false;
       this.loadBrands();
     }
   }

@@ -77,6 +77,7 @@ namespace ME_API._Services.Services
             var lists = _repoAuditType.FindAll().ProjectTo<AuditTypeDto>(_configMapper)
             .Where(
                 x => x.Audit_Type_ID.Contains(text.ToString()) || 
+                x.Brand.Contains(text.ToString()) ||
                 x.Audit_Type1.Contains(text.ToString()) || 
                 x.Audit_Type2.Contains(text.ToString()) || 
                 x.Audit_Type2_Name.Contains(text.ToString()) ||

@@ -28,7 +28,7 @@ export class AuditPicDService {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
-    return this.http.get<AuditPicD[]>(this.baseUrl + 'auditPicM', { observe: 'response', params })
+    return this.http.get<AuditPicD[]>(this.baseUrl + 'auditPicD', { observe: 'response', params })
       .pipe(
         map(response => {
           paginatedResult.result = response.body;

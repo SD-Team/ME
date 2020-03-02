@@ -85,7 +85,6 @@ export class AuditTypeDService {
         );
     }
     create(auditType: AuditTypeD) {
-      console.log(httpOptions);
       return this.http.post(this.baseUrl + 'auditTypeD/', auditType);
     }
     update(auditType: AuditTypeD) {

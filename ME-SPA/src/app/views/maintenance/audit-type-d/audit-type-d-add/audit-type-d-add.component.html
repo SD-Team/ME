@@ -16,7 +16,7 @@
                 <label class="col-md-1 col-form-label" for="audit_Type_ID">Audit_Type_ID: </label>
                 <div class="col-md-3">
                     <select class="form-control" id="audit_type_id" [(ngModel)]="auditType.audit_Type_ID" name="audit_type_id">
-                        <option *ngFor="let item of auditTypeM" value="{{item.audit_Type_ID}}" value="1">{{item.audit_Type_ID}}</option>
+                        <option *ngFor="let item of auditTypeM" value="{{item.audit_Type_ID}}">{{item.audit_Type_ID}}</option>
                     </select>
                 </div>
                 <label class="col-md-1 col-form-label" for="audit_Item_ID">Audit Item ID</label>

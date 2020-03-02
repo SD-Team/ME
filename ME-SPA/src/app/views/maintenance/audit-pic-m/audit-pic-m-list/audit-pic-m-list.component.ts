@@ -18,6 +18,7 @@ export class AuditPicMListComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   pagination: Pagination;
   text: string;
+  searchKey = false;
   constructor(private auditPicMService: AuditPicMService,
               private alertify: AlertifyService,
               private router: Router,
@@ -34,7 +35,8 @@ export class AuditPicMListComponent implements OnInit {
     });
   }
   load() {
-    this.auditPicMService.getListAll(this.pagination.currentPage, this.pagination.itemsPerPage)
+    if (this.searchKey === false) {
+      this.auditPicMService.getListAll(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res: PaginatedResult<AuditPicM[]>) => {
         this.auditPics = res.result;
         this.pagination = res.pagination;
@@ -42,6 +44,15 @@ export class AuditPicMListComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
+    } else {
+      this.auditPicMService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
+        .subscribe((res: PaginatedResult<AuditPicM[]>) => {
+          this.auditPics = res.result;
+          this.pagination = res.pagination;
+        }, error => {
+          this.alertify.error(error);
+        });
+    }
   }
   delete(auditPicM: AuditPicM) {
     this.alertify.confirm('Delete Audit Pic M', 'Are you sure you want to delete this Pic ID "' + auditPicM.piC_Type_ID + '" ?', () => {
@@ -70,6 +81,7 @@ export class AuditPicMListComponent implements OnInit {
   }
   search() {
     if (this.text !== '') {
+      this.searchKey = true;
       this.auditPicMService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
         .subscribe((res: PaginatedResult<AuditPicM[]>) => {
           this.auditPics = res.result;
@@ -78,6 +90,7 @@ export class AuditPicMListComponent implements OnInit {
           this.alertify.error(error);
         });
     } else {
+      this.searchKey = false;
       this.load();
     }
   }

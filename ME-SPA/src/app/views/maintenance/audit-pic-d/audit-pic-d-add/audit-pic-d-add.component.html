@@ -1,1 +1,90 @@
-<p>audit-pic-d-add works!</p>
+
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong *ngIf="!auditPicD.piC_Type_ID;else elseBlock">Add new</strong>
+                <ng-template #elseBlock><strong>Update</strong></ng-template>
+                    Audit Pic D
+                <button type="button" class="btn btn-sm btn-primary float-right" (click)="backList()"><i class="fa fa-chevron-left"></i>
+                    Back</button>
+            </div>
+          <form class="form-horizontal" #AuditPicForm="ngForm" (ngSubmit)="AuditPicForm.valid && saveAndNext()">
+          <div class="card-body">
+            <div class="form-group row">
+                <label class="col-md-1 col-form-label" for="hf-email">PIC_Type_ZW: </label>
+                <div class="col-md-3">
+                    <select class="form-control" [(ngModel)]="auditPicD.piC_Type_ID" id="pic_Type_ZW" name="PIC_Type_ZW" required>
+                        <option *ngFor="let item of auditPicM" value="{{ item.piC_Type_ID}}">{{ item.piC_Type_ZW}}</option>
+                    </select>
+                </div>
+                <label class="col-md-1 col-form-label">Resp_ID: </label>
+                <div class="col-md-3">
+                    <input type="text" name="resp_ID" [(ngModel)]="auditPicD.resp_ID" class="form-control" placeholder="Enter Resp_ID" required>
+                </div>
+                <label class="col-md-1 col-form-label" >Agent: </label>
+                <div class="col-md-3">
+                    <input type="text" name="agent" [(ngModel)]="auditPicD.agent" class="form-control" placeholder="Enter Agent">
+                </div>
+            </div>
+            <div class="form-group row">
+                    <label class="col-md-1 col-form-label">Resp_ZW</label>
+                    <div class="col-md-3">
+                        <input type="text" name="Resp_ZW" [(ngModel)]="auditPicD.resp_ZW" class="form-control"
+                        placeholder="Enter Resp ZW.." required>
+                    </div>
+                    <label class="col-md-1 col-form-label">Resp_EN</label>
+                    <div class="col-md-3">
+                        <input type="text" name="resp_EN" [(ngModel)]="auditPicD.resp_EN" class="form-control" required placeholder="Enter Resp EN.." required>
+                    </div>
+                    <label class="col-md-1 col-form-label">Resp_LL</label>
+                    <div class="col-md-3">
+                        <input type="text"  name="Resp_LL" [(ngModel)]="auditPicD.resp_LL" class="form-control" required placeholder="Enter Resp LL.." required>
+                    </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-1 col-form-label">Email</label>
+                <div class="col-md-3">
+                    <input type="text" name="email" [(ngModel)]="auditPicD.email" class="form-control"
+                    placeholder="Enter Email.." required>
+                </div>
+                <div class="col-md-4"></div>
+                <label class="col-md-1 col-form-label">Status</label>
+                    <div class="col-md-3">
+                        <select [(ngModel)]="auditPicD.status" class="form-control" name="status" id="" required>
+                            <option value="1">Valid</option>
+                            <option value="0">Invalid</option>
+                        </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-1 col-form-label">PDC</label>
+                <div class="col-md-3 parent-pdc">
+                    <input type="text" [(ngModel)]="auditPicD.pdc" name="pdc" class="form-control"
+                    placeholder="Enter PDC.." >
+                </div>
+                <label class="col-md-1 col-form-label">Building</label>
+                <div class="col-md-3 parent-building">
+                    <input type="text" [(ngModel)]="auditPicD.building" name="Building" class="form-control"
+                    placeholder="Enter Building.." >
+                </div>
+                <label class="col-md-1 col-form-label">Language</label>
+                <div class="col-md-3 parent-language">
+                    <input type="text" [(ngModel)]="auditPicD.language" name="Language" class="form-control"
+                    placeholder="Enter Language.." >
+                </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-sm btn-danger" (click)="cancel()"><i class="fa fa-ban"></i> Cancel</button>
+            <button type="submit" *ngIf="flag == '0'" class="btn btn-sm btn-primary" [disabled]="!AuditPicForm.valid"><i class="fa fa-check"></i> Save & Next</button>
+            <button type="button" class="btn btn-sm btn-success" [disabled]="!AuditPicForm.valid" (click)="save()"><i class="fa fa-check"></i> Save</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

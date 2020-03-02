@@ -10,12 +10,12 @@ import { AuditPicD } from '../_models/audit-pic-d';
 export class AuditPicDListResolver implements Resolve<AuditPicD[]> {
     pageNumber = 1;
     pageSize = 3;
-    constructor(    private auditPicMService: AuditPicDService,
+    constructor(    private auditPicDService: AuditPicDService,
                     private router: Router,
                     private alertify: AlertifyService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<AuditPicD[]> {
-        return this.auditPicMService.getListAll(this.pageNumber, this.pageSize).pipe(
+        return this.auditPicDService.getListAll(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/dashboard']);
