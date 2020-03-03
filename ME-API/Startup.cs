@@ -68,6 +68,8 @@ namespace ME_API
             services.AddScoped<IAuditTypeDRepository, AuditTypeDRepository>();
             services.AddScoped<IAuditPicMRepository, AuditPicMRepository>();
             services.AddScoped<IAuditPicDRepository, AuditPicDRepository>();
+            services.AddScoped<IAuditRecMRepository, AuditRecMRepository>();
+            services.AddScoped<IAuditRecDRepository, AuditRecDRepository>();
 
             //Services
             services.AddScoped<IBrandService, BrandService>();
@@ -75,6 +77,8 @@ namespace ME_API
             services.AddScoped<IAuditTypeDService, AuditTypeDService>();
             services.AddScoped<IAuditPicMService, AuditPicMService>();
             services.AddScoped<IAuditPicDService, AuditPicDService>();
+            services.AddScoped<IAuditRecMService, AuditRecMService>();
+            services.AddScoped<IAuditRecDService, AuditRecDService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,8 +94,6 @@ namespace ME_API
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-
 
             app.UseEndpoints(endpoints =>
             {

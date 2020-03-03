@@ -1,0 +1,95 @@
+<div class="animated fadeIn">
+    <!--/.row-->
+    <div class="row">
+        <!--/.col-->
+        <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+            <i class="fa fa-align-justify"></i> List Audit Types
+            <input type="text" name="search" [(ngModel)]="text" 
+                            id="search"
+            class="form-control brand-search"
+                placeholder="Search">
+            <button type="button" class="btn btn-sm btn-primary float-right"><i
+                class="fa fa-plus"></i> Add new</button>
+            </div>
+            <div class="card-body">
+            <ngx-spinner bdOpacity=0.2 bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
+            </ngx-spinner>
+            <div class="scoll-bottom">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Record_Date</th>
+                            <th>Line_ID</th>
+                            <th>Model_Name</th>
+                            <th>Model_No</th>
+                            <th>Item_no</th>
+                            <th>ERCS</th>
+                            <th>Audit_Type</th>
+                            <th>Audit_Item</th>
+                            <th>Issue_LL</th>
+                            <th>Issue_ZW</th>
+                            <th>Issue_EN</th>
+                            <th>Before_Picture</th>
+                            <th>After_Picture</th>
+                            <th>PIC_Type_ZW</th>
+                            <th>Resp_Name</th>
+                            <th>Resp_PIC</th>
+                            <th>Finished_Date</th>
+                            <th>Status</th>
+                            <th>Remark</th>
+                            <th>Implement_User</th>
+                            <th>Implement_Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of auditRecs;let i = index">
+                        <th>{{ (pagination.currentPage - 1) * pagination.itemsPerPage + i + 1 }}</th>
+                        <th>{{ item.record_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <th>{{ item.line }}</th>
+                        <th>{{ item.model_Name }}</th>
+                        <th>{{ item.model_No }}</th>
+                        <th>{{ item.item_no }}</th>
+                        <th>{{ item.ercs }}</th>
+                        <th>{{ item.audit_Type_ID }}</th>
+                        <th>{{ item.audit_Item }}</th>
+                        <th>{{ item.issue_LL }}</th>
+                        <th>{{ item.issue_ZW }}</th>
+                        <th>{{ item.issue_EN }}</th>
+                        <th>{{ item.before_Picture }}</th>
+                        <th>{{ item.after_Picture }}</th>
+                        <th>{{ item.pD_PIC }}</th>
+                        <th>{{ item.pD_RESP }}</th>
+                        <th>{{ item.mE_PIC }}</th>
+                        <th>{{ item.finished_Date | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <th>{{ item.status }}</th>
+                        <th>{{ item.remark }}</th>
+                        <th>{{ item.implement_User }}</th>
+                        <th>{{ item.implement_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm mr-2"><i
+                                class="fa fa-edit fa-lg"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm"><i
+                                class="fa fa-trash fa-lg"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex">
+                <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
+                [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+                nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]=5>
+                </pagination>
+            </div>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+        </div>
+    </div>
+
+

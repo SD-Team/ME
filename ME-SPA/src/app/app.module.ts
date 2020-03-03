@@ -59,6 +59,7 @@ import { AuditTypeDListResolver } from './_core/_resolvers/audit-typeD-list.reso
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuditPicMListResolver } from './_core/_resolvers/audit-pic-m-list.resolver';
 import { AuditPicDListResolver } from './_core/_resolvers/audit-pic-d-list.resolver';
+import { AuditRecDListResolver } from './_core/_resolvers/audit-rec-d-list.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -98,7 +99,7 @@ export function tokenGetter() {
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   providers: [
     AuthService,
@@ -110,6 +111,7 @@ export function tokenGetter() {
     AuditTypeDListResolver,
     AuditPicMListResolver,
     AuditPicDListResolver,
+    AuditRecDListResolver,
     CategoryListResolver,
     CategoryEditResolver,
     {

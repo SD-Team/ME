@@ -17,6 +17,8 @@ import { AuditPicMListComponent } from './audit-pic-m/audit-pic-m-list/audit-pic
 import { AuditPicMAddComponent } from './audit-pic-m/audit-pic-m-add/audit-pic-m-add.component';
 import { AuditPicDListComponent } from './audit-pic-d/audit-pic-d-list/audit-pic-d-list.component';
 import { AuditPicDAddComponent } from './audit-pic-d/audit-pic-d-add/audit-pic-d-add.component';
+import { AuditRecDListComponent } from './audit-rec-d/audit-rec-d-list/audit-rec-d-list.component';
+import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d-add.component';
 
 @NgModule({
   imports: [
@@ -38,7 +40,9 @@ import { AuditPicDAddComponent } from './audit-pic-d/audit-pic-d-add/audit-pic-d
     AuditPicMListComponent,
     AuditPicMAddComponent,
     AuditPicDListComponent,
-    AuditPicDAddComponent
+    AuditPicDAddComponent,
+    AuditRecDListComponent,
+    AuditRecDAddComponent
   ]
 })
 export class MaintenanceModule {}
