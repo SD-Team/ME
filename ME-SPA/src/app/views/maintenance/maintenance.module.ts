@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 // Components Routing
 import { MaintenanceRoutingModule } from './maintenance-routing.module';
 import { BrandListComponent } from './brands/brand-list/brand-list.component';
@@ -28,7 +29,8 @@ import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d
     NgxSpinnerModule,
     MaintenanceRoutingModule,
     PaginationModule,
-    NgSelectModule
+    NgSelectModule,
+    BsDatepickerModule.forRoot(),
   ],
   declarations: [
     BrandListComponent,
@@ -43,6 +45,6 @@ import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d
     AuditPicDAddComponent,
     AuditRecDListComponent,
     AuditRecDAddComponent
-  ]
+  ],
 })
 export class MaintenanceModule {}

@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { AuditRecViewModel } from '../_models/audit-rec-viewmodel';
 import { map } from 'rxjs/operators';
+import { AuditRecSearch } from '../_models/audit-rec-search';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -38,5 +39,28 @@ export class AuditRecDService {
           return paginatedResult;
         }),
     );
+  }
+  search(page?, itemsPerPage?, auditRecSearch?: AuditRecSearch): Observable<PaginatedResult<AuditRecViewModel[]>> {
+    const paginatedResult: PaginatedResult<AuditRecViewModel[]> = new PaginatedResult<AuditRecViewModel[]>();
+    let params = new HttpParams();
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    // tslint:disable-next-line:prefer-const
+    let url = this.baseUrl + 'auditRecD/searchModel/';
+    return this.http.post<any>(url , auditRecSearch , { observe: 'response', params })
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        }),
+      );
+  }
+  getListStatus() {
+    return this.http.get<any>(this.baseUrl + 'auditRecD/status', {});
   }
 }

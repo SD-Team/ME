@@ -16,3 +16,9 @@ thead {
 th {
     font-weight: normal;
 }
+.btn-add-new {
+    margin-left: 2px;
+}
+.btn-upload {
+    margin-left: 12px;
+}

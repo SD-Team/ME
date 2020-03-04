@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using ME_API._Services.Interface;
 using ME_API.Helpers;
+using ME_API.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,12 @@ namespace ME_API.Controllers
         public async Task<IActionResult> GetAllStatus() {
             var data = await _service.GetAllStatus();
             return Ok(data);
+        }
+        [HttpPost("searchModel")]
+        public async Task<IActionResult> SearchByModel([FromQuery]PaginationParams param, [FromBody]AuditRecSearch model) {
+            var auditRecs = await _service.SearchByModel(param, model);
+            Response.AddPagination(auditRecs.CurrentPage, auditRecs.PageSize, auditRecs.TotalCount, auditRecs.TotalPages);
+            return Ok(auditRecs);
         }
     }
 }

@@ -29,6 +29,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^9.0.0-rc.0",
+    "@angular/cdk": "^9.1.0",
     "@angular/common": "^9.0.0-rc.0",
     "@angular/compiler": "^9.0.0-rc.0",
     "@angular/core": "^9.0.0-rc.0",

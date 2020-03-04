@@ -7,6 +7,7 @@ using ME_API._Repositories.Interface;
 using ME_API._Services.Interface;
 using ME_API.DTO;
 using ME_API.Helpers;
+using ME_API.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace ME_API._Services.Services
@@ -82,6 +83,8 @@ namespace ME_API._Services.Services
                             Issue_EN = x.Issue_EN,
                             Issue_LL = x.Issue_LL,
                             Issue_ZW = x.Issue_ZW,
+                            Building = y.Building,
+                            PDC = y.PDC,
                             Line = y.Line,
                             ME_PIC = x.ME_PIC,
                             Model_Name = y.Model_Name,
@@ -94,7 +97,58 @@ namespace ME_API._Services.Services
                         });
             return await PagedList<AuditRecDto>.CreateAsync(listAuditRecDto, param.PageNumber, param.PageSize);
         }
+        public async Task<PagedList<AuditRecDto>> SearchByModel(PaginationParams param, AuditRecSearch model)
+        {
+            var listAuditRecM = _repoAuditRecM.FindAll();
+            var listAuditRecD =  _repoAuditRecD.FindAll(); 
+            var listAuditRecDto = listAuditRecD.Join(listAuditRecM, x => x.Record_ID, y => y.Record_ID, (x, y) => new AuditRecDto
+                        {
+                            Record_Time = y.Record_Time,
+                            After_Picture = x.After_Picture,
+                            Audit_Item = x.Audit_Item,
+                            Audit_Type_ID = _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type2,
+                            Before_Picture = x.Before_Picture,
+                            Finished_Date = x.Finished_Date,
+                            ERCS = x.ERCS,
+                            Implement_Time = x.Implement_Time,
+                            Implement_User = x.Implement_User,
+                            Issue_EN = x.Issue_EN,
+                            Issue_LL = x.Issue_LL,
+                            Issue_ZW = x.Issue_ZW,
+                            PDC = y.PDC,
+                            Line = y.Line,
+                            Building = y.Building,
+                            ME_PIC = x.ME_PIC,
+                            Model_Name = y.Model_Name,
+                            Model_No = y.Model_No,
+                            PD_PIC = x.PD_PIC,
+                            PD_RESP = x.PD_RESP,
+                            Remark = x.Remark,
+                            Status = x.Status,
+                            Item_no = x.Item_no
+                        });
+            listAuditRecDto = listAuditRecDto.Where(x =>    x.Status.Trim() == model.Status.Trim() && 
+                                                            x.Building.Trim() == model.Building.Trim() &&
+                                                            x.Line.Trim() == model.Line.Trim() &&
+                                                            x.PDC.Trim() == model.PDC.Trim());
+            if(model.Model_No != "all") {
+                listAuditRecDto = listAuditRecDto.Where(x => x.Model_No.Trim() == model.Model_No.Trim());
+            }
+            if(model.Model_Name != "" && model.Model_Name != string.Empty && model.Model_Name != null) {
+                listAuditRecDto = listAuditRecDto.Where(x => x.Model_Name.Contains(model.Model_Name));
+            }
+            if(model.Audit_Type_1 != "all") {
+                var auditTypeMFind = await _repoAuditTypeM.FindAll().Where(x => x.Audit_Type1.Trim() == model.Audit_Type_1 &&
+                                                        x.Audit_Type2.Trim() == model.Audit_Type_2).FirstOrDefaultAsync();
+                listAuditRecDto = listAuditRecDto.Where(x => x.Audit_Type_ID.Trim() == auditTypeMFind.Audit_Type_ID);
+            }
+            return await PagedList<AuditRecDto>.CreateAsync(listAuditRecDto, param.PageNumber, param.PageSize);
+        }
 
+        public Task<bool> Update(AuditRecDDto model)
+        {
+            throw new System.NotImplementedException();
+        }
         public async Task<List<string>> GetAllStatus()
         {
             return await _repoAuditRecD.FindAll().GroupBy(x => x.Status).Select(x => x.Key).ToListAsync();
@@ -111,11 +165,6 @@ namespace ME_API._Services.Services
         }
 
         public Task<PagedList<AuditRecDDto>> Search(PaginationParams param, object text)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<bool> Update(AuditRecDDto model)
         {
             throw new System.NotImplementedException();
         }

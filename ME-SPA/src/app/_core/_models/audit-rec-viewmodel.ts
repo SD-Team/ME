@@ -1,6 +1,8 @@
 export interface AuditRecViewModel {
         record_ID: string;
         record_Time: Date;
+        building: string;
+        pdc: string;
         line: string;
         model_Name: string;
         model_No: string;

@@ -6,6 +6,8 @@ namespace ME_API.DTO
     {
         public string Record_ID {get;set;}
         public DateTime? Record_Time {get;set;}
+        public string PDC {get;set;}
+        public string Building {get;set;}
         public string Line {get;set;}
         public string Model_Name {get;set;}
         public string Model_No {get;set;}

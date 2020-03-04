@@ -16,6 +16,7 @@
                     (change)= "optionAuditType1($event)"
                     id="auditType1" 
                     class="select-list">
+                  <option value="all">All</option>
                   <option *ngFor="let item of auditType1List" value="{{ item }}">{{ item }}</option>
                 </select>
                 <select [(ngModel)]="auditType2" 
