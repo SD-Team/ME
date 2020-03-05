@@ -13,6 +13,7 @@ namespace ME_API.DTO
         public string Model_No {get;set;}
         public int Item_no {get;set;}
         public string ERCS {get;set;}
+        public string Audit_Type {get;set;}
         public string Audit_Type_ID {get;set;}
         public string Audit_Item {get;set;}
         public string Issue_ZW {get;set;}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -106,7 +107,8 @@ namespace ME_API._Services.Services
                             Record_Time = y.Record_Time,
                             After_Picture = x.After_Picture,
                             Audit_Item = x.Audit_Item,
-                            Audit_Type_ID = _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type2,
+                            Audit_Type_ID = x.Audit_Type_ID,
+                            Audit_Type = _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type2,
                             Before_Picture = x.Before_Picture,
                             Finished_Date = x.Finished_Date,
                             ERCS = x.ERCS,
@@ -130,7 +132,9 @@ namespace ME_API._Services.Services
             listAuditRecDto = listAuditRecDto.Where(x =>    x.Status.Trim() == model.Status.Trim() && 
                                                             x.Building.Trim() == model.Building.Trim() &&
                                                             x.Line.Trim() == model.Line.Trim() &&
-                                                            x.PDC.Trim() == model.PDC.Trim());
+                                                            x.PDC.Trim() == model.PDC.Trim() && 
+                                                            x.Record_Time >= Convert.ToDateTime(model.From_Date + " 00:00") &&
+                                                            x.Record_Time <= Convert.ToDateTime(model.To_Date + " 00:00"));
             if(model.Model_No != "all") {
                 listAuditRecDto = listAuditRecDto.Where(x => x.Model_No.Trim() == model.Model_No.Trim());
             }

@@ -7,4 +7,6 @@ export interface AuditRecSearch {
     model_No: string;
     audit_Type_1: string;
     audit_Type_2: string;
+    from_Date: string;
+    to_Date: string;
 }

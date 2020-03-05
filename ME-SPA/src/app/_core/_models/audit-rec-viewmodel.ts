@@ -8,6 +8,7 @@ export interface AuditRecViewModel {
         model_No: string;
         item_no: string;
         ercs: string;
+        audit_Type: string;
         audit_Type_ID: string;
         audit_Item: string;
         issue_ZW: string;

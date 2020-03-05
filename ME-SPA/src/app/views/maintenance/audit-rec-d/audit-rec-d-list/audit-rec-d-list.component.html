@@ -32,6 +32,7 @@
                         <div class="input-group">
                             <input class="form-control" 
                               placeholder="End"
+                              [(ngModel)]="time_end"
                               type="text" bsDatepicker 
                               [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
                             <span class="input-group-text">
@@ -156,7 +157,7 @@
                         <th>{{ item.model_No }}</th>
                         <th>{{ item.item_no }}</th>
                         <th>{{ item.ercs }}</th>
-                        <th>{{ item.audit_Type_ID }}</th>
+                        <th>{{ item.audit_Type }}</th>
                         <th>{{ item.audit_Item }}</th>
                         <th>{{ item.issue_LL }}</th>
                         <th>{{ item.issue_ZW }}</th>
