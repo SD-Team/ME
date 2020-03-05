@@ -72,10 +72,12 @@ namespace ME_API._Services.Services
             //                         }).Distinct().OrderByDescending(x => x.Implement_Time);
                     var listAuditRecDto = listAuditRecD.Join(listAuditRecM, x => x.Record_ID, y => y.Record_ID, (x, y) => new AuditRecDto
                         {
+                            Record_ID = x.Record_ID,
                             Record_Time = y.Record_Time,
                             After_Picture = x.After_Picture,
                             Audit_Item = x.Audit_Item,
-                            Audit_Type_ID = _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type2,
+                            Audit_Type_ID = x.Audit_Type_ID,
+                            Audit_Type = _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type2,
                             Before_Picture = x.Before_Picture,
                             Finished_Date = x.Finished_Date,
                             ERCS = x.ERCS,
@@ -90,11 +92,16 @@ namespace ME_API._Services.Services
                             ME_PIC = x.ME_PIC,
                             Model_Name = y.Model_Name,
                             Model_No = y.Model_No,
+                            Chief = y.Chief,
+                            Recorder = y.Recorder,
+                            Attendees = y.Attendees,
                             PD_PIC = x.PD_PIC,
                             PD_RESP = x.PD_RESP,
                             Remark = x.Remark,
                             Status = x.Status,
-                            Item_no = x.Item_no
+                            Item_no = x.Item_no,
+                            Updated_By = x.Updated_By,
+                            Updated_Time = y.Updated_Time
                         });
             return await PagedList<AuditRecDto>.CreateAsync(listAuditRecDto, param.PageNumber, param.PageSize);
         }
@@ -104,6 +111,7 @@ namespace ME_API._Services.Services
             var listAuditRecD =  _repoAuditRecD.FindAll(); 
             var listAuditRecDto = listAuditRecD.Join(listAuditRecM, x => x.Record_ID, y => y.Record_ID, (x, y) => new AuditRecDto
                         {
+                            Record_ID = x.Record_ID,
                             Record_Time = y.Record_Time,
                             After_Picture = x.After_Picture,
                             Audit_Item = x.Audit_Item,
@@ -123,11 +131,16 @@ namespace ME_API._Services.Services
                             ME_PIC = x.ME_PIC,
                             Model_Name = y.Model_Name,
                             Model_No = y.Model_No,
+                            Chief = y.Chief,
+                            Recorder = y.Recorder,
+                            Attendees = y.Attendees,
                             PD_PIC = x.PD_PIC,
                             PD_RESP = x.PD_RESP,
                             Remark = x.Remark,
                             Status = x.Status,
-                            Item_no = x.Item_no
+                            Item_no = x.Item_no,
+                            Updated_By = x.Updated_By,
+                            Updated_Time = x.Updated_Time
                         });
             listAuditRecDto = listAuditRecDto.Where(x =>    x.Status.Trim() == model.Status.Trim() && 
                                                             x.Building.Trim() == model.Building.Trim() &&
@@ -171,6 +184,103 @@ namespace ME_API._Services.Services
         public Task<PagedList<AuditRecDDto>> Search(PaginationParams param, object text)
         {
             throw new System.NotImplementedException();
+        }
+
+        public async Task<List<AuditRecDto>> GetAllExcel()
+        {
+            var listAuditRecM = _repoAuditRecM.FindAll();
+            var listAuditRecD = _repoAuditRecD.FindAll();
+                    var listAuditRecDto = await listAuditRecD.Join(listAuditRecM, x => x.Record_ID, y => y.Record_ID, (x, y) => new AuditRecDto
+                        {
+                            Record_ID = x.Record_ID,
+                            Record_Time = y.Record_Time,
+                            After_Picture = x.After_Picture,
+                            Audit_Item = x.Audit_Item,
+                            Audit_Type_ID = x.Audit_Type_ID,
+                            Audit_Type = _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type2,
+                            Before_Picture = x.Before_Picture,
+                            Finished_Date = x.Finished_Date,
+                            ERCS = x.ERCS,
+                            Implement_Time = x.Implement_Time,
+                            Implement_User = x.Implement_User,
+                            Issue_EN = x.Issue_EN,
+                            Issue_LL = x.Issue_LL,
+                            Issue_ZW = x.Issue_ZW,
+                            Building = y.Building,
+                            PDC = y.PDC,
+                            Line = y.Line,
+                            ME_PIC = x.ME_PIC,
+                            Model_Name = y.Model_Name,
+                            Model_No = y.Model_No,
+                            Chief = y.Chief,
+                            Recorder = y.Recorder,
+                            Attendees = y.Attendees,
+                            PD_PIC = x.PD_PIC,
+                            PD_RESP = x.PD_RESP,
+                            Remark = x.Remark,
+                            Status = x.Status,
+                            Item_no = x.Item_no,
+                            Updated_By = x.Updated_By,
+                            Updated_Time = x.Updated_Time
+                        }).ToListAsync();
+            return listAuditRecDto;
+        }
+
+        public async Task<List<AuditRecDto>> SearchExcel(AuditRecSearch model)
+        {
+            var listAuditRecM = _repoAuditRecM.FindAll();
+            var listAuditRecD =  _repoAuditRecD.FindAll(); 
+            var listAuditRecDto = await listAuditRecD.Join(listAuditRecM, x => x.Record_ID, y => y.Record_ID, (x, y) => new AuditRecDto
+                        {
+                            Record_ID = x.Record_ID,
+                            Record_Time = y.Record_Time,
+                            After_Picture = x.After_Picture,
+                            Audit_Item = x.Audit_Item,
+                            Audit_Type_ID = x.Audit_Type_ID,
+                            Audit_Type = _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(x.Audit_Type_ID).Audit_Type2,
+                            Before_Picture = x.Before_Picture,
+                            Finished_Date = x.Finished_Date,
+                            ERCS = x.ERCS,
+                            Implement_Time = x.Implement_Time,
+                            Implement_User = x.Implement_User,
+                            Issue_EN = x.Issue_EN,
+                            Issue_LL = x.Issue_LL,
+                            Issue_ZW = x.Issue_ZW,
+                            PDC = y.PDC,
+                            Line = y.Line,
+                            Building = y.Building,
+                            ME_PIC = x.ME_PIC,
+                            Model_Name = y.Model_Name,
+                            Model_No = y.Model_No,
+                            Chief = y.Chief,
+                            Recorder = y.Recorder,
+                            Attendees = y.Attendees,
+                            PD_PIC = x.PD_PIC,
+                            PD_RESP = x.PD_RESP,
+                            Remark = x.Remark,
+                            Status = x.Status,
+                            Item_no = x.Item_no,
+                            Updated_By = x.Updated_By,
+                            Updated_Time = x.Updated_Time
+                        }).ToListAsync();
+            listAuditRecDto = listAuditRecDto.Where(x =>    x.Status.Trim() == model.Status.Trim() && 
+                                                            x.Building.Trim() == model.Building.Trim() &&
+                                                            x.Line.Trim() == model.Line.Trim() &&
+                                                            x.PDC.Trim() == model.PDC.Trim() && 
+                                                            x.Record_Time >= Convert.ToDateTime(model.From_Date + " 00:00") &&
+                                                            x.Record_Time <= Convert.ToDateTime(model.To_Date + " 00:00")).ToList();
+            if(model.Model_No != "all") {
+                listAuditRecDto =  listAuditRecDto.Where(x => x.Model_No.Trim() == model.Model_No.Trim()).ToList();
+            }
+            if(model.Model_Name != "" && model.Model_Name != string.Empty && model.Model_Name != null) {
+                listAuditRecDto = listAuditRecDto.Where(x => x.Model_Name.Contains(model.Model_Name)).ToList();
+            }
+            if(model.Audit_Type_1 != "all") {
+                var auditTypeMFind = await _repoAuditTypeM.FindAll().Where(x => x.Audit_Type1.Trim() == model.Audit_Type_1 &&
+                                                        x.Audit_Type2.Trim() == model.Audit_Type_2).FirstOrDefaultAsync();
+                listAuditRecDto = listAuditRecDto.Where(x => x.Audit_Type_ID.Trim() == auditTypeMFind.Audit_Type_ID).ToList();
+            }
+            return listAuditRecDto;
         }
     }
 }

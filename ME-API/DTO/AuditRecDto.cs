@@ -11,6 +11,9 @@ namespace ME_API.DTO
         public string Line {get;set;}
         public string Model_Name {get;set;}
         public string Model_No {get;set;}
+        public string Chief {get;set;}
+        public string Recorder {get;set;}
+        public string Attendees {get;set;}
         public int Item_no {get;set;}
         public string ERCS {get;set;}
         public string Audit_Type {get;set;}
@@ -29,5 +32,7 @@ namespace ME_API.DTO
         public string Remark {get;set;}
         public string Implement_User {get;set;}
         public DateTime? Implement_Time {get;set;}
+        public string Updated_By {get;set;}
+        public DateTime? Updated_Time {get;set;}
     }
 }

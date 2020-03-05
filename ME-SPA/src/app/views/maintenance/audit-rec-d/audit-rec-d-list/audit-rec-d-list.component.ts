@@ -73,32 +73,38 @@ export class AuditRecDListComponent implements OnInit {
     }
   }
   search() {
+    if (this.time_start === undefined || this.time_end === undefined) {
+      this.alertify.error('Please option start and end time');
+    } else {
     // tslint:disable-next-line:prefer-const
-    let form_date = new Date(this.time_start).toLocaleDateString();
-    // tslint:disable-next-line:prefer-const
-    let to_date = new Date(this.time_end).toLocaleDateString();
-    this.searchKey = true;
-    // tslint:disable-next-line:prefer-const
-    let object = {
-      pdc: this.pdc,
-      status: this.status,
-      building: this.building,
-      line: this.line,
-      model_Name: this.model_Name,
-      model_No: this.model_No,
-      audit_Type_1: this.auditType1,
-      audit_Type_2: this.auditType2,
-      from_Date: form_date,
-      to_Date: to_date
-    };
-    console.log(object);
-    this.auditRecDService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object)
-    .subscribe((res: PaginatedResult<AuditRecViewModel[]>) => {
-      this.auditRecs = res.result;
-      this.pagination = res.pagination;
-    }, error => {
-      this.alertify.error(error);
-    });
+      let form_date = new Date(this.time_start).toLocaleDateString();
+      // tslint:disable-next-line:prefer-const
+      let to_date = new Date(this.time_end).toLocaleDateString();
+      this.searchKey = true;
+      // tslint:disable-next-line:prefer-const
+      let object = {
+        pdc: this.pdc,
+        status: this.status,
+        building: this.building,
+        line: this.line,
+        model_Name: this.model_Name,
+        model_No: this.model_No,
+        audit_Type_1: this.auditType1,
+        audit_Type_2: this.auditType2,
+        from_Date: form_date,
+        to_Date: to_date
+      };
+      this.auditRecDService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object)
+      .subscribe((res: PaginatedResult<AuditRecViewModel[]>) => {
+        this.auditRecs = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+      });
+      }
+  }
+  getAllExcel() {
+    this.auditRecDService.generateExcel();
   }
   getListStatus() {
     this.auditRecDService.getListStatus().subscribe(res => {

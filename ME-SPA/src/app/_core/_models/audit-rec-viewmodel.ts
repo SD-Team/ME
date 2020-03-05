@@ -1,11 +1,14 @@
 export interface AuditRecViewModel {
         record_ID: string;
         record_Time: Date;
-        building: string;
         pdc: string;
+        building: string;
         line: string;
         model_Name: string;
         model_No: string;
+        chief: string;
+        recorder: string;
+        attendees: string;
         item_no: string;
         ercs: string;
         audit_Type: string;
@@ -22,6 +25,8 @@ export interface AuditRecViewModel {
         finished_Date: Date;
         status: string;
         remark: string;
+        updated_By: string;
+        updated_Time: Date;
         implement_User: string;
         implement_Time: Date;
 }

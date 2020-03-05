@@ -11,5 +11,7 @@ namespace ME_API._Services.Interface
         Task<PagedList<AuditRecDto>> GetAllAuditRecViewModel(PaginationParams param);
         Task<List<string>> GetAllStatus();
         Task<PagedList<AuditRecDto>> SearchByModel(PaginationParams param, AuditRecSearch model);
+        Task<List<AuditRecDto>> GetAllExcel();
+        Task<List<AuditRecDto>> SearchExcel(AuditRecSearch model);
     }
 }

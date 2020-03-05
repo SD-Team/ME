@@ -46,7 +46,7 @@
                         <button type="button" (click)="search()"
                         class="btn btn-block btn-success"><i class="fa fa-search"></i> Search
                         </button>
-                        <button type="button" class="btn btn-add-new btn-block btn-primary">
+                        <button type="button" (click)="getAllExcel()" class="btn btn-add-new btn-block btn-primary">
                             <i class="fa fa-file-excel-o"></i>  Export Excel
                         </button>
                     </div>
@@ -121,8 +121,6 @@
                         <tr>
                             <th>#</th>
                             <th>Record_Date</th>
-                            <th>Building</th>
-                            <th>PDC</th>
                             <th>Line_ID</th>
                             <th>Model_Name</th>
                             <th>Model_No</th>
@@ -133,8 +131,6 @@
                             <th>Issue_LL</th>
                             <th>Issue_ZW</th>
                             <th>Issue_EN</th>
-                            <th>Before_Picture</th>
-                            <th>After_Picture</th>
                             <th>PIC_Type_ZW</th>
                             <th>Resp_Name</th>
                             <th>Resp_PIC</th>
@@ -148,30 +144,26 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let item of auditRecs;let i = index">
-                        <th>{{ (pagination.currentPage - 1) * pagination.itemsPerPage + i + 1 }}</th>
-                        <th>{{ item.record_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
-                        <th>{{ item.building }}</th>
-                        <th>{{ item.pdc }}</th>
-                        <th>{{ item.line }}</th>
-                        <th>{{ item.model_Name }}</th>
-                        <th>{{ item.model_No }}</th>
-                        <th>{{ item.item_no }}</th>
-                        <th>{{ item.ercs }}</th>
-                        <th>{{ item.audit_Type }}</th>
-                        <th>{{ item.audit_Item }}</th>
-                        <th>{{ item.issue_LL }}</th>
-                        <th>{{ item.issue_ZW }}</th>
-                        <th>{{ item.issue_EN }}</th>
-                        <th>{{ item.before_Picture }}</th>
-                        <th>{{ item.after_Picture }}</th>
-                        <th>{{ item.pD_PIC }}</th>
-                        <th>{{ item.pD_RESP }}</th>
-                        <th>{{ item.mE_PIC }}</th>
-                        <th>{{ item.finished_Date | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
-                        <th>{{ item.status }}</th>
-                        <th>{{ item.remark }}</th>
-                        <th>{{ item.implement_User }}</th>
-                        <th>{{ item.implement_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <th class="font-table">{{ (pagination.currentPage - 1) * pagination.itemsPerPage + i + 1 }}</th>
+                        <th class="font-table">{{ item.record_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <th class="font-table">{{ item.line }}</th>
+                        <th class="font-table">{{ item.model_Name }}</th>
+                        <th class="font-table">{{ item.model_No }}</th>
+                        <th class="font-table">{{ item.item_no }}</th>
+                        <th class="font-table">{{ item.ercs }}</th>
+                        <th class="font-table">{{ item.audit_Type }}</th>
+                        <th class="font-table">{{ item.audit_Item }}</th>
+                        <th class="font-table">{{ item.issue_LL }}</th>
+                        <th class="font-table">{{ item.issue_ZW }}</th>
+                        <th class="font-table">{{ item.issue_EN }}</th>
+                        <th class="font-table">{{ item.pD_PIC }}</th>
+                        <th class="font-table">{{ item.pD_RESP }}</th>
+                        <th class="font-table">{{ item.mE_PIC }}</th>
+                        <th class="font-table">{{ item.finished_Date | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <th class="font-table">{{ item.status }}</th>
+                        <th class="font-table">{{ item.remark }}</th>
+                        <th class="font-table">{{ item.implement_User }}</th>
+                        <th class="font-table">{{ item.implement_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
                         <td>
                             <button type="button" class="btn btn-primary btn-sm mr-2"><i
                                 class="fa fa-edit fa-lg"></i></button>

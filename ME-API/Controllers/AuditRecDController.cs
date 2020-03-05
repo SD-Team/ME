@@ -17,10 +17,16 @@ namespace ME_API.Controllers
             _service = service;
         }
 
-        [HttpGet(Name = "GetAllRecDs")]
+        [HttpGet("all" ,Name = "GetAllRecDs")]
         public async Task<IActionResult> GetAll([FromQuery]PaginationParams param){
             var auditRecs = await _service.GetAllAuditRecViewModel(param);
             Response.AddPagination(auditRecs.CurrentPage, auditRecs.PageSize, auditRecs.TotalCount, auditRecs.TotalPages);
+            return Ok(auditRecs);
+        }
+
+        [HttpGet("allExcel",Name = "getallExcel")]
+        public async Task<IActionResult> GetAllExcel() {
+            var auditRecs = await _service.GetAllExcel();
             return Ok(auditRecs);
         }
 
@@ -29,10 +35,17 @@ namespace ME_API.Controllers
             var data = await _service.GetAllStatus();
             return Ok(data);
         }
+
         [HttpPost("searchModel")]
         public async Task<IActionResult> SearchByModel([FromQuery]PaginationParams param, [FromBody]AuditRecSearch model) {
             var auditRecs = await _service.SearchByModel(param, model);
             Response.AddPagination(auditRecs.CurrentPage, auditRecs.PageSize, auditRecs.TotalCount, auditRecs.TotalPages);
+            return Ok(auditRecs);
+        }
+
+        [HttpPost("searchExcel")]
+        public async Task<IActionResult> SearchExcel([FromBody]AuditRecSearch model) {
+            var auditRecs = await _service.SearchExcel(model);
             return Ok(auditRecs);
         }
     }
