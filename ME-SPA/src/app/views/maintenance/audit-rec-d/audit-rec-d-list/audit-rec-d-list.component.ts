@@ -13,7 +13,7 @@ import { AuditType } from '../../../../_core/_models/audit-type';
 @Component({
   selector: 'app-audit-rec-d-list',
   templateUrl: './audit-rec-d-list.component.html',
-  styleUrls: ['./audit-rec-d-list.component.css']
+  styleUrls: ['./audit-rec-d-list.component.scss']
 })
 export class AuditRecDListComponent implements OnInit {
   auditRecs: AuditRecViewModel[];
@@ -76,7 +76,7 @@ export class AuditRecDListComponent implements OnInit {
     if (this.time_start === undefined || this.time_end === undefined) {
       this.alertify.error('Please option start and end time');
     } else {
-    // tslint:disable-next-line:prefer-const
+      // tslint:disable-next-line:prefer-const
       let form_date = new Date(this.time_start).toLocaleDateString();
       // tslint:disable-next-line:prefer-const
       let to_date = new Date(this.time_end).toLocaleDateString();
@@ -103,8 +103,30 @@ export class AuditRecDListComponent implements OnInit {
       });
       }
   }
-  getAllExcel() {
-    this.auditRecDService.generateExcel();
+  exportExcel() {
+    if (this.searchKey) {
+      // tslint:disable-next-line:prefer-const
+      let form_date = new Date(this.time_start).toLocaleDateString();
+      // tslint:disable-next-line:prefer-const
+      let to_date = new Date(this.time_end).toLocaleDateString();
+      this.searchKey = true;
+      // tslint:disable-next-line:prefer-const
+      let object = {
+        pdc: this.pdc,
+        status: this.status,
+        building: this.building,
+        line: this.line,
+        model_Name: this.model_Name,
+        model_No: this.model_No,
+        audit_Type_1: this.auditType1,
+        audit_Type_2: this.auditType2,
+        from_Date: form_date,
+        to_Date: to_date
+      };
+      this.auditRecDService.getSearchExcel(object);
+    } else {
+      this.auditRecDService.getAllExcel();
+    }
   }
   getListStatus() {
     this.auditRecDService.getListStatus().subscribe(res => {
@@ -155,6 +177,9 @@ export class AuditRecDListComponent implements OnInit {
         this.auditType2 = this.auditType2List[0].audit_Type2;
       });
     }
+  }
+  addAuditRecM() {
+    this.router.navigate(['/maintenance/audit-rec/add-audit-recM']);
   }
   // Khi Click chọn option selection Audit Type 2
   // optionAuditType2(e) {

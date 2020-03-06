@@ -19,6 +19,7 @@ import { AuditPicDAddComponent } from './audit-pic-d/audit-pic-d-add/audit-pic-d
 import { AuditRecDListComponent } from './audit-rec-d/audit-rec-d-list/audit-rec-d-list.component';
 import { AuditRecDListResolver } from '../../_core/_resolvers/audit-rec-d-list.resolver';
 import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d-add.component';
+import { AuditRecMAddComponent } from './audit-rec-d/audit-rec-m-add/audit-rec-m-add.component';
 
 
 
@@ -135,7 +136,7 @@ const routes: Routes = [
           ]
       },
       {
-        path: 'audit-rec-d',
+        path: 'audit-rec',
         children:
           [
             {
@@ -147,10 +148,17 @@ const routes: Routes = [
               }
             },
             {
-              path: 'add',
+              path: 'add-audit-recM',
+              component: AuditRecMAddComponent,
+              data: {
+                title: 'Add new audit Rec M'
+              }
+            },
+            {
+              path: 'add-recD',
               component: AuditRecDAddComponent,
               data: {
-                title: 'Add new audit Rec'
+                title: 'Add new audit Rec D'
               }
             }
           ]

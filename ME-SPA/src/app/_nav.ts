@@ -55,7 +55,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Audit Rec D',
-    url: '/maintenance/audit-rec-d',
+    url: '/maintenance/audit-rec',
     icon: 'icon-eyeglass',
   },
   {

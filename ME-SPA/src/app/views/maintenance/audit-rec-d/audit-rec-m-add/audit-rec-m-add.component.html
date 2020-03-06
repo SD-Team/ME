@@ -1,0 +1,97 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong >Add new</strong>
+          Audit Rec M
+          <button type="button" class="btn btn-sm btn-primary float-right"><i
+              class="fa fa-chevron-left"></i>
+            Back</button>
+        </div>
+        <form class="form-horizontal" #addAuditRecMForm="ngForm" (ngSubmit)="addAuditRecMForm.valid && saveAndNext()">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-1 col-form-label" for="Record_Time">Record_Time: </label>
+              <div class="col-md-2">
+                <div class="input-group">
+                  <input class="form-control" 
+                      placeholder="Record Time"
+                      [(ngModel)]="auditRecM.record_Time"
+                      type="text" bsDatepicker 
+                      [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
+                  <span class="input-group-text">
+                    <span class="fa fa-calendar"></span>
+                  </span>
+                </div>
+              </div>
+              <label class="col-md-1 col-form-label" for="PDC">PDC</label>
+              <div class="col-md-2">
+                  <select value="" [(ngModel)]="auditRecM.pdc" class="form-control">
+                    <option name="" id="">PDC</option>
+                    <option name="" id="">PDC</option>
+                  </select>
+              </div>
+              <label class="col-md-1 col-form-label" for="Building">Building</label>
+              <div class="col-md-2">
+                  <select value="" [(ngModel)]="auditRecM.building" class="form-control">
+                    <option name="" id="">Building</option>
+                    <option name="" id="">Building</option>
+                  </select>
+              </div>
+              <label class="col-md-1 col-form-label" for="Line_ID">Line_ID</label>
+              <div class="col-md-2">
+                  <select value="" [(ngModel)]="auditRecM.line_ID" class="form-control">
+                    <option name="" id="">Line_ID</option>
+                    <option name="" id="">Line_ID</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-1 col-form-label" for="Model_No">Model_No</label>
+              <div class="col-md-2">
+                  <select value="" [(ngModel)]="auditRecM.model_No" class="form-control">
+                    <option name="" id="">Model_No</option>
+                    <option name="" id="">Model_No</option>
+                  </select>
+              </div>
+              <label class="col-md-1 col-form-label" for="Model_Name">Model_Name</label>
+              <div class="col-md-2">
+                  <input class="form-control" [(ngModel)]="auditRecM.model_Name" type="text" placeholder="Model Name">
+              </div>
+              <label class="col-md-1 col-form-label" for="Chief">Chief</label>
+              <div class="col-md-2">
+                  <select value="" [(ngModel)]="auditRecM.chief" class="form-control">
+                    <option name="" id="">Chief</option>
+                    <option name="" id="">Chief</option>
+                  </select>
+              </div>
+              <label class="col-md-1 col-form-label" for="Recorder">Recorder</label>
+              <div class="col-md-2">
+                  <select value="" [(ngModel)]="auditRecM.recorder" class="form-control">
+                    <option name="" id="">Recorder</option>
+                    <option name="" id="">Recorder</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-1 col-form-label" for="attendees">Attendees</label>
+              <div class="col-md-5">
+                <textarea class="form-control" [(ngModel)]="auditRecM.attendees"  name="attendees" id="" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-ban"></i> Cancel</button>
+            <button type="submit" class="btn btn-sm btn-primary"  [disabled]="!addAuditRecMForm.valid"><i
+                class="fa fa-check" ></i> Save & NewDetail</button>
+            <button type="button" class="btn btn-sm btn-success" [disabled]="!addAuditRecMForm.valid"><i
+                class="fa fa-check"></i> Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

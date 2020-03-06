@@ -11,5 +11,6 @@ export class AuditRecDAddComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  saveAndNext() {
+  }
 }

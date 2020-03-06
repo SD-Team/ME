@@ -5,8 +5,8 @@ import { AlertifyService } from '../../_core/_services/alertify.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./default-layout.component.html"
+  selector: 'app-dashboard',
+  templateUrl: './default-layout.component.html'
 })
 export class DefaultLayoutComponent {
   public sidebarMinimized = false;
@@ -16,19 +16,17 @@ export class DefaultLayoutComponent {
    *
    */
   constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) {
-    
-    
   }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
 
   logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
-    this.alertify.message("Logged out");
-    this.router.navigate(["/login"]);
+    this.alertify.message('Logged out');
+    this.router.navigate(['/login']);
   }
 }

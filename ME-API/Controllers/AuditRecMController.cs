@@ -1,5 +1,8 @@
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ME_API._Services.Interface;
+using ME_API.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +47,16 @@ namespace ME_API.Controllers
         public async Task<IActionResult> GetAllPDC() {
             var data = await _service.GetAllPDC();
             return Ok(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AuditRecMDto data) {
+            var username = User.FindFirst(ClaimTypes.Name).Value;
+            data.Updated_By = username;
+            if (await _service.Add(data)) {
+                return CreatedAtRoute("GetAllRecM", new {});
+            }
+            throw new Exception("Creating the Audit RecM failed on save");
         }
     }
 }

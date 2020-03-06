@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 // Components Routing
 import { MaintenanceRoutingModule } from './maintenance-routing.module';
 import { BrandListComponent } from './brands/brand-list/brand-list.component';
@@ -20,6 +21,7 @@ import { AuditPicDListComponent } from './audit-pic-d/audit-pic-d-list/audit-pic
 import { AuditPicDAddComponent } from './audit-pic-d/audit-pic-d-add/audit-pic-d-add.component';
 import { AuditRecDListComponent } from './audit-rec-d/audit-rec-d-list/audit-rec-d-list.component';
 import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d-add.component';
+import { AuditRecMAddComponent } from './audit-rec-d/audit-rec-m-add/audit-rec-m-add.component';
 
 @NgModule({
   imports: [
@@ -30,6 +32,7 @@ import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d
     MaintenanceRoutingModule,
     PaginationModule,
     NgSelectModule,
+    BsDropdownModule,
     BsDatepickerModule.forRoot(),
   ],
   declarations: [
@@ -44,7 +47,8 @@ import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d
     AuditPicDListComponent,
     AuditPicDAddComponent,
     AuditRecDListComponent,
-    AuditRecDAddComponent
+    AuditRecDAddComponent,
+    AuditRecMAddComponent
   ],
 })
 export class MaintenanceModule {}

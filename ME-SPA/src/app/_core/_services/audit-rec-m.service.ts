@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { AuditRecM } from '../_models/audit-rec-m';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,5 +28,8 @@ export class AuditRecMService {
   }
   getListPDC() {
     return this.http.get<any>(this.baseUrl + 'auditRecM/pdcs', {});
+  }
+  create(auditRecM: AuditRecM) {
+    return this.http.post(this.baseUrl + 'auditRecM/', auditRecM);
   }
 }
