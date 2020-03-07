@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ME_API._Services.Interface;
 using ME_API.DTO;
+using ME_API.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,13 +51,16 @@ namespace ME_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AuditRecMDto data) {
+        public async Task<IActionResult> Create(AuditRecMViewModel model)
+        {
             var username = User.FindFirst(ClaimTypes.Name).Value;
-            data.Updated_By = username;
-            if (await _service.Add(data)) {
-                return CreatedAtRoute("GetAllRecM", new {});
+            model.Updated_By = username;
+            if (await _service.AddAuditRecM(model))
+            {
+                return CreatedAtRoute("GetAllRecM", new { });
             }
-            throw new Exception("Creating the Audit RecM failed on save");
+
+            throw new Exception("Creating the Audit Rec M failed on save");
         }
     }
 }

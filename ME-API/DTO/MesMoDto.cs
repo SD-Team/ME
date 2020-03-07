@@ -44,7 +44,10 @@ namespace ME_API.DTO
         public DateTime? Comfirm_Date {get;set;}
         public string Prod_Season {get;set;}
         public string Top_Model {get;set;}
-        public DateTime? Updated_Time {get;set;}
+        public DateTime? Update_Time {get;set;}
         public string Updated_By {get;set;}
+        public MesMoDto() {
+            this.Update_Time = DateTime.Now;
+        }
     }
 }

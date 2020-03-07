@@ -15,7 +15,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuditTypeDService {
-
     baseUrl = environment.apiUrl;
     auditTypeDSource = new BehaviorSubject<Object>({});
     currentAuditType = this.auditTypeDSource.asObservable();

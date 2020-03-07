@@ -71,6 +71,7 @@ namespace ME_API
             services.AddScoped<IAuditRecMRepository, AuditRecMRepository>();
             services.AddScoped<IAuditRecDRepository, AuditRecDRepository>();
             services.AddScoped<IMesOrgRepository, MesOrgRepository>();
+            services.AddScoped<IMesMoRepository, MesMoRepository>();
 
             //Services
             services.AddScoped<IBrandService, BrandService>();
@@ -81,6 +82,7 @@ namespace ME_API
             services.AddScoped<IAuditRecMService, AuditRecMService>();
             services.AddScoped<IAuditRecDService, AuditRecDService>();
             services.AddScoped<IMesOrgService, MesOrgService>();
+            services.AddScoped<IMesMoService, MesMoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

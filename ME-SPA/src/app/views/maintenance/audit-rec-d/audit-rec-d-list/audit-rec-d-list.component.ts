@@ -181,10 +181,6 @@ export class AuditRecDListComponent implements OnInit {
   addAuditRecM() {
     this.router.navigate(['/maintenance/audit-rec/add-audit-recM']);
   }
-  // Khi Click chọn option selection Audit Type 2
-  // optionAuditType2(e) {
-  //   this.auditType2 = e.target.value;
-  // }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.load();

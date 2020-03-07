@@ -16,8 +16,9 @@
               <div class="col-md-2">
                 <div class="input-group">
                   <input class="form-control" 
+                      name="Record_Time"
                       placeholder="Record Time"
-                      [(ngModel)]="auditRecM.record_Time"
+                      [(ngModel)]="record_Time"
                       type="text" bsDatepicker 
                       [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
                   <span class="input-group-text">
@@ -27,57 +28,55 @@
               </div>
               <label class="col-md-1 col-form-label" for="PDC">PDC</label>
               <div class="col-md-2">
-                  <select value="" [(ngModel)]="auditRecM.pdc" class="form-control">
-                    <option name="" id="">PDC</option>
-                    <option name="" id="">PDC</option>
+                  <select value="" name="PDC" [(ngModel)]="auditRecM.pdc" class="form-control">
+                    <option value="{{ item }}" *ngFor="let item of pdcs" id="">{{ item }}</option>
                   </select>
               </div>
               <label class="col-md-1 col-form-label" for="Building">Building</label>
               <div class="col-md-2">
-                  <select value="" [(ngModel)]="auditRecM.building" class="form-control">
-                    <option name="" id="">Building</option>
-                    <option name="" id="">Building</option>
+                  <select value="" name="Building" [(ngModel)]="auditRecM.building" class="form-control">
+                    <option  value="{{item}}" *ngFor="let item of buildings" id="">{{item}}</option>
                   </select>
               </div>
               <label class="col-md-1 col-form-label" for="Line_ID">Line_ID</label>
               <div class="col-md-2">
-                  <select value="" [(ngModel)]="auditRecM.line_ID" class="form-control">
-                    <option name="" id="">Line_ID</option>
-                    <option name="" id="">Line_ID</option>
+                  <select value="" name="Line_ID"
+                    [(ngModel)]="auditRecM.line" class="form-control">
+                    <option  value="{{item}}" *ngFor="let item of lineIDs" id="">{{item}}</option>
                   </select>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-1 col-form-label" for="Model_No">Model_No</label>
               <div class="col-md-2">
-                  <select value="" [(ngModel)]="auditRecM.model_No" class="form-control">
-                    <option name="" id="">Model_No</option>
-                    <option name="" id="">Model_No</option>
+                  <select value="" (change)="changeOptionModelNo()"
+                                    name="model_No" 
+                                    [(ngModel)]="modelNo" 
+                                    class="form-control">
+                    <option value="{{item}}" *ngFor="let item of modelNos" id="">{{item}}</option>
                   </select>
               </div>
               <label class="col-md-1 col-form-label" for="Model_Name">Model_Name</label>
               <div class="col-md-2">
-                  <input class="form-control" [(ngModel)]="auditRecM.model_Name" type="text" placeholder="Model Name">
+                  <input class="form-control" name="modelName" 
+                  [(ngModel)]="modelName" type="text" placeholder="Model Name" required>
               </div>
               <label class="col-md-1 col-form-label" for="Chief">Chief</label>
               <div class="col-md-2">
-                  <select value="" [(ngModel)]="auditRecM.chief" class="form-control">
-                    <option name="" id="">Chief</option>
-                    <option name="" id="">Chief</option>
-                  </select>
+                  <input class="form-control" name="Chief" [(ngModel)]="auditRecM.chief" required
+                   type="text" placeholder="Enter chief">
               </div>
               <label class="col-md-1 col-form-label" for="Recorder">Recorder</label>
               <div class="col-md-2">
-                  <select value="" [(ngModel)]="auditRecM.recorder" class="form-control">
-                    <option name="" id="">Recorder</option>
-                    <option name="" id="">Recorder</option>
-                  </select>
+                <input class="form-control" name="Recorder" 
+                [(ngModel)]="auditRecM.recorder" type="text" placeholder="Enter recorder" required>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-1 col-form-label" for="attendees">Attendees</label>
               <div class="col-md-5">
-                <textarea class="form-control" [(ngModel)]="auditRecM.attendees"  name="attendees" id="" rows="3"></textarea>
+                <textarea class="form-control" 
+                [(ngModel)]="auditRecM.attendees"  name="attendees" id="" rows="3" required></textarea>
               </div>
             </div>
           </div>

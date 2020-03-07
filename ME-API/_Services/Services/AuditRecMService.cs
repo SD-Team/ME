@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ using ME_API._Repositories.Interface;
 using ME_API._Services.Interface;
 using ME_API.DTO;
 using ME_API.Helpers;
+using ME_API.Models;
+using ME_API.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace ME_API._Services.Services
@@ -26,7 +29,27 @@ namespace ME_API._Services.Services
         }
         public Task<bool> Add(AuditRecMDto model)
         {
-            throw new System.NotImplementedException();
+           throw new System.NotImplementedException();
+        }
+
+        public async Task<bool> AddAuditRecM(AuditRecMViewModel model)
+        {
+            var recored_Time = DateTime.Parse(model.Record_Time.ToString());
+            AuditRecMDto data = new AuditRecMDto();
+            data.Record_ID = model.Record_ID.Trim();
+            data.Record_Time = recored_Time;
+            data.PDC = model.PDC.Trim();
+            data.Building = model.Building.Trim();
+            data.Line = model.Line.Trim();
+            data.Model_Name = model.Model_Name.Trim();
+            data.Model_No = model.Model_No.Trim();
+            data.Chief = model.Chief.Trim();
+            data.Recorder = model.Recorder.Trim();
+            data.Attendees = model.Attendees.Trim();
+            data.Updated_By = model.Updated_By.Trim();
+            var auditRecMAdd = _mapper.Map<MES_Audit_Rec_M>(data);
+            _repoAuditRecM.Add(auditRecMAdd);
+            return await _repoAuditRecM.SaveAll();
         }
 
         public Task<bool> Delete(object id)

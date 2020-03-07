@@ -37,8 +37,7 @@
               "node_modules/chart.js/dist/Chart.min.js",
               "node_modules/alertifyjs/build/alertify.min.js",
               "node_modules/exceljs/dist/exceljs.min.js",
-              "node_modules/file-saver/dist/FileSaver.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/file-saver/dist/FileSaver.min.js"
             ]
           },
           "configurations": {
