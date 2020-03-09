@@ -65,6 +65,13 @@ namespace ME_API._Services.Services
             return await PagedList<AuditType_D_Dto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
 
+        public async Task<List<AuditType_D_Dto>> SearchAuditItem(string auditTypeID)
+        {
+            return await _repoAuditDType.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper)
+            .Where(x => x.Audit_Type_ID.Trim() == auditTypeID.Trim())
+            .OrderByDescending(x => x.Updated_Time).ToListAsync();
+        }
+
         public async Task<PagedList<AuditType_D_Dto>> SearchByAuditType(PaginationParams param, string audit_Type1, string audit_Type2)
         {
             MES_Audit_Type_M auditTypeID = null;

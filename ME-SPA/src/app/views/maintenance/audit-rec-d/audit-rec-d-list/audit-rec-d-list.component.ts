@@ -181,6 +181,9 @@ export class AuditRecDListComponent implements OnInit {
   addAuditRecM() {
     this.router.navigate(['/maintenance/audit-rec/add-audit-recM']);
   }
+  addAuditRecD() {
+    this.router.navigate(['/maintenance/audit-rec/add-audit-recD']);
+  }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.load();

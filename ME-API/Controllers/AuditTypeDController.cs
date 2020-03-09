@@ -19,7 +19,7 @@ namespace ME_API.Controllers
             _auditTypeDService = auditTypeDService;
         }
 
-        
+
         [HttpGet(Name = "GetAuditTypeDs")]
         public async Task<IActionResult> GetAuditTypes([FromQuery]PaginationParams param)
         {
@@ -28,6 +28,11 @@ namespace ME_API.Controllers
             return Ok(auditTypes);
         }
 
+        [HttpGet("auditItem/{auditTypeID}")]
+        public async Task<IActionResult> SearchAuditItem(string auditTypeID) {
+            var data = await _auditTypeDService.SearchAuditItem(auditTypeID);
+            return Ok(data);
+        }
         [HttpGet("search/{text}")]
         public async Task<IActionResult> Search([FromQuery]PaginationParams param, string text)
         {

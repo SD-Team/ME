@@ -10,6 +10,7 @@ using ME_API.DTO;
 using ME_API.Models;
 using System;
 using Microsoft.EntityFrameworkCore;
+using ME_API.ViewModel;
 
 namespace ME_API._Services.Services
 {
@@ -91,6 +92,17 @@ namespace ME_API._Services.Services
         {
             var lists = await _repoAuditType.FindAll().Select(x => x.Audit_Type1).Distinct().ToListAsync();
             return lists;
+        }
+
+        public async Task<List<AuditTypeViewModel>> GetAuditType_1_2_Vesion()
+        {
+            var lists = await _repoAuditType.FindAll().ToListAsync();
+            // var data = lists.Select(x => x.Audit_Type1 + " " + x.Audit_Type2 + " V" + x.Version).ToList();
+            var data = lists.Select(x => new AuditTypeViewModel {
+                Audit_Type_ID = x.Audit_Type_ID,
+                Audit_Type = x.Audit_Type1 + " " + x.Audit_Type2 + " V" + x.Version
+            });
+            return data.ToList();
         }
     }
 }

@@ -155,7 +155,7 @@ const routes: Routes = [
               }
             },
             {
-              path: 'add-recD',
+              path: 'add-audit-recD',
               component: AuditRecDAddComponent,
               data: {
                 title: 'Add new audit Rec D'

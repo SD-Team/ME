@@ -15,7 +15,6 @@ export class AuditRecMAddComponent implements OnInit {
   buildings:  string[];
   lineIDs: string[];
   modelNos: string[];
-  record_Time: string;
   pdc: string; building: string; lineID: string; modelNo: string; modelName: string;
   constructor(private mesOrgService: MesOrgService,
               private mesMoService: MesMoService,
@@ -30,34 +29,20 @@ export class AuditRecMAddComponent implements OnInit {
   saveAndNext() {
     this.auditRecM.model_No = this.modelNo;
     this.auditRecM.model_Name = this.modelName;
-    const arrTime = new Date(this.record_Time);
-    this.auditRecM.record_Time = this.record_Time;
+    // const arrTime = new Date(this.record_Time);
     // this.auditRecM.record_Time = (arrTime.getFullYear() + '/' + (arrTime.getMonth() + 1) + '/' + arrTime.getDate());
-    this.auditRecM.record_ID = 'REC' + this.setStringRecordID(this.record_Time);
+    this.auditRecM.record_ID = 'REC' + this.auditRecMService.setStringRecordID(this.auditRecM.record_Time);
     this.auditRecMService.create(this.auditRecM).subscribe(res => {
       this.alertifyService.success('Add succed!');
     }, error => {
       this.alertifyService.error(error);
     });
+    console.log(this.auditRecM);
   }
-  setStringRecordID(dateString: string) {
-    const arrTime = new Date(dateString);
-    const year = arrTime.getFullYear().toString();
-    const arrYear = year.split('');
-    const y = arrYear[2].toString() + arrYear[3].toString();
-
-    const month = (arrTime.getMonth() + 1).toString();
-    // tslint:disable-next-line:prefer-const
-    let arrMonth = month.split('');
-    // tslint:disable-next-line:prefer-const
-    let count = arrMonth.length;
-    let m = '';
-    if (count === 1) {
-      m = '0' + month.toString();
-    } else {
-      m = arrMonth[0].toString() + arrMonth[1].toString();
-    }
-    return y + m;
+  cancel() {
+    this.auditRecM = {};
+    this.modelNo = '';
+    this.modelName = '';
   }
   getAllPdc() {
     this.mesOrgService.getAllPdc().subscribe(res => {

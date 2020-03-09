@@ -32,4 +32,23 @@ export class AuditRecMService {
   create(auditRecM: AuditRecMAdd) {
     return this.http.post(this.baseUrl + 'auditRecM/', auditRecM);
   }
+  setStringRecordID(dateString: string) {
+    const arrTime = new Date(dateString);
+    const year = arrTime.getFullYear().toString();
+    const arrYear = year.split('');
+    const y = arrYear[2].toString() + arrYear[3].toString();
+
+    const month = (arrTime.getMonth() + 1).toString();
+    // tslint:disable-next-line:prefer-const
+    let arrMonth = month.split('');
+    // tslint:disable-next-line:prefer-const
+    let count = arrMonth.length;
+    let m = '';
+    if (count === 1) {
+      m = '0' + month.toString();
+    } else {
+      m = arrMonth[0].toString() + arrMonth[1].toString();
+    }
+    return y + m;
+  }
 }

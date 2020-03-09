@@ -9,6 +9,7 @@ import * as ExcelJS from 'exceljs/dist/exceljs';
 import * as fs from 'file-saver';
 import * as moment from 'moment';
 import { AuditRecSearch } from '../_models/audit-rec-search';
+import { AuditRecDAdd } from '../_models/audit-rec-d-add';
 const httpOptions = {
   headers: new HttpHeaders({
     'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -74,6 +75,9 @@ export class AuditRecDService {
       let result = arr[0] + ' ' + arr[1];
       return result;
     }
+  }
+  add(auditRecD: AuditRecDAdd) {
+    return this.http.post<any>(this.baseUrl + 'auditRecD/AddRecD', auditRecD, {});
   }
   async getAllExcel() {
     this.http.get<AuditRecViewModel[]>(this.baseUrl + 'auditRecD/allExcel').subscribe(res => {

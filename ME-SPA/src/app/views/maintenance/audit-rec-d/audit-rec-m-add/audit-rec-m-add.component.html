@@ -18,7 +18,7 @@
                   <input class="form-control" 
                       name="Record_Time"
                       placeholder="Record Time"
-                      [(ngModel)]="record_Time"
+                      [(ngModel)]="auditRecM.record_Time"
                       type="text" bsDatepicker 
                       [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
                   <span class="input-group-text">
@@ -28,20 +28,20 @@
               </div>
               <label class="col-md-1 col-form-label" for="PDC">PDC</label>
               <div class="col-md-2">
-                  <select value="" name="PDC" [(ngModel)]="auditRecM.pdc" class="form-control">
+                  <select value="" name="PDC" [(ngModel)]="auditRecM.pdc" class="form-control" required>
                     <option value="{{ item }}" *ngFor="let item of pdcs" id="">{{ item }}</option>
                   </select>
               </div>
               <label class="col-md-1 col-form-label" for="Building">Building</label>
               <div class="col-md-2">
-                  <select value="" name="Building" [(ngModel)]="auditRecM.building" class="form-control">
+                  <select value="" name="Building" [(ngModel)]="auditRecM.building" class="form-control" required>
                     <option  value="{{item}}" *ngFor="let item of buildings" id="">{{item}}</option>
                   </select>
               </div>
               <label class="col-md-1 col-form-label" for="Line_ID">Line_ID</label>
               <div class="col-md-2">
                   <select value="" name="Line_ID"
-                    [(ngModel)]="auditRecM.line" class="form-control">
+                    [(ngModel)]="auditRecM.line" class="form-control" required>
                     <option  value="{{item}}" *ngFor="let item of lineIDs" id="">{{item}}</option>
                   </select>
               </div>
@@ -52,7 +52,8 @@
                   <select value="" (change)="changeOptionModelNo()"
                                     name="model_No" 
                                     [(ngModel)]="modelNo" 
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
                     <option value="{{item}}" *ngFor="let item of modelNos" id="">{{item}}</option>
                   </select>
               </div>
@@ -76,12 +77,14 @@
               <label class="col-md-1 col-form-label" for="attendees">Attendees</label>
               <div class="col-md-5">
                 <textarea class="form-control" 
-                [(ngModel)]="auditRecM.attendees"  name="attendees" id="" rows="3" required></textarea>
+                [(ngModel)]="auditRecM.attendees"  
+                name="attendees" id="" 
+                rows="3" required></textarea>
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-ban"></i> Cancel</button>
+            <button type="button" class="btn btn-sm btn-danger" (click)="cancel()" ><i class="fa fa-ban"></i> Cancel</button>
             <button type="submit" class="btn btn-sm btn-primary"  [disabled]="!addAuditRecMForm.valid"><i
                 class="fa fa-check" ></i> Save & NewDetail</button>
             <button type="button" class="btn btn-sm btn-success" [disabled]="!addAuditRecMForm.valid"><i

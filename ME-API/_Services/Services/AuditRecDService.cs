@@ -8,6 +8,7 @@ using ME_API._Repositories.Interface;
 using ME_API._Services.Interface;
 using ME_API.DTO;
 using ME_API.Helpers;
+using ME_API.Models;
 using ME_API.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -281,6 +282,13 @@ namespace ME_API._Services.Services
                 listAuditRecDto = listAuditRecDto.Where(x => x.Audit_Type_ID.Trim() == auditTypeMFind.Audit_Type_ID).ToList();
             }
             return listAuditRecDto;
+        }
+
+        public async Task<bool> AddRecD(AuditRecDViewModel model)
+        {
+            MES_Audit_Rec_D auditRecDConvert = _mapper.Map<MES_Audit_Rec_D>(model);
+            _repoAuditRecD.Add(auditRecDConvert);
+            return await _repoAuditRecD.SaveAll();
         }
     }
 }

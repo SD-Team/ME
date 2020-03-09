@@ -46,6 +46,19 @@ namespace ME_API._Services.Services
                         return lists;
         }
 
+        public async Task<List<string>> GetAllMePic()
+        {
+            var data = await _repo.FindAll().Where(x => x.PIC_Type_ID == "1")
+                        .GroupBy(x => x.Resp_ID).Select(x => x.Key).ToListAsync();
+            return data;
+        }
+        public async Task<List<string>> GetAllPdPic()
+        {
+            var data = await _repo.FindAll().Where(x => x.PIC_Type_ID == "2")
+                        .GroupBy(x => x.Resp_ID).Select(x => x.Key).ToListAsync();
+            return data;
+        }
+
         public AuditPicDDto GetById(object id)
         {
             var auditFind =  _repo.FindById(id);

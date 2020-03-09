@@ -1,3 +1,5 @@
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ME_API._Services.Interface;
 using ME_API.Helpers;
@@ -47,6 +49,16 @@ namespace ME_API.Controllers
         public async Task<IActionResult> SearchExcel([FromBody]AuditRecSearch model) {
             var auditRecs = await _service.SearchExcel(model);
             return Ok(auditRecs);
+        }
+
+        [HttpPost("AddRecD")]
+        public async Task<IActionResult> AddRecD([FromBody] AuditRecDViewModel model) {
+            var username = User.FindFirst(ClaimTypes.Name).Value;
+            model.Updated_By = username;
+            if (await _service.AddRecD(model)) {
+                return CreatedAtRoute("GetAllRecDs", new { });
+            }
+            throw new Exception("Creating the Audit RecD failed on save");
         }
     }
 }

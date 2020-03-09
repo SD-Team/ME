@@ -39,6 +39,11 @@ namespace ME_API.Controllers
             return Ok(auditType);
         }
 
+        [HttpGet("auditTypeVersion")]
+        public async Task<IActionResult> GetAuditType_1_2_Vesion() {
+            var data = await _auditTypeService.GetAuditType_1_2_Vesion();
+            return Ok(data);
+        }
         [HttpGet(Name = "GetAuditTypes")]
         public async Task<IActionResult> GetAuditTypes([FromQuery]PaginationParams param)
         {

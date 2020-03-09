@@ -58,6 +58,12 @@ export class AuditPicDService {
         }),
       );
   }
+  getAllPdPic() {
+    return this.http.get(this.baseUrl + 'auditPicD/allPdPic', {});
+  }
+  getAllMePic() {
+    return this.http.get(this.baseUrl + 'auditPicD/allMePic', {});
+  }
   create(auditPicD: AuditPicD) {
     return this.http.post(this.baseUrl + 'auditPicD/', auditPicD);
   }

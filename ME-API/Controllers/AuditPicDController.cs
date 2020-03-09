@@ -39,6 +39,17 @@ namespace ME_API.Controllers
             return Ok(auditPicDs);
         }
 
+        [HttpGet("allPdPic")]
+        public async Task<IActionResult> GetAllPdPic() {
+            var data = await _service.GetAllPdPic();
+            return Ok(data);
+        }
+
+        [HttpGet("allMePic")]
+        public async Task<IActionResult> GetAllMePic() {
+            var data = await _service.GetAllMePic();
+            return Ok(data);
+        }
         [HttpPost]
         public async Task<IActionResult> Create(AuditPicDDto data) {
             var username = User.FindFirst(ClaimTypes.Name).Value;

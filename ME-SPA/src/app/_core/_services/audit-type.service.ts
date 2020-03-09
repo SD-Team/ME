@@ -69,7 +69,9 @@ export class AuditTypeService {
   create(auditType: AuditType) {
     return this.http.post(this.baseUrl + 'auditType/', auditType);
   }
-
+  getAuditTypeVersion() {
+    return this.http.get(this.baseUrl + 'auditType/auditTypeVersion', {});
+  }
   getAlls() {
     return this.http.get<AuditType[]>(this.baseUrl + 'auditType/all', {});
   }

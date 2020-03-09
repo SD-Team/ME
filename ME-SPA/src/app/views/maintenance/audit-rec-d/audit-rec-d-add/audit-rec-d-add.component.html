@@ -1,0 +1,126 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+            <strong >Add new</strong>
+            Audit Rec D
+            <button type="button" class="btn btn-sm btn-primary float-right"><i
+                class="fa fa-chevron-left"></i>
+                Back</button>
+            </div>
+            <form class="form-horizontal" #addAuditRecDForm="ngForm" (ngSubmit)="addAuditRecDForm.valid && saveAndNext()">
+                <div class="card-body">
+                    <div class="form-group row">
+                    <label class="col-md-1 col-form-label" for="Model_No">Item_No</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" name="item_no" placeholder="Item No" required>
+                    </div>
+                    <label class="col-md-1 col-form-label" for="ersc">ERSC</label>
+                    <div class="col-md-2">
+                        <select name="" [(ngModel)]="auditRecD.ercs" id="" name="ersc" class="form-control" required>
+                            <option value="E">E</option>
+                            <option value="R">R</option>
+                            <option value="C">C</option>
+                            <option value="S">S</option>
+                        </select>
+                    </div>
+                    <label class="col-md-1 col-form-label" for="audit_Type">Audit_Type</label>
+                    <div class="col-md-2">
+                        <select name="" [(ngModel)]="auditRecD.audit_Type_ID" 
+                        id="" name="audit_Type" (change)="optionAuditType()" class="form-control" required>
+                            <option value="{{ item.audit_Type_ID }}" *ngFor="let item of auditType">{{ item.audit_Type}}</option>
+                        </select>
+                    </div>
+                    <label class="col-md-1 col-form-label" for="audit_Item">Audit_Item</label>
+                    <div class="col-md-2">
+                        <select id="" [(ngModel)]="auditRecD.audit_Item" name="audit_Item" class="form-control" required>
+                            <option value="{{ item.audit_Item_ID}}" *ngFor="let item of auditItems">{{ item.audit_Item_ID}}</option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-1 col-form-label" for="upload_picture">Upload Picture</label>
+                        <input class="form-control" 
+                            (change)="fileEvent($event)"
+                            class="col-md-2" type="file" 
+                            name="file-picture" 
+                            placeholder="Upload Picture">
+                        <label class="col-md-1 col-form-label" for="upload_picture">PD_PIC</label>
+                        <div class="col-md-2">
+                            <select name="" id="" [(ngModel)]="auditRecD.pD_PIC" name="PD_PIC" class="form-control">
+                                <option *ngFor="let item of pdPics" value="{{item}}">{{item}}</option>
+                            </select>
+                        </div>
+                        <label class="col-md-1 col-form-label" for="upload_picture">PD_RESP</label>
+                        <div class="col-md-2">
+                            <input type="text" [(ngModel)]="auditRecD.pD_RESP" class="form-control" name="pd_RESP" placeholder="PD RESP">
+                        </div>
+                        <label class="col-md-1 col-form-label" for="upload_picture">ME_PIC</label>
+                        <div class="col-md-2">
+                            <select name="" [(ngModel)]="auditRecD.mE_PIC" id="" name="ME_PIC" class="form-control" required>
+                                <option *ngFor="let item of mePics" value="{{item}}">{{item}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-1 col-form-label" for="audit_Item">Finished_Date</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <input class="form-control" 
+                                    name="Record_Time"
+                                    placeholder="Record Time"
+                                    [(ngModel)]="auditRecD.finished_Date"
+                                    type="text" bsDatepicker 
+                                    [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
+                                <span class="input-group-text">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <label class="col-md-1 col-form-label" for="Status">Status</label>
+                        <div class="col-md-2">
+                            <select name="status" [(ngModel)]="auditRecD.status" id="" name="status" class="form-control">
+                                <option value="OnGoing">OnGoing</option>
+                                <option value="Fail">Fail</option>
+                                <option value="Implement">Implement</option>
+                            </select>
+                        </div>
+                        <label class="col-md-1 col-form-label" for="Remark">Remark</label>
+                        <div class="col-md-5">
+                            <input type="text" [(ngModel)]="auditRecD.remark" class="form-control" name="remark" placeholder="Enter Remark">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <textarea class="form-control" 
+                            name="Issue_LL" id="" 
+                            [(ngModel)]="auditRecD.issue_LL"
+                            rows="3" placeholder="Enter Issue_LL"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <textarea class="form-control" 
+                            name="Issue_ZW" id="" 
+                            [(ngModel)]="auditRecD.issue_ZW"
+                            rows="3" placeholder="Enter Issue_ZW"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <textarea class="form-control" 
+                            name="Issue_EN" id=""
+                            [(ngModel)]="auditRecD.issue_EN"
+                            rows="3" placeholder="Enter Issue_EN"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-ban"></i> Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-primary"  [disabled]="!addAuditRecDForm.valid"><i
+                        class="fa fa-check" ></i> Save & NewDetail</button>
+                    <button type="button" class="btn btn-sm btn-success" [disabled]="!addAuditRecDForm.valid"><i
+                        class="fa fa-check"></i> Save</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>

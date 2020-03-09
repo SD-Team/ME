@@ -34,7 +34,7 @@ export class AuditTypeDService {
           map(response => {
             console.log(response);
             paginatedResult.result = response.body;
-            if (response.headers.get('Pagination') != null) {0
+            if (response.headers.get('Pagination') != null) {
               paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
             }
             return paginatedResult;
@@ -82,6 +82,9 @@ export class AuditTypeDService {
             return paginatedResult;
           }),
         );
+    }
+    searchauditItem(auditTypeId: any) {
+      return this.http.get(this.baseUrl + 'auditTypeD/auditItem/' + auditTypeId.toString(), {});
     }
     create(auditType: AuditTypeD) {
       return this.http.post(this.baseUrl + 'auditTypeD/', auditType);
