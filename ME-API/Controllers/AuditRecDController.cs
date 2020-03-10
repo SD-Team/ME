@@ -26,6 +26,12 @@ namespace ME_API.Controllers
             return Ok(auditRecs);
         }
 
+        [HttpGet("recDs" ,Name = "RecDs")]
+        public async Task<IActionResult> GetRecDs([FromQuery]PaginationParams param) {
+            var recDs = await _service.GetWithPaginations(param);
+            Response.AddPagination(recDs.CurrentPage, recDs.PageSize, recDs.TotalCount, recDs.TotalPages);
+            return Ok(recDs);
+        }
         [HttpGet("allExcel",Name = "getallExcel")]
         public async Task<IActionResult> GetAllExcel() {
             var auditRecs = await _service.GetAllExcel();
@@ -59,6 +65,14 @@ namespace ME_API.Controllers
                 return CreatedAtRoute("GetAllRecDs", new { });
             }
             throw new Exception("Creating the Audit RecD failed on save");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateRecD([FromBody] AuditRecDViewModel model) {
+            
+            if (await _service.UpdateRecD(model))
+                return NoContent();
+            return BadRequest($"Updating brand {model.Audit_Type_ID} failed on save");
         }
     }
 }

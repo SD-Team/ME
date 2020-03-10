@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ME_API._Services.Interface;
 using ME_API.DTO;
+using ME_API.Helpers;
 using ME_API.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,14 @@ namespace ME_API.Controllers
             var data = await _service.GetAllAsync();
             return Ok(data);
         }
+        
+        [HttpGet("RecMs" , Name = "GetRecMs")]
+        public async Task<IActionResult> GetRecMs([FromQuery]PaginationParams param) {
+            var recms = await _service.GetWithPaginations(param);
+            Response.AddPagination(recms.CurrentPage, recms.PageSize, recms.TotalCount, recms.TotalPages);
+            return Ok(recms);
+        }
+
         [HttpGet("buildings")]
         public async Task<IActionResult> GetAllBuilding() {
             var data = await _service.GetAllBuilding();

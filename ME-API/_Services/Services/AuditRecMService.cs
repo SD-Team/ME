@@ -29,7 +29,7 @@ namespace ME_API._Services.Services
         }
         public Task<bool> Add(AuditRecMDto model)
         {
-           throw new System.NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
         public async Task<bool> AddAuditRecM(AuditRecMViewModel model)
@@ -94,9 +94,11 @@ namespace ME_API._Services.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<PagedList<AuditRecMDto>> GetWithPaginations(PaginationParams param)
+        public async Task<PagedList<AuditRecMDto>> GetWithPaginations(PaginationParams param)
         {
-            throw new System.NotImplementedException();
+            var lists = _repoAuditRecM.FindAll().ProjectTo<AuditRecMDto>(_configMapper)
+                                        .OrderByDescending(x => x.Updated_Time);
+            return await PagedList<AuditRecMDto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
 
         public Task<PagedList<AuditRecMDto>> Search(PaginationParams param, object text)

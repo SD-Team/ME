@@ -3,6 +3,7 @@ import { MesOrgService } from '../../../../_core/_services/mes-org.service';
 import { MesMoService } from '../../../../_core/_services/mes-mo.service';
 import { AuditRecMService } from '../../../../_core/_services/audit-rec-m.service';
 import { AlertifyService } from '../../../../_core/_services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-audit-rec-m-add',
@@ -19,7 +20,8 @@ export class AuditRecMAddComponent implements OnInit {
   constructor(private mesOrgService: MesOrgService,
               private mesMoService: MesMoService,
               private auditRecMService: AuditRecMService,
-              private alertifyService: AlertifyService) { }
+              private alertifyService: AlertifyService,
+              private router: Router) { }
   ngOnInit() {
     this.getAllPdc();
     this.getAllBuilding();
@@ -37,7 +39,17 @@ export class AuditRecMAddComponent implements OnInit {
     }, error => {
       this.alertifyService.error(error);
     });
-    console.log(this.auditRecM);
+  }
+  save() {
+    this.auditRecM.model_No = this.modelNo;
+    this.auditRecM.model_Name = this.modelName;
+    this.auditRecM.record_ID = 'REC' + this.auditRecMService.setStringRecordID(this.auditRecM.record_Time);
+    this.auditRecMService.create(this.auditRecM).subscribe(res => {
+      this.alertifyService.success('Add succed!');
+      this.router.navigate(['/maintenance/audit-rec/audit-recM-list']);
+    }, error => {
+      this.alertifyService.error(error);
+    });
   }
   cancel() {
     this.auditRecM = {};
@@ -68,5 +80,8 @@ export class AuditRecMAddComponent implements OnInit {
     this.mesMoService.getModelName(this.modelNo).subscribe(res => {
       this.modelName = res.dataResult;
     });
+  }
+  back() {
+    this.router.navigate(['/maintenance/audit-rec']);
   }
 }

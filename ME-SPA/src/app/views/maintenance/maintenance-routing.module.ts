@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrandListComponent } from './brands/brand-list/brand-list.component';
 import { BrandListResolver } from '../../_core/_resolvers/brand-list.resolver';
 import { BrandAddComponent } from './brands/brand-add/brand-add.component';
-import { CategoryListResolver } from '../../_core/_resolvers/category-list.resolver';
 import { TypeListComponent } from './audit-type/type-list/type-list.component';
 import { TypeAddComponent } from './audit-type/type-add/type-add.component';
 import { AuditTypeListResolver } from '../../_core/_resolvers/audit-type-list.resolver';
@@ -17,9 +16,13 @@ import { AuditPicDListComponent } from './audit-pic-d/audit-pic-d-list/audit-pic
 import { AuditPicDListResolver } from '../../_core/_resolvers/audit-pic-d-list.resolver';
 import { AuditPicDAddComponent } from './audit-pic-d/audit-pic-d-add/audit-pic-d-add.component';
 import { AuditRecDListComponent } from './audit-rec-d/audit-rec-d-list/audit-rec-d-list.component';
-import { AuditRecDListResolver } from '../../_core/_resolvers/audit-rec-d-list.resolver';
+import { AuditRecViewModelListResolver } from '../../_core/_resolvers/audit-rec-viewmodel-list.resolver';
 import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d-add.component';
 import { AuditRecMAddComponent } from './audit-rec-d/audit-rec-m-add/audit-rec-m-add.component';
+import { AuditRecMListComponent } from './audit-rec-d/audit-rec-m-list/audit-rec-m-list.component';
+import { AuditRecMListResolver } from '../../_core/_resolvers/audit-rec-m-list.resolver';
+import { AuditRecListComponent } from './audit-rec-d/audit-rec-list/audit-rec-list.component';
+import { AuditRecDListResolver } from '../../_core/_resolvers/audit-rec-d-list-resolver';
 
 
 
@@ -141,10 +144,26 @@ const routes: Routes = [
           [
             {
               path: '',
-              component: AuditRecDListComponent,
-              resolve: { auditRecs: AuditRecDListResolver },
+              component: AuditRecListComponent,
+              resolve: { auditRecs: AuditRecViewModelListResolver },
               data: {
                 title: 'Audit Rec'
+              }
+            },
+            {
+              path: 'audit-recM-list',
+              component: AuditRecMListComponent,
+              resolve: { auditRecMs: AuditRecMListResolver },
+              data: {
+                title: 'List audit Rec M'
+              }
+            },
+            {
+              path: 'audit-recD-list',
+              component: AuditRecDListComponent,
+              resolve: { auditRecDs: AuditRecDListResolver },
+              data: {
+                title: 'List audit Rec D'
               }
             },
             {

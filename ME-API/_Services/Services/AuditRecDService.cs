@@ -177,9 +177,11 @@ namespace ME_API._Services.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<PagedList<AuditRecDDto>> GetWithPaginations(PaginationParams param)
+        public async Task<PagedList<AuditRecDDto>> GetWithPaginations(PaginationParams param)
         {
-            throw new System.NotImplementedException();
+            var lists = _repoAuditRecD.FindAll().ProjectTo<AuditRecDDto>(_configMapper)
+                        .OrderByDescending(x => x.Updated_Time);
+            return await PagedList<AuditRecDDto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
 
         public Task<PagedList<AuditRecDDto>> Search(PaginationParams param, object text)
@@ -288,6 +290,13 @@ namespace ME_API._Services.Services
         {
             MES_Audit_Rec_D auditRecDConvert = _mapper.Map<MES_Audit_Rec_D>(model);
             _repoAuditRecD.Add(auditRecDConvert);
+            return await _repoAuditRecD.SaveAll();
+        }
+        public async Task<bool> UpdateRecD(AuditRecDViewModel model)
+        {
+            var auditRecD = _mapper.Map<MES_Audit_Rec_D>(model);
+            auditRecD.Updated_Time = DateTime.Now;
+            _repoAuditRecD.Update(auditRecD);
             return await _repoAuditRecD.SaveAll();
         }
     }

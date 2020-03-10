@@ -1,0 +1,199 @@
+<div class="animated fadeIn">
+<!--/.row-->
+    <div class="row">
+    <!--/.col-->
+    <div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-3">
+                        <button type="button" 
+                        class="btn btn-block btn-success"><i class="fa fa-upload"></i> Upload
+                        </button>
+                        <div class="dropdown" dropdown>
+                        <button class="btn btn-add-new btn-block btn-primary"  
+                                        data-toggle="dropdown1" href="#" role="button" 
+                                                    aria-haspopup="true" aria-expanded="false" 
+                                                    dropdownToggle (click)="false">
+                              <i class="fa fa-plus"></i> Add New
+                          </button>
+                              <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+                                    <!-- <div class="dropdown-header text-center"><strong>Settings</strong></div> -->
+                                    <a class="dropdown-item dropdown-pointer" (click)="addAuditRecM()">Add Audit Rec M</a>
+                                    <a class="dropdown-item dropdown-pointer" (click)="addAuditRecD()" >Add Audit Rec D</a>
+                                    <div class="divider"></div>
+                            </div>
+                    </div>
+                    </div>
+                    <div class="col-3">
+                    <label class="badge badge-warning">From Time</label>
+                        <div class="input-group">
+                            <input class="form-control" 
+                                placeholder="Start"
+                                [(ngModel)]="time_start"
+                                type="text" bsDatepicker 
+                                [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                            </div>
+                    </div>
+                    <div class="col-3">
+                        <label class="badge badge-warning">To Time</label>
+                        <div class="input-group">
+                            <input class="form-control" 
+                                placeholder="End"
+                                [(ngModel)]="time_end"
+                                type="text" bsDatepicker 
+                                [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                            </div>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" (click)="search()"
+                        class="btn btn-block btn-success"><i class="fa fa-search"></i> Search
+                        </button>
+                        <button type="button" (click)="exportExcel()" class="btn btn-add-new btn-block btn-primary">
+                            <i class="fa fa-file-excel-o"></i>  Export Excel
+                        </button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3">
+                        <label class="badge badge-warning">PDC</label>
+                        <select class="form-control" name="" [(ngModel)]="pdc" id="">
+                            <option value="{{ item }}" *ngFor="let item of pdcList">{{ item }}</option>
+                        </select>
+                    </div>
+                    <div class="col-3"> 
+                        <label class="badge badge-warning">Building</label>
+                        <select class="form-control" name="" [(ngModel)]="building" id="">
+                            <option value="{{ item }}" *ngFor="let item of buildings">{{ item }}</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <label class="badge badge-warning">Line</label>
+                        <select class="form-control" name="" id="" [(ngModel)]="line">
+                          <option value="{{ item }}" *ngFor="let item of lines">{{ item }}</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <label class="badge badge-warning">Status</label>
+                        <select class="form-control" name="" [(ngModel)]="status" id="">
+                            <option value="{{item}}" *ngFor="let item of statusList">{{ item }}</option>
+                        </select>
+                </div>
+                </div>
+              <div class="row mt-2">
+                    <div class="col-3">
+                    <label class="badge badge-warning">Audit Type 1</label>
+                    <select name="auditType1" 
+                            [(ngModel)]="auditType1"
+                            (change)= "optionAuditType1($event)"
+                            id="auditType1" 
+                            class="select-list form-control">
+                            <option value="all">All</option>
+                            <option *ngFor="let item of auditType1List" value="{{ item }}">{{ item }}</option>
+                      </select>
+                  </div>
+                  <div class="col-3"> 
+                    <label class="badge badge-warning">Audit_Type 2</label>
+                    <select [(ngModel)]="auditType2" 
+                    name="auditType2" 
+                    id="auditType2" 
+                    class="select-list form-control">
+              <option *ngFor="let item of auditType2List" value="{{item.audit_Type2}}">{{ item.audit_Type2 }}</option>
+            </select>
+                  </div>
+                  <div class="col-3"> 
+                    <label class="badge badge-warning">Model_No</label>
+                    <select class="form-control" name="" id="" [(ngModel)]="model_No">
+                      <option value="all">All</option>
+                      <option value="{{ item }}"  *ngFor="let item of modelNos">{{ item }}</option>
+                  </select>
+                  </div>
+                  <div class="col-3">
+                    <label class="badge badge-warning">Model Name</label>
+                    <input class="form-control" type="text" name="model_name" [(ngModel)]="model_Name" placeholder="Model Name">
+                  </div>
+                </div>
+              
+          </div>
+          <div class="card-body">
+          <ngx-spinner bdOpacity=0.2 bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
+          </ngx-spinner>
+          <div class="scoll-bottom">
+              <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Record_Date</th>
+                            <th>Line_ID</th>
+                            <th>Model_Name</th>
+                            <th>Model_No</th>
+                            <th>Item_no</th>
+                            <th>ERCS</th>
+                            <th>Audit_Type</th>
+                            <th>Audit_Item</th>
+                            <th>Issue_LL</th>
+                            <th>Issue_ZW</th>
+                            <th>Issue_EN</th>
+                            <th>PIC_Type_ZW</th>
+                            <th>Resp_Name</th>
+                            <th>Resp_PIC</th>
+                            <th>Finished_Date</th>
+                            <th>Status</th>
+                            <th>Remark</th>
+                            <th>Implement_User</th>
+                            <th>Implement_Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                  <tr *ngFor="let item of auditRecs;let i = index">
+                        <th class="font-table">{{ (pagination.currentPage - 1) * pagination.itemsPerPage + i + 1 }}</th>
+                        <th class="font-table">{{ item.record_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <th class="font-table">{{ item.line }}</th>
+                        <th class="font-table">{{ item.model_Name }}</th>
+                        <th class="font-table">{{ item.model_No }}</th>
+                        <th class="font-table">{{ item.item_no }}</th>
+                        <th class="font-table">{{ item.ercs }}</th>
+                        <th class="font-table">{{ item.audit_Type }}</th>
+                        <th class="font-table">{{ item.audit_Item }}</th>
+                        <th class="font-table">{{ item.issue_LL }}</th>
+                        <th class="font-table">{{ item.issue_ZW }}</th>
+                        <th class="font-table">{{ item.issue_EN }}</th>
+                        <th class="font-table">{{ item.pD_PIC }}</th>
+                        <th class="font-table">{{ item.pD_RESP }}</th>
+                        <th class="font-table">{{ item.mE_PIC }}</th>
+                        <th class="font-table">{{ item.finished_Date | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <th class="font-table" style="background: red;color: white;" *ngIf="item.status === 'Not Feasible'">{{ item.status }}</th>
+                        <th class="font-table" style="background: rgb(108, 180, 91);color: white;" *ngIf="item.status === 'Implemented'">{{ item.status }}</th>
+                        <th class="font-table" style="background:yellow;color: rgb(24, 20, 224);" *ngIf="item.status === 'Ongoing'">{{ item.status }}</th>
+                        <th class="font-table">{{ item.remark }}</th>
+                        <th class="font-table">{{ item.implement_User }}</th>
+                        <th class="font-table">{{ item.implement_Time | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm mr-2"><i
+                                class="fa fa-edit fa-lg"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex">
+                <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
+                [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+                nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]=5>
+                </pagination>
+            </div>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+        </div>
+</div>
+
+

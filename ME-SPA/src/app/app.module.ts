@@ -59,7 +59,9 @@ import { AuditTypeDListResolver } from './_core/_resolvers/audit-typeD-list.reso
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuditPicMListResolver } from './_core/_resolvers/audit-pic-m-list.resolver';
 import { AuditPicDListResolver } from './_core/_resolvers/audit-pic-d-list.resolver';
-import { AuditRecDListResolver } from './_core/_resolvers/audit-rec-d-list.resolver';
+import { AuditRecViewModelListResolver } from './_core/_resolvers/audit-rec-viewmodel-list.resolver';
+import { AuditRecMListResolver } from './_core/_resolvers/audit-rec-m-list.resolver';
+import { AuditRecDListResolver } from './_core/_resolvers/audit-rec-d-list-resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -110,8 +112,10 @@ export function tokenGetter() {
     AuditTypeListResolver,
     AuditTypeDListResolver,
     AuditPicMListResolver,
-    AuditPicDListResolver,
+    AuditRecMListResolver,
     AuditRecDListResolver,
+    AuditPicDListResolver,
+    AuditRecViewModelListResolver,
     CategoryListResolver,
     CategoryEditResolver,
     {

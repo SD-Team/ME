@@ -10,6 +10,7 @@ import * as fs from 'file-saver';
 import * as moment from 'moment';
 import { AuditRecSearch } from '../_models/audit-rec-search';
 import { AuditRecDAdd } from '../_models/audit-rec-d-add';
+import { AuditRecD } from '../_models/audit-rec-d';
 const httpOptions = {
   headers: new HttpHeaders({
     'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -27,6 +28,24 @@ export class AuditRecDService {
   allAuditRecD: AuditRecViewModel[] = [];
   searchAuditRecD: AuditRecViewModel[] = [];
   constructor(private http: HttpClient) { }
+  getListRecDs(page?, itemsPerPage?): Observable<PaginatedResult<AuditRecD[]>> {
+    const paginatedResult: PaginatedResult<AuditRecD[]> = new PaginatedResult<AuditRecD[]>();
+    let params = new HttpParams();
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    return this.http.get<AuditRecD[]>(this.baseUrl + 'auditRecD/recDs/', { observe: 'response', params })
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        }),
+    );
+  }
   getListAll(page?, itemsPerPage?): Observable<PaginatedResult<AuditRecViewModel[]>> {
     const paginatedResult: PaginatedResult<AuditRecViewModel[]> = new PaginatedResult<AuditRecViewModel[]>();
     let params = new HttpParams();
@@ -78,6 +97,9 @@ export class AuditRecDService {
   }
   add(auditRecD: AuditRecDAdd) {
     return this.http.post<any>(this.baseUrl + 'auditRecD/AddRecD', auditRecD, {});
+  }
+  update(auditRecD: AuditRecDAdd) {
+    return this.http.put(this.baseUrl + 'auditRecD', auditRecD);
   }
   async getAllExcel() {
     this.http.get<AuditRecViewModel[]>(this.baseUrl + 'auditRecD/allExcel').subscribe(res => {
@@ -259,5 +281,11 @@ export class AuditRecDService {
   }
   getListStatus() {
     return this.http.get<any>(this.baseUrl + 'auditRecD/status', {});
+  }
+  changeAuditRecD(auditRecD: AuditRecD) {
+    this.auditRecDSource.next(auditRecD);
+  }
+  changeFlag(flag: string) {
+    this.flagSource.next(flag);
   }
 }

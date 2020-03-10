@@ -14,5 +14,6 @@ namespace ME_API._Services.Interface
         Task<List<AuditRecDto>> GetAllExcel();
         Task<List<AuditRecDto>> SearchExcel(AuditRecSearch model);
         Task<bool> AddRecD(AuditRecDViewModel model);
+        Task<bool> UpdateRecD(AuditRecDViewModel model);
     }
 }

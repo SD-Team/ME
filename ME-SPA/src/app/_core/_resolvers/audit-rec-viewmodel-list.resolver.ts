@@ -7,7 +7,7 @@ import { AuditRecViewModel } from '../_models/audit-rec-viewmodel';
 import { AuditRecDService } from '../_services/audit-rec-d.service';
 
 @Injectable()
-export class AuditRecDListResolver implements Resolve<AuditRecViewModel[]> {
+export class AuditRecViewModelListResolver implements Resolve<AuditRecViewModel[]> {
     pageNumber = 1;
     pageSize = 3;
     constructor(    private auditRecDService: AuditRecDService,
