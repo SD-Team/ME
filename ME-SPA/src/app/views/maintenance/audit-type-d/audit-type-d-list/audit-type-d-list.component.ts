@@ -109,20 +109,17 @@ export class AuditTypeDListComponent implements OnInit {
   }
 
   // Khi Click chọn option selection Audit Type 1
-  optionAuditType1(e) {
-    this.auditType1 =  e.target.value;
+  optionAuditType1() {
     // tslint:disable-next-line:no-var-keyword
     const ọbject = {
       audit_type_1: this.auditType1
     };
-    this.auditTypeMService.getAuditsByAuditType1(ọbject).subscribe(res => {
-      this.auditType2List = res;
-      this.auditType2 = this.auditType2List[0].audit_Type2;
-    });
-  }
-  // Khi Click chọn option selection Audit Type 2
-  optionAuditType2(e) {
-    this.auditType2 = e.target.value;
+    if (this.auditType1 !== 'all') {
+      this.auditTypeMService.getAuditsByAuditType1(ọbject).subscribe(res => {
+        this.auditType2List = res;
+        this.auditType2 = this.auditType2List[0].audit_Type2;
+      });
+    }
   }
   getAllAuditType1() {
     this.auditTypeMService.getAllAuditType1().subscribe(res => {

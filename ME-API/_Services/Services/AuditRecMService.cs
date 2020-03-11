@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,6 +12,7 @@ using ME_API.Helpers;
 using ME_API.Models;
 using ME_API.ViewModel;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 
 namespace ME_API._Services.Services
 {
@@ -99,6 +101,37 @@ namespace ME_API._Services.Services
             var lists = _repoAuditRecM.FindAll().ProjectTo<AuditRecMDto>(_configMapper)
                                         .OrderByDescending(x => x.Updated_Time);
             return await PagedList<AuditRecMDto>.CreateAsync(lists, param.PageNumber, param.PageSize);
+        }
+
+        public async Task<bool> ImportExcel(string filePath)
+        {
+            using (var package = new ExcelPackage(new FileInfo(filePath)))
+            {
+                ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
+                AuditRecMDto auditRecMDto = new AuditRecMDto();
+                for (int i = workSheet.Dimension.Start.Row + 1; i <= workSheet.Dimension.End.Row; i++)
+                {
+                    auditRecMDto.Record_ID = "REC" + DateTime.Now.Year.ToString().Substring(2) + DateTime.Now.Month.ToString() + i.ToString();
+                    auditRecMDto.Record_Time = Convert.ToDateTime(workSheet.Cells[i, 1].Value.ToString());
+                    auditRecMDto.PDC = workSheet.Cells[i, 2].Value.ToString();
+                    auditRecMDto.Building = workSheet.Cells[i, 3].Value.ToString();
+                    auditRecMDto.Line = workSheet.Cells[i, 4].Value.ToString();
+                    auditRecMDto.Model_No = workSheet.Cells[i, 5].Value.ToString();
+                    auditRecMDto.Model_Name = "Test";
+                    var auditRecM = _mapper.Map<MES_Audit_Rec_M>(auditRecMDto);
+                    _repoAuditRecM.Add(auditRecM);
+                }
+                try
+                {
+                    await _repoAuditRecM.SaveAll();
+                    return true;
+                }
+                catch (System.Exception)
+                {
+                    return false;
+                    throw;
+                }
+            }
         }
 
         public Task<PagedList<AuditRecMDto>> Search(PaginationParams param, object text)

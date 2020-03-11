@@ -33,7 +33,7 @@ export class AuditRecMAddComponent implements OnInit {
     this.auditRecM.model_Name = this.modelName;
     // const arrTime = new Date(this.record_Time);
     // this.auditRecM.record_Time = (arrTime.getFullYear() + '/' + (arrTime.getMonth() + 1) + '/' + arrTime.getDate());
-    this.auditRecM.record_ID = 'REC' + this.auditRecMService.setStringRecordID(this.auditRecM.record_Time);
+    this.auditRecM.record_ID = this.auditRecMService.setStringRecordID(this.auditRecM.record_Time);
     this.auditRecMService.create(this.auditRecM).subscribe(res => {
       this.alertifyService.success('Add succed!');
     }, error => {

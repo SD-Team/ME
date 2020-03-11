@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ME_API.Models
 {
     public class MES_Audit_Rec_D
     {
+        [Key]
         public long ID {get;set;}
         public string Record_ID {get;set;}
         public int Item_no {get;set;}

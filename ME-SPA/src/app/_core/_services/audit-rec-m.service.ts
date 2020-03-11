@@ -73,4 +73,7 @@ export class AuditRecMService {
     }
     return 'REC' + y + m;
   }
+  importExcel(files: FormData) {
+    return this.http.post(this.baseUrl + 'auditRecM/importExcel', files);
+  }
 }

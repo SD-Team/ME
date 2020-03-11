@@ -95,6 +95,7 @@ export class AuditRecDAddComponent implements OnInit {
   optionAuditType() {
     this.auditTypeDService.searchauditItem(this.auditRecD.audit_Type_ID).subscribe(res => {
       this.auditItems = res;
+      this.auditRecD.audit_Item = this.auditItems[0];
     });
   }
   getAllPdPic() {

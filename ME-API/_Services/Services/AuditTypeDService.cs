@@ -75,12 +75,15 @@ namespace ME_API._Services.Services
         public async Task<PagedList<AuditType_D_Dto>> SearchByAuditType(PaginationParams param, string audit_Type1, string audit_Type2)
         {
             MES_Audit_Type_M auditTypeID = null;
-            if(audit_Type2 != null) {
-                auditTypeID = await _repoAuditMType.FindAll().Where(x => x.Audit_Type1.Trim() == audit_Type1.Trim() && x.Audit_Type2.Trim()== audit_Type2).FirstOrDefaultAsync();
-            } else {
-                auditTypeID = await _repoAuditMType.FindAll().Where(x => x.Audit_Type1.Trim() == audit_Type1.Trim()).FirstOrDefaultAsync();
+            var lists = _repoAuditDType.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper);
+            if (audit_Type1 != "all") {
+                if(audit_Type2 != null) {
+                    auditTypeID = await _repoAuditMType.FindAll().Where(x => x.Audit_Type1.Trim() == audit_Type1.Trim() && x.Audit_Type2.Trim()== audit_Type2).FirstOrDefaultAsync();
+                } else {
+                    auditTypeID = await _repoAuditMType.FindAll().Where(x => x.Audit_Type1.Trim() == audit_Type1.Trim()).FirstOrDefaultAsync();
+                }
+                lists =  _repoAuditDType.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper).Where(x => x.Audit_Type_ID.Trim() == auditTypeID.Audit_Type_ID.Trim()).OrderByDescending(x => x.Updated_Time);
             }
-            var lists =  _repoAuditDType.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper).Where(x => x.Audit_Type_ID.Trim() == auditTypeID.Audit_Type_ID.Trim()).OrderByDescending(x => x.Updated_Time);
             return await PagedList<AuditType_D_Dto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
         public async Task<bool> Update(AuditType_D_Dto model)

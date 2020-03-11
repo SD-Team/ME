@@ -7,23 +7,27 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-3">
-                        <button type="button" 
+                    <input type="file" class="form-control input-file"
+                    [(ngModel)]="file_excel"
+                    #fileInput
+                     name="upload-excel">
+                        <button type="button" (click)="uploadFile()"
                         class="btn btn-block btn-success"><i class="fa fa-upload"></i> Upload
                         </button>
-                        <div class="dropdown" dropdown>
-                        <button class="btn btn-add-new btn-block btn-primary"  
+                        <!-- <div class="dropdown" dropdown>
+                            <button class="btn btn-add-new btn-block btn-primary"  
                                         data-toggle="dropdown1" href="#" role="button" 
                                                     aria-haspopup="true" aria-expanded="false" 
                                                     dropdownToggle (click)="false">
                               <i class="fa fa-plus"></i> Add New
-                          </button>
+                            </button>
                               <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-                                    <!-- <div class="dropdown-header text-center"><strong>Settings</strong></div> -->
+                                     <div class="dropdown-header text-center"><strong>Settings</strong></div>
                                     <a class="dropdown-item dropdown-pointer" (click)="addAuditRecM()">Add Audit Rec M</a>
                                     <a class="dropdown-item dropdown-pointer" (click)="addAuditRecD()" >Add Audit Rec D</a>
                                     <div class="divider"></div>
                             </div>
-                    </div>
+                        </div> -->
                     </div>
                     <div class="col-3">
                     <label class="badge badge-warning">From Time</label>
@@ -52,12 +56,42 @@
                             </div>
                     </div>
                     <div class="col-3">
-                        <button type="button" (click)="search()"
-                        class="btn btn-block btn-success"><i class="fa fa-search"></i> Search
-                        </button>
-                        <button type="button" (click)="exportExcel()" class="btn btn-add-new btn-block btn-primary">
-                            <i class="fa fa-file-excel-o"></i>  Export Excel
-                        </button>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="dropdown" dropdown>
+                                    <button class="btn btn-add-new btn-block btn-primary"
+                                    style="width: 118px;" 
+                                                data-toggle="dropdown1" href="#" role="button" 
+                                                            aria-haspopup="true" aria-expanded="false" 
+                                                            dropdownToggle (click)="false">
+                                      <i class="fa fa-plus"></i> Add New
+                                    </button>
+                                      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+                                            <!-- <div class="dropdown-header text-center"><strong>Settings</strong></div> -->
+                                            <a class="dropdown-item dropdown-pointer" (click)="addAuditRecM()">Add Audit Rec M</a>
+                                            <a class="dropdown-item dropdown-pointer" (click)="addAuditRecD()" >Add Audit Rec D</a>
+                                            <div class="divider"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" style="width: 115px;float: right;" (click)="search()"
+                                class="btn btn-block btn-primary"><i class="fa fa-search"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="button" (click)="exportExcel()" style="width: 118px;" class="btn btn-add-new btn-block btn-success">
+                                    <i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span> 
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" (click)="openOutlook()" class="btn btn-add-new button-1 btn-block btn-success">
+                                   Email
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-2">

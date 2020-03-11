@@ -29,7 +29,6 @@ export class AuditPicDListComponent implements OnInit {
     this.spinner.show();
     this.auditPicDService.currentAuditPicD.subscribe(auditPic => auditPic = this.auditPic);
     this.route.data.subscribe(data => {
-      console.log(data['auditPics'].result);
       this.auditPics = data['auditPics'].result;
       this.pagination = data['auditPics'].pagination;
       this.spinner.hide();

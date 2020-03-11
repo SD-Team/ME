@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditRecDService } from '../../../../_core/_services/audit-rec-d.service';
 import { AlertifyService } from '../../../../_core/_services/alertify.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +9,7 @@ import { Pagination, PaginatedResult } from '../../../../_core/_models/paginatio
 import { AuditRecMService } from '../../../../_core/_services/audit-rec-m.service';
 import { AuditTypeService } from '../../../../_core/_services/audit-type.service';
 import { AuditType } from '../../../../_core/_models/audit-type';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-audit-rec-list',
@@ -36,6 +37,8 @@ export class AuditRecListComponent implements OnInit {
   auditType2: string;
   time_start: string;
   time_end: string;
+  file_excel: File = null;
+  @ViewChild('fileInput', {static: true}) fileInput;
   constructor(private auditRecDService: AuditRecDService,
               private auditRecMService: AuditRecMService,
               private auditTypeMService: AuditTypeService,
@@ -45,6 +48,9 @@ export class AuditRecListComponent implements OnInit {
               private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+      console.log(_.truncate('hi-diddly-ho there, neighborino', {
+        'length': 24
+      }));
       this.spinner.show();
       this.getListStatus();
       this.getListBuilding();
@@ -54,7 +60,12 @@ export class AuditRecListComponent implements OnInit {
       this.getAllAuditType1();
       this.route.data.subscribe(data => {
       this.auditRecs = data['auditRecs'].result;
-      this.auditRecs = data['auditRecs'].result;
+      this.auditRecs.map(item => {
+        item.issue_EN =  _.truncate(item.issue_EN, { 'length': 80});
+        item.issue_LL =  _.truncate(item.issue_LL, { 'length': 80});
+        item.issue_ZW = _.truncate(item.issue_ZW, { 'length': 80});
+        return item;
+      });
       this.pagination = data['auditRecs'].pagination;
       this.spinner.hide();
     });
@@ -64,6 +75,12 @@ export class AuditRecListComponent implements OnInit {
       this.auditRecDService.getListAll(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res: PaginatedResult<AuditRecViewModel[]>) => {
         this.auditRecs = res.result;
+        this.auditRecs.map(item => {
+          item.issue_EN =  _.truncate(item.issue_EN, { 'length': 80});
+          item.issue_LL =  _.truncate(item.issue_LL, { 'length': 80});
+          item.issue_ZW = _.truncate(item.issue_ZW, { 'length': 80});
+          return item;
+        });
         this.pagination = res.pagination;
       }, error => {
         this.alertify.error(error);
@@ -195,5 +212,24 @@ export class AuditRecListComponent implements OnInit {
     // tslint:disable-next-line:prefer-const
     let getDate = event.value._i;
     this.reportDate = getDate.year + '/' + getDate.month + '/' + getDate.date;
+  }
+  uploadFile() {
+    if (this.file_excel === null) {
+      this.alertify.error('Please select file');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('files', this.fileInput.nativeElement.files[0]);
+    this.auditRecMService.importExcel(formData).subscribe(res => {
+      if (res) {
+        this.alertify.success('Upload file success');
+      } else {
+        this.alertify.error('Upload file failed');
+      }
+    });
+  }
+  openOutlook() {
+    const email = 'mailto:etc';
+    window.location.href = email;
   }
 }

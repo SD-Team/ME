@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ME_API._Services.Interface;
@@ -6,6 +8,8 @@ using ME_API.DTO;
 using ME_API.Helpers;
 using ME_API.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ME_API.Controllers
@@ -16,8 +20,11 @@ namespace ME_API.Controllers
     public class AuditRecMController : ControllerBase
     {
         private readonly IAuditRecMService _service;
-        public AuditRecMController(IAuditRecMService service) {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public AuditRecMController( IAuditRecMService service,
+                                    IWebHostEnvironment webHostEnvironment) {
             _service = service;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet("all", Name = "GetAllRecM")]
@@ -70,6 +77,37 @@ namespace ME_API.Controllers
             }
 
             throw new Exception("Creating the Audit Rec M failed on save");
+        }
+        
+        [HttpPost("importExcel")]
+        public async Task<bool> ImportExcel(IFormFile files) {
+            if (files != null) {
+                var file = files;
+                var fileName = ContentDispositionHeaderValue
+                                .Parse(file.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+                fileName = fileName + "_" + DateTime.Now.ToString().Replace(":", "").Replace("/", "").Replace(" ", "") + ".xlsx";
+                string a = _webHostEnvironment.WebRootPath;
+
+                string folder = _webHostEnvironment.WebRootPath +  $@"\uploaded\excels";
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+                string filePath = Path.Combine(folder, fileName);
+                using (FileStream fs = System.IO.File.Create(filePath)) {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+                if (await _service.ImportExcel(filePath))
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return false;
         }
     }
 }
