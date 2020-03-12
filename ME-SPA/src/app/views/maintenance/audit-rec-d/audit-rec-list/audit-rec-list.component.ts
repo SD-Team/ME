@@ -48,9 +48,6 @@ export class AuditRecListComponent implements OnInit {
               private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-      console.log(_.truncate('hi-diddly-ho there, neighborino', {
-        'length': 24
-      }));
       this.spinner.show();
       this.getListStatus();
       this.getListBuilding();
@@ -229,7 +226,15 @@ export class AuditRecListComponent implements OnInit {
     });
   }
   openOutlook() {
-    const email = 'mailto:etc';
+    // tslint:disable-next-line:prefer-const
+    let mailTo = 'philong.nguyen@shc.ssbshoes.com;nam.nguyen@shc.ssbshoes.com;Quyen.Nguyen@shc.ssbshoes.com;truc.dinh@shc.ssbshoes.com;lan.ho@shc.ssbshoes.com';
+    // tslint:disable-next-line:prefer-const
+    let subject = 'FW: CB FG Tracking Kanban - Export:10.9.0.9:93-Add Modify';
+    // tslint:disable-next-line:prefer-const
+    let cc = 'cuong.huynh@shc.ssbshoes.com';
+     // tslint:disable-next-line:prefer-const
+    let body = 'Please help modify the following factory print report format, using the table field.';
+    const email = `mailto:${mailTo}?cc=${cc}&subject=${subject}&body=${body}`;
     window.location.href = email;
   }
 }
