@@ -10,6 +10,7 @@ import { SixsScoreRecordAddComponent } from './sixs-score-record-add/sixs-score-
 import { SmeScoreRecordAddComponent } from './sme-score-record-add/sme-score-record-add.component';
 import { WaterSpiderScoreRecordAddComponent } from './water-spider-score-record-add/water-spider-score-record-add.component';
 import { ScoreRecordRoutingModulle } from './score-record-routing.module';
+import { SixsRecoredChooseQuesionComponent } from './sixs-score-record-add/sixs-recored-choose-quesion/sixs-recored-choose-quesion.component';
 
 
 @NgModule({
@@ -27,7 +28,9 @@ import { ScoreRecordRoutingModulle } from './score-record-routing.module';
     declarations: [
         SixsScoreRecordAddComponent,
         SmeScoreRecordAddComponent,
-        WaterSpiderScoreRecordAddComponent],
+        WaterSpiderScoreRecordAddComponent,
+        SixsRecoredChooseQuesionComponent
+    ],
 })
 
 export class ScoreRecordModule { }
