@@ -1,13 +1,15 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ME_API.Models
 {
     public class MES_Audit_Rec_D
     {
-        [Key]
-        public long ID {get;set;}
+        [Key][Column(Order = 0)]
         public string Record_ID {get;set;}
+
+        [Key][Column(Order = 1)]
         public int Item_no {get;set;}
         public string ERCS {get;set;}
         public string Audit_Type_ID {get;set;}

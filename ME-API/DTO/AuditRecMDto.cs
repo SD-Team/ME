@@ -4,7 +4,6 @@ namespace ME_API.DTO
 {
     public class AuditRecMDto
     {
-        public long ID {get;set;}
         public string Record_ID {get;set;}
         public DateTime? Record_Time {get;set;}
         public string PDC {get;set;}

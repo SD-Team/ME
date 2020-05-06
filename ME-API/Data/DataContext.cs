@@ -20,6 +20,7 @@ namespace ME_API.Data
         {
             modelBuilder.Entity<MES_Audit_Type_D>().HasKey(x => new {x.Audit_Type_ID, x.Audit_Item_ID});
             modelBuilder.Entity<MES_Audit_PIC_D>().HasKey(x => new {x.PIC_Type_ID, x.Resp_ID});
+            modelBuilder.Entity<MES_Audit_Rec_D>().HasKey(x => new {x.Record_ID, x.Item_no});
             modelBuilder.Entity<MES_User>().HasKey(x => new { x.Factory_ID, x.User_ID });
             modelBuilder.Entity<MES_Org>().HasKey(x => new {x.Factory_ID, x.PDC_ID, x.Line_ID, x.Dept_ID});
             modelBuilder.Entity<MES_MO>().HasKey(x => new {x.Factory_ID, x.Cycle_No});

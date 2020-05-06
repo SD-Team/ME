@@ -4,7 +4,6 @@ namespace ME_API.DTO
 {
     public class AuditRecDDto
     {
-        public long ID {get;set;}
         public string Record_ID {get;set;}
         public int Item_no {get;set;}
         public string ERCS {get;set;}
