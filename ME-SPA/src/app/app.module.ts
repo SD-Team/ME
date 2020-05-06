@@ -14,7 +14,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import { AppComponent } from './app.component';
 
 // Import containers
-import { DefaultLayoutComponent } from './containers';
+import { DefaultLayoutComponent, ScopeRecordLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -102,6 +102,7 @@ export function tokenGetter() {
     P500Component,
     LoginComponent,
     RegisterComponent,
+    ScopeRecordLayoutComponent
   ],
   providers: [
     AuthService,
