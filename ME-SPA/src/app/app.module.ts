@@ -53,7 +53,7 @@ import { CategoryEditResolver } from './_core/_resolvers/category-edit.resolver'
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
-import { PaginationModule } from 'ngx-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AuditTypeListResolver } from './_core/_resolvers/audit-type-list.resolver';
 import { AuditTypeDListResolver } from './_core/_resolvers/audit-typeD-list.resolver';
 import { NgxSpinnerModule } from 'ngx-spinner';

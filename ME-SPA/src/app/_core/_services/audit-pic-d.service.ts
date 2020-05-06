@@ -67,8 +67,8 @@ export class AuditPicDService {
   create(auditPicD: AuditPicD) {
     return this.http.post(this.baseUrl + 'auditPicD/', auditPicD);
   }
-  delete(id: number) {
-    return this.http.delete(this.baseUrl + 'auditPicD/' + id, {});
+  delete(model: AuditPicD) {
+    return this.http.post(this.baseUrl + 'auditPicD/delete/',model);
   }
   update(auditPicD: AuditPicD) {
     return this.http.put(this.baseUrl + 'auditPicD/', auditPicD);

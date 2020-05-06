@@ -39,6 +39,15 @@ namespace ME_API._Services.Services
             return await _repo.SaveAll();
         }
 
+        public async Task<bool> Delete(AuditPicDDto model)
+        {
+            var modelFind = await _repo.GetAll()
+                .Where(x => x.PIC_Type_ID.Trim() == model.PIC_Type_ID.Trim()
+                    && x.Resp_ID.Trim() == model.Resp_ID.Trim()).FirstOrDefaultAsync();
+            _repo.Remove(modelFind);
+            return await _repo.SaveAll();
+        }
+
         public async Task<List<AuditPicDDto>> GetAllAsync()
         {
             var lists = await _repo.FindAll().ProjectTo<AuditPicDDto>(_configMapper)

@@ -55,7 +55,7 @@ export class AuditPicDListComponent implements OnInit {
   }
   delete(auditPicD: AuditPicD) {
     this.alertify.confirm('Delete Audit Pic D', 'Are you sure you want to delete this Pic ID "' + auditPicD.id + '" ?', () => {
-      this.auditPicDService.delete(auditPicD.id).subscribe(() => {
+      this.auditPicDService.delete(auditPicD).subscribe(() => {
         this.load();
         this.alertify.success('Audit Pic D has been deleted');
       }, error => {

@@ -11,7 +11,8 @@ import { AuditPicMService } from '../../../../_core/_services/audit-pic-m.servic
 })
 export class AuditPicMAddComponent implements OnInit {
   auditPicM: any = {};
-  flag = '0';
+  flag = '100';
+
   constructor(private auditPicMService: AuditPicMService,
               private alertify: AlertifyService,
               private authService: AuthService,
@@ -20,9 +21,15 @@ export class AuditPicMAddComponent implements OnInit {
   ngOnInit(): void {
     this.auditPicMService.currentAuditPicM.subscribe(auditPicM => this.auditPicM = auditPicM);
     this.auditPicMService.currentFlag.subscribe(flag => this.flag = flag);
+    console.log("L1: ",this.flag)
+    this.auditPicMService.changeFlag('1212');
+    this.auditPicMService.currentFlag.subscribe(flag => this.flag = flag);
+    console.log("L2: ",this.flag);
   }
   backList() {
     this.router.navigate(['/maintenance/audit-pic-m']);
+  }
+  change() {
   }
   saveAndNext() {
     if (this.flag === '0') {
