@@ -28,7 +28,9 @@
                   <span class="fa fa-calendar"></span>
                 </span>
               </div>
-              <div class="col-1"></div>
+              <div class="col-1">
+
+              </div>
               <label class="badge badge-warning font-lable">Line</label>
               <select class="form-control" name="" id="" [(ngModel)]="line">
                 <option value="{{ item }}" *ngFor="let item of lines">{{
@@ -79,7 +81,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body mt-1">
+        <div class="card-body">
           <ngx-spinner bdOpacity="0.2" bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
           </ngx-spinner>
           <div class="table-responsive">
