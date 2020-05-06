@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
-<<<<<<< HEAD
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
-=======
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
->>>>>>> e2854cb312cc9ebe91673c5502da0723ed1e7847
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 // Components Routing
 import { MaintenanceRoutingModule } from './maintenance-routing.module';
