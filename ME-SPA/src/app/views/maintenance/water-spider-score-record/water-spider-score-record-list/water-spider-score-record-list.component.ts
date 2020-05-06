@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Pagination } from '../../../../_core/_models/pagination';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AuditType } from '../../../../_core/_models/audit-type';
+import { AuditTypeService } from '../../../../_core/_services/audit-type.service';
+import { AuditRecMService } from '../../../../_core/_services/audit-rec-m.service';
+import { AuditRecDService } from '../../../../_core/_services/audit-rec-d.service';
 
 @Component({
   selector: 'app-water-spider-score-record-list',
@@ -16,11 +18,36 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
   pdcList: string[] = [];
   lines: string[] = [];
   buildings: string[] = [];
-  constructor( private spinner: NgxSpinnerService
+  constructor(
+    private auditRecDService: AuditRecDService,
+    private auditRecMService: AuditRecMService,
+     private auditTypeMService: AuditTypeService,
+     private spinner: NgxSpinnerService
 
               ) { }
 
   ngOnInit() {
+    this.getListPDCs();
+    this.getListBuilding();
+    this.getListLine();
+  }
+  getListPDCs() {
+    this.auditRecMService.getListPDC().subscribe(res => {
+      this.pdcList = res;
+      this.pdc = this.pdcList[0];
+    });
+  }
+  getListBuilding() {
+    this.auditRecMService.getListBuilding().subscribe(res => {
+      this.buildings = res;
+      this.building = this.buildings[0];
+    });
+  }
+  getListLine() {
+    this.auditRecMService.getListLine().subscribe(res => {
+      this.lines = res;
+      this.line = this.lines[0];
+    });
   }
   pageChanged(){
 
