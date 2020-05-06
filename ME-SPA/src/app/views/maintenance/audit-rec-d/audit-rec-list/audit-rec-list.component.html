@@ -1,11 +1,11 @@
 <div class="animated fadeIn">
-<!--/.row-->
+	<!--/.row-->
     <div class="row">
     <!--/.col-->
     <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <div class="row ">
+            <div class="row">
                 <div class="col-3">
                     <input type="file" class="form-control input-file"
                     [(ngModel)]="file_excel"
@@ -14,14 +14,28 @@
                         <button type="button" (click)="uploadFile()"
                         class="btn btn-block btn-success"><i class="fa fa-upload"></i> Upload
                         </button>
+                        <!-- <div class="dropdown" dropdown>
+                            <button class="btn btn-add-new btn-block btn-primary"  
+                                        data-toggle="dropdown1" href="#" role="button" 
+                                                    aria-haspopup="true" aria-expanded="false" 
+                                                    dropdownToggle (click)="false">
+                              <i class="fa fa-plus"></i> Add New
+                            </button>
+                              <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+                                     <div class="dropdown-header text-center"><strong>Settings</strong></div>
+                                    <a class="dropdown-item dropdown-pointer" (click)="addAuditRecM()">Add Audit Rec M</a>
+                                    <a class="dropdown-item dropdown-pointer" (click)="addAuditRecD()" >Add Audit Rec D</a>
+                                    <div class="divider"></div>
+                            </div>
+                        </div> -->
                     </div>
                     <div class="col-3">
                     <label class="badge badge-warning">From Time</label>
                         <div class="input-group">
-                            <input class="form-control"
+                            <input class="form-control" 
                                 placeholder="Start"
                                 [(ngModel)]="time_start"
-                                type="text" bsDatepicker
+                                type="text" bsDatepicker 
                                 [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
                             <span class="input-group-text">
                                 <span class="fa fa-calendar"></span>
@@ -31,10 +45,10 @@
                     <div class="col-3">
                         <label class="badge badge-warning">To Time</label>
                         <div class="input-group">
-                            <input class="form-control"
+                            <input class="form-control" 
                                 placeholder="End"
                                 [(ngModel)]="time_end"
-                                type="text" bsDatepicker
+                                type="text" bsDatepicker 
                                 [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
                             <span class="input-group-text">
                                 <span class="fa fa-calendar"></span>
@@ -46,9 +60,9 @@
                             <div class="col-6">
                                 <div class="dropdown" dropdown>
                                     <button class="btn btn-add-new btn-block btn-primary"
-                                    style="width: 118px;"
-                                                data-toggle="dropdown1" href="#" role="button"
-                                                            aria-haspopup="true" aria-expanded="false"
+                                    style="width: 118px;" 
+                                                data-toggle="dropdown1" href="#" role="button" 
+                                                            aria-haspopup="true" aria-expanded="false" 
                                                             dropdownToggle (click)="false">
                                       <i class="fa fa-plus"></i> Add New
                                     </button>
@@ -69,7 +83,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <button type="button" (click)="exportExcel()" style="width: 118px;" class="btn btn-add-new btn-block btn-success">
-                                    <i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span>
+                                    <i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span> 
                                 </button>
                             </div>
                             <div class="col-6">
@@ -87,7 +101,7 @@
                             <option value="{{ item }}" *ngFor="let item of pdcList">{{ item }}</option>
                         </select>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3"> 
                         <label class="badge badge-warning">Building</label>
                         <select class="form-control" name="" [(ngModel)]="building" id="">
                             <option value="{{ item }}" *ngFor="let item of buildings">{{ item }}</option>
@@ -109,25 +123,25 @@
               <div class="row mt-2">
                     <div class="col-3">
                     <label class="badge badge-warning">Audit Type 1</label>
-                    <select name="auditType1"
+                    <select name="auditType1" 
                             [(ngModel)]="auditType1"
                             (change)= "optionAuditType1($event)"
-                            id="auditType1"
+                            id="auditType1" 
                             class="select-list form-control">
                             <option value="all">All</option>
                             <option *ngFor="let item of auditType1List" value="{{ item }}">{{ item }}</option>
                       </select>
                   </div>
-                  <div class="col-3">
+                  <div class="col-3"> 
                     <label class="badge badge-warning">Audit_Type 2</label>
-                    <select [(ngModel)]="auditType2"
-                    name="auditType2"
-                    id="auditType2"
+                    <select [(ngModel)]="auditType2" 
+                    name="auditType2" 
+                    id="auditType2" 
                     class="select-list form-control">
               <option *ngFor="let item of auditType2List" value="{{item.audit_Type2}}">{{ item.audit_Type2 }}</option>
             </select>
                   </div>
-                  <div class="col-3">
+                  <div class="col-3"> 
                     <label class="badge badge-warning">Model_No</label>
                     <select class="form-control" name="" id="" [(ngModel)]="model_No">
                       <option value="all">All</option>
@@ -139,7 +153,7 @@
                     <input class="form-control" type="text" name="model_name" [(ngModel)]="model_Name" placeholder="Model Name">
                   </div>
                 </div>
-
+              
           </div>
           <div class="card-body">
           <ngx-spinner bdOpacity=0.2 bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
