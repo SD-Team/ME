@@ -5,37 +5,98 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> List Audit Rec D
-          <button type="button" class="btn btn-sm btn-primary float-right">
-            <i class="fa fa-plus"></i> Add new
-          </button>
-          <div class="card-body">
-            <ngx-spinner
-              bdOpacity="0.2"
-              bdColor="rgba(51,51,51,0.8)"
-              size="medium"
-              color="#20A8D8"
-              type="pacman"
-            >
-            </ngx-spinner>
-            <div class="scoll-bottom">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Audit_Date</th>
-                    <th>Audit_Type</th>
-                    <th>Audit_Type2</th>
-                    <th>Line_ID</th>
-                    <th>Rating NA</th>
-                    <th>Rating0</th>
-                    <th>Rating1</th>
-                    <th>Total</th>
-                    <th>Need to do qty</th>
-                    <th>Achieving%</th>
-                  </tr>
-                </thead>
-                <body>
-                  <!-- <tr *ngFor="let item of auditRecDs; let i = index">
+          <div class="row">
+            <div class="col-lg-10">
+              <i class="fa fa-align-justify"></i> List Water Spider Record
+              </div>
+              <div class="col-lg-2">
+                <button type="button" class="btn btn-sm btn-primary float-right">
+                  <i class="fa fa-plus"></i> Add new
+                </button>
+                </div>
+          </div>
+          <div class="row">
+            <div class="font-row col-3">
+              <label class="badge badge-warning font-lable">From Time</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="Start" [(ngModel)]="timeStart" type="text" bsDatepicker
+                  [bsConfig]="{
+                    isAnimated: true,
+                    dateInputFormat: 'YYYY/MM/DD'
+                  }" />
+                <span class="input-group-text">
+                  <span class="fa fa-calendar"></span>
+                </span>
+              </div>
+              <div class="col-1"></div>
+              <label class="badge badge-warning font-lable">Line</label>
+              <select class="form-control" name="" id="" [(ngModel)]="line">
+                <option value="{{ item }}" *ngFor="let item of lines">{{
+                  item
+                }}</option>
+              </select>
+            </div>
+            <div class="font-row col-3">
+              <label class="badge badge-warning font-lable">To Time</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="End" [(ngModel)]="timeEnd" type="text" bsDatepicker [bsConfig]="{
+                    isAnimated: true,
+                    dateInputFormat: 'YYYY/MM/DD'
+                  }" />
+                <span class="input-group-text">
+                  <span class="fa fa-calendar"></span>
+                </span>
+              </div>
+              <div class="col-1"></div>
+              <div class="col-3 ml-5">
+                <div class="col-1 ml-4 ">
+                  <button type="button" class="btn btn-block btn-query1 float-right btn-secondary">
+                    <i class="fa fa-search"></i> Search
+                  </button>
+                </div>
+                <div class="col-1 ml-5">
+                  <button type="button" class="btn btn-block btn-query1  btn-success">
+                    <i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="font-row col-3">
+              <label class="badge badge-warning font-lable">PDC</label>
+              <select class="form-control" name="" [(ngModel)]="pdc" id="">
+                <option value="{{ item }}" *ngFor="let item of pdcList">{{
+                  item
+                }}</option>
+              </select>
+            </div>
+            <div class="font-row col-3">
+              <label class="badge badge-warning font-lable">Building</label>
+              <select class="form-control" name="" [(ngModel)]="building" id="">
+                <option value="{{ item }}" *ngFor="let item of buildings">{{
+                  item
+                }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ngx-spinner bdOpacity="0.2" bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
+          </ngx-spinner>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Audit_Date</th>
+                  <th>Audit_Type</th>
+                  <th>Line_ID</th>
+                  <th>A: Loss</th>
+                  <th> B: Loss</th>
+                  <th>C: Total = 100</th>
+                  <th>D: Achieving% = B/C</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr *ngFor="let item of auditRecDs; let i = index">
                     <th class="font-table">{{ item.Audit_Date }}</th>
                     <th class="font-table">{{ item.Audit_Type1 }}</th>
                     <th class="font-table">{{ item.Audit_Type2 }}</th>
@@ -47,23 +108,20 @@
                      <th class="font-table">{{ item.Need to do qty }}</th>
                     <th class="font-table">{{ item.Achieving }}</th>
                    </tr> -->
-                   <tr>
-                     <th>1</th>
-                     <th>1</th>
-                     <th>1</th>
-                     <th>1</th>
-                     <th>1</th>
-                     <th>1</th>
-                     <th>1</th>
-                     <th>1</th>
-                     <th>1</th>
-                     <th>1</th>
-                   </tr>
-                </body>
-              </table>
-            </div>
-            <div class="d-flex">
-               <pagination
+                <tr>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                  <th>6</th>
+                  <th>7</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex">
+            <!-- <pagination
                 [boundaryLinks]="true"
                 [totalItems]="pagination.totalItems"
                 [(ngModel)]="pagination.currentPage"
@@ -75,11 +133,9 @@
                 lastText="&raquo;"
                 [maxSize]="5"
               >
-              </pagination>
-            </div>
+              </pagination> -->
           </div>
         </div>
-      </div>
+        </div>
     </div>
   </div>
-</div>
