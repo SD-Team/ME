@@ -50,7 +50,15 @@ export const routes: Routes = [
           component: ScopeRecordLayoutComponent,
           data: {
             title: "Record Page"
-          }
+          },
+          children:[
+            {
+
+              path:'record-add',
+              loadChildren:() => import ("./views/score-record/score-record.module").then( m => m.ScoreRecordModule)
+            }
+
+          ]
         },
          {
            path: "",
