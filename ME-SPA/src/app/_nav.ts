@@ -59,6 +59,21 @@ export const navItems: INavData[] = [
     icon: 'icon-eyeglass',
   },
   {
+    name: 'SME Score Record',
+    url: '/maintenance/sme-score-record',
+    icon: 'icon-note',
+  },
+  {
+    name: '6S Score Record',
+    url: '/maintenance/6s-score-record',
+    icon: 'icon-note',
+  },
+  {
+    name: 'Water Spider Score Record',
+    url: '/maintenance/water-spider-score-record',
+    icon: 'icon-note',
+  },
+  {
     title: true,
     name: 'Components'
   },

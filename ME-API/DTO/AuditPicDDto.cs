@@ -4,7 +4,6 @@ namespace ME_API.DTO
 {
     public class AuditPicDDto
     {
-        public long ID {get;set;}
         public string PIC_Type_ID { get; set; }
         public string Resp_ID { get; set; }
         public string Resp_ZW { get; set; }

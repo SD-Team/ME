@@ -37,11 +37,12 @@ namespace ME_API._Services.Services
             return await _repoAuditDType.SaveAll();
         }
 
-        public async Task<bool> Delete(object id)
+        public Task<bool> Delete(object id)
         {
-            var model = _repoAuditDType.FindById(id);
-            _repoAuditDType.Remove(model);
-            return await _repoAuditDType.SaveAll();
+            // var model = _repoAuditDType.FindById(id);
+            // _repoAuditDType.Remove(model);
+            // return await _repoAuditDType.SaveAll();
+            throw new System.NotImplementedException();
         }
 
         public async Task<List<AuditType_D_Dto>> GetAllAsync()

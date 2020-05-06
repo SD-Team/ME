@@ -60,9 +60,9 @@ namespace ME_API.Controllers
             throw new Exception("Creating the Audit PicD failed on save");
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id) {
-            if (await _service.Delete(id)) {
+        [HttpPost("delete")]
+        public async Task<IActionResult> Delete([FromBody]AuditPicDDto model) {
+            if (await _service.Delete(model)) {
                 return NoContent();
             }
             throw new Exception("Error deleting the Audit PicD");

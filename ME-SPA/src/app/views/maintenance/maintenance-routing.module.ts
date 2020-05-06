@@ -23,6 +23,9 @@ import { AuditRecMListComponent } from './audit-rec-d/audit-rec-m-list/audit-rec
 import { AuditRecMListResolver } from '../../_core/_resolvers/audit-rec-m-list.resolver';
 import { AuditRecListComponent } from './audit-rec-d/audit-rec-list/audit-rec-list.component';
 import { AuditRecDListResolver } from '../../_core/_resolvers/audit-rec-d-list-resolver';
+import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
+import { SixsScoreRecordListComponent } from './sixs-score-record/sixs-score-record-list/sixs-score-record-list.component';
+import { WaterSpiderScoreRecordListComponent } from './water-spider-score-record/water-spider-score-record-list/water-spider-score-record-list.component';
 
 
 
@@ -180,6 +183,45 @@ const routes: Routes = [
                 title: 'Add new audit Rec D'
               }
             }
+          ]
+      },
+      {
+        path: 'sme-score-record',
+        children:
+          [
+            {
+              path: '',
+              component: SmeScoreRecordListComponent,
+              data: {
+                title: 'SME Score Record'
+              }
+            },
+          ]
+      },
+      {
+        path: '6s-score-record',
+        children:
+          [
+            {
+              path: '',
+              component: SixsScoreRecordListComponent,
+              data: {
+                title: '6S Score Record'
+              }
+            },
+          ]
+      },
+      {
+        path: 'water-spider-score-record',
+        children:
+          [
+            {
+              path: '',
+              component: WaterSpiderScoreRecordListComponent,
+              data: {
+                title: 'Water Spider Score Record'
+              }
+            },
           ]
       },
     ]

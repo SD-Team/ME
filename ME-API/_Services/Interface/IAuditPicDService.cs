@@ -8,5 +8,6 @@ namespace ME_API._Services.Interface
     {
         Task<List<string>> GetAllPdPic();
         Task<List<string>> GetAllMePic();
+        Task<bool> Delete(AuditPicDDto model);
     }
 }
