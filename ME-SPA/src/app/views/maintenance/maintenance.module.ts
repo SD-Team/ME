@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 // Components Routing
 import { MaintenanceRoutingModule } from './maintenance-routing.module';
 import { BrandListComponent } from './brands/brand-list/brand-list.component';
-import { PaginationModule } from 'ngx-bootstrap';
 import { BrandAddComponent } from './brands/brand-add/brand-add.component';
 import { TypeListComponent } from './audit-type/type-list/type-list.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -24,6 +23,7 @@ import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d
 import { AuditRecMAddComponent } from './audit-rec-d/audit-rec-m-add/audit-rec-m-add.component';
 import { AuditRecMListComponent } from './audit-rec-d/audit-rec-m-list/audit-rec-m-list.component';
 import { AuditRecListComponent } from './audit-rec-d/audit-rec-list/audit-rec-list.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   imports: [

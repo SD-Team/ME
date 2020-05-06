@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
-import { DefaultLayoutComponent } from './containers';
+import { DefaultLayoutComponent, ScopeRecordLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -45,6 +45,13 @@ export const routes: Routes = [
              title: "Register Page"
            }
          },
+         {
+          path: "record",
+          component: ScopeRecordLayoutComponent,
+          data: {
+            title: "Record Page"
+          }
+        },
          {
            path: "",
            component: DefaultLayoutComponent,

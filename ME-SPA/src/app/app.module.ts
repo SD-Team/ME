@@ -14,7 +14,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import { AppComponent } from './app.component';
 
 // Import containers
-import { DefaultLayoutComponent } from './containers';
+import { DefaultLayoutComponent, ScopeRecordLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -53,7 +53,7 @@ import { CategoryEditResolver } from './_core/_resolvers/category-edit.resolver'
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
-import { PaginationModule } from 'ngx-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AuditTypeListResolver } from './_core/_resolvers/audit-type-list.resolver';
 import { AuditTypeDListResolver } from './_core/_resolvers/audit-typeD-list.resolver';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -102,6 +102,7 @@ export function tokenGetter() {
     P500Component,
     LoginComponent,
     RegisterComponent,
+    ScopeRecordLayoutComponent
   ],
   providers: [
     AuthService,
