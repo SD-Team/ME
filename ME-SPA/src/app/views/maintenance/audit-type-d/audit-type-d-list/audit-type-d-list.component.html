@@ -11,7 +11,7 @@
                 <i class="fa fa-align-justify"></i> List Audit Types
               </div>
               <div class="col-lg-4">
-                <select name="auditType1" 
+                <select name="auditType1"
                     [(ngModel)]="auditType1"
                     (change)= "optionAuditType1()"
                     id="auditType1" 
@@ -19,8 +19,8 @@
                   <option value="all">All</option>
                   <option *ngFor="let item of auditType1List" value="{{ item }}">{{ item }}</option>
                 </select>
-                <select [(ngModel)]="auditType2" 
-                        name="auditType2" 
+                <select [(ngModel)]="auditType2"
+                        name="auditType2"
                         id="auditType2"
                         class="select-list">
                   <option *ngFor="let item of auditType2List" value="{{item.audit_Type2}}">{{ item.audit_Type2 }}</option>
