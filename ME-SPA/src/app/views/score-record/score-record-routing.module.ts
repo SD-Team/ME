@@ -1,6 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { SixsScoreRecordAddComponent } from './sixs-score-record-add/sixs-score-record-add.component';
+import { SmeScoreRecordAddComponent } from './sme-score-record-add/sme-score-record-add.component';
+import { WaterSpiderScoreRecordAddComponent } from './water-spider-score-record-add/water-spider-score-record-add.component';
 
 
 const routes: Routes = [
@@ -10,11 +12,11 @@ const routes: Routes = [
     },
     {
         path:'sms-scored-record-add',
-        component: SixsScoreRecordAddComponent,
+        component: SmeScoreRecordAddComponent,
     },
     {
         path:'water-spider-scored-record-add',
-        component: SixsScoreRecordAddComponent,
+        component: WaterSpiderScoreRecordAddComponent,
     },
 ];
 
