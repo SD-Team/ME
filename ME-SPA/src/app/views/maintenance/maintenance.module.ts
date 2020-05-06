@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
+<<<<<<< HEAD
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+=======
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+>>>>>>> e2854cb312cc9ebe91673c5502da0723ed1e7847
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 // Components Routing
 import { MaintenanceRoutingModule } from './maintenance-routing.module';
@@ -24,6 +28,9 @@ import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d
 import { AuditRecMAddComponent } from './audit-rec-d/audit-rec-m-add/audit-rec-m-add.component';
 import { AuditRecMListComponent } from './audit-rec-d/audit-rec-m-list/audit-rec-m-list.component';
 import { AuditRecListComponent } from './audit-rec-d/audit-rec-list/audit-rec-list.component';
+import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
+import { SixsScoreRecordListComponent } from './sixs-score-record/sixs-score-record-list/sixs-score-record-list.component';
+import { WaterSpiderScoreRecordListComponent } from './water-spider-score-record/water-spider-score-record-list/water-spider-score-record-list.component';
 
 @NgModule({
   imports: [
@@ -52,7 +59,10 @@ import { AuditRecListComponent } from './audit-rec-d/audit-rec-list/audit-rec-li
     AuditRecDAddComponent,
     AuditRecMAddComponent,
     AuditRecMListComponent,
-    AuditRecListComponent
+    AuditRecListComponent,
+    SmeScoreRecordListComponent,
+    SixsScoreRecordListComponent,
+    WaterSpiderScoreRecordListComponent
   ],
 })
 export class MaintenanceModule {}
