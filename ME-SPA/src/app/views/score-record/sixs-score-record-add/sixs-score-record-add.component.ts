@@ -24,4 +24,7 @@ export class SixsScoreRecordAddComponent implements OnInit {
   {
     this.question = $event;
   }
+  backList(){
+    this.question =false;
+  }
 }
