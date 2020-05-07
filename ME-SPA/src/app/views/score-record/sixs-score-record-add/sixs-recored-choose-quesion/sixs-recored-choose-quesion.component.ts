@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-sixs-recored-choose-quesion',
@@ -7,20 +7,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./sixs-recored-choose-quesion.component.scss']
 })
 export class SixsRecoredChooseQuesionComponent implements OnInit {
-  @Output() QuestionEvent = new EventEmitter<boolean>();
+  remake: boolean = false;
+  text:any;
   question = false;
-  constructor(private router:Router) { }
-
+  @Output() QuestionEvent = new EventEmitter<boolean>();
+  constructor() {}
   ngOnInit() {
   }
-  back() {
-    this.router.navigate(['maintenance/6s-score-record']);
+  changText(number) {
+    console.log(this.text);
+    if (number == 1) {
+      this.remake = true;
+    } else {
+      this.remake = false;
+    }
   }
   sendquestion() {
     this.QuestionEvent.emit(this.question);
   }
-  hideQuestion(){
-    this.question=true;
+  backList() {
+    this.question=false;
     this.sendquestion();
   }
 }

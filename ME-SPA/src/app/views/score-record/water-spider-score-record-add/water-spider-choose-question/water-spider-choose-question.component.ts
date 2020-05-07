@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-water-spider-choose-question',
@@ -7,21 +6,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./water-spider-choose-question.component.scss']
 })
 export class WaterSpiderChooseQuestionComponent implements OnInit {
-
-  @Output() QuestionEvent = new EventEmitter<boolean>();
+  remake: boolean = false;
+  text:any;
   question = false;
-  constructor(private router:Router) { }
-
+  @Output() QuestionEvent = new EventEmitter<boolean>();
+  constructor() {}
   ngOnInit() {
   }
-  back() {
-    this.router.navigate(['maintenance/6s-score-record']);
+  changText(number) {
+    console.log(this.text);
+    if (number == 1) {
+      this.remake = true;
+    } else {
+      this.remake = false;
+    }
   }
   sendquestion() {
     this.QuestionEvent.emit(this.question);
   }
-  hideQuestion(){
-    this.question=true;
+  backList() {
+    this.question=false;
     this.sendquestion();
   }
 

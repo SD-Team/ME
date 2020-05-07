@@ -1,94 +1,69 @@
-<div class="choose-question">
+<div class="font-title">
+  <b > 6S 稽核評分紀錄  </b>
+  <button type="button" class="btn btn-sm btn-primary float-right" (click)="backList()"><i class="fa fa-chevron-left"></i>
+    Back</button>
+</div>
+<div class="question">
+<div>
+  <p><b>Custom Radio Buttons</b></p>
+  <label class="container">N/A
+    <input type="radio"  [value] ="0"[(ngModel)]="text"  >
+    <span class="checkmark"></span>
+  </label>
+  <label class="container" > N
+    <input type="radio" [value] ="1"[(ngModel)]="text" >
+    <span class="checkmark"></span>
+  </label>
+  <label class="container" >Y
+    <input type="radio" [value] ="2" [(ngModel)]="text" >
+    <span class="checkmark"></span>
+  </label>
+  <div *ngIf="text== '0'" class="row">
+    <div class="col-12">
+      <label>Remake :</label>
+    </div>
+    <div class="col-12">
+      <textarea class="remake ml-5" >
+        </textarea>
+    </div>
+  </div>
+</div>
+<div>
+  <p><b>Custom Radio Buttons 2</b></p>
+  <label class="container" >N/A
+    <input type="radio"  [value] ="0"[(ngModel)]="text" >
+    <span class="checkmark"></span>
+  </label>
+  <label class="container"> N
+    <input type="radio"[value]="1" [(ngModel)]="text" >
+    <span class="checkmark"></span>
+  </label>
+  <label class="container" >Y
+    <input type="radio" [value]="2" [(ngModel)]="text" >
+    <span class="checkmark"></span>
+  </label>
+  <div *ngIf="text ==0" class="row">
+    <div class="col-12">
+      <label>Remake :</label>
+    </div>
+    <div class="col-12">
+      <textarea class="remake ml-5" >
+        </textarea>
+    </div>
+  </div>
+</div>
+</div>
+<div class="ml-1">
+<button type="button" class="btn btn-add-new  btn-primary">
+<i class="fa fa-envelope"></i><span style="margin-left: 2px;"> E-mail</span>  </button>
 
-  <p class="title-head">SME 稽核評分紀錄</p>
-  <div class="form-group row">
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Date</label>
-      <div class="input-group">
-        <select class="form-control" name="" id="">
-          <option value="1">1</option>
-          <option value="1">1</option>
-          <option value="1">1</option>
-        </select>
-        <span class="input-group-text">
-          <span class="fa fa-calendar"></span>
-        </span>
-      </div>
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">PDC</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Building</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Line</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Audit Type 2</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">ME Auditor</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div class="col-12 col-md-3">
-      <label class="badge badge-warning">PD_Resp</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
+<button type="button" class="btn btn-add-new   btn-danger"><i class="fa fa-ban"></i> Cancel</button>
 
-  </div>
-  <div class="form-group row">
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Update By</label>
-      <input class="form-control" type="text" name="model_name" placeholder="HCE">
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Update Time</label>
-      <input class="form-control" type="text" name="model_name" placeholder="AHIHI đồ con chó">
-    </div>
-    <div class="col-6 col-md-3 mt-auto">
-      <div class="row">
-        <div class="col-6">
-          <button type="button" style="width: 115px;"
-                        class="btn btn-block btn-primary"(click) ="back()"><i class="fa fa-arrow-left" ></i> Back
-                        </button>
-        </div>
-        <div class="col-6">
-          <button type="button" style="width: 115px; float: right;"
-                        class="btn btn-block btn-primary" (click)="hideQuestion()"><i class="fa fa-arrow-right"></i> Next
-                        </button>
-        </div>
-      </div>
-      </div>
-  </div>
+<button type="button" class="btn btn-add-new btn-success "  ><i class="fa fa-check"></i> Save & New</button>
+
+<button type="button" class="btn btn-add-new btn-success "  ><i class="fa fa-check"></i> Save</button>
+
+<button type="button"  class="btn btn-add-new  btn-primary">
+<i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span>
+</button>
 </div>

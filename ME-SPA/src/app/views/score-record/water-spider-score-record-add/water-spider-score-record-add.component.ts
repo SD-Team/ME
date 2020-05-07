@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-water-spider-score-record-add',
   templateUrl: './water-spider-score-record-add.component.html',
@@ -7,25 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WaterSpiderScoreRecordAddComponent implements OnInit {
 
-  remake: boolean = false;
-  text:any;
-  question:false;
-  constructor() {}
+  question = false;
+  constructor(private router:Router) { }
 
   ngOnInit() {}
-  changText(number) {
-    console.log(this.text);
-    if (number == 1) {
-      this.remake = true;
-    } else {
-      this.remake = false;
-    }
+
+  back() {
+    this.router.navigate(['maintenance/6s-score-record']);
+  }
+
+  hideQuestion(){
+    this.question=true;
   }
   receiveQuestion($event)
   {
     this.question = $event;
-  }
-  backList(){
-    this.question =false;
   }
 }
