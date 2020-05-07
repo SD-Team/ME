@@ -87,6 +87,7 @@ namespace ME_API
             services.AddScoped<IMesMoService, MesMoService>();
             services.AddScoped<IAuditRateDService, AuditRateDService>();
             services.AddScoped<IAuditRateMService, AuditRateMService>();
+            services.AddScoped<IAuditRateService, AuditRateService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

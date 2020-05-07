@@ -8,6 +8,7 @@ import { Component, OnInit } from "@angular/core";
 export class SixsScoreRecordAddComponent implements OnInit {
   remake: boolean = false;
   text:any;
+  question:false;
   constructor() {}
 
   ngOnInit() {}
@@ -18,5 +19,9 @@ export class SixsScoreRecordAddComponent implements OnInit {
     } else {
       this.remake = false;
     }
+  }
+  receiveQuestion($event)
+  {
+    this.question = $event;
   }
 }
