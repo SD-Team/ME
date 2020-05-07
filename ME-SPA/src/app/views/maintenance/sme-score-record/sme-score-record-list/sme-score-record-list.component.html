@@ -19,7 +19,7 @@
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">From Time</label>
               <div class="input-group">
-                <input class="form-control" placeholder="Start" [(ngModel)]="timeStart" type="text" bsDatepicker
+                <input class="form-control" placeholder="Start"  type="text" bsDatepicker
                   [bsConfig]="{
                     isAnimated: true,
                     dateInputFormat: 'YYYY/MM/DD'
@@ -30,16 +30,14 @@
               </div>
               <div class="col-2"></div>
               <label class="badge badge-warning font-lable">Line</label>
-              <select class="form-control" name="" id="" [(ngModel)]="line">
-                <option value="{{ item }}" *ngFor="let item of lines">{{
-                  item
-                }}</option>
+              <select class="form-control" name="" id="">
+                <option ></option>
               </select>
             </div>
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">To Time</label>
               <div class="input-group">
-                <input class="form-control" placeholder="End" [(ngModel)]="timeEnd" type="text" bsDatepicker [bsConfig]="{
+                <input class="form-control" placeholder="End"  type="text" bsDatepicker [bsConfig]="{
                     isAnimated: true,
                     dateInputFormat: 'YYYY/MM/DD'
                   }" />
@@ -49,17 +47,15 @@
               </div>
               <div class="col-2"></div>
               <label class="badge badge-warning font-lable">Audit_Type 2</label>
-              <select [(ngModel)]="auditType2" name="auditType2" id="auditType2" class="select-list form-control">
-                <option *ngFor="let item of auditType2List" value="{{ item.audit_Type2 }}">{{ item.audit_Type2 }}
+              <select  name="auditType2" id="auditType2" class="select-list form-control">
+                <option>
                 </option>
               </select>
             </div>
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">PDC</label>
-              <select class="form-control" name="" [(ngModel)]="pdc" id="">
-                <option value="{{ item }}" *ngFor="let item of pdcList">{{
-                  item
-                }}</option>
+              <select class="form-control" name=""  id="">
+                <option value="" ></option>
               </select>
               <div class="col-3 ml-5">
                 <div class="col-1 ml-4 ">
@@ -76,10 +72,8 @@
             </div>
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">Building</label>
-              <select class="form-control" name="" [(ngModel)]="building" id="">
-                <option value="{{ item }}" *ngFor="let item of buildings">{{
-                  item
-                }}</option>
+              <select class="form-control" name="" id="">
+                <option></option>
               </select>
             </div>
           </div>
