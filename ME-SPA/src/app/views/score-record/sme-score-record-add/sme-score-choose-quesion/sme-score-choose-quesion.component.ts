@@ -8,21 +8,26 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class SmeScoreChooseQuesionComponent implements OnInit {
 
-  @Output() QuestionEvent = new EventEmitter<boolean>();
+  remake: boolean = false;
+  text:any;
   question = false;
-  constructor(private router: Router) { }
-
+  @Output() QuestionEvent = new EventEmitter<boolean>();
+  constructor() {}
   ngOnInit() {
+  }
+  changText(number) {
+    console.log(this.text);
+    if (number == 1) {
+      this.remake = true;
+    } else {
+      this.remake = false;
+    }
   }
   sendquestion() {
     this.QuestionEvent.emit(this.question);
   }
-  hideQuestion() {
-    this.question = true;
+  backList() {
+    this.question=false;
     this.sendquestion();
   }
-  back() {
-    this.router.navigate(['maintenance/sme-score-record']);
-  }
-
 }

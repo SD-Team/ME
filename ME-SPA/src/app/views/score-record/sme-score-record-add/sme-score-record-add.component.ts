@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sme-score-record-add',
@@ -6,22 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sme-score-record-add.component.scss']
 })
 export class SmeScoreRecordAddComponent implements OnInit {
-  remake: boolean = false;
-  text: any;
-  question: false;
-  constructor() {}
+  question = false;
+  constructor(private router: Router) { }
 
   ngOnInit() {}
-  changText(number) {
-    console.log(this.text);
-    if (number == 1) {
-      this.remake = true;
-    } else {
-      this.remake = false;
-    }
-  }
-  receiveQuestion($event) {
-    this.question = $event;
+
+  back() {
+    this.router.navigate(['maintenance/sme-score-record']);
   }
 
+  hideQuestion(){
+    this.question=true;
+  }
+  receiveQuestion($event)
+  {
+    this.question = $event;
+  }
 }
