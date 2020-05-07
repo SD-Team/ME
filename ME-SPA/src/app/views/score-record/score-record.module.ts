@@ -1,3 +1,4 @@
+import { SmeScoreChooseQuesionComponent } from './sme-score-record-add/sme-score-choose-quesion/sme-score-choose-quesion.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -29,7 +30,8 @@ import { SixsRecoredChooseQuesionComponent } from './sixs-score-record-add/sixs-
         SixsScoreRecordAddComponent,
         SmeScoreRecordAddComponent,
         WaterSpiderScoreRecordAddComponent,
-        SixsRecoredChooseQuesionComponent
+        SixsRecoredChooseQuesionComponent,
+        SmeScoreChooseQuesionComponent
     ],
 })
 

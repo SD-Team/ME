@@ -51,11 +51,10 @@ export const routes: Routes = [
           data: {
             title: "Record Page"
           },
-          children:[
+          children: [
             {
-
-              path:'record-add',
-              loadChildren:() => import ("./views/score-record/score-record.module").then( m => m.ScoreRecordModule)
+              path: 'record-add',
+              loadChildren: () => import ("./views/score-record/score-record.module").then( m => m.ScoreRecordModule)
             }
 
           ]
