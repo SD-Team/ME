@@ -11,22 +11,22 @@ namespace ME_API._Services.Services
 {
     public class AuditRateDService : IAuditRateDService
     {
-        private readonly IAuditRateDRepository _repo;
+        private readonly IAuditRateDRepository _auditRateDRepository;
         private readonly IMapper _mapper;
         private readonly MapperConfiguration _configMapper;
-        public AuditRateDService(IAuditRateDRepository repo,
+        public AuditRateDService(IAuditRateDRepository auditRateDRepository,
                                  IMapper mapper,
                                  MapperConfiguration configMapper)
         {
-            _repo = repo;
+            _auditRateDRepository = auditRateDRepository;
             _mapper = mapper;
             _configMapper = configMapper;
         }
         public async Task<bool> Add(AuditRateDDto model)
         {
             var auditRateD = _mapper.Map<MES_Audit_Rate_D>(model);
-            _repo.Add(auditRateD);
-            return await _repo.SaveAll();
+            _auditRateDRepository.Add(auditRateD);
+            return await _auditRateDRepository.SaveAll();
         }
 
         public Task<bool> Delete(object id)
