@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sme-score-record-add.component.scss']
 })
 export class SmeScoreRecordAddComponent implements OnInit {
+  remake: boolean = false;
+  text: any;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit() {}
+  changText(number) {
+    console.log(this.text);
+    if (number == 1) {
+      this.remake = true;
+    } else {
+      this.remake = false;
+    }
   }
 
 }

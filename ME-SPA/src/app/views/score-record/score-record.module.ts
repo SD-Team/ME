@@ -31,7 +31,8 @@ import { SixsRecoredChooseQuesionComponent } from './sixs-score-record-add/sixs-
         SmeScoreRecordAddComponent,
         WaterSpiderScoreRecordAddComponent,
         SixsRecoredChooseQuesionComponent,
-        SmeScoreChooseQuesionComponent
+        SmeScoreChooseQuesionComponent,
+
     ],
 })
 

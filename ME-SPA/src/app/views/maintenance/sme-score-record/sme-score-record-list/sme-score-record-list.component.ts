@@ -1,5 +1,7 @@
+import { Pagination } from './../../../../_core/_models/pagination';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-sme-score-record-list',
