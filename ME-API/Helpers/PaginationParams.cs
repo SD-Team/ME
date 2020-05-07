@@ -10,6 +10,5 @@ namespace ME_API.Helpers
             get { return pageSize;}
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value;}
         }
-        public bool IsPaging { get; set; }
     }
 }

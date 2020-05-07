@@ -90,5 +90,11 @@ namespace ME_API.Controllers
                 return NoContent();
             throw new Exception("Error deleting the AuditType");
         }
+
+        [HttpGet("audittype2")]
+        public async Task<IActionResult> GetAllAuditType2() {
+            var data = await _auditTypeService.GetAllAuditType2();
+            return Ok(data);
+        }
     }
 }

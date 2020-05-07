@@ -48,11 +48,15 @@ namespace ME_API.Controllers
             return Ok(data);
         }
 
+<<<<<<< HEAD
+        
+=======
         [HttpGet("sixs-list")]
         public async Task<IActionResult> GetListSixsScoreRecord([FromQuery]PaginationParams paginationParams, SixsScoreRecordParam sixsScoreRecordParam)
         {
             var data = await _auditRateService.GetListSixsScoreRecord(paginationParams, sixsScoreRecordParam);
             return Ok(data);
         }
+>>>>>>> 822153a961de65d1b11d02131ec3cca7a890cbef
     }
 }

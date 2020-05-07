@@ -50,6 +50,9 @@ namespace ME_API.Controllers
             var data = await _service.GetAllLine();
             return Ok(data);
         }
+
+        
+
         [HttpGet("modelNames")]
         public async Task<IActionResult> GetAllModelName() {
             var data = await _service.GetAllModelName();
