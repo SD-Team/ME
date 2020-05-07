@@ -42,7 +42,6 @@ namespace ME_API.Controllers {
             return Ok (data);
         }
 
-<<<<<<< HEAD
 
         [HttpGet("sixs-list")]
         public async Task<IActionResult> GetListSixsScoreRecord([FromQuery]PaginationParams paginationParams, SixsScoreRecordParam sixsScoreRecordParam)
@@ -50,13 +49,6 @@ namespace ME_API.Controllers {
             var data = await _auditRateService.GetListSixsScoreRecord(paginationParams, sixsScoreRecordParam);
             return Ok(data);
         }
-=======
-        [HttpGet ("sixs-list")]
-        public async Task<IActionResult> GetListSixsScoreRecord ([FromQuery] PaginationParams paginationParams, SixsScoreRecordParam sixsScoreRecordParam) {
-            var data = await _auditRateService.GetListSixsScoreRecord (paginationParams, sixsScoreRecordParam);
-            return Ok (data);
-        }
 
->>>>>>> a5307eddd1521052ade89d299c637f16104c3b6c
     }
 }
