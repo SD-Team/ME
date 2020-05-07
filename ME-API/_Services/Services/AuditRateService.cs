@@ -21,10 +21,9 @@ namespace ME_API._Services.Services
             _auditRateMRepository = auditRateMRepository;
         }
 
-        public async Task<List<SixsScoreRecordDto>> GetListSixsScoreRecord(PaginationParams paginationParams, SixsScoreRecordParam sixsScoreRecordParam)
+        public async Task<List<SixsScoreRecordDto>> GetListSixsScoreRecord(PaginationParams paginationParams, SixsScoreRecordParam sixsScoreRecordParam, bool isPaging = true)
         {
             var queryAuditRateM = _auditRateMRepository.FindAll(x => x.Audit_Type1.Trim() == "6S");
-            var queryAuditRateD = _auditRateDRepository.FindAll();
 
             if (sixsScoreRecordParam.PDC != "")
             {
@@ -48,17 +47,20 @@ namespace ME_API._Services.Services
                 DateTime d2 = Convert.ToDateTime(sixsScoreRecordParam.ToDate + " 23:59:59");
                 queryAuditRateM = queryAuditRateM.Where(x => x.Record_Date >= d1 && x.Record_Date <= d2);
             }
+
+            var a = _auditRateDRepository.FindAll().Where(y => y.Record_ID == "RA20010001").Sum(z => z.Rating_1);
             
             var data = queryAuditRateM.Select(x => new SixsScoreRecordDto {
                 AuditDate = x.Record_Date,
                 AuditType = x.Audit_Type1,
                 AuditType2 = x.Audit_Type2,
                 LineId = x.Line,
-                Rating0 = _auditRateDRepository.FindAll(y => y.Record_ID == x.Record_ID).ToList().Sum(y => y.Rating_0),
-                Rating1 = _auditRateDRepository.FindAll(y => y.Record_ID == x.Record_ID).ToList().Sum(y => y.Rating_1),
+                Rating0 = _auditRateDRepository.FindAll().Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rating_0),
+                Rating1 = _auditRateDRepository.FindAll().Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rating_1),
+                RatingNa = _auditRateDRepository.FindAll().Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rate_NA) == null ? 0 : _auditRateDRepository.FindAll().Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rate_NA),
             });
 
-            return await PagedList<SixsScoreRecordDto>.CreateAsync(data, paginationParams.PageNumber, paginationParams.PageSize, paginationParams.IsPaging);
+            return await PagedList<SixsScoreRecordDto>.CreateAsync(data, paginationParams.PageNumber, paginationParams.PageSize, isPaging);
         }
     }
 }

@@ -25,11 +25,12 @@ namespace ME_API.DTO
                 return Rating0 + Rating1;
             }
         }
-        public long Achieving
+        public decimal Achieving
         {
             get
             {
-                return (100 / NeedToDoQty) * Rating0 * 0 + (100 / NeedToDoQty) * Rating1 * 1;
+                // return (100 / NeedToDoQty) * Rating0 * 0 + (100 / NeedToDoQty) * Rating1 * 1; // Sum((100/E)*B*0) + ((100/E)*C*1)
+                return Rating1/ NeedToDoQty; // Sum((100/E)*B*0) + ((100/E)*C*1)
             }
         }
     }
