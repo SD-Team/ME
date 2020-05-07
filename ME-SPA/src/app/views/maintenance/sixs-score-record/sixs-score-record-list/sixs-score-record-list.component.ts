@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Pagination } from '../../../../_core/_models/pagination';
 import { ScoreRecordService } from '../../../../_core/_services/score-record.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-sixs-score-record-list',
   templateUrl: './sixs-score-record-list.component.html',
@@ -17,7 +19,8 @@ export class SixsScoreRecordListComponent implements OnInit {
   buildings: string[] = [];
   auditType2List: string[] =[];
   constructor(private scoreRecordService: ScoreRecordService,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getListPDCs();
@@ -57,5 +60,8 @@ export class SixsScoreRecordListComponent implements OnInit {
   }
   pageChanged(){
 
+  }
+  addNew() {
+    this.router.navigate(['/record/record-add/6s-scored-record-add']);
   }
 }

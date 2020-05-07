@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WaterSpiderScoreRecordAddComponent implements OnInit {
 
-  constructor() { }
+  remake: boolean = false;
+  text:any;
+  question:false;
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+  changText(number) {
+    console.log(this.text);
+    if (number == 1) {
+      this.remake = true;
+    } else {
+      this.remake = false;
+    }
   }
-
+  receiveQuestion($event)
+  {
+    this.question = $event;
+  }
 }

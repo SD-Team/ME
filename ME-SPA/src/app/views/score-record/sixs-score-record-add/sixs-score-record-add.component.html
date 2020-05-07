@@ -1,9 +1,9 @@
 <div>
-  <ng-container *ngIf="true">
-    <app-sixs-recored-choose-quesion></app-sixs-recored-choose-quesion>
+  <ng-container *ngIf="!question">
+    <app-sixs-recored-choose-quesion (QuestionEvent) ="receiveQuestion($event)"></app-sixs-recored-choose-quesion>
   </ng-container>
 
-  <ng-container *ngIf="true">
+  <ng-container *ngIf="question">
     <div class="font-title">
         <b > 6S 稽核評分紀錄  </b>
       </div>

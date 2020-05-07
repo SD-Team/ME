@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pagination } from '../../../../_core/_models/pagination';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ScoreRecordService } from '../../../../_core/_services/score-record.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-water-spider-score-record-list',
@@ -18,7 +19,7 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
   buildings: string[] = [];
   constructor(
     private scoreRecordservice: ScoreRecordService,
-
+      private router:Router,
      private spinner: NgxSpinnerService
 
               ) { }
@@ -48,5 +49,8 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
   }
   pageChanged(){
 
+  }
+  addNew() {
+    this.router.navigate(['/record/record-add/water-spider-scored-record-add']);
   }
 }

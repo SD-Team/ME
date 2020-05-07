@@ -2,11 +2,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sixs-recored-choose-quesion',
-  templateUrl: './sixs-recored-choose-quesion.component.html',
-  styleUrls: ['./sixs-recored-choose-quesion.component.scss']
+  selector: 'app-water-spider-choose-question',
+  templateUrl: './water-spider-choose-question.component.html',
+  styleUrls: ['./water-spider-choose-question.component.scss']
 })
-export class SixsRecoredChooseQuesionComponent implements OnInit {
+export class WaterSpiderChooseQuestionComponent implements OnInit {
+
   @Output() QuestionEvent = new EventEmitter<boolean>();
   question = false;
   constructor(private router:Router) { }
@@ -23,4 +24,5 @@ export class SixsRecoredChooseQuesionComponent implements OnInit {
     this.question=true;
     this.sendquestion();
   }
+
 }
