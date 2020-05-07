@@ -104,5 +104,11 @@ namespace ME_API._Services.Services
             });
             return data.ToList();
         }
+
+        public async Task<List<string>> GetAllAuditType2()
+        {
+           return await _repoAuditType.FindAll().GroupBy(x => x.Audit_Type2).Select(x => x.Key).ToListAsync();
+
+        }
     }
 }

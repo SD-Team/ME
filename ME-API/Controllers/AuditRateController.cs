@@ -40,5 +40,7 @@ namespace ME_API.Controllers
             var data = await _auditRateMService.GetAllAuditType2();
             return Ok(data);
         }
+
+        
     }
 }
