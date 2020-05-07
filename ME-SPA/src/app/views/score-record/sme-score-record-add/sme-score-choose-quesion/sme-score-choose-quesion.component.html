@@ -1,94 +1,341 @@
-<div class="choose-question">
+<div class="font-title">
+  <b > 6S 稽核評分紀錄  </b>
+  <button type="button" class="btn btn-sm btn-primary float-right" (click)="backList()"><i class="fa fa-chevron-left"></i>
+    Back</button>
+</div>
+<div class="question">
+  <div>
+    <p><b>1.0.HEALTH && SAFETY</b></p>
+    <label class="container"> N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
 
-  <p class="title-head">SME 稽核評分紀錄</p>
-  <div class="form-group row">
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Date</label>
-      <div class="input-group">
-        <select class="form-control" name="" id="">
-          <option value="1">1</option>
-          <option value="1">1</option>
-          <option value="1">1</option>
-        </select>
-        <span class="input-group-text">
-          <span class="fa fa-calendar"></span>
-        </span>
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
       </div>
     </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">PDC</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Building</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Line</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
   </div>
-  <div class="form-group row">
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Audit Type 2</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">ME Auditor</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div class="col-12 col-md-3">
-      <label class="badge badge-warning">PD_Resp</label>
-      <select class="form-control" name="" id="">
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-      </select>
-    </div>
+  <div>
+    <p><b>1.1.Nơi làm việc có tuân theo hướng</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
 
-  </div>
-  <div class="form-group row">
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Update By</label>
-      <input class="form-control" type="text" name="model_name" placeholder="HCE">
-    </div>
-    <div class="col-6 col-md-3">
-      <label class="badge badge-warning">Update Time</label>
-      <input class="form-control" type="text" name="model_name" placeholder="AHIHI đồ con chó">
-    </div>
-    <div class="col-6 col-md-3 mt-auto">
-      <div class="row">
-        <div class="col-6">
-          <button type="button" style="width: 115px;"
-                        class="btn btn-block btn-primary"(click) ="back()"><i class="fa fa-chevron-left" ></i> Back
-                        </button>
-        </div>
-        <div class="col-6">
-          <button type="button" style="width: 115px; float: right;"
-                        class="btn btn-block btn-primary" (click)="hideQuestion()">Next<i class="fa fa-chevron-right"></i>
-                        </button> 
-        </div>
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
       </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
       </div>
+    </div>
   </div>
+  <div>
+    <p><b>1.2.Người thao tác được bảo vệ khỏi</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p><b>1.3.Những bộ phận phát nhiệt nhọn</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p><b>1.4.Các máy móc quan trọng trong khu vực</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p><b>1.5.Tạo nên môi trường làm việc</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p><b>1.6.Đảm bảo bất kì chất thải có thể</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p><b>2.0.QUALITY MANAGEMENT</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p><b>3.0.QUALITY MANAGEMENT</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p><b>3.1.Áp dụng hệ thống kéo có hiệu quả</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p><b>3.2.Lưu trình nguyên vật liệu và vận</b></p>
+    <label class="container">N/A
+      <input type="radio" [value] ="0" [(ngModel)]="text"  >
+      <span class="checkmark"></span>
+
+    </label>
+    <label class="container"> 0
+      <input type="radio" [value] ="1" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 1
+      <input type="radio" [value] ="2" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <label class="container" > 2
+      <input type="radio" [value] ="3" [(ngModel)]="text" >
+      <span class="checkmark"></span>
+    </label>
+    <div *ngIf="text== '0'" class="row">
+      <div class="col-12">
+        <label>Remake :</label>
+      </div>
+      <div class="col-12">
+        <textarea class="remake ml-5" >
+          </textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ml-1">
+<button type="button" class="btn btn-add-new  btn-primary">
+<i class="fa fa-envelope"></i><span style="margin-left: 2px;"> E-mail</span>  </button>
+
+<button type="button" class="btn btn-add-new   btn-danger"><i class="fa fa-ban"></i> Cancel</button>
+
+<button type="button" class="btn btn-add-new btn-success "  ><i class="fa fa-check"></i> Save & New</button>
+
+<button type="button" class="btn btn-add-new btn-success "  ><i class="fa fa-check"></i> Save</button>
+
+<button type="button"  class="btn btn-add-new  btn-primary">
+<i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span>
+</button>
 </div>
