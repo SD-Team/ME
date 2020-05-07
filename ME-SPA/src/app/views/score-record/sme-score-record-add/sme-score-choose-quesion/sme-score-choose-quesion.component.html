@@ -1,17 +1,19 @@
 <div class="choose-question">
+
   <p class="title-head">SME 稽核評分紀錄</p>
   <div class="form-group row">
     <div class="col-6 col-md-3">
       <label class="badge badge-warning">Date</label>
-                        <div class="input-group">
-                            <input class="form-control"
-                                placeholder="Start"
-                                type="text" bsDatepicker
-                                [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
-                            <span class="input-group-text">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                            </div>
+      <div class="input-group">
+        <select class="form-control" name="" id="">
+          <option value="1">1</option>
+          <option value="1">1</option>
+          <option value="1">1</option>
+        </select>
+        <span class="input-group-text">
+          <span class="fa fa-calendar"></span>
+        </span>
+      </div>
     </div>
     <div class="col-6 col-md-3">
       <label class="badge badge-warning">PDC</label>
@@ -55,7 +57,7 @@
         <option value="1">1</option>
       </select>
     </div>
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-md-3">
       <label class="badge badge-warning">PD_Resp</label>
       <select class="form-control" name="" id="">
         <option value="1">1</option>
@@ -63,29 +65,30 @@
         <option value="1">1</option>
       </select>
     </div>
+
+  </div>
+  <div class="form-group row">
     <div class="col-6 col-md-3">
       <label class="badge badge-warning">Update By</label>
       <input class="form-control" type="text" name="model_name" placeholder="HCE">
     </div>
-  </div>
-  <div class="form-group row">
     <div class="col-6 col-md-3">
       <label class="badge badge-warning">Update Time</label>
-      <input class="form-control" type="text" name="model_name" placeholder="AHIHI">
+      <input class="form-control" type="text" name="model_name" placeholder="AHIHI đồ con chó">
     </div>
     <div class="col-6 col-md-3 mt-auto">
       <div class="row">
         <div class="col-6">
           <button type="button" style="width: 115px;"
-                        class="btn btn-block btn-primary" (click)="back()"><i class="fa fa-chevron-left pr-1"></i> Back
+                        class="btn btn-block btn-primary"(click) ="back()"><i class="fa fa-chevron-left" ></i> Back
                         </button>
         </div>
         <div class="col-6">
           <button type="button" style="width: 115px; float: right;"
-                        class="btn btn-block btn-primary" (click)="next()"> Next <i class="fa fa-chevron-right pl-1"></i>
-          </button>
+                        class="btn btn-block btn-primary" (click)="hideQuestion()">Next<i class="fa fa-chevron-right"></i>
+                        </button> 
         </div>
       </div>
       </div>
-    </div>
-    </div>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 <div>
-  <ng-container *ngIf="false">
-    <app-sme-score-choose-quesion></app-sme-score-choose-quesion>
+  <ng-container *ngIf="!question">
+    <app-sme-score-choose-quesion (QuestionEvent) ="receiveQuestion($event)"></app-sme-score-choose-quesion>
   </ng-container>
 
-  <ng-container *ngIf="true">
+  <ng-container *ngIf="question">
     <div class="font-title">
       <b > SME 稽核評分紀錄  </b>
     </div>

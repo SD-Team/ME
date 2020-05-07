@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-sme-score-choose-quesion',
@@ -8,15 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SmeScoreChooseQuesionComponent implements OnInit {
 
+  @Output() QuestionEvent = new EventEmitter<boolean>();
+  question = false;
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
-
-  next() {
-      
+  sendquestion() {
+    this.QuestionEvent.emit(this.question);
   }
-
+  hideQuestion() {
+    this.question = true;
+    this.sendquestion();
+  }
   back() {
     this.router.navigate(['maintenance/sme-score-record']);
   }
