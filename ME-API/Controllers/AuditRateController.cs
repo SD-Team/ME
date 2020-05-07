@@ -42,12 +42,16 @@ namespace ME_API.Controllers {
             return Ok (data);
         }
 
+        [HttpPost ("sixs-list")]
+        public async Task<IActionResult> GetListSixsScoreRecord ([FromQuery] PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam) {
+            var data = await _auditRateService.GetListSixsScoreRecord (paginationParams, sixsScoreRecordParam);
+            return Ok (data);
+        }
 
-        [HttpGet("sixs-list")]
-        public async Task<IActionResult> GetListSixsScoreRecord([FromQuery]PaginationParams paginationParams, SixsScoreRecordParam sixsScoreRecordParam)
-        {
-            var data = await _auditRateService.GetListSixsScoreRecord(paginationParams, sixsScoreRecordParam);
-            return Ok(data);
+        [HttpPost ("sme-list")]
+        public async Task<IActionResult> GetListSMEScoreRecord ([FromQuery] PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam) {
+            var data = await _auditRateService.GetLisSMEScoreRecord (paginationParams, sixsScoreRecordParam);
+            return Ok (data);
         }
 
     }

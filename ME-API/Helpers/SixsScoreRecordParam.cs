@@ -1,6 +1,6 @@
 namespace ME_API.Helpers
 {
-    public class SixsScoreRecordParam
+    public class ScoreRecordParam
     {
         public string FromDate { get; set; }
         public string ToDate { get; set; }

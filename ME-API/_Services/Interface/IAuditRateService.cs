@@ -7,7 +7,9 @@ namespace ME_API._Services.Interface
 {
     public interface IAuditRateService
     {
-        Task<List<SixsScoreRecordDto>> GetListSixsScoreRecord(PaginationParams paginationParams, SixsScoreRecordParam sixsScoreRecordParam, bool isPaging = true);
+        Task<List<SixsScoreRecordDto>> GetListSixsScoreRecord(PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true);
+
+         Task<List<SMEScoreRecordDto>> GetLisSMEScoreRecord(PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true);
          
     }
 }
