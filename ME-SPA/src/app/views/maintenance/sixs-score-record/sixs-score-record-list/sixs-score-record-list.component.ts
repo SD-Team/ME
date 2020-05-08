@@ -130,4 +130,7 @@ export class SixsScoreRecordListComponent implements OnInit {
     };
     this.scoreRecordService.exportExcel(object);
   }
+  changeToDetail(){
+    this.router.navigate(["maintenance/6s-score-record/detail/1"]);
+  }
 }
