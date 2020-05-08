@@ -1,4 +1,5 @@
 export interface AuditRate6S {
+  
   auditDate:Date;
   auditType:string;
   auditType2:string;

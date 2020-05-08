@@ -54,7 +54,7 @@ export class ScoreRecordService {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         const currentTime = new Date();
-        const filename = 'ME_AuditRec_Server_' + currentTime.getFullYear().toString() +
+        const filename = '6S_Score_Record_' + currentTime.getFullYear().toString() +
           (currentTime.getMonth() + 1) + currentTime.getDate() +
           currentTime.toLocaleTimeString().replace(/[ ]|[,]|[:]/g, '').trim() + '.xlsx';
         link.href = url;
