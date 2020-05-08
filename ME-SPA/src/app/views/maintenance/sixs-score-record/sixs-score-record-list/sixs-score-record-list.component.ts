@@ -14,7 +14,7 @@ import { AlertifyService } from "../../../../_core/_services/alertify.service";
 export class SixsScoreRecordListComponent implements OnInit {
   pagination: Pagination = {
     currentPage: 1,
-    itemsPerPage: 1,
+    itemsPerPage: 3,
     totalItems: 1,
     totalPages: 1,
   };
@@ -56,7 +56,7 @@ export class SixsScoreRecordListComponent implements OnInit {
       fromDate: this.fromTime,
       toDate: this.toTime,
     };
-    this.scoreRecordService.search(1, 3, object).subscribe(
+    this.scoreRecordService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
       (res: PaginatedResult<AuditRate6S[]>) => {
         this.auditRate6S = res.result;
         this.pagination = res.pagination;
@@ -98,7 +98,10 @@ export class SixsScoreRecordListComponent implements OnInit {
       this.auditType2List.unshift({ id: "", text: "All" });
     });
   }
-  pageChanged() {}
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadData();
+  }
   addNew() {
     this.router.navigate(["/record/record-add/6s-scored-record-add"]);
   }
@@ -106,10 +109,13 @@ export class SixsScoreRecordListComponent implements OnInit {
     if (this.timeStart == "" || this.timeEnd == "") {
       this.alertify.error("Please option start and end time");
     } else {
+      this.spinner.show();
       this.fromTime = new Date(this.timeStart).toLocaleDateString();
       // tslint:disable-next-line:prefer-const
       this.toTime = new Date(this.timeEnd).toLocaleDateString();
+      this.pagination.currentPage=1;
       this.loadData();
+      this.spinner.hide();
     }
   }
 }

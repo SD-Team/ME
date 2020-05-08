@@ -33,8 +33,8 @@
               </div>
               <label class="badge badge-warning font-lable">Line</label>
               <select class="form-control" name="" id="" [(ngModel)]="line">
-                <option value="{{ item }}" *ngFor="let item of lines">{{
-                  item
+                <option value="{{ item.id }}" *ngFor="let item of lines">{{
+                  item.text
                 }}</option>
               </select>
             </div>
@@ -66,16 +66,16 @@
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">PDC</label>
               <select class="form-control" name="" [(ngModel)]="pdc" id="">
-                <option value="{{ item }}" *ngFor="let item of pdcList">{{
-                  item
+                <option value="{{ item.item }}" *ngFor="let item of pdcList">{{
+                  item.text
                 }}</option>
               </select>
             </div>
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">Building</label>
               <select class="form-control" name="" [(ngModel)]="building" id="">
-                <option value="{{ item }}" *ngFor="let item of buildings">{{
-                  item
+                <option value="{{ item.id }}" *ngFor="let item of buildings">{{
+                  item.text
                 }}</option>
               </select>
             </div>
