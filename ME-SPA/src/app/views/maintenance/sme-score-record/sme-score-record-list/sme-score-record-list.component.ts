@@ -1,6 +1,6 @@
+import { SmeScoreRecordService } from './../../../../_core/_services/sme-score-record.service';
 import { AlertifyService } from './../../../../_core/_services/alertify.service';
 import { AuditRateSme } from './../../../../_core/_models/audit-rate-sme';
-import { ScoreRecordService } from './../../../../_core/_services/score-record.service';
 import { Pagination, PaginatedResult } from './../../../../_core/_models/pagination';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -33,7 +33,7 @@ export class SmeScoreRecordListComponent implements OnInit {
   auditType2List: any[] = [];
   aduditRateSme: AuditRateSme[] = [];
   constructor(
-    private scoreRecordService: ScoreRecordService,
+    private smeScoreRecordService: SmeScoreRecordService,
     private spinner: NgxSpinnerService,
     private router: Router,
     private alertify: AlertifyService
@@ -49,6 +49,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.spinner.hide();
   }
   loadData() {
+
     let object = {
       pdc: this.pdc,
       building: this.building,
@@ -57,7 +58,7 @@ export class SmeScoreRecordListComponent implements OnInit {
       fromDate: this.fromTime,
       toDate: this.toTime,
     };
-    this.scoreRecordService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
+    this.smeScoreRecordService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
       (res: PaginatedResult<AuditRateSme[]>) => {
         console.log(res);
         this.aduditRateSme = res.result;
@@ -69,7 +70,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     );
   }
   getListPDCs() {
-    this.scoreRecordService.getListPDC().subscribe((res) => {
+    this.smeScoreRecordService.getListPDC().subscribe((res) => {
       this.pdcList = res.map((item) => {
         return { id: item, text: item };
       });
@@ -77,7 +78,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     });
   }
   getListBuilding() {
-    this.scoreRecordService.getListBuilding().subscribe((res) => {
+    this.smeScoreRecordService.getListBuilding().subscribe((res) => {
       this.buildings = res.map((item) => {
         return { id: item, text: item };
       });
@@ -85,7 +86,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     });
   }
   getListLine() {
-    this.scoreRecordService.getListLine().subscribe((res) => {
+    this.smeScoreRecordService.getListLine().subscribe((res) => {
       this.lines = res.map((item) => {
         return { id: item, text: item };
       });
@@ -93,7 +94,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     });
   }
   optionAuditType2() {
-    this.scoreRecordService.getAuditType2().subscribe((res) => {
+    this.smeScoreRecordService.getAuditType2().subscribe((res) => {
       this.auditType2List = res.map((item) => {
         return { id: item, text: item };
       });
@@ -120,5 +121,18 @@ export class SmeScoreRecordListComponent implements OnInit {
       this.spinner.hide();
     }
   }
+
+  exportExcel() {
+    let object = {
+      pdc: this.pdc,
+      building: this.building,
+      line: this.line,
+      auditType2: this.auditType2,
+      fromDate: this.fromTime,
+      toDate: this.toTime,
+    };
+    this.smeScoreRecordService.exportExcel(object);
+  }
+
 
 }
