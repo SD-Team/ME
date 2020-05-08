@@ -44,6 +44,25 @@ export class ScoreRecordService {
         }),
       );
   }
+  exportExcel(auditRateSearch?: AuditRateSearch){
+    return this.http.post(this.baseUrl + 'AuditRate/ExportExcelSixs', auditRateSearch, { responseType: 'blob' })
+      .subscribe((result: Blob) => {
+        if (result.type !== 'application/xlsx') {
+          alert(result.type);
+        }
+        const blob = new Blob([result]);
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const currentTime = new Date();
+        const filename = 'ME_AuditRec_Server_' + currentTime.getFullYear().toString() +
+          (currentTime.getMonth() + 1) + currentTime.getDate() +
+          currentTime.toLocaleTimeString().replace(/[ ]|[,]|[:]/g, '').trim() + '.xlsx';
+        link.href = url;
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+      });
+  }
   getListPDC(){
     return this.http.get<any>(this.baseUrl + 'AuditRate/pdcs', {});
   }

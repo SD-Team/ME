@@ -118,4 +118,16 @@ export class SixsScoreRecordListComponent implements OnInit {
       this.spinner.hide();
     }
   }
+
+  exportExcel() {
+    let object = {
+      pdc: this.pdc,
+      building: this.building,
+      line: this.line,
+      auditType2: this.auditType2,
+      fromDate: this.fromTime,
+      toDate: this.toTime,
+    };
+    this.scoreRecordService.exportExcel(object);
+  }
 }
