@@ -19,7 +19,7 @@ namespace ME_API._Services.Services {
             _auditRateMRepository = auditRateMRepository;
         }
 
-        public async Task<List<SMEScoreRecordDto>> GetLisSMEScoreRecord(PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true)
+        public async Task<PagedList<SMEScoreRecordDto>> GetLisSMEScoreRecord(PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true)
         {
              var queryAuditRateM = _auditRateMRepository.FindAll ().Where(x => x.Audit_Type1.Trim () == "SME2.0");
             var queryAuditRateD = _auditRateDRepository.FindAll ();
@@ -55,7 +55,7 @@ namespace ME_API._Services.Services {
             return await PagedList<SMEScoreRecordDto>.CreateAsync (data, paginationParams.PageNumber, paginationParams.PageSize, isPaging);
         }
 
-        public async Task<List<SixsScoreRecordDto>> GetListSixsScoreRecord (PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true) {
+        public async Task<PagedList<SixsScoreRecordDto>> GetListSixsScoreRecord (PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true) {
             var queryAuditRateM = _auditRateMRepository.FindAll ().Where(x => x.Audit_Type1.Trim () == "6S");
             var queryAuditRateD = _auditRateDRepository.FindAll ();
             if (sixsScoreRecordParam.PDC != "") {
