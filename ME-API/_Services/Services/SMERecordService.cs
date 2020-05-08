@@ -6,22 +6,26 @@ using ME_API._Repositories.Interface;
 using ME_API._Services.Interface;
 using ME_API.DTO;
 using ME_API.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace ME_API._Services.Services {
-    public class AuditRateService : IAuditRateService {
-
+    public class SMERecordService : ISMERecordService {
         private readonly IAuditRateDRepository _auditRateDRepository;
         private readonly IAuditRateMRepository _auditRateMRepository;
-        public AuditRateService (IAuditRateDRepository auditRateDRepository,
+        private readonly IAuditTypeDRepository _auditTypeDRepository;
+
+        private readonly IAuditTypeRepository _auditTypeMRepository;
+
+        public SMERecordService (IAuditRateDRepository auditRateDRepository, IAuditTypeRepository auditTypeMRepository, IAuditTypeDRepository auditTypeDRepository,
             IAuditRateMRepository auditRateMRepository) {
             _auditRateDRepository = auditRateDRepository;
             _auditRateMRepository = auditRateMRepository;
+            _auditTypeDRepository = auditTypeDRepository;
+            _auditTypeMRepository = auditTypeMRepository;
         }
 
-      
-
-        public async Task<PagedList<SixsScoreRecordDto>> GetListSixsScoreRecord (PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true) {
-            var queryAuditRateM = _auditRateMRepository.FindAll ().Where (x => x.Audit_Type1.Trim () == "6S");
+        public async Task<PagedList<SMEScoreRecordDto>> GetLisSMEScoreRecord (PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true) {
+            var queryAuditRateM = _auditRateMRepository.FindAll ().Where (x => x.Audit_Type1.Trim () == "SME2.0");
             var queryAuditRateD = _auditRateDRepository.FindAll ();
             if (sixsScoreRecordParam.PDC != "") {
                 queryAuditRateM = queryAuditRateM.Where (x => x.PDC.Trim () == sixsScoreRecordParam.PDC);
@@ -41,19 +45,39 @@ namespace ME_API._Services.Services {
                 queryAuditRateM = queryAuditRateM.Where (x => x.Record_Date >= d1 && x.Record_Date <= d2);
             }
 
-            var data = queryAuditRateM.Select (x => new SixsScoreRecordDto {
+            var data = queryAuditRateM.Select (x => new SMEScoreRecordDto {
                 AuditDate = x.Record_Date,
                     AuditType = x.Audit_Type1,
                     AuditType2 = x.Audit_Type2,
-                    LineId = x.Line,
+                    LineID = x.Line,
                     UpdateBy = x.Updated_By,
                     UpdateTime = x.Updated_Time,
                     Rating0 = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_0),
                     Rating1 = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_1),
+                    Rating2 = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_2),
                     RatingNa = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rate_NA) == null ? 0 : queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rate_NA),
             });
 
-            return await PagedList<SixsScoreRecordDto>.CreateAsync (data, paginationParams.PageNumber, paginationParams.PageSize, isPaging);
+            return await PagedList<SMEScoreRecordDto>.CreateAsync (data, paginationParams.PageNumber, paginationParams.PageSize, isPaging);
+        }
+
+        public async Task<List<SMEScoreRecordQuesDto>> GetListQuesSMEScoreRecord (string auditType2) {
+            var auditTypeID = _auditTypeMRepository.FindAll ().Where (x => x.Audit_Type2 == auditType2.Trim ()).FirstOrDefault ();
+            List<SMEScoreRecordQuesDto> data = new List<SMEScoreRecordQuesDto> ();
+
+            if (auditTypeID != null) {
+
+                var queryAudiiTypeD = _auditTypeDRepository.FindAll ().Where (x => x.Audit_Type_ID.Trim () == auditTypeID.Audit_Type_ID.Trim ());
+
+                data = await queryAudiiTypeD.Select (x => new SMEScoreRecordQuesDto {
+                    AuditTypeID = x.Audit_Type_ID,
+                    AuditItem = x.Audit_Item_ID,
+                    Quesion = x.Audit_Item_LL
+                }).ToListAsync ();
+
+            }
+            return data;
+
         }
     }
 }
