@@ -10,20 +10,30 @@
               <i class="fa fa-align-justify"></i> List 6S Record
             </div>
             <div class="col-lg-2">
-              <button type="button" class="btn btn-sm btn-primary float-right" (click)="addNew()">
+              <button
+                type="button"
+                class="btn btn-sm btn-primary float-right"
+                (click)="addNew()"
+              >
                 <i class="fa fa-plus"></i> Add new
               </button>
             </div>
           </div>
-          <div class="row ">
+          <div class="row">
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">From Time</label>
               <div class="input-group">
-                <input class="form-control" placeholder="Start" [(ngModel)]="timeStart" type="text" bsDatepicker
+                <input
+                  class="form-control"
+                  placeholder="Start"
+                  [(ngModel)]="timeStart"
+                  type="text"
+                  bsDatepicker
                   [bsConfig]="{
                     isAnimated: true,
                     dateInputFormat: 'YYYY/MM/DD'
-                  }" />
+                  }"
+                />
                 <span class="input-group-text">
                   <span class="fa fa-calendar"></span>
                 </span>
@@ -31,45 +41,66 @@
               <div class="col-2"></div>
               <label class="badge badge-warning font-lable">Line</label>
               <select class="form-control" name="" id="" [(ngModel)]="line">
-                <option value="{{ item }}" *ngFor="let item of lines">{{
-                  item
-                }}</option>
+                <option value="{{ item.id }}" *ngFor="let item of lines">
+                  {{ item.text }}
+                </option>
               </select>
             </div>
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">To Time</label>
               <div class="input-group">
-                <input class="form-control" placeholder="End" [(ngModel)]="timeEnd" type="text" bsDatepicker [bsConfig]="{
+                <input
+                  class="form-control"
+                  placeholder="End"
+                  [(ngModel)]="timeEnd"
+                  type="text"
+                  bsDatepicker
+                  [bsConfig]="{
                     isAnimated: true,
                     dateInputFormat: 'YYYY/MM/DD'
-                  }" />
+                  }"
+                />
                 <span class="input-group-text">
                   <span class="fa fa-calendar"></span>
                 </span>
               </div>
               <div class="col-2"></div>
               <label class="badge badge-warning font-lable">Audit_Type 2</label>
-              <select [(ngModel)]="auditType2" name="auditType2" id="auditType2" class="select-list form-control">
-                <option *ngFor="let item of auditType2List" value="{{ item }}">{{ item }}
+              <select
+                [(ngModel)]="auditType2"
+                name="auditType2"
+                id="auditType2"
+                class="select-list form-control"
+              >
+                <option
+                  *ngFor="let item of auditType2List"
+                  value="{{ item.id }}"
+                  >{{ item.text }}
                 </option>
               </select>
             </div>
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">PDC</label>
               <select class="form-control" name="" [(ngModel)]="pdc" id="">
-                <option value="{{ item }}" *ngFor="let item of pdcList">{{
-                  item
+                <option value="{{ item.id }}" *ngFor="let item of pdcList">{{
+                  item.text
                 }}</option>
               </select>
               <div class="col-3 ml-5">
-                <div class="col-1 ml-4 ">
-                  <button type="button" class="btn btn-block btn-query1 float-right btn-secondary">
+                <div class="col-1 ml-4">
+                  <button
+                    type="button"
+                    class="btn btn-block btn-query1 float-right btn-secondary"(click) =search()>
                     <i class="fa fa-search"></i> Search
                   </button>
                 </div>
                 <div class="col-1 ml-5">
-                  <button type="button" class="btn btn-block btn-query1  btn-success">
-                    <i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span>
+                  <button
+                    type="button"
+                    class="btn btn-block btn-query1 btn-success"
+                  >
+                    <i class="fa fa-file-excel-o"></i>
+                    <span style="margin-left: 2px;">Excel</span>
                   </button>
                 </div>
               </div>
@@ -77,15 +108,21 @@
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">Building</label>
               <select class="form-control" name="" [(ngModel)]="building" id="">
-                <option value="{{ item }}" *ngFor="let item of buildings">{{
-                  item
+                <option value="{{ item.id }}" *ngFor="let item of buildings">{{
+                  item.text
                 }}</option>
               </select>
             </div>
           </div>
         </div>
         <div class="card-body mt-1">
-          <ngx-spinner bdOpacity="0.2" bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
+          <ngx-spinner
+            bdOpacity="0.2"
+            bdColor="rgba(51,51,51,0.8)"
+            size="medium"
+            color="#20A8D8"
+            type="pacman"
+          >
           </ngx-spinner>
           <div class="table-responsive">
             <table class="table table-bordered">
@@ -104,35 +141,23 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr *ngFor="let item of auditRecDs; let i = index">
-                    <th class="font-table">{{ item.Audit_Date }}</th>
-                    <th class="font-table">{{ item.Audit_Type1 }}</th>
-                    <th class="font-table">{{ item.Audit_Type2 }}</th>
-                    <th class="font-table">{{ item.Line }}</th>
-                    <th class="font-table">{{ item.Rating_NA }}</th>
-                    <th class="font-table">{{ item.Rating_0 }}</th>
-                    <th class="font-table">{{ item.Rating_1 }}</th>
-                    <th class="font-table">{{ item.Total }}</th>
-                     <th class="font-table">{{ item.Need to do qty }}</th>
-                    <th class="font-table">{{ item.Achieving }}</th>
-                   </tr> -->
-                <tr>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>5</th>
-                  <th>6</th>
-                  <th>7</th>
-                  <th>8</th>
-                  <th>9</th>
-                  <th>10</th>
-                </tr>
+                <tr *ngFor="let item of auditRate6S; let i = index">
+                    <th class="font-table">{{ item.auditDate | date: "MM/dd/yyyy" }}</th>
+                    <th class="font-table">{{ item.auditType }}</th>
+                    <th class="font-table">{{ item.auditType2 }}</th>
+                    <th class="font-table">{{ item.lineId }}</th>
+                    <th class="font-table">{{ item.ratingNa }}</th>
+                    <th class="font-table">{{ item.rating0 }}</th>
+                    <th class="font-table">{{ item.rating1 }}</th>
+                    <th class="font-table">{{ item.total }}</th>
+                     <th class="font-table">{{ item.needToDoQty }}</th>
+                    <th class="font-table">{{ item.achieving *100 }}%</th>
+                   </tr>
               </tbody>
             </table>
           </div>
           <div class="d-flex">
-            <!-- <pagination
+            <pagination
                 [boundaryLinks]="true"
                 [totalItems]="pagination.totalItems"
                 [(ngModel)]="pagination.currentPage"
@@ -144,7 +169,7 @@
                 lastText="&raquo;"
                 [maxSize]="5"
               >
-              </pagination> -->
+              </pagination>
           </div>
         </div>
       </div>
