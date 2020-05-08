@@ -27,6 +27,9 @@ import { AuditRecListComponent } from './audit-rec-d/audit-rec-list/audit-rec-li
 import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
 import { SixsScoreRecordListComponent } from './sixs-score-record/sixs-score-record-list/sixs-score-record-list.component';
 import { WaterSpiderScoreRecordListComponent } from './water-spider-score-record/water-spider-score-record-list/water-spider-score-record-list.component';
+import { SixsScoreRecordDetailComponent } from './sixs-score-record/sixs-score-record-detail/sixs-score-record-detail.component';
+import { SmeScoreRecordDetailComponent } from './sme-score-record/sme-score-record-detail/sme-score-record-detail.component';
+import { WaterSpiderScoreRecordDetailComponent } from './water-spider-score-record/water-spider-score-record-detail/water-spider-score-record-detail.component';
 
 @NgModule({
   imports: [
@@ -58,7 +61,10 @@ import { WaterSpiderScoreRecordListComponent } from './water-spider-score-record
     AuditRecListComponent,
     SmeScoreRecordListComponent,
     SixsScoreRecordListComponent,
-    WaterSpiderScoreRecordListComponent
+    WaterSpiderScoreRecordListComponent,
+    SixsScoreRecordDetailComponent,
+    SmeScoreRecordDetailComponent,
+    WaterSpiderScoreRecordDetailComponent
   ],
 })
 export class MaintenanceModule {}
