@@ -26,6 +26,9 @@ import { AuditRecDListResolver } from '../../_core/_resolvers/audit-rec-d-list-r
 import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
 import { SixsScoreRecordListComponent } from './sixs-score-record/sixs-score-record-list/sixs-score-record-list.component';
 import { WaterSpiderScoreRecordListComponent } from './water-spider-score-record/water-spider-score-record-list/water-spider-score-record-list.component';
+import { SixsScoreRecordDetailComponent } from './sixs-score-record/sixs-score-record-detail/sixs-score-record-detail.component';
+import { SmeScoreRecordDetailComponent } from './sme-score-record/sme-score-record-detail/sme-score-record-detail.component';
+import { WaterSpiderScoreRecordDetailComponent } from './water-spider-score-record/water-spider-score-record-detail/water-spider-score-record-detail.component';
 
 
 
@@ -197,6 +200,13 @@ const routes: Routes = [
                 title: 'SME Score Record'
               }
             },
+            {
+              path: 'detail/:recordId',
+              component: SmeScoreRecordDetailComponent,
+              data: {
+                title: 'SME Score Record Detail'
+              }
+            },
           ]
       },
       {
@@ -210,6 +220,13 @@ const routes: Routes = [
                 title: '6S Score Record'
               }
             },
+            {
+              path: 'detail/:recordId',
+              component: SixsScoreRecordDetailComponent,
+              data: {
+                title: '6S Score Record Detail'
+              }
+            },
           ]
       },
       {
@@ -221,6 +238,13 @@ const routes: Routes = [
               component: WaterSpiderScoreRecordListComponent,
               data: {
                 title: 'Water Spider Score Record'
+              }
+            },
+            {
+              path: 'detail/:recordId',
+              component: WaterSpiderScoreRecordDetailComponent,
+              data: {
+                title: 'Water Spider Score Record Detail'
               }
             },
           ]

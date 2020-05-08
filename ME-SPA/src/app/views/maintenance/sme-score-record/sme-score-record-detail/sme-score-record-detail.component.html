@@ -1,0 +1,130 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> SME Record Detail
+          <button type="button" class="btn btn-sm btn-primary float-right" (click)="back()">
+            <i class="fa fa-chevron-left"></i> Back
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <label class="col-md-1 col-form-label" for="hf-email">Date: </label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled />
+            </div>
+            <label class="col-md-1 col-form-label" for="hf-password">PDC</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled />
+            </div>
+            <label class="col-md-1 col-form-label" for="hf-email"
+              >Building:
+            </label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled />
+            </div>
+            <label class="col-md-1 col-form-label" for="hf-password"
+              >Line</label
+            >
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-1 col-form-label" for="hf-email"
+              >Audit_Type_1:
+            </label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled />
+            </div>
+            <label class="col-md-1 col-form-label" for="hf-password"
+              >Audit_Type_2</label
+            >
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled />
+            </div>
+            <label class="col-md-1 col-form-label" for="hf-email"
+              >Update_User:
+            </label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled />
+            </div>
+            <label class="col-md-1 col-form-label" for="hf-password"
+              >Update_Time</label
+            >
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled />
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Audit_Item_ID</th>
+                  <th>Audit_Item_LL</th>
+                  <th>Audit_Item_ZW</th>
+                  <th>Audit_Item_EN</th>
+                  <th>Rating</th>
+                  <th>Remark</th>
+                  <th>Upload_Picture</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1.0</td>
+                  <td>Healthy & Safety</td>
+                  <td>Healthy & Safety</td>
+                  <td>Healthy & Safety</td>
+                  <td>0</td>
+                  <td>Remark rating 0</td>
+                  <td>
+                    <img [src]="url" width="100%" width="60" />
+                    <label class="btn btn-primary upload">
+                      Upload
+                      <input
+                        type="file"
+                        class="uploadFile img"
+                        value="Upload Photo"
+                        style="width: 0px; height: 0px; overflow: hidden;"
+                        (change)="onSelectFile($event)"
+                        #fileImageB4
+                      />
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2.0</td>
+                  <td>Healthy & Safety</td>
+                  <td>Healthy & Safety</td>
+                  <td>Healthy & Safety</td>
+                  <td>2</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>3.0</td>
+                  <td>Healthy & Safety</td>
+                  <td>Healthy & Safety</td>
+                  <td>Healthy & Safety</td>
+                  <td>1</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>4.0</td>
+                  <td>Healthy & Safety</td>
+                  <td>Healthy & Safety</td>
+                  <td>Healthy & Safety</td>
+                  <td>NA</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

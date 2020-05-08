@@ -19,7 +19,7 @@ const httpOptions = {
 export class SmeScoreRecordService {
   baseUrl = environment.apiUrl;
   scoreSmeSource = new BehaviorSubject<Object>({});
-  currentScore6S = this.scoreSmeSource.asObservable();
+  currentScoreSme = this.scoreSmeSource.asObservable();
   flagSource = new BehaviorSubject<string>('0');
   currentFlag = this.flagSource.asObservable();
 
@@ -27,6 +27,7 @@ export class SmeScoreRecordService {
   search(page?, itemsPerPage?, auditRateSearch?: AuditRateSearch): Observable<PaginatedResult<AuditRateSme[]>> {
     const paginatedResult: PaginatedResult<AuditRateSme[]> = new PaginatedResult<AuditRateSme[]>();
     let params = new HttpParams();
+
     if (page != null && itemsPerPage != null) {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
@@ -45,6 +46,26 @@ export class SmeScoreRecordService {
         }),
       );
   }
+  exportExcel(auditRateSearch?: AuditRateSearch) {
+    return this.http.post(this.baseUrl + 'AuditRate/ExportExcelSME', auditRateSearch, { responseType: 'blob' })
+      .subscribe((result: Blob) => {
+        if (result.type !== 'application/xlsx') {
+          alert(result.type);
+        }
+        const blob = new Blob([result]);
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const currentTime = new Date();
+        const filename = 'Sme_Score_Record' + currentTime.getFullYear().toString() +
+          (currentTime.getMonth() + 1) + currentTime.getDate() +
+          currentTime.toLocaleTimeString().replace(/[ ]|[,]|[:]/g, '').trim() + '.xlsx';
+        link.href = url;
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+      });
+  }
+
   getListPDC(){
     return this.http.get<any>(this.baseUrl + 'AuditRecM/pdcs');
   }

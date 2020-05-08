@@ -9,8 +9,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class SixsRecoredChooseQuesionComponent implements OnInit {
   remake: boolean = false;
   text:any;
-  question = false;
-  @Output() QuestionEvent = new EventEmitter<boolean>();
   constructor() {}
   ngOnInit() {
   }
@@ -21,12 +19,5 @@ export class SixsRecoredChooseQuesionComponent implements OnInit {
     } else {
       this.remake = false;
     }
-  }
-  sendquestion() {
-    this.QuestionEvent.emit(this.question);
-  }
-  backList() {
-    this.question=false;
-    this.sendquestion();
   }
 }

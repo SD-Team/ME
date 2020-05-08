@@ -7,20 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./sme-score-record-add.component.scss']
 })
 export class SmeScoreRecordAddComponent implements OnInit {
-  question = false;
+  user: any = JSON.parse(localStorage.getItem('user'));
+  today: Date = new Date();
   constructor(private router: Router) { }
 
   ngOnInit() {}
 
   back() {
     this.router.navigate(['maintenance/sme-score-record']);
-  }
-
-  hideQuestion(){
-    this.question=true;
-  }
-  receiveQuestion($event)
-  {
-    this.question = $event;
   }
 }
