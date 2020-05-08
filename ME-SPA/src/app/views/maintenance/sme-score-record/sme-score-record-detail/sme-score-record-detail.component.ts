@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SmeScoreRecordDetailComponent implements OnInit {
   url: any = '../../../../../assets/img/avatars/8.jpg';
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,4 +23,9 @@ export class SmeScoreRecordDetailComponent implements OnInit {
       };
     }
   }
+
+  back() {
+    this.router.navigate(['/maintenance/sme-score-record']);
+  }
+
 }

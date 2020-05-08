@@ -71,6 +71,7 @@ export class SmeScoreRecordListComponent implements OnInit {
   }
   getListPDCs() {
     this.smeScoreRecordService.getListPDC().subscribe((res) => {
+      console.log(res);
       this.pdcList = res.map((item) => {
         return { id: item, text: item };
       });
@@ -120,6 +121,10 @@ export class SmeScoreRecordListComponent implements OnInit {
       this.loadData();
       this.spinner.hide();
     }
+  }
+
+  detail() {
+    this.router.navigate(["/maintenance/sme-score-record/detail/:recordId"]);
   }
 
   exportExcel() {
