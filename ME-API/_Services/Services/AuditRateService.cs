@@ -13,15 +13,13 @@ namespace ME_API._Services.Services {
         private readonly IAuditRateDRepository _auditRateDRepository;
         private readonly IAuditRateMRepository _auditRateMRepository;
         public AuditRateService (IAuditRateDRepository auditRateDRepository,
-            IAuditRateMRepository auditRateMRepository)
-             {
+            IAuditRateMRepository auditRateMRepository) {
             _auditRateDRepository = auditRateDRepository;
             _auditRateMRepository = auditRateMRepository;
         }
 
-        public async Task<PagedList<SMEScoreRecordDto>> GetLisSMEScoreRecord(PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true)
-        {
-             var queryAuditRateM = _auditRateMRepository.FindAll ().Where(x => x.Audit_Type1.Trim () == "SME2.0");
+        public async Task<PagedList<SMEScoreRecordDto>> GetLisSMEScoreRecord (PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true) {
+            var queryAuditRateM = _auditRateMRepository.FindAll ().Where (x => x.Audit_Type1.Trim () == "SME2.0");
             var queryAuditRateD = _auditRateDRepository.FindAll ();
             if (sixsScoreRecordParam.PDC != "") {
                 queryAuditRateM = queryAuditRateM.Where (x => x.PDC.Trim () == sixsScoreRecordParam.PDC);
@@ -46,9 +44,11 @@ namespace ME_API._Services.Services {
                     AuditType = x.Audit_Type1,
                     AuditType2 = x.Audit_Type2,
                     LineID = x.Line,
+                    UpdateBy = x.Updated_By,
+                    UpdateTime = x.Updated_Time,
                     Rating0 = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_0),
                     Rating1 = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_1),
-                    Rating2=queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_2),
+                    Rating2 = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_2),
                     RatingNa = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rate_NA) == null ? 0 : queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rate_NA),
             });
 
@@ -56,7 +56,7 @@ namespace ME_API._Services.Services {
         }
 
         public async Task<PagedList<SixsScoreRecordDto>> GetListSixsScoreRecord (PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true) {
-            var queryAuditRateM = _auditRateMRepository.FindAll ().Where(x => x.Audit_Type1.Trim () == "6S");
+            var queryAuditRateM = _auditRateMRepository.FindAll ().Where (x => x.Audit_Type1.Trim () == "6S");
             var queryAuditRateD = _auditRateDRepository.FindAll ();
             if (sixsScoreRecordParam.PDC != "") {
                 queryAuditRateM = queryAuditRateM.Where (x => x.PDC.Trim () == sixsScoreRecordParam.PDC);
@@ -81,6 +81,8 @@ namespace ME_API._Services.Services {
                     AuditType = x.Audit_Type1,
                     AuditType2 = x.Audit_Type2,
                     LineId = x.Line,
+                    UpdateBy = x.Updated_By,
+                    UpdateTime = x.Updated_Time,
                     Rating0 = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_0),
                     Rating1 = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rating_1),
                     RatingNa = queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rate_NA) == null ? 0 : queryAuditRateD.Where (y => y.Record_ID == x.Record_ID).Sum (z => z.Rate_NA),
