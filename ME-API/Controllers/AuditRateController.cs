@@ -62,7 +62,7 @@ namespace ME_API.Controllers {
             return Ok (data);
         }
 
-        [HttpGet ("ExportExcelSixs")]
+        [HttpPost ("ExportExcelSixs")]
         public async Task<ActionResult> ExportExcelSixsRecord ([FromQuery] PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam) {
             var data = await _auditRateService.GetListSixsScoreRecord (paginationParams, sixsScoreRecordParam, false);
 
@@ -85,7 +85,7 @@ namespace ME_API.Controllers {
             return File (result, "application/xlsx", "Sixs_Score_Record" + DateTime.Now.ToString ("dd_MM_yyyy_HH_mm_ss") + ".xlsx");
         }
 
-        [HttpGet ("ExportExcelSME")]
+        [HttpPost ("ExportExcelSME")]
         public async Task<ActionResult> ExportExcelSMERecord ([FromQuery] PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam) {
             var data = await _auditRateService.GetLisSMEScoreRecord (paginationParams, sixsScoreRecordParam, false);
 

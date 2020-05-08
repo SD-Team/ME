@@ -28,5 +28,8 @@ namespace ME_API.DTO {
                 return (Rating1 / NeedToDoQty * 2) + (Rating2 / NeedToDoQty); 
             }
         }
+        public string UpdateBy { get; set; }
+
+        public DateTime? UpdateTime { get; set; }
     }
 }
