@@ -32,7 +32,7 @@ export class SmeScoreRecordService {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
-    let url = this.baseUrl + 'AuditRate/sme-list';
+    let url = this.baseUrl + 'SMERecord/sme-list';
     // return this.http.post<any>(url,auditRateSearch,{params});
     return this.http.post<any>(url, auditRateSearch, { observe: 'response', params })
       .pipe(
@@ -47,8 +47,9 @@ export class SmeScoreRecordService {
       );
   }
   exportExcel(auditRateSearch?: AuditRateSearch) {
-    return this.http.post(this.baseUrl + 'AuditRate/ExportExcelSME', auditRateSearch, { responseType: 'blob' })
+    return this.http.post(this.baseUrl + 'SMERecord/ExportExcelSME', auditRateSearch, { responseType: 'blob' })
       .subscribe((result: Blob) => {
+        console.log(result);
         if (result.type !== 'application/xlsx') {
           alert(result.type);
         }
@@ -66,7 +67,7 @@ export class SmeScoreRecordService {
       });
   }
 
-  getListPDC(){
+  getListPDC() {
     return this.http.get<any>(this.baseUrl + 'AuditRecM/pdcs');
   }
   getListBuilding()
@@ -79,6 +80,10 @@ export class SmeScoreRecordService {
   }
   getAuditType2()
   {
-    return this.http.get<any>(this.baseUrl + 'AuditRate/audittype2bysme');
+    return this.http.get<any>(this.baseUrl + 'AuditType/audittype2');
+  }
+
+  getAuditType2RecordAdd() {
+    return this.http.get<any>(this.baseUrl + 'AuditType/audittype2bysme');
   }
 }

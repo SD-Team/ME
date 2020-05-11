@@ -28,31 +28,29 @@ export class SixsRecoredChooseQuesionComponent implements OnInit {
 
     },
   ];
-  constructor() {}
-  ngOnInit() {}
-  cancel() {}
-  checkedChang(item,number) {
-    this.isLoading = false;
-    this.Test.map((x) => {
-      if (x.id == item.id) {
-        if (number==1) {
-          x.NA = 1;
-          x.Rating0 = 0;
-          x.Rating1 = 0;
-          x.Remake = "";
-        } else if (number==2) {
-          x.NA = 0;
-          x.Rating0 = 1;
-          x.Rating1 = 0;
-          x.Remake = item.Remake;
-        } else {
-          x.NA = 0;
-          x.Rating0 = 0;
-          x.Rating1 = 1;
-          x.Remake = "";
-        }
-      }
-    });
-    console.log(1, this.Test);
+  constructor() { }
+  ngOnInit() { }
+  cancel() { }
+  checkedChang(item, number) {
+    if (number == 1) {
+      item.NA = 1;
+      item.Rating0 = 0;
+      item.Rating1 = 0;
+      item.Remake = "";
+    } else if (number == 2) {
+      item.NA = 0;
+      item.Rating0 = 1;
+      item.Rating1 = 0;
+      item.Remake = item.Remake;
+    } else {
+      item.NA = 0;
+      item.Rating0 = 0;
+      item.Rating1 = 1;
+      item.Remake = "";
+    }
+  }
+
+  saveAndNew() {
+console.log(this.Test);
   }
 }

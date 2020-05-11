@@ -27,32 +27,7 @@
       </div>
     </div>
   </div>
-  <!-- <div>
-    <p><b>Custom Radio Buttons 2</b></p>
-    <label class="container"
-      >N/A
-      <input type="radio" [value]="0" [(ngModel)]="text" />
-      <span class="checkmark"></span>
-    </label>
-    <label class="container">
-      N
-      <input type="radio" [value]="1" [(ngModel)]="text" />
-      <span class="checkmark"></span>
-    </label>
-    <label class="container"
-      >Y
-      <input type="radio" [value]="2" [(ngModel)]="text" />
-      <span class="checkmark"></span>
-    </label>
-    <div *ngIf="text == 0" class="row">
-      <div class="col-12">
-        <label>Remake :</label>
-      </div>
-      <div class="col-12">
-        <textarea class="remake ml-5"> </textarea>
-      </div>
-    </div>
-  </div> -->
+ 
 </div>
 <div class="ml-1">
   <button type="button" class="btn btn-add-new btn-primary">
@@ -63,7 +38,7 @@
     <i class="fa fa-ban"></i> Cancel
   </button>
 
-  <button type="button" class="btn btn-add-new btn-success">
+  <button type="button" (click)="saveAndNew()" class="btn btn-add-new btn-success">
     <i class="fa fa-check"></i> Save & New
   </button>
 

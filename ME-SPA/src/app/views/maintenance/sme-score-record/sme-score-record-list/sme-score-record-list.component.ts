@@ -31,7 +31,7 @@ export class SmeScoreRecordListComponent implements OnInit {
   lines: any[] = [];
   buildings: any[] = [];
   auditType2List: any[] = [];
-  aduditRateSme: AuditRateSme[] = [];
+  aududitRateSme: AuditRateSme[] = [];
   constructor(
     private smeScoreRecordService: SmeScoreRecordService,
     private spinner: NgxSpinnerService,
@@ -60,7 +60,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.smeScoreRecordService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
       (res: PaginatedResult<AuditRateSme[]>) => {
         console.log(res);
-        this.aduditRateSme = res.result;
+        this.aududitRateSme = res.result;
         this.pagination = res.pagination;
       },
       (error) => {
@@ -127,6 +127,7 @@ export class SmeScoreRecordListComponent implements OnInit {
   }
 
   exportExcel() {
+    debugger;
     let object = {
       pdc: this.pdc,
       building: this.building,
