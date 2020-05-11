@@ -30,7 +30,7 @@ export class ScoreRecordService {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
-    let url = this.baseUrl + 'AuditRate/sixs-list';
+    let url = this.baseUrl + 'SixsRecord/sixs-list';
     // return this.http.post<any>(url,auditRateSearch,{params});
     return this.http.post<any>(url, auditRateSearch, { observe: 'response', params })
       .pipe(
@@ -45,7 +45,7 @@ export class ScoreRecordService {
       );
   }
   exportExcel(auditRateSearch?: AuditRateSearch){
-    return this.http.post(this.baseUrl + 'AuditRate/ExportExcelSixs', auditRateSearch, { responseType: 'blob' })
+    return this.http.post(this.baseUrl + 'SixsRecord/ExportExcelSixs', auditRateSearch, { responseType: 'blob' })
       .subscribe((result: Blob) => {
         if (result.type !== 'application/xlsx') {
           alert(result.type);
