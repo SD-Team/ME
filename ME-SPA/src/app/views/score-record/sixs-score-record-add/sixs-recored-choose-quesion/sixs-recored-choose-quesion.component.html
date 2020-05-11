@@ -4,20 +4,20 @@
     <div>
       <label class="container"
         >N/A
-        <input type="radio" (click)="chkNa(item)" name="{{item.id}}" />
+        <input type="radio" (click)="checkedChang(item,1)" name="{{item.id}}" />
         <span class="checkmark" ></span>
       </label>
       <label class="container">
         N
-        <input type="radio"(click)="chkR0(item)"name="{{item.id}}" />
+        <input type="radio"(click)="checkedChang(item,2)"name="{{item.id}}" />
         <span class="checkmark"></span>
       </label>
       <label class="container"
         >Y
-        <input type="radio" (click)="chkR1(item)"name="{{item.id}}" />
+        <input type="radio" (click)="checkedChang(item,3)"name="{{item.id}}" />
         <span class="checkmark"></span>
       </label>
-      <div *ngIf="ChkRemake(item)" class="row">
+      <div *ngIf="item.Rating0==1" class="row">
         <div class="col-12">
           <label>Remake :</label>
         </div>

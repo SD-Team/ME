@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
+  currentUser: any = JSON.parse(localStorage.getItem('user'));
 
   /**
    *

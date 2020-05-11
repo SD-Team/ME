@@ -8,7 +8,7 @@ namespace ME_API._Services.Interface
     public interface IAuditRateService
     {
       
-   Task<List<ScoreRecordQuesDto>> GetListQuesScoreRecord ( string auditType2);
+   Task<List<ScoreRecordQuesDto>> GetListQuesScoreRecord ( string auditType2, string auditType1);
        
          
     }
