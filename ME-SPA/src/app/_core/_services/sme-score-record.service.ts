@@ -32,7 +32,7 @@ export class SmeScoreRecordService {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
-    let url = this.baseUrl + 'AuditRate/sme-list';
+    let url = this.baseUrl + 'SMERecord/sme-list';
     // return this.http.post<any>(url,auditRateSearch,{params});
     return this.http.post<any>(url, auditRateSearch, { observe: 'response', params })
       .pipe(
@@ -79,6 +79,10 @@ export class SmeScoreRecordService {
   }
   getAuditType2()
   {
-    return this.http.get<any>(this.baseUrl + 'AuditRate/audittype2bysme');
+    return this.http.get<any>(this.baseUrl + 'AuditType/audittype2');
+  }
+
+  getAuditType2RecordAdd() {
+    return this.http.get<any>(this.baseUrl + 'AuditType/audittype2bysme');
   }
 }
