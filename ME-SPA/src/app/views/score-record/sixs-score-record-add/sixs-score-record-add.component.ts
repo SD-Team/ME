@@ -2,19 +2,21 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { Router } from '@angular/router';
 import { MesOrgService } from '../../../_core/_services/mes-org.service';
 import { ScoreRecordService } from '../../../_core/_services/score-record.service';
+import { ScoreRecordQuestion } from '../../../_core/_models/score-record-question';
 @Component({
   selector: "app-sixs-score-record-add",
   templateUrl: "./sixs-score-record-add.component.html",
   styleUrls: ["./sixs-score-record-add.component.scss"],
 })
 export class SixsScoreRecordAddComponent implements OnInit {
+  questions: ScoreRecordQuestion[] = [];
   user: any = JSON.parse(localStorage.getItem('user'));
   today: Date = new Date();
   pdcs: string[];
   buildings:  string[];
   lineIDs: string[];
   auditType2List: string[];
-  pdc: string; building: string; lineID: string;auditType2:string;
+  pdc: string; building: string; lineID: string;auditType2:string ;
   constructor(private router:Router,
         private mesOrgService: MesOrgService,
         private scoreService:ScoreRecordService) { }
@@ -47,9 +49,53 @@ export class SixsScoreRecordAddComponent implements OnInit {
     this.scoreService.getAuditType2Score().subscribe(res => {
       this.auditType2List = res;
       this.auditType2 = this.auditType2List[0];
+      this.loadQuestion();
     });
+
   }
   back() {
     this.router.navigate(['maintenance/6s-score-record']);
+  }
+  loadQuestion() {
+
+    const auditType1 = '6S';
+    const auditType2 = this.auditType2;
+    this.scoreService.getQuestion(auditType1, auditType2).subscribe(res => {
+      this.questions = res;
+    });
+  }
+
+  checkChange(item: ScoreRecordQuestion, number) {
+     if (number === 0) {
+      item.rating_0 = 1;
+      item.rating_1 = 0;
+      item.rating_2 = 0;
+      item.rating_Na = 0;
+      item.remark = '';
+    }
+    if (number === 1) {
+      item.rating_0 = 0;
+      item.rating_1 = 1;
+      item.rating_2 = 0;
+      item.rating_Na = 0;
+      item.remark = '';
+    }
+    // if (number === 2) {
+    //   item.rating_0 = 0;
+    //   item.rating_1 = 0;
+    //   item.rating_2 = 1;
+    //   item.rating_Na = 0;
+    //   item.remark = '';
+    // }
+    if (number === 3) {
+      item.rating_0 = 0;
+      item.rating_1 = 0;
+      item.rating_2 = 0;
+      item.rating_Na = 1;
+      item.remark = '';
+    }
+  }
+  saveAndNew(){
+    console.log(this.questions);
   }
 }
