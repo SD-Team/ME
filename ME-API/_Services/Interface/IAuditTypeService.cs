@@ -12,5 +12,7 @@ namespace ME_API._Services.Interface
          Task<List<string>> GetAllAuditType2();
         Task<bool> CheckAuditTypeExists(string auditTypeId);
         Task<List<AuditTypeViewModel>> GetAuditType_1_2_Vesion();
+        Task<List<string>> GetAllAuditType2By6s();
+        Task<List<string>> GetAllAuditType2BySME();
     }
 }

@@ -62,7 +62,7 @@ namespace ME_API._Services.Services {
         }
 
         public async Task<List<SMEScoreRecordQuesDto>> GetListQuesSMEScoreRecord (string auditType2) {
-            var auditTypeID = _auditTypeMRepository.FindAll ().Where (x => x.Audit_Type2 == auditType2.Trim ()).FirstOrDefault ();
+            var auditTypeID = _auditTypeMRepository.FindAll ().Where (x => x.Audit_Type2 == auditType2).FirstOrDefault ();
             List<SMEScoreRecordQuesDto> data = new List<SMEScoreRecordQuesDto> ();
 
             if (auditTypeID != null) {

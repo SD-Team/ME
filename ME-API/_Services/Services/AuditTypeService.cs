@@ -110,5 +110,14 @@ namespace ME_API._Services.Services
            return await _repoAuditType.FindAll().GroupBy(x => x.Audit_Type2).Select(x => x.Key).ToListAsync();
 
         }
+        public async Task<List<string>> GetAllAuditType2By6s()
+        {
+            return await _repoAuditType.FindAll().Where(x => x.Audit_Type1.Trim() == "6S").GroupBy(x => x.Audit_Type2).Select(x => x.Key).ToListAsync();
+        }
+        public async Task<List<string>> GetAllAuditType2BySME()
+        {
+            return await _repoAuditType.FindAll().Where(x => x.Audit_Type1.Trim() == "SME2.0").GroupBy(x => x.Audit_Type2).Select(x => x.Key).ToListAsync();
+        }
+
     }
 }

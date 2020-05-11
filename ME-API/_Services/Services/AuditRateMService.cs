@@ -41,9 +41,13 @@ namespace ME_API._Services.Services
             throw new System.NotImplementedException();
         }
 
-        public async Task<List<string>> GetAllAuditType2()
+        public async Task<List<string>> GetAllAuditType2By6s()
         {
-            return await _auditRateMRepository.FindAll().GroupBy(x => x.Audit_Type2).Select(x => x.Key).ToListAsync();
+            return await _auditRateMRepository.FindAll().Where(x => x.Audit_Type1.Trim() == "6S").GroupBy(x => x.Audit_Type2).Select(x => x.Key).ToListAsync();
+        }
+        public async Task<List<string>> GetAllAuditType2BySME()
+        {
+            return await _auditRateMRepository.FindAll().Where(x => x.Audit_Type1.Trim() == "SME2.0").GroupBy(x => x.Audit_Type2).Select(x => x.Key).ToListAsync();
         }
 
         public async Task<List<string>> GetAllBuilding()

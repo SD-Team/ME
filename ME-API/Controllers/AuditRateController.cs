@@ -42,9 +42,14 @@ namespace ME_API.Controllers {
             return Ok (data);
         }
 
-        [HttpGet ("audittype2")]
-        public async Task<IActionResult> GetAllAuditType2 () {
-            var data = await _auditRateMService.GetAllAuditType2 ();
+        [HttpGet ("audittype2by6s")]
+        public async Task<IActionResult> GetAllAuditType2By6s () {
+            var data = await _auditRateMService.GetAllAuditType2By6s ();
+            return Ok (data);
+        }
+        [HttpGet ("audittype2bysme")]
+        public async Task<IActionResult> GetAllAuditType2BySME () {
+            var data = await _auditRateMService.GetAllAuditType2BySME ();
             return Ok (data);
         }
 

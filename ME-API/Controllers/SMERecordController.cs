@@ -49,7 +49,7 @@ namespace ME_API.Controllers {
             return File (result, "application/xlsx", "SME_Score_Record" + DateTime.Now.ToString ("dd_MM_yyyy_HH_mm_ss") + ".xlsx");
         }
 
-        [HttpGet ("quesion/{audityType}")]
+        [HttpGet ("{audityType}")]
         public async Task<ActionResult> GetListQuesSMERecord ( string audityType) {
             var data = await _sMERecordService.GetListQuesSMEScoreRecord ( audityType);
             return Ok (data);
