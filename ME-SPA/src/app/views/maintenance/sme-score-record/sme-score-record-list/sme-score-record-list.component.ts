@@ -49,7 +49,6 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.spinner.hide();
   }
   loadData() {
-
     let object = {
       pdc: this.pdc,
       building: this.building,
