@@ -54,9 +54,9 @@ namespace ME_API.Controllers {
             return Ok (data);
         }
 
-        [HttpGet ("{audityType}")]
-        public async Task<ActionResult> GetListQuesRecord (string audityType) {
-            var data = await _auditRateService.GetListQuesScoreRecord (audityType);
+        [HttpGet("GetListQuesRecord")]
+        public async Task<ActionResult> GetListQuesRecord (string auditType2, string auditType1) {
+            var data = await _auditRateService.GetListQuesScoreRecord (auditType2, auditType1);
             return Ok (data);
 
         }
