@@ -47,8 +47,9 @@ export class SmeScoreRecordService {
       );
   }
   exportExcel(auditRateSearch?: AuditRateSearch) {
-    return this.http.post(this.baseUrl + 'AuditRate/ExportExcelSME', auditRateSearch, { responseType: 'blob' })
+    return this.http.post(this.baseUrl + 'SMERecord/ExportExcelSME', auditRateSearch, { responseType: 'blob' })
       .subscribe((result: Blob) => {
+        console.log(result);
         if (result.type !== 'application/xlsx') {
           alert(result.type);
         }
@@ -66,7 +67,7 @@ export class SmeScoreRecordService {
       });
   }
 
-  getListPDC(){
+  getListPDC() {
     return this.http.get<any>(this.baseUrl + 'AuditRecM/pdcs');
   }
   getListBuilding()

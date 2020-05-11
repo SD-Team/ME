@@ -7,18 +7,51 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./sme-score-choose-quesion.component.scss']
 })
 export class SmeScoreChooseQuesionComponent implements OnInit {
-
   remake: boolean = false;
-  text:any;
-  constructor() {}
-  ngOnInit() {
-  }
-  changText(number) {
-    console.log(this.text);
+  isLoading = true;
+  Test: any[] = [
+    {
+      id: "1",
+      question: "the firts question?",
+      NA: 0,
+      Rating0: 0,
+      Rating1: 0,
+      Remake: "",
+
+    },
+    {
+      id: "2",
+      question: "the next question?",
+      NA: 0,
+      Rating0: 0,
+      Rating1: 0,
+      Remake: "",
+
+    },
+  ];
+  constructor() { }
+  ngOnInit() { }
+  cancel() { }
+  checkedChang(item, number) {
     if (number == 1) {
-      this.remake = true;
+      item.NA = 1;
+      item.Rating0 = 0;
+      item.Rating1 = 0;
+      item.Remake = "";
+    } else if (number == 2) {
+      item.NA = 0;
+      item.Rating0 = 1;
+      item.Rating1 = 0;
+      item.Remake = item.Remake;
     } else {
-      this.remake = false;
+      item.NA = 0;
+      item.Rating0 = 0;
+      item.Rating1 = 1;
+      item.Remake = "";
     }
+  }
+
+  saveAndNew() {
+console.log(this.Test);
   }
 }
