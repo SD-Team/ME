@@ -1,8 +1,9 @@
 export interface AuditRateSme {
+  recordId: string;
   auditDate:Date;
   auditType:string;
   auditType2:string;
-  lineID:string;
+  lineId:string;
   ratingNa:number;
   rating0:number;
   rating1:number;

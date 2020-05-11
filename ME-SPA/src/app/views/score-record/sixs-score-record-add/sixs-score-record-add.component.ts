@@ -1,17 +1,19 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MesOrgService } from '../../../_core/_services/mes-org.service';
 import { ScoreRecordService } from '../../../_core/_services/score-record.service';
-import { ScoreRecordQuestion } from '../../../_core/_models/score-record-question';
+import { ScoreRecordQuestion, AuditRateM, AuditRateModel } from '../../../_core/_models/score-record-question';
+import { AlertifyService } from '../../../_core/_services/alertify.service';
 @Component({
-  selector: "app-sixs-score-record-add",
-  templateUrl: "./sixs-score-record-add.component.html",
-  styleUrls: ["./sixs-score-record-add.component.scss"],
+  selector: 'app-sixs-score-record-add',
+  templateUrl: './sixs-score-record-add.component.html',
+  styleUrls: ['./sixs-score-record-add.component.scss'],
 })
 export class SixsScoreRecordAddComponent implements OnInit {
   questions: ScoreRecordQuestion[] = [];
   user: any = JSON.parse(localStorage.getItem('user'));
   today: Date = new Date();
+  recordDate: Date = new Date();
   pdcs: string[];
   buildings:  string[];
   lineIDs: string[];
@@ -19,7 +21,8 @@ export class SixsScoreRecordAddComponent implements OnInit {
   pdc: string; building: string; lineID: string;auditType2:string ;
   constructor(private router:Router,
         private mesOrgService: MesOrgService,
-        private scoreService:ScoreRecordService) { }
+        private scoreService:ScoreRecordService,
+        private alertifyService: AlertifyService) { }
 
   ngOnInit() {
     this.getAllBuilding();
@@ -94,9 +97,37 @@ export class SixsScoreRecordAddComponent implements OnInit {
      item.remark = '';
    }
  }
-  saveAndNew(){
-    console.log(this.questions);
+ save() {
+  let auditRateM = new AuditRateM();
+  auditRateM.pdc = this.pdc;
+  auditRateM.building = this.building;
+  auditRateM.line = this.lineID;
+  auditRateM.audit_Type1 = '6S';
+  auditRateM.audit_Type2 = this.auditType2;
+  auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
+
+  auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
+
+  let param = new AuditRateModel();
+  param.listAuditRateD = this.questions;
+  param.auditRateM = auditRateM;
+
+  // kiểm tra phải trả lời hết các câu hỏi mới được lưu
+  for (let index = 0; index < this.questions.length; index++) {
+    if (this.questions[index].rate_Na === undefined) {
+      this.alertifyService.error('Mời bạn trả lời tất cả các câu hỏi');
+      return;
+    }
   }
+  this.scoreService.saveScoreRecord(param).subscribe(res => {
+    if (res) {
+      this.alertifyService.success('success');
+    }
+    else {
+      this.alertifyService.error('error');
+    }
+  });
+}
   auditType2Change(){
   this.loadQuestion();
   }

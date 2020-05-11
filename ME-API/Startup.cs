@@ -90,6 +90,7 @@ namespace ME_API
             services.AddScoped<IAuditRateService, AuditRateService>();
             services.AddScoped<ISMERecordService,SMERecordService>();
             services.AddScoped<ISixsRecordService, SixsRecordService>();
+            services.AddScoped<IWaterSpiderRecordService, WaterSpiderRecordService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

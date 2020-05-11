@@ -1,42 +1,55 @@
-import { Component, OnInit } from "@angular/core";
-import { Pagination } from "../../../../_core/_models/pagination";
-import { NgxSpinnerService } from "ngx-spinner";
-import { ScoreRecordService } from "../../../../_core/_services/score-record.service";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Pagination, PaginatedResult } from '../../../../_core/_models/pagination';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ScoreRecordService } from '../../../../_core/_services/score-record.service';
+import { Router } from '@angular/router';
+import { WaterSpiderScoreRecordService } from '../../../../_core/_services/water-spider-score-record.service';
+import { AuditRateWaterSpider } from '../../../../_core/_models/audit-rate-water-spider';
+import { AlertifyService } from '../../../../_core/_services/alertify.service';
 
 @Component({
-  selector: "app-water-spider-score-record-list",
-  templateUrl: "./water-spider-score-record-list.component.html",
-  styleUrls: ["./water-spider-score-record-list.component.scss"],
+  selector: 'app-water-spider-score-record-list',
+  templateUrl: './water-spider-score-record-list.component.html',
+  styleUrls: ['./water-spider-score-record-list.component.scss'],
 })
 export class WaterSpiderScoreRecordListComponent implements OnInit {
-  pagination: Pagination;
+  pagination: Pagination = {
+    currentPage: 1,
+    itemsPerPage: 3,
+    totalItems: 1,
+    totalPages: 1,
+  };
   timeStart: string;
   timeEnd: string;
-  pdc: string = "";
-  line: string = "";
-  building: string = "";
-  auditType2: string = "";
+  fromTime: string;
+  toTime: string;
+  pdc: string = '';
+  line: string = '';
+  building: string = '';
   pdcList: any[] = [];
   lines: any[] = [];
   buildings: any[] = [];
+  auditRateWaterSpider: AuditRateWaterSpider[] = [];
   constructor(
     private scoreRecordservice: ScoreRecordService,
     private router: Router,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private waterSpiderService: WaterSpiderScoreRecordService,
+    private alertifyService: AlertifyService
+  ) { }
 
   ngOnInit() {
     this.getListPDCs();
     this.getListBuilding();
     this.getListLine();
+    this.loadData()
   }
   getListPDCs() {
     this.scoreRecordservice.getListPDC().subscribe((res) => {
       this.pdcList = res.map((item) => {
         return { id: item, text: item };
       });
-      this.pdcList.unshift({ id: "", text: "All" });
+      this.pdcList.unshift({ id: '', text: 'All' });
     });
   }
   getListBuilding() {
@@ -44,7 +57,7 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       this.buildings = res.map((item) => {
         return { id: item, text: item };
       });
-      this.buildings.unshift({ id: "", text: "All" });
+      this.buildings.unshift({ id: '', text: 'All' });
     });
   }
   getListLine() {
@@ -52,11 +65,58 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       this.lines = res.map((item) => {
         return { id: item, text: item };
       });
-      this.lines.unshift({ id: "", text: "All" });
+      this.lines.unshift({ id: '', text: 'All' });
     });
   }
-  pageChanged() {}
-  addNew() {
-    this.router.navigate(["/record/record-add/water-spider-scored-record-add"]);
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadData();
   }
+  addNew() {
+    this.router.navigate(['/record/record-add/water-spider-scored-record-add']);
+  }
+  loadData() {
+    let object = {
+      pdc: this.pdc,
+      building: this.building,
+      line: this.line,
+      fromDate: this.fromTime,
+      toDate: this.toTime,
+      auditType2: ''
+    };
+    this.waterSpiderService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
+      (res: PaginatedResult<AuditRateWaterSpider[]>) => {
+        this.auditRateWaterSpider = res.result;
+        this.pagination = res.pagination;
+      },
+      (error) => {
+        this.alertifyService.error(error);
+      }
+    );
+  }
+
+  search() {
+    if (this.timeStart === '' || this.timeEnd === '') {
+      this.alertifyService.error('Please option start and end time');
+    } else {
+      this.spinner.show();
+      this.fromTime = new Date(this.timeStart).toLocaleDateString();
+      this.toTime = new Date(this.timeEnd).toLocaleDateString();
+      this.pagination.currentPage = 1;
+      this.loadData();
+      this.spinner.hide();
+    }
+  }
+  exportExcel() {
+    let object = {
+      pdc: this.pdc,
+      building: this.building,
+      line: this.line,
+      fromDate: this.fromTime,
+      toDate: this.toTime,
+      auditType2: ''
+    };
+    this.waterSpiderService.exportExcel(object);
+  }
+
 }

@@ -2,6 +2,7 @@ using System;
 
 namespace ME_API.DTO {
     public class SixsScoreRecordDto {
+        public string RecordId { get; set; }
         public DateTime AuditDate { get; set; }
         public string AuditType { get; set; }
         public string AuditType2 { get; set; }

@@ -2,11 +2,12 @@ using System;
 
 namespace ME_API.DTO {
     public class SMEScoreRecordDto {
+        public string RecordId { get; set; }
         public DateTime AuditDate { get; set; }
         public string AuditType { get; set; }
         public string AuditType2 { get; set; }
 
-        public string LineID { get; set; }
+        public string LineId { get; set; }
         public int? RatingNa { get; set; }
         public int Rating0 { get; set; }
         public int Rating1 { get; set; }

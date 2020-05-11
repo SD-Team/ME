@@ -27,6 +27,7 @@
               isAnimated: true,
               dateInputFormat: 'YYYY/MM/DD'
             }"
+            [(ngModel)]="recordDate"
           />
           <span class="input-group-text">
             <span class="fa fa-calendar"></span>
@@ -121,11 +122,11 @@
       <i class="fa fa-ban"></i> Cancel
     </button>
 
-    <button type="button" class="btn btn-add-new btn-success"(click)="saveAndNew()">
+    <button type="button" class="btn btn-add-new btn-success">
       <i class="fa fa-check"></i> Save & New
     </button>
 
-    <button type="button" class="btn btn-add-new btn-success">
+    <button type="button" class="btn btn-add-new btn-success"(click)="save()">
       <i class="fa fa-check"></i> Save
     </button>
 

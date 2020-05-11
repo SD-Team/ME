@@ -76,7 +76,7 @@
   </div>
   <div class="question">
     <div *ngFor="let item of questions; let i = index">
-      <p><b>{{item.auditItem}}. {{item.quesion}}</b></p>
+      <p><b>{{item.audit_Item_ID}}. {{item.quesion}}</b></p>
       <label class="container"
         >N/A
         <input type="radio" name="{{i}}" (click)="checkChange(item, 3)"/>
