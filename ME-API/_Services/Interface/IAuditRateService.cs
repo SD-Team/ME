@@ -10,6 +10,6 @@ namespace ME_API._Services.Interface
       
    Task<List<ScoreRecordQuesDto>> GetListQuesScoreRecord ( string auditType2, string auditType1);
        
-         
+    Task SaveScopeRecord(ScoreRecordAnsDto param);
     }
 }

@@ -52,18 +52,20 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
     this.router.navigate(['maintenance/water-spider-score-record']);
   }
   save() {
-    let auditRateM: AuditRateM;
+    debugger
+    let auditRateM = new AuditRateM();
     auditRateM.pdc = this.pdc;
     auditRateM.building = this.building;
     auditRateM.line = this.lineID;
-    auditRateM.audit_Type1 = '精實系統/WS';
-    auditRateM.audit_Type2 = '';
-    auditRateM.audit_Type_Id = this.questions[0].auditTypeID;
-    auditRateM.record_Date = this.recordDate.toLocaleDateString();
+    // auditRateM.audit_Type1 = '精實系統/WS';
+    // auditRateM.audit_Type2 = '';
+    // auditRateM.audit_Type_Id = this.questions[0].auditTypeID;
+    // auditRateM.record_Date = this.recordDate.toLocaleDateString();
 
-    let param: AuditRateModel;
-    param.auditRateD = this.questions;
+    let param = new AuditRateModel();
+    param.listAuditRateD = this.questions;
     param.auditRateM = auditRateM;
+    debugger;
     this.scoreService.saveScoreRecord(param).subscribe(res => {
       if (res) {
         this.alertifyService.success('success');

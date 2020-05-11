@@ -9,7 +9,7 @@ export class ScoreRecordQuestion {
     remark: string;
 }
 
-export interface AuditRateM {
+export class AuditRateM {
     record_Id: string;
     audit_Type_Id: string;
     pdc: string;
@@ -24,7 +24,7 @@ export interface AuditRateM {
     record_Date: string;
 }
 
-export interface AuditRateModel {
+export class AuditRateModel {
     auditRateM: AuditRateM;
-    auditRateD: ScoreRecordQuestion[];
+    listAuditRateD: ScoreRecordQuestion[];
 }
