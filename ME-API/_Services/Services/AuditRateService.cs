@@ -49,8 +49,8 @@ namespace ME_API._Services.Services
 
                 data = await queryAudiiTypeD.Select(x => new ScoreRecordQuesDto
                 {
-                    AuditTypeID = x.Audit_Type_ID,
-                    AuditItem = x.Audit_Item_ID,
+                    Audit_Type_ID = x.Audit_Type_ID,
+                    Audit_Item_ID = x.Audit_Item_ID,
                     Quesion = x.Audit_Item_LL
                 }).ToListAsync();
 

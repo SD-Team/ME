@@ -57,9 +57,10 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
     auditRateM.pdc = this.pdc;
     auditRateM.building = this.building;
     auditRateM.line = this.lineID;
-    // auditRateM.audit_Type1 = '精實系統/WS';
-    // auditRateM.audit_Type2 = '';
-    // auditRateM.audit_Type_Id = this.questions[0].auditTypeID;
+    auditRateM.audit_Type1 = '精實系統/WS';
+    auditRateM.audit_Type2 = '';
+    auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
+    debugger
     // auditRateM.record_Date = this.recordDate.toLocaleDateString();
 
     let param = new AuditRateModel();
@@ -89,28 +90,28 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
       item.rating_0 = 1;
       item.rating_1 = 0;
       item.rating_2 = 0;
-      item.rating_Na = 0;
+      item.rate_Na = 0;
       item.remark = '';
     }
     if (number === 1) {
       item.rating_0 = 0;
       item.rating_1 = 1;
       item.rating_2 = 0;
-      item.rating_Na = 0;
+      item.rate_Na = 0;
       item.remark = '';
     }
     if (number === 2) {
       item.rating_0 = 0;
       item.rating_1 = 0;
       item.rating_2 = 1;
-      item.rating_Na = 0;
+      item.rate_Na = 0;
       item.remark = '';
     }
     if (number === 3) {
       item.rating_0 = 0;
       item.rating_1 = 0;
       item.rating_2 = 0;
-      item.rating_Na = 1;
+      item.rate_Na = 1;
       item.remark = '';
     }
   }

@@ -1,17 +1,17 @@
 export class ScoreRecordQuestion {
-    auditTypeID: string;
-    auditItem: string;
+    audit_Type_ID: string;
+    audit_Item_ID: string;
     quesion: string;
     rating_0: number = 0;
-    rating_1: number = 1;
+    rating_1: number = 0;
     rating_2: number = 0;
-    rating_Na: number = 0;
+    rate_Na: number = 0;
     remark: string;
 }
 
 export class AuditRateM {
-    record_Id: string;
-    audit_Type_Id: string;
+    record_ID: string;
+    audit_Type_ID: string;
     pdc: string;
     building: string;
     line: string;
