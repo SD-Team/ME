@@ -6,6 +6,7 @@ import { PaginatedResult } from '../_models/pagination';
 import { AuditRate6S } from '../_models/audit-rate-6s';
 import { map } from 'rxjs/operators';
 import { AuditRateSearch } from '../_models/audit-rate-search';
+import { ScoreRecordQuestion, AuditRateModel } from '../_models/score-record-question';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -81,5 +82,16 @@ export class ScoreRecordService {
   getAuditType2Score()
   {
     return this.http.get<any>(this.baseUrl + 'AuditType/audittype2by6s', {});
+  }
+
+  getQuestion(auditType1: string, auditType2: string) {
+    return this.http.get<ScoreRecordQuestion[]>(this.baseUrl + 'AuditRate/GetListQuesRecord', {params : {
+      auditType1: auditType1,
+      auditType2: auditType2
+    }});
+  }
+
+  saveScoreRecord(param: AuditRateModel) {
+    return this.http.post(this.baseUrl + 'AuditRate/SaveScordRecord', param);
   }
 }
