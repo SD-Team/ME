@@ -7,7 +7,6 @@ namespace ME_API._Services.Interface {
     public interface ISMERecordService {
         Task<PagedList<SMEScoreRecordDto>> GetLisSMEScoreRecord (PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam, bool isPaging = true);
 
-        Task<List<SMEScoreRecordQuesDto>> GetListQuesSMEScoreRecord ( string auditType2);
 
     }
 }

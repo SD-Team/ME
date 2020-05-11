@@ -1,31 +1,33 @@
 <div class="question">
-  <div>
-    <p><b>Custom Radio Buttons</b></p>
-    <label class="container"
-      >N/A
-      <input type="radio" [value]="0" [(ngModel)]="text" />
-      <span class="checkmark"></span>
-    </label>
-    <label class="container">
-      N
-      <input type="radio" [value]="1" [(ngModel)]="text" />
-      <span class="checkmark"></span>
-    </label>
-    <label class="container"
-      >Y
-      <input type="radio" [value]="2" [(ngModel)]="text" />
-      <span class="checkmark"></span>
-    </label>
-    <div *ngIf="text == '0'" class="row">
-      <div class="col-12">
-        <label>Remake :</label>
-      </div>
-      <div class="col-12">
-        <textarea class="remake ml-5"> </textarea>
+  <div *ngFor="let item of Test">
+    <p><b>{{item.question}}</b></p>
+    <div>
+      <label class="container"
+        >N/A
+        <input type="radio" (click)="chkNa(item)" name="{{item.id}}" />
+        <span class="checkmark" ></span>
+      </label>
+      <label class="container">
+        N
+        <input type="radio"(click)="chkR0(item)"name="{{item.id}}" />
+        <span class="checkmark"></span>
+      </label>
+      <label class="container"
+        >Y
+        <input type="radio" (click)="chkR1(item)"name="{{item.id}}" />
+        <span class="checkmark"></span>
+      </label>
+      <div *ngIf="ChkRemake(item)" class="row">
+        <div class="col-12">
+          <label>Remake :</label>
+        </div>
+        <div class="col-12">
+          <textarea class="remake ml-5" [(ngModel)]="item.Remake"> </textarea>
+        </div>
       </div>
     </div>
   </div>
-  <div>
+  <!-- <div>
     <p><b>Custom Radio Buttons 2</b></p>
     <label class="container"
       >N/A
@@ -50,7 +52,7 @@
         <textarea class="remake ml-5"> </textarea>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 <div class="ml-1">
   <button type="button" class="btn btn-add-new btn-primary">

@@ -47,45 +47,19 @@ namespace ME_API.Controllers {
             var data = await _auditRateMService.GetAllAuditType2By6s ();
             return Ok (data);
         }
+
         [HttpGet ("audittype2bysme")]
         public async Task<IActionResult> GetAllAuditType2BySME () {
             var data = await _auditRateMService.GetAllAuditType2BySME ();
             return Ok (data);
         }
 
-        [HttpPost ("sixs-list")]
-        public async Task<IActionResult> GetListSixsScoreRecord ([FromQuery] PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam) {
-            var data = await _auditRateService.GetListSixsScoreRecord (paginationParams, sixsScoreRecordParam);
-            Response.AddPagination (data.CurrentPage, data.PageSize, data.TotalCount, data.TotalPages);
+        [HttpGet ("{audityType}")]
+        public async Task<ActionResult> GetListQuesRecord (string audityType) {
+            var data = await _auditRateService.GetListQuesScoreRecord (audityType);
             return Ok (data);
+
         }
-
-      
-
-        [HttpPost ("ExportExcelSixs")]
-        public async Task<ActionResult> ExportExcelSixsRecord ([FromQuery] PaginationParams paginationParams, ScoreRecordParam sixsScoreRecordParam) {
-            var data = await _auditRateService.GetListSixsScoreRecord (paginationParams, sixsScoreRecordParam, false);
-
-            var path = Path.Combine (_webHostEnvironment.ContentRootPath, "Resources\\Template\\Sixs_Score_Record_Template.xlsx");
-            WorkbookDesigner designer = new WorkbookDesigner ();
-            designer.Workbook = new Workbook (path);
-
-            Worksheet ws = designer.Workbook.Worksheets[0];
-
-            designer.SetDataSource ("result", data);
-            designer.Process ();
-
-            MemoryStream stream = new MemoryStream ();
-            designer.Workbook.Save (stream, SaveFormat.Xlsx);
-
-            // designer.Workbook.Save (path + "Test.xlsx", SaveFormat.Xlsx);
-
-            byte[] result = stream.ToArray ();
-
-            return File (result, "application/xlsx", "Sixs_Score_Record" + DateTime.Now.ToString ("dd_MM_yyyy_HH_mm_ss") + ".xlsx");
-        }
-
-       
 
     }
 }

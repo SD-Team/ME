@@ -61,23 +61,5 @@ namespace ME_API._Services.Services {
             return await PagedList<SMEScoreRecordDto>.CreateAsync (data, paginationParams.PageNumber, paginationParams.PageSize, isPaging);
         }
 
-        public async Task<List<SMEScoreRecordQuesDto>> GetListQuesSMEScoreRecord (string auditType2) {
-            var auditTypeID = _auditTypeMRepository.FindAll ().Where (x => x.Audit_Type2 == auditType2).FirstOrDefault ();
-            List<SMEScoreRecordQuesDto> data = new List<SMEScoreRecordQuesDto> ();
-
-            if (auditTypeID != null) {
-
-                var queryAudiiTypeD = _auditTypeDRepository.FindAll ().Where (x => x.Audit_Type_ID.Trim () == auditTypeID.Audit_Type_ID.Trim ());
-
-                data = await queryAudiiTypeD.Select (x => new SMEScoreRecordQuesDto {
-                    AuditTypeID = x.Audit_Type_ID,
-                    AuditItem = x.Audit_Item_ID,
-                    Quesion = x.Audit_Item_LL
-                }).ToListAsync ();
-
-            }
-            return data;
-
-        }
     }
 }
