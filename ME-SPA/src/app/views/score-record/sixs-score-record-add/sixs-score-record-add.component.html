@@ -63,7 +63,8 @@
         [(ngModel)]="auditType2"
         name="auditType2"
         id="auditType2"
-        class="select-list form-control">
+        class="select-list form-control"
+        (ngModelChange) ="auditType2Change()">
         <option
           *ngFor="let item of auditType2List"
           value="{{ item }}"
@@ -84,21 +85,21 @@
     </div>
   </div>
   <div class="question">
-    <div *ngFor="let item of questions">
-      <p><b>{{item.auditItem}}. {{item.quesion}}</b></p>
+    <div *ngFor="let item of questions; let i = index">
+      <p><b>{{item.audit_Item_ID}}. {{item.quesion}}</b></p>
       <label class="container"
         >N/A
-        <input type="radio" name="{{item.auditItem+item.auditTypeID}}" (click)="checkChange(item, 3)"/>
+        <input type="radio" name="{{i}}" (click)="checkChange(item, 3)"/>
         <span class="checkmark"></span>
       </label>
       <label class="container">
         N
-        <input type="radio" name="{{item.auditItem+item.auditTypeID}}" (click)="checkChange(item, 0)"  />
+        <input type="radio" name="{{i}}" (click)="checkChange(item, 0)"  />
         <span class="checkmark"></span>
       </label>
       <label class="container"
         >Y
-        <input type="radio" checked name="{{item.auditItem+item.auditTypeID}}" (click)="checkChange(item, 1)"/>
+        <input type="radio" name="{{i}}" (click)="checkChange(item, 1)"/>
         <span class="checkmark"></span>
       </label>
       <div *ngIf="item.rating_0 == 1" class="row">
@@ -111,7 +112,7 @@
       </div>
     </div>
   </div>
-  <div class="ml-1">
+  <div class="ml-1 mt-2">
     <button type="button" class="btn btn-add-new btn-primary">
       <i class="fa fa-envelope"></i><span style="margin-left: 2px;"> E-mail</span>
     </button>

@@ -57,7 +57,6 @@ export class SixsScoreRecordAddComponent implements OnInit {
     this.router.navigate(['maintenance/6s-score-record']);
   }
   loadQuestion() {
-
     const auditType1 = '6S';
     const auditType2 = this.auditType2;
     this.scoreService.getQuestion(auditType1, auditType2).subscribe(res => {
@@ -66,36 +65,39 @@ export class SixsScoreRecordAddComponent implements OnInit {
   }
 
   checkChange(item: ScoreRecordQuestion, number) {
-     if (number === 0) {
-      item.rating_0 = 1;
-      item.rating_1 = 0;
-      item.rating_2 = 0;
-      item.rating_Na = 0;
-      item.remark = '';
-    }
-    if (number === 1) {
-      item.rating_0 = 0;
-      item.rating_1 = 1;
-      item.rating_2 = 0;
-      item.rating_Na = 0;
-      item.remark = '';
-    }
-    // if (number === 2) {
-    //   item.rating_0 = 0;
-    //   item.rating_1 = 0;
-    //   item.rating_2 = 1;
-    //   item.rating_Na = 0;
-    //   item.remark = '';
-    // }
-    if (number === 3) {
-      item.rating_0 = 0;
-      item.rating_1 = 0;
-      item.rating_2 = 0;
-      item.rating_Na = 1;
-      item.remark = '';
-    }
-  }
+    if (number === 0) {
+     item.rating_0 = 1;
+     item.rating_1 = 0;
+     item.rating_2 = 0;
+     item.rate_Na = 0;
+     item.remark = '';
+   }
+   if (number === 1) {
+     item.rating_0 = 0;
+     item.rating_1 = 1;
+     item.rating_2 = 0;
+     item.rate_Na = 0;
+     item.remark = '';
+   }
+   if (number === 2) {
+     item.rating_0 = 0;
+     item.rating_1 = 0;
+     item.rating_2 = 1;
+     item.rate_Na = 0;
+     item.remark = '';
+   }
+   if (number === 3) {
+     item.rating_0 = 0;
+     item.rating_1 = 0;
+     item.rating_2 = 0;
+     item.rate_Na = 1;
+     item.remark = '';
+   }
+ }
   saveAndNew(){
     console.log(this.questions);
+  }
+  auditType2Change(){
+  this.loadQuestion();
   }
 }
