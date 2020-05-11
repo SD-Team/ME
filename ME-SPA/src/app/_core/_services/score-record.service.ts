@@ -76,6 +76,10 @@ export class ScoreRecordService {
   }
   getAuditType2()
   {
-    return this.http.get<any>(this.baseUrl + 'AuditRate/audittype2', {});
+    return this.http.get<any>(this.baseUrl + 'AuditRate/audittype2by6s', {});
+  }
+  getAuditType2Score()
+  {
+    return this.http.get<any>(this.baseUrl + 'AuditType/audittype2by6s', {});
   }
 }
