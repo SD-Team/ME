@@ -57,5 +57,10 @@ namespace ME_API._Services.Services
             }
             return data;
         }
+
+        public Task SaveScopeRecord(ScoreRecordAnsDto param)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

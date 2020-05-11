@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Aspose.Cells;
 using ME_API._Services.Interface;
+using ME_API.DTO;
 using ME_API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -54,11 +55,17 @@ namespace ME_API.Controllers {
             return Ok (data);
         }
 
-        [HttpGet("GetListQuesRecord")]
+        [HttpGet ("GetListQuesRecord")]
         public async Task<ActionResult> GetListQuesRecord (string auditType2, string auditType1) {
             var data = await _auditRateService.GetListQuesScoreRecord (auditType2, auditType1);
             return Ok (data);
 
+        }
+
+        [HttpPost ("save")]
+        public async Task<ActionResult> SaveScopeRecordRate (ScoreRecordAnsDto param) {
+            
+            return Ok ();
         }
 
     }
