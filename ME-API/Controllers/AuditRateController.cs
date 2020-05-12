@@ -55,7 +55,7 @@ namespace ME_API.Controllers {
             return Ok (data);
         }
 
-        [HttpGet ("GetListQuesRecord")]
+        [HttpGet ("getlistquesrecord")]
         public async Task<ActionResult> GetListQuesRecord (string auditType2, string auditType1) {
             var data = await _auditRateService.GetListQuesScoreRecord (auditType2, auditType1);
             return Ok (data);
@@ -64,8 +64,10 @@ namespace ME_API.Controllers {
 
         [HttpPost ("save")]
         public async Task<ActionResult> SaveScopeRecordRate (ScoreRecordAnsDto param) {
-            var test = await _auditRateService.SaveScopeRecord(param);
-            return Ok ();
+            if (await _auditRateService.SaveScopeRecord (param)) {
+                return NoContent ();
+            };
+            throw new Exception ("Error ");
         }
 
     }

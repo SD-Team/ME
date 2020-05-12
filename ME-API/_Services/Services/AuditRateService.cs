@@ -54,6 +54,7 @@ namespace ME_API._Services.Services {
             return data;
         }
 
+        //Get record ID by truc cu to
         public async Task<string> GetRecordIdRate () {
             string record_Id = "RA" + DateTime.Now.Year.ToString ().Substring (2) + (DateTime.Now.Month < 10 ? ("0" + DateTime.Now.Month) : DateTime.Now.Month.ToString ());
             var item = await _auditRateMRepository.FindAll (x => x.Record_ID.Contains (record_Id)).OrderByDescending (x => x.Record_ID).FirstOrDefaultAsync ();
@@ -69,24 +70,34 @@ namespace ME_API._Services.Services {
 
         public async Task<bool> SaveScopeRecord (ScoreRecordAnsDto param) {
             string record_Id = await GetRecordIdRate ();
-            var auditRateM = _mapper.Map<MES_Audit_Rate_M> (param.auditRateM);
-            auditRateM.Record_ID=record_Id;
 
+            param.auditRateM.Record_ID = record_Id;
+            param.auditRateM.ME_PIC = "HCE";
+
+            //Set value record and updateBy  all object in list  
             var listAuditRateDModel = param.listAuditRateD.Select (x => {
                 x.Record_ID = record_Id;
+                x.Updated_By = "0";
                 return x;
             }).ToList ();
+
+            //Mapper
+            var listAuditRateD = _mapper.Map<List<AuditRateDDto>, List<MES_Audit_Rate_D>> (listAuditRateDModel);
+            var auditRateM = _mapper.Map<MES_Audit_Rate_M> (param.auditRateM);
+
+            //Add DB
+            _auditRateMRepository.Add (auditRateM);
+            _auditRateDRepository.AddMultiple (listAuditRateD);
+
             try {
+                //Save
+                await _auditRateMRepository.SaveAll ();
+                return await _auditRateDRepository.SaveAll ();
 
-            } catch (System.Exception ex) {
+            } catch {
 
-                throw ex;
+                return false;
             }
-
-            ////Save
-            // _auditRateMRepository.Add (auditRateM);
-            // await _auditRateMRepository.SaveAll ();
-            return true;
         }
 
     }
