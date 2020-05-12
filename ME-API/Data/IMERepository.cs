@@ -29,5 +29,7 @@ namespace ME_API.Data
         IQueryable<T> GetAll();
 
         Task<bool> SaveAll();
+
+        void AddMultiple(List<T> entities);
     }
 }
