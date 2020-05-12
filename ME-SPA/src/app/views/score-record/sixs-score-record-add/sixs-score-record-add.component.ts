@@ -131,4 +131,7 @@ export class SixsScoreRecordAddComponent implements OnInit {
   auditType2Change(){
   this.loadQuestion();
   }
+  cancel(){
+    this.loadQuestion();
+  }
 }
