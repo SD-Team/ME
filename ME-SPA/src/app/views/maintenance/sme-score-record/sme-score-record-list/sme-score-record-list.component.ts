@@ -109,6 +109,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.router.navigate(["/record/record-add/sms-scored-record-add"]);
   }
   search() {
+    debugger;
     if (this.timeStart == "" || this.timeEnd == "") {
       this.alertify.error("Please option start and end time");
     } else {

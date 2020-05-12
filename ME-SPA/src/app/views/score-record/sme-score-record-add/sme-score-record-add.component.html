@@ -61,15 +61,15 @@
       <div class="col-6 col-md-2">
         <label class="badge badge-warning">Audit Type 2</label>
         <select
-        [(ngModel)]="auditType2"
+        [(ngModel)]="selectType2"
         name="auditType2"
         id="auditType2"
         class="select-list form-control"
-        (ngModelChange) ="auditType2Change()">
+        (ngModelChange)="auditType2Change()">
         <option
-          *ngFor="let item of auditType2List"
-          value="{{ item }}"
-          >{{ item }}
+          *ngFor="let item of selectType2s"
+          value="{{ item.id }}">
+          {{ item.text }}
         </option>
       </select>
       </div>

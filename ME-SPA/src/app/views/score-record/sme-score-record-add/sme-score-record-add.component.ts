@@ -21,8 +21,9 @@ export class SmeScoreRecordAddComponent implements OnInit {
   pdcs: string[];
   buildings:  string[];
   lineIDs: string[];
-  auditType2List: string[];
-  pdc: string; building: string; lineID: string;auditType2:string ;
+  selectType2s: any[] = [];
+  selectType2: string = "";
+  pdc: string; building: string; lineID: string;
   constructor(private router: Router,
         private mesOrgService: MesOrgService,
         private smeScoreRecordService: SmeScoreRecordService,
@@ -52,20 +53,22 @@ export class SmeScoreRecordAddComponent implements OnInit {
       this.lineID = this.lineIDs[0];
     });
   }
-  getAllType2() {
-    this.smeScoreRecordService.getAuditType2Score().subscribe(res => {
-      this.auditType2List = res;
-      this.auditType2 = this.auditType2List[0];
-      this.loadQuestion();
-    });
+
+    getAllType2() {
+      this.smeScoreRecordService.getAuditType2Score().subscribe(res => {
+        this.selectType2s = res.map((item) => {
+          console.log(res);
+          return { id: item, text: item };
+        });
+        this.selectType2s.unshift({ id: "", text: "Select AuditType2" });
+        this.loadQuestion();
+      });
 
   }
   loadQuestion() {
-    debugger;
     const auditType1 = 'SME2.0';
-    const auditType2 = this.auditType2;
+    const auditType2 = this.selectType2;
     this.smeScoreRecordService.getQuestion(auditType1, auditType2).subscribe(res => {
-      console.log(res);
       this.questions = res;
     }); }
 
@@ -105,10 +108,10 @@ export class SmeScoreRecordAddComponent implements OnInit {
   auditRateM.building = this.building;
   auditRateM.line = this.lineID;
   auditRateM.audit_Type1 = 'SME2.0';
-  auditRateM.audit_Type2 = this.auditType2;
+  auditRateM.audit_Type2 = '';
   auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
-
   auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
+  auditRateM.updated_By = this.user.user_Name;
 
   let param = new AuditRateModel();
   param.listAuditRateD = this.questions;
@@ -121,17 +124,14 @@ export class SmeScoreRecordAddComponent implements OnInit {
       return;
     }
   }
-  this.smeScoreRecordService.saveScoreRecord(param).subscribe(res => {
-    if (res) {
+  this.smeScoreRecordService.saveScoreRecord(param).subscribe(() => {
       this.alertifyService.success('success');
-    }
-    else {
-      this.alertifyService.error('error');
-    }
+  }, (error) => {
+    this.alertifyService.error(error);
   });
 }
-  auditType2Change(){
-  this.loadQuestion();
+  auditType2Change() {
+    this.loadQuestion();
   }
 
   cancel() {

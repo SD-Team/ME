@@ -38,6 +38,7 @@ export class SmeScoreRecordService {
     return this.http.post<any>(url, auditRateSearch, { observe: 'response', params })
       .pipe(
         map(response => {
+          debugger;
           console.log(response);
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
@@ -96,6 +97,7 @@ export class SmeScoreRecordService {
   }
 
   saveScoreRecord(param: AuditRateModel) {
+    debugger;
     return this.http.post(this.baseUrl + 'AuditRate/save', param);
   }
 }
