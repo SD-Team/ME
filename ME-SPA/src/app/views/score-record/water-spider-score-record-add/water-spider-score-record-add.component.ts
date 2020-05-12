@@ -81,6 +81,7 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
         return;
       }
     }
+    debugger;
     this.scoreService.saveScoreRecord(param).subscribe((res) => {
       if (res) {
         this.alertifyService.success('success');

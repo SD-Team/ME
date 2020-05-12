@@ -92,7 +92,7 @@ export class ScoreRecordService {
   }
 
   saveScoreRecord(param: AuditRateModel) {
-    debugger
+    debugger;
     return this.http.post(this.baseUrl + 'AuditRate/save', param);
   }
 }

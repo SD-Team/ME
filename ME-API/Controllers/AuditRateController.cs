@@ -64,7 +64,7 @@ namespace ME_API.Controllers {
 
         [HttpPost ("save")]
         public async Task<ActionResult> SaveScopeRecordRate (ScoreRecordAnsDto param) {
-            
+            var test = await _auditRateService.SaveScopeRecord(param);
             return Ok ();
         }
 
