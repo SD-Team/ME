@@ -17,8 +17,8 @@ export class SixsScoreRecordAddComponent implements OnInit {
   pdcs: string[];
   buildings:  string[];
   lineIDs: string[];
-  auditType2List: string[];
-  pdc: string; building: string; lineID: string;auditType2:string ;
+  auditType2List: any[]=[];
+  pdc: string; building: string; lineID: string;auditType2:string='';
   constructor(private router:Router,
         private mesOrgService: MesOrgService,
         private scoreService:ScoreRecordService,
@@ -50,9 +50,10 @@ export class SixsScoreRecordAddComponent implements OnInit {
   }
   getAllType2() {
     this.scoreService.getAuditType2Score().subscribe(res => {
-      this.auditType2List = res;
-      this.auditType2 = this.auditType2List[0];
-      this.loadQuestion();
+      this.auditType2List =  res.map((item) => {
+        return { id: item, text: item };
+      });
+      this.auditType2List.unshift({ id: "", text: "Select auditType2" });
     });
 
   }
@@ -98,35 +99,77 @@ export class SixsScoreRecordAddComponent implements OnInit {
    }
  }
  save() {
-  let auditRateM = new AuditRateM();
-  auditRateM.pdc = this.pdc;
-  auditRateM.building = this.building;
-  auditRateM.line = this.lineID;
-  auditRateM.audit_Type1 = '6S';
-  auditRateM.audit_Type2 = this.auditType2;
-  auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
+   if(this.auditType2=="")
+   {
+    this.alertifyService.error("Please option auditType2");
+   }
+   else{
+    let auditRateM = new AuditRateM();
+    auditRateM.pdc = this.pdc;
+    auditRateM.building = this.building;
+    auditRateM.line = this.lineID;
+    auditRateM.audit_Type1 = '6S';
+    auditRateM.audit_Type2 = this.auditType2;
+    auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
+    auditRateM.updated_By = this.user.user_Name;
 
-  auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
+    auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
 
-  let param = new AuditRateModel();
-  param.listAuditRateD = this.questions;
-  param.auditRateM = auditRateM;
+    let param = new AuditRateModel();
+    param.listAuditRateD = this.questions;
+    param.auditRateM = auditRateM;
 
-  // kiểm tra phải trả lời hết các câu hỏi mới được lưu
-  for (let index = 0; index < this.questions.length; index++) {
-    if (this.questions[index].rate_Na === undefined) {
-      this.alertifyService.error('Mời bạn trả lời tất cả các câu hỏi');
-      return;
+    // kiểm tra phải trả lời hết các câu hỏi mới được lưu
+    for (let index = 0; index < this.questions.length; index++) {
+      if (this.questions[index].rate_Na === undefined) {
+        this.alertifyService.error('Mời bạn trả lời tất cả các câu hỏi');
+        return;
+      }
     }
+    this.scoreService.saveScoreRecord(param).subscribe(() => {
+        this.alertifyService.success('success');
+        this.router.navigate(['maintenance/6s-score-record']);
+    }, (error) => {
+      this.alertifyService.error(error);
+    });
+   }
+}
+saveAndNew(){
+  if(this.auditType2=="")
+  {
+   this.alertifyService.error("Please option auditType2");
   }
-  this.scoreService.saveScoreRecord(param).subscribe(res => {
-    if (res) {
-      this.alertifyService.success('success');
-    }
-    else {
-      this.alertifyService.error('error');
-    }
-  });
+  else{
+   let auditRateM = new AuditRateM();
+   auditRateM.pdc = this.pdc;
+   auditRateM.building = this.building;
+   auditRateM.line = this.lineID;
+   auditRateM.audit_Type1 = '6S';
+   auditRateM.audit_Type2 = this.auditType2;
+   auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
+   auditRateM.updated_By = this.user.user_Name;
+
+   auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
+
+   let param = new AuditRateModel();
+   param.listAuditRateD = this.questions;
+   param.auditRateM = auditRateM;
+
+   // kiểm tra phải trả lời hết các câu hỏi mới được lưu
+   for (let index = 0; index < this.questions.length; index++) {
+     if (this.questions[index].rate_Na === undefined) {
+       this.alertifyService.error('Mời bạn trả lời tất cả các câu hỏi');
+       return;
+     }
+   }
+   this.scoreService.saveScoreRecord(param).subscribe(() => {
+    this.alertifyService.success('success');
+      this.questions =[];
+      this.auditType2="";
+   }, (error) => {
+     this.alertifyService.error(error);
+   });
+  }
 }
   auditType2Change(){
   this.loadQuestion();

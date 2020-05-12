@@ -48,6 +48,7 @@ export class SixsScoreRecordListComponent implements OnInit {
     this.spinner.hide();
   }
   loadData() {
+    this.spinner.show();
     let object = {
       pdc: this.pdc,
       building: this.building,
@@ -65,6 +66,7 @@ export class SixsScoreRecordListComponent implements OnInit {
         this.alertify.error(error);
       }
     );
+    this.spinner.hide();
   }
   getListPDCs() {
     this.scoreRecordService.getListPDC().subscribe((res) => {
@@ -99,8 +101,11 @@ export class SixsScoreRecordListComponent implements OnInit {
     });
   }
   pageChanged(event: any): void {
+
     this.pagination.currentPage = event.page;
-    this.loadData();
+
+   this.loadData();
+
   }
   addNew() {
     this.router.navigate(["/record/record-add/6s-scored-record-add"]);
