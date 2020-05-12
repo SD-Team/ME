@@ -106,7 +106,7 @@
                   <th>{{item.loss}}</th>
                   <th>{{item.score}}</th>
                   <th>{{item.total}}</th>
-                  <th>{{item.achieving}}</th>
+                  <th>{{item.achieving * 100 | number : '1.2-2'}} %</th>
                   <th>
                     <button type="button" class="btn btn-primary btn-sm mr-2">
                       <i class="fa fa-edit fa-lg"></i>Detail

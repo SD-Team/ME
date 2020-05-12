@@ -69,6 +69,7 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
     auditRateM.audit_Type2 = '';
     auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
     auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
+    auditRateM.updated_By = this.user.user_Name;
 
     let param = new AuditRateModel();
     param.listAuditRateD = this.questions;

@@ -19,10 +19,10 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
     totalItems: 1,
     totalPages: 1,
   };
-  timeStart: string;
-  timeEnd: string;
-  fromTime: string;
-  toTime: string;
+  timeStart: string = '';
+  timeEnd: string = '';
+  fromTime: string = '';
+  toTime: string = '';
   pdc: string = '';
   line: string = '';
   building: string = '';
@@ -86,6 +86,7 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
     };
     this.waterSpiderService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
       (res: PaginatedResult<AuditRateWaterSpider[]>) => {
+        debugger
         this.auditRateWaterSpider = res.result;
         this.pagination = res.pagination;
       },

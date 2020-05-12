@@ -13,7 +13,7 @@ namespace ME_API.DTO
         public int Total { get; set; } = 100;
         public decimal Achieving {
             get {
-                return Score/Total; 
+                return (decimal)((decimal)Score/(decimal)Total); 
             }
         }
 
