@@ -61,7 +61,7 @@ export class SmeScoreRecordAddComponent implements OnInit {
 
   }
   loadQuestion() {
-    debugger
+    debugger;
     const auditType1 = 'SME2.0';
     const auditType2 = this.auditType2;
     this.smeScoreRecordService.getQuestion(auditType1, auditType2).subscribe(res => {
@@ -104,7 +104,7 @@ export class SmeScoreRecordAddComponent implements OnInit {
   auditRateM.pdc = this.pdc;
   auditRateM.building = this.building;
   auditRateM.line = this.lineID;
-  auditRateM.audit_Type1 = 'SME';
+  auditRateM.audit_Type1 = 'SME2.0';
   auditRateM.audit_Type2 = this.auditType2;
   auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
 
@@ -133,6 +133,11 @@ export class SmeScoreRecordAddComponent implements OnInit {
   auditType2Change(){
   this.loadQuestion();
   }
+
+  cancel() {
+    this.loadQuestion();
+  }
+
   back() {
     this.router.navigate(['maintenance/sme-score-record']);
   }

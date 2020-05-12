@@ -60,11 +60,9 @@ export class SixsScoreRecordAddComponent implements OnInit {
     this.router.navigate(['maintenance/6s-score-record']);
   }
   loadQuestion() {
-    debugger
     const auditType1 = '6S';
     const auditType2 = this.auditType2;
     this.scoreService.getQuestion(auditType1, auditType2).subscribe(res => {
-      console.log(res);
       this.questions = res;
     });
   }
@@ -133,7 +131,7 @@ export class SixsScoreRecordAddComponent implements OnInit {
   auditType2Change(){
   this.loadQuestion();
   }
-  cancel(){
+  cancel() {
     this.loadQuestion();
   }
 }

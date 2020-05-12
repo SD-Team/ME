@@ -89,7 +89,6 @@ export class SmeScoreRecordService {
   }
 
   getQuestion(auditType1: string, auditType2: string) {
-    debugger
     return this.http.get<SmeRecordQuestion[]>(this.baseUrl + 'AuditRate/GetListQuesRecord', {params : {
       auditType1: auditType1,
       auditType2: auditType2
@@ -97,7 +96,6 @@ export class SmeScoreRecordService {
   }
 
   saveScoreRecord(param: AuditRateModel) {
-    debugger
     return this.http.post(this.baseUrl + 'AuditRate/save', param);
   }
 }
