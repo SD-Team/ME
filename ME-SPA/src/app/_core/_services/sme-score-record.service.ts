@@ -7,6 +7,7 @@ import { AuditRateSearch } from '../_models/audit-rate-search';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/internal/operators/map';
+import { SmeRecordQuestion, AuditRateModel } from '../_models/sme-record-question';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -83,7 +84,20 @@ export class SmeScoreRecordService {
     return this.http.get<any>(this.baseUrl + 'AuditType/audittype2');
   }
 
-  getAuditType2RecordAdd() {
+  getAuditType2Score() {
     return this.http.get<any>(this.baseUrl + 'AuditType/audittype2bysme');
+  }
+
+  getQuestion(auditType1: string, auditType2: string) {
+    debugger
+    return this.http.get<SmeRecordQuestion[]>(this.baseUrl + 'AuditRate/GetListQuesRecord', {params : {
+      auditType1: auditType1,
+      auditType2: auditType2
+    }});
+  }
+
+  saveScoreRecord(param: AuditRateModel) {
+    debugger
+    return this.http.post(this.baseUrl + 'AuditRate/save', param);
   }
 }

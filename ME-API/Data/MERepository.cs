@@ -84,5 +84,10 @@ namespace ME_API.Data
         {
             _context.Set<T>().Update(entity);
         }
+
+        public void AddMultiple(List<T> entities)
+        {
+            _context.AddRange(entities);
+        }
     }
 }

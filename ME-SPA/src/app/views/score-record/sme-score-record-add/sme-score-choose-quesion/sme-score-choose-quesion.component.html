@@ -29,25 +29,68 @@
   </div>
 
 </div>
-<div class="ml-1">
-  <button type="button" class="btn btn-add-new btn-primary">
-    <i class="fa fa-envelope"></i><span style="margin-left: 2px;"> E-mail</span>
-  </button>
 
-  <button type="button" class="btn btn-add-new btn-danger">
-    <i class="fa fa-ban"></i> Cancel
-  </button>
+<div class="question">
+  <div *ngFor="let item of Test">
+    <p><b>{{item.question}}</b></p>
+    <div>
+      <label class="container"
+        >N/A
+        <input type="radio" (click)="checkedChang(item,1)" name="{{item.id}}" />
+        <span class="checkmark" ></span>
+      </label>
+      <label class="container">
+        N
+        <input type="radio"(click)="checkedChang(item,2)"name="{{item.id}}" />
+        <span class="checkmark"></span>
+      </label>
+      <label class="container"
+        >Y
+        <input type="radio" (click)="checkedChang(item,3)"name="{{item.id}}" />
+        <span class="checkmark"></span>
+      </label>
+      <div *ngIf="item.Rating0==1" class="row">
+        <div class="col-12">
+          <label>Remake :</label>
+        </div>
+        <div class="col-12">
+          <textarea class="remake ml-5" [(ngModel)]="item.Remake"> </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <button type="button" (click)="saveAndNew()" class="btn btn-add-new btn-success">
-    <i class="fa fa-check"></i> Save & New
-  </button>
-
-  <button type="button" class="btn btn-add-new btn-success">
-    <i class="fa fa-check"></i> Save
-  </button>
-
-  <button type="button" class="btn btn-add-new btn-primary">
-    <i class="fa fa-file-excel-o"></i>
-    <span style="margin-left: 2px;">Excel</span>
-  </button>
 </div>
+
+<div class="question">
+  <div *ngFor="let item of Test">
+    <p><b>{{item.question}}</b></p>
+    <div>
+      <label class="container"
+        >N/A
+        <input type="radio" (click)="checkedChang(item,1)" name="{{item.id}}" />
+        <span class="checkmark" ></span>
+      </label>
+      <label class="container">
+        N
+        <input type="radio"(click)="checkedChang(item,2)"name="{{item.id}}" />
+        <span class="checkmark"></span>
+      </label>
+      <label class="container"
+        >Y
+        <input type="radio" (click)="checkedChang(item,3)"name="{{item.id}}" />
+        <span class="checkmark"></span>
+      </label>
+      <div *ngIf="item.Rating0==1" class="row">
+        <div class="col-12">
+          <label>Remake :</label>
+        </div>
+        <div class="col-12">
+          <textarea class="remake ml-5" [(ngModel)]="item.Remake"> </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

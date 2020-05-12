@@ -85,6 +85,7 @@ export class ScoreRecordService {
   }
 
   getQuestion(auditType1: string, auditType2: string) {
+    debugger
     return this.http.get<ScoreRecordQuestion[]>(this.baseUrl + 'AuditRate/GetListQuesRecord', {params : {
       auditType1: auditType1,
       auditType2: auditType2

@@ -127,7 +127,6 @@ export class SmeScoreRecordListComponent implements OnInit {
   }
 
   exportExcel() {
-    debugger;
     let object = {
       pdc: this.pdc,
       building: this.building,
