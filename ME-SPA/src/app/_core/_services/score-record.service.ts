@@ -7,6 +7,7 @@ import { AuditRate6S } from '../_models/audit-rate-6s';
 import { map } from 'rxjs/operators';
 import { AuditRateSearch } from '../_models/audit-rate-search';
 import { ScoreRecordQuestion, AuditRateModel } from '../_models/score-record-question';
+import { ScoreRecordDetail } from '../_models/score-record-detail';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -94,5 +95,10 @@ export class ScoreRecordService {
 
   saveScoreRecord(param: AuditRateModel) {
     return this.http.post(this.baseUrl + 'AuditRate/save', param);
+  }
+
+
+  getDetailScoreRecord(recordId: string) {
+    return this.http.get<ScoreRecordDetail>(this.baseUrl + 'AuditRate/detail/' + recordId);
   }
 }

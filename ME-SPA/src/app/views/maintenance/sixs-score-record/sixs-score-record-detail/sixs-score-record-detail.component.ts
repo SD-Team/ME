@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-sixs-score-record-detail',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sixs-score-record-detail.component.scss']
 })
 export class SixsScoreRecordDetailComponent implements OnInit {
+  urlImage = environment.imageUrl;
   url: any = '../../../../../assets/img/avatars/8.jpg';
   constructor() { }
 
