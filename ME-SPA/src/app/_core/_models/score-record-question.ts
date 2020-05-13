@@ -24,6 +24,7 @@ export class AuditRateM {
     record_Date: Date;
 }
 
+
 export class AuditRateModel {
     auditRateM: AuditRateM;
     listAuditRateD: ScoreRecordQuestion[];

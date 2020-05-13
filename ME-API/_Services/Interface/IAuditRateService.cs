@@ -11,5 +11,6 @@ namespace ME_API._Services.Interface {
         Task<bool> SaveScopeRecord (ScoreRecordAnsDto param);
 
         Task<string> GetRecordIdRate ();
+        Task<ScoreRecordDetailDto> GetScoreRecordDetail (string recordId);
     }
 }

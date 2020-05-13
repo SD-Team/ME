@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/internal/operators/map';
 import { SmeRecordQuestion, AuditRateModel } from '../_models/sme-record-question';
+import { ScoreRecordDetail } from '../_models/score-record-detail';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -97,7 +98,10 @@ export class SmeScoreRecordService {
   }
 
   saveScoreRecord(param: AuditRateModel) {
-    debugger;
     return this.http.post(this.baseUrl + 'AuditRate/save', param);
+  }
+
+  getDetailScoreRecord(recordId: string) {
+    return this.http.get<ScoreRecordDetail>(this.baseUrl + 'AuditRate/detail/' + recordId);
   }
 }

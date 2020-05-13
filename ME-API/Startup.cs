@@ -104,6 +104,8 @@ namespace ME_API
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -7,5 +7,8 @@ namespace ME_API._Repositories.Interface
     public interface IAuditTypeDRepository : IMERepository<MES_Audit_Type_D>
     {
         
+        string GetAuditItemLL(string auditTypeId, string auditItemId);
+        string GetAuditItemEN(string auditTypeId, string auditItemId);
+        string GetAuditItemZW(string auditTypeId, string auditItemId);
     }
 }

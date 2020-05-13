@@ -81,6 +81,37 @@ namespace ME_API._Services.Services
             return record_Id;
         }
 
+        public async Task<ScoreRecordDetailDto> GetScoreRecordDetail(string recordId)
+        {
+            var auditRateMModel = _auditRateMRepository.FindSingle(x => x.Record_ID.Trim() == recordId);
+            if (auditRateMModel != null)
+            {
+                var listAuditRateDModel = _auditRateDRepository.FindAll(x => x.Record_ID == auditRateMModel.Record_ID);
+                var listAuditRateD = await listAuditRateDModel.Select(x => new AuditRateDDetailDto
+                {
+                    AuditItemId = x.Audit_Item_ID,
+                    Rating0 = x.Rating_0,
+                    Rating1 = x.Rating_1,
+                    Rating2 = x.Rating_2,
+                    RatingNA = x.Rate_NA,
+                    Remark = x.Remark,
+                    UplloadPicture = x.Upload_Picture,
+                    AuditItemLL = _auditTypeDRepository.GetAuditItemLL(auditRateMModel.Audit_Type_ID, x.Audit_Item_ID),
+                    AuditItemEN = _auditTypeDRepository.GetAuditItemEN(auditRateMModel.Audit_Type_ID, x.Audit_Item_ID),
+                    AuditItemZW = _auditTypeDRepository.GetAuditItemZW(auditRateMModel.Audit_Type_ID, x.Audit_Item_ID),
+                }).ToListAsync();
+
+                ScoreRecordDetailDto result = new ScoreRecordDetailDto();
+                result.auditRateM = _mapper.Map<AuditRateMDto>(auditRateMModel);
+                result.listAuditRateD = listAuditRateD;
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> SaveScopeRecord(ScoreRecordAnsDto param)
         {
             string record_Id = await GetRecordIdRate();
