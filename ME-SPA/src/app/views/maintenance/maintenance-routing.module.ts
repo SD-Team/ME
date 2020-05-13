@@ -221,7 +221,7 @@ const routes: Routes = [
               }
             },
             {
-              path: 'detail/:recordId',
+              path: 'detail',
               component: SixsScoreRecordDetailComponent,
               data: {
                 title: '6S Score Record Detail'

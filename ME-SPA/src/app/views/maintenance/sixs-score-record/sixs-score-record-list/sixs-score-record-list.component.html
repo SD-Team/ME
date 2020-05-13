@@ -154,7 +154,7 @@
                     <th>{{ item.total }}</th>
                     <th>{{ item.needToDoQty }}</th>
                     <th>{{ item.achieving *100  | number : '1.2-2'}}%</th>
-                   <th><button type="button" class="btn btn-primary btn-sm mr-2" (click)="changeToDetail()"><i
+                   <th><button type="button" class="btn btn-primary btn-sm mr-2" (click)="changeToDetail(item.recordId)"><i
                     class="fa fa-edit fa-lg"></i>Detail</button></th>
                    </tr>
               </tbody>

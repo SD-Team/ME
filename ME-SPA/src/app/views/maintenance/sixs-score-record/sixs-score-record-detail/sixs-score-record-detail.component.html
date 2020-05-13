@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header">
           <i class="fa fa-align-justify"></i> 6S Record Detail
-          <button type="button" class="btn btn-sm btn-primary float-right">
+          <button type="button" class="btn btn-sm btn-primary float-right"(click)="back()">
             <i class="fa fa-chevron-left"></i> Back
           </button>
         </div>
@@ -12,23 +12,23 @@
           <div class="form-group row">
             <label class="col-md-1 col-form-label" for="hf-email">Date: </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.record_Date" />
             </div>
             <label class="col-md-1 col-form-label" for="hf-password">PDC</label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.pdc"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-email"
               >Building:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.building"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Line</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.line"/>
             </div>
           </div>
           <div class="form-group row">
@@ -36,25 +36,25 @@
               >Audit_Type_1:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.audit_Type1"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Audit_Type_2</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.audit_Type2"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-email"
               >Update_User:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.updated_By"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Update_Time</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.updated_Time"/>
             </div>
           </div>
           <div class="table-responsive">
@@ -71,14 +71,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1.0</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>0</td>
-                  <td>Remark rating 0</td>
-                  <td>
+                <tr *ngFor="let item of listAuditRateD">
+                  <td>{{item.auditItemId}}</td>
+                  <td>{{item.auditItemLL}}</td>
+                  <td>{{item.auditItemZW}}</td>
+                  <td>{{item.auditItemEN}}</td>
+                  <td >{{item.rating0 == 1 ? "0":item.rating1==1?"1":item.ratingNA==1?"NA":null}}</td>
+                  <td  *ngIf="chkRating(item)">{{item.remark}}</td>
+                  <td  *ngIf="!chkRating(item)"></td>
+                  <td *ngIf="chkRating(item)">
                     <img [src]="url" width="100%" width="60" />
                     <label class="btn btn-primary upload">
                       Upload
@@ -92,24 +93,7 @@
                       />
                     </label>
                   </td>
-                </tr>
-                <tr>
-                  <td>3.0</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>1</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>2.0</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>NA</td>
-                  <td></td>
-                  <td></td>
+                  <td  *ngIf="!chkRating(item)"></td>
                 </tr>
               </tbody>
             </table>

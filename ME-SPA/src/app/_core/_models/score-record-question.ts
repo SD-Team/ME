@@ -20,7 +20,7 @@ export class AuditRateM {
     me_Pic: string;
     pd_Resp: string;
     updated_By: string;
-    update_Time: string;
+    updated_Time: string;
     record_Date: Date;
 }
 

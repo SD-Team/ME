@@ -21,8 +21,8 @@ export class ScoreRecordService {
   baseUrl = environment.apiUrl;
   score6SSource = new BehaviorSubject<Object>({});
   currentScore6S = this.score6SSource.asObservable();
-  flagSource = new BehaviorSubject<string>('0');
-  currentFlag = this.flagSource.asObservable();
+  recordId = new BehaviorSubject<string>('0');
+  currentRecordId = this.recordId.asObservable();
 
   constructor(private http: HttpClient) { }
   search(page?, itemsPerPage?, auditRateSearch?: AuditRateSearch): Observable<PaginatedResult<AuditRate6S[]>> {
@@ -100,5 +100,8 @@ export class ScoreRecordService {
 
   getDetailScoreRecord(recordId: string) {
     return this.http.get<ScoreRecordDetail>(this.baseUrl + 'AuditRate/detail/' + recordId);
+  }
+  changeRecordId(recordId: string) {
+    this.recordId.next(recordId);
   }
 }
