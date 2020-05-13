@@ -1,3 +1,5 @@
+import { AuditRateDDetail } from './../../../../_core/_models/score-record-detail';
+import { AuditRateM } from './../../../../_core/_models/sme-record-question';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,6 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SmeScoreRecordDetailComponent implements OnInit {
   url: any = '../../../../../assets/img/avatars/8.jpg';
+  recordId: string = '';
+  auditRateM: AuditRateM;
+  listAuditRateD: AuditRateDDetail[];
   constructor(private router: Router) { }
 
   ngOnInit() {

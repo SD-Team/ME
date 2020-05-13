@@ -113,7 +113,7 @@
       </div>
     </div>
   </div>
-  <div class="ml-1 mt-2">
+  <div class="ml-1 mt-2"  *ngIf="questions.length !=0" >
     <button type="button" class="btn btn-add-new btn-primary">
       <i class="fa fa-envelope"></i><span style="margin-left: 2px;"> E-mail</span>
     </button>
@@ -122,11 +122,11 @@
       <i class="fa fa-ban"></i> Cancel
     </button>
 
-    <button type="button" class="btn btn-add-new btn-success">
+    <button type="button" class="btn btn-add-new btn-success" (click)="SaveAndNext()">
       <i class="fa fa-check"></i> Save & New
     </button>
 
-    <button type="button" class="btn btn-add-new btn-success" (click)="save()">
+    <button type="button" class="btn btn-add-new btn-success"  (click)="save()" >
       <i class="fa fa-check"></i> Save
     </button>
 
@@ -134,5 +134,6 @@
       <i class="fa fa-file-excel-o"></i>
       <span style="margin-left: 2px;">Excel</span>
     </button>
+
   </div>
 </div>

@@ -155,7 +155,7 @@
                     <td>{{ item.needToDoQty }}</td>
                     <td>{{ item.achieving *100  | number : '1.2-2'}}%</td>
                     <td>
-                      <button type="button" class="btn btn-primary btn-sm mr-2" (click)="detail()"><i
+                      <button type="button" class="btn btn-primary btn-sm mr-2" (click)="detail(item.recordId)"><i
                         class="fa fa-edit fa-lg mr-1"></i>Detail</button>
                     </td>
                    </tr>
