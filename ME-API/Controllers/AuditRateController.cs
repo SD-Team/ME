@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Aspose.Cells;
 using ME_API._Services.Interface;
@@ -7,6 +8,7 @@ using ME_API.DTO;
 using ME_API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ME_API.Controllers
@@ -91,6 +93,44 @@ namespace ME_API.Controllers
             }
             return NoContent();
         }
+
+        [HttpPost("upload")]
+        public async Task<ActionResult> UploadPicture(IFormFile file, string recordId, string auditItemId)
+        {
+            recordId = Request.Form["recordId"];
+            auditItemId = Request.Form["auditItemId"];
+            if (file != null)
+            {
+                var filename = ContentDispositionHeaderValue
+                                   .Parse(file.ContentDisposition)
+                                   .FileName
+                                   .Trim('"');
+                Random rnd = new Random();
+                int ramdom = rnd.Next(0, 999999);
+                var uploadPicture = "AuditRateDRemark_" + recordId + "_" + auditItemId + "_" + ramdom + Path.GetExtension(filename);
+
+                string folder = _webHostEnvironment.WebRootPath + "\\uploaded\\images";
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+                string filePath = Path.Combine(folder, uploadPicture);
+
+                using (FileStream fs = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+                if (await _auditRateDService.UpdateUploadPicture(recordId, auditItemId, uploadPicture))
+                {
+                    return NoContent();
+                }
+                throw new Exception("Error ");
+            }
+            return NoContent();
+        }
+
+
 
     }
 }

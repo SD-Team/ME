@@ -7,6 +7,6 @@ namespace ME_API._Services.Interface
 {
     public interface IAuditRateDService : IMEService<AuditRateDDto>
     {
-        
+        Task<bool> UpdateUploadPicture(string recordId, string auditItemId, string uploadPicture);
     }
 }

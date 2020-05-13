@@ -58,5 +58,21 @@ namespace ME_API._Services.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public async Task<bool> UpdateUploadPicture(string recordId, string auditItemId, string uploadPicture)
+        {
+            var auditRateD = _auditRateDRepository.FindSingle(x => x.Record_ID == recordId && x.Audit_Item_ID == auditItemId);
+            if (auditRateD != null)
+            {
+                auditRateD.Upload_Picture = uploadPicture;
+                _auditRateDRepository.Update(auditRateD);
+
+                return await _auditRateDRepository.SaveAll();
+            }
+            else 
+            {
+                return false;
+            }
+        }
     }
 }

@@ -104,4 +104,9 @@ export class ScoreRecordService {
   changeRecordId(recordId: string) {
     this.recordId.next(recordId);
   }
+
+  uploadPicture(formData: FormData) {
+    debugger
+    return this.http.post(this.baseUrl + 'AuditRate/upload', formData);
+  }
 }
