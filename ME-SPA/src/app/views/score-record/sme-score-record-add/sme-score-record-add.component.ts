@@ -78,28 +78,28 @@ export class SmeScoreRecordAddComponent implements OnInit {
      item.rating_1 = 0;
      item.rating_2 = 0;
      item.rate_Na = 0;
-     item.remark = '';
+     item.remark = null;
    }
    if (number === 1) {
      item.rating_0 = 0;
      item.rating_1 = 1;
      item.rating_2 = 0;
      item.rate_Na = 0;
-     item.remark = '';
+     item.remark = null;
    }
    if (number === 2) {
      item.rating_0 = 0;
      item.rating_1 = 0;
      item.rating_2 = 1;
      item.rate_Na = 0;
-     item.remark = '';
+     item.remark = null;
    }
    if (number === 3) {
      item.rating_0 = 0;
      item.rating_1 = 0;
      item.rating_2 = 0;
      item.rate_Na = 1;
-     item.remark = '';
+     item.remark = null;
    }
  }
  save() {

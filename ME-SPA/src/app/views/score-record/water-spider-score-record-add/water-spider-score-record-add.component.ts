@@ -78,17 +78,14 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
     // kiểm tra phải trả lời hết các câu hỏi mới được lưu
     for (let index = 0; index < this.questions.length; index++) {
       if (this.questions[index].rate_Na === undefined) {
-        this.alertifyService.error('Mời bạn trả lời tất cả các câu hỏi');
+        this.alertifyService.error('You must not leave any questions blank!');
         return;
       }
     }
-    debugger;
-    this.scoreService.saveScoreRecord(param).subscribe((res) => {
-      if (res) {
-        this.alertifyService.success('success');
-      } else {
-        this.alertifyService.error('error');
-      }
+    this.scoreService.saveScoreRecord(param).subscribe(() => {
+      this.alertifyService.success('success');
+    }, (error) => {
+      this.alertifyService.error(error);
     });
   }
 
@@ -106,28 +103,28 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
       item.rating_1 = 0;
       item.rating_2 = 0;
       item.rate_Na = 0;
-      item.remark = '';
+      item.remark = null;
     }
     if (number === 1) {
       item.rating_0 = 0;
       item.rating_1 = 1;
       item.rating_2 = 0;
       item.rate_Na = 0;
-      item.remark = '';
+      item.remark = null;
     }
     if (number === 2) {
       item.rating_0 = 0;
       item.rating_1 = 0;
       item.rating_2 = 1;
       item.rate_Na = 0;
-      item.remark = '';
+      item.remark = null;
     }
     if (number === 3) {
       item.rating_0 = 0;
       item.rating_1 = 0;
       item.rating_2 = 0;
       item.rate_Na = 1;
-      item.remark = '';
+      item.remark = null;
     }
   }
 }

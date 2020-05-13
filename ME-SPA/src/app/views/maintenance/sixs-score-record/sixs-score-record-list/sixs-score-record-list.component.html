@@ -144,16 +144,16 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of auditRate6S; let i = index">
-                    <th class="font-table">{{ item.auditDate | date: "yyyy/MM/dd" }}</th>
-                    <th class="font-table">{{ item.auditType }}</th>
-                    <th class="font-table">{{ item.auditType2 }}</th>
-                    <th class="font-table">{{ item.lineId }}</th>
-                    <th class="font-table">{{ item.ratingNa }}</th>
-                    <th class="font-table">{{ item.rating0 }}</th>
-                    <th class="font-table">{{ item.rating1 }}</th>
-                    <th class="font-table">{{ item.total }}</th>
-                     <th class="font-table">{{ item.needToDoQty }}</th>
-                    <th class="font-table">{{ item.achieving *100 }}%</th>
+                    <th>{{ item.auditDate | date: "yyyy/MM/dd" }}</th>
+                    <th>{{ item.auditType }}</th>
+                    <th>{{ item.auditType2 }}</th>
+                    <th>{{ item.lineId }}</th>
+                    <th>{{ item.ratingNa }}</th>
+                    <th>{{ item.rating0 }}</th>
+                    <th>{{ item.rating1 }}</th>
+                    <th>{{ item.total }}</th>
+                    <th>{{ item.needToDoQty }}</th>
+                    <th>{{ item.achieving *100  | number : '1.2-2'}}%</th>
                    <th><button type="button" class="btn btn-primary btn-sm mr-2" (click)="changeToDetail()"><i
                     class="fa fa-edit fa-lg"></i>Detail</button></th>
                    </tr>

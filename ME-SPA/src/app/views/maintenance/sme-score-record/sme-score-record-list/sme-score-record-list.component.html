@@ -144,17 +144,17 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of aududitRateSme; let i = index">
-                    <td class="font-table">{{ item.auditDate | date: "yyyy/MM/dd" }}</td>
-                    <td class="font-table">{{ item.auditType }}</td>
-                    <td class="font-table">{{ item.auditType2 }}</td>
-                    <td class="font-table">{{ item.lineId }}</td>
-                    <td class="font-table">{{ item.ratingNa }}</td>
-                    <td class="font-table">{{ item.rating0 }}</td>
-                    <td class="font-table">{{ item.rating1 }}</td>
-                    <td class="font-table">{{ item.total }}</td>
-                    <td class="font-table">{{ item.needToDoQty }}</td>
-                    <td class="font-table">{{ item.achieving *100 }}%</td>
-                    <td class="font-table">
+                    <td>{{ item.auditDate | date: "yyyy/MM/dd" }}</td>
+                    <td>{{ item.auditType }}</td>
+                    <td>{{ item.auditType2 }}</td>
+                    <td>{{ item.lineId }}</td>
+                    <td>{{ item.ratingNa }}</td>
+                    <td>{{ item.rating0 }}</td>
+                    <td>{{ item.rating1 }}</td>
+                    <td>{{ item.total }}</td>
+                    <td>{{ item.needToDoQty }}</td>
+                    <td>{{ item.achieving *100  | number : '1.2-2'}}%</td>
+                    <td>
                       <button type="button" class="btn btn-primary btn-sm mr-2" (click)="detail()"><i
                         class="fa fa-edit fa-lg mr-1"></i>Detail</button>
                     </td>
