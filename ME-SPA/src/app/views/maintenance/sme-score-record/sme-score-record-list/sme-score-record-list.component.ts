@@ -142,5 +142,6 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.smeScoreRecordService.exportExcel(object);
   }
 
+  
 
 }
