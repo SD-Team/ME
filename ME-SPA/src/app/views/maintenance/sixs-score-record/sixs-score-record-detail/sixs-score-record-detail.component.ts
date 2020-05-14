@@ -63,6 +63,9 @@ export class SixsScoreRecordDetailComponent implements OnInit {
       var title = event.target.files[0].name.split(".").pop();
       var fileZise = event.target.files[0].size;
       var file = event.target.files[0];
+<<<<<<< HEAD
+      if (title == "jpg" || title == "jpeg" || title == "png") {
+=======
       if (
         title == "jpg" ||
         title == "jpeg" ||
@@ -71,6 +74,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
         title == "IPEG" ||
         title == "PNG"
       ) {
+>>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
         if (fileZise <= 2097152) {
           // reader.readAsDataURL(event.target.files[0]); // read file as data url
           // reader.onload = (event) => { // called once readAsDataURL is completed
@@ -80,6 +84,15 @@ export class SixsScoreRecordDetailComponent implements OnInit {
           formData.append("file", file);
           formData.append("recordId", this.recordId);
           formData.append("auditItemId", auditItemId);
+<<<<<<< HEAD
+          this.scoreRecordService.uploadPicture(formData).subscribe(() => {
+            this.loadData();
+          });
+        } else {
+          this.alertify.error("Images cannot be larger than 2MB");
+        }
+      } else if (title == "mp4") {
+=======
           this.scoreRecordService.uploadPicture(formData).subscribe(
             () => {
               this.loadData();
@@ -97,6 +110,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
           this.alertify.error("Images cannot be larger than 2MB");
         }
       } else if (title == "mp4" || title == "MP4") {
+>>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
         if (fileZise <= 5242880) {
           // reader.readAsDataURL(event.target.files[0]); // read file as data url
           // reader.onload = (event) => { // called once readAsDataURL is completed
@@ -106,6 +120,11 @@ export class SixsScoreRecordDetailComponent implements OnInit {
           formData.append("file", file);
           formData.append("recordId", this.recordId);
           formData.append("auditItemId", auditItemId);
+<<<<<<< HEAD
+          this.scoreRecordService.uploadPicture(formData).subscribe(() => {
+            this.loadData();
+          });
+=======
           this.scoreRecordService.uploadPicture(formData).subscribe(
             () => {
               this.loadData();
@@ -117,6 +136,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
               this.alertify.error("Upload video of " + auditItemId + " failed");
             }
           );
+>>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
         } else {
           this.alertify.error("Video cannot be larger than 5MB");
         }
@@ -128,6 +148,11 @@ export class SixsScoreRecordDetailComponent implements OnInit {
   back() {
     this.router.navigate(["maintenance/6s-score-record"]);
   }
+<<<<<<< HEAD
+  chkImage(uploadPicture) {
+    if (uploadPicture != null) {
+      if (uploadPicture.split(".").pop() == "mp4") {
+=======
   exportExcel() {
     this.scoreRecordService.exportExcelDetail(this.recordId);
   }
@@ -137,6 +162,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
         uploadPicture.split(".").pop() == "mp4" ||
         uploadPicture.split(".").pop() == "MP4"
       ) {
+>>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
         return false;
       } else {
         return true;

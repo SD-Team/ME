@@ -126,4 +126,8 @@ export class SmeScoreRecordService {
         link.click();
       });
   }
+
+  uploadPicture(formData: FormData) {
+    return this.http.post(this.baseUrl + 'AuditRate/upload', formData);
+  }
 }

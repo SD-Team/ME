@@ -81,7 +81,7 @@
       </div>
       <div class="col-6 col-md-2">
         <label class="badge badge-warning">Update Time</label>
-        <input class="form-control" type="text" name="model_name" disabled [value]="today | date: 'yyyy/MM/dd'" />
+        <input class="form-control" type="text" name="model_name" disabled [value]="today | date: 'yyyy/MM/dd HH:mm:ss'" />
       </div>
     </div>
   </div>
@@ -133,11 +133,6 @@
 
     <button type="button" class="btn btn-add-new btn-success"  (click)="save()" >
       <i class="fa fa-check"></i> Save
-    </button>
-
-    <button type="button" class="btn btn-add-new btn-primary">
-      <i class="fa fa-file-excel-o"></i>
-      <span style="margin-left: 2px;">Excel</span>
     </button>
 
   </div>

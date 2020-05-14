@@ -109,7 +109,6 @@ export class SmeScoreRecordAddComponent implements OnInit {
     }
   }
   save() {
-    debugger;
     let auditRateM = new AuditRateM();
     auditRateM.pdc = this.pdc;
     auditRateM.building = this.building;
@@ -144,7 +143,6 @@ export class SmeScoreRecordAddComponent implements OnInit {
   }
 
   SaveAndNext() {
-    debugger
     let auditRateM = new AuditRateM();
     auditRateM.pdc = this.pdc;
     auditRateM.building = this.building;
@@ -169,7 +167,6 @@ export class SmeScoreRecordAddComponent implements OnInit {
     }
     this.smeScoreRecordService.saveScoreRecord(param).subscribe(
       () => {
-        debugger
         this.alertifyService.success("Add Success");
         this.loadSelectSaveAndNext();
       },
