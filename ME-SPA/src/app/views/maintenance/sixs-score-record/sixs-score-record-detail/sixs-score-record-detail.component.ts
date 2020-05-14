@@ -63,7 +63,14 @@ export class SixsScoreRecordDetailComponent implements OnInit {
       var title = event.target.files[0].name.split(".").pop();
       var fileZise = event.target.files[0].size;
       var file = event.target.files[0];
-      if (title == "jpg" || title == "jpeg" || title == "png") {
+      if (
+        title == "jpg" ||
+        title == "jpeg" ||
+        title == "png" ||
+        title == "JPG" ||
+        title == "IPEG" ||
+        title == "PNG"
+      ) {
         if (fileZise <= 2097152) {
           // reader.readAsDataURL(event.target.files[0]); // read file as data url
           // reader.onload = (event) => { // called once readAsDataURL is completed
@@ -89,7 +96,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
         } else {
           this.alertify.error("Images cannot be larger than 2MB");
         }
-      } else if (title == "mp4") {
+      } else if (title == "mp4" || title == "MP4") {
         if (fileZise <= 5242880) {
           // reader.readAsDataURL(event.target.files[0]); // read file as data url
           // reader.onload = (event) => { // called once readAsDataURL is completed
@@ -107,9 +114,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
               );
             },
             (error) => {
-              this.alertify.error(
-                "Upload video of " + auditItemId + " failed"
-              );
+              this.alertify.error("Upload video of " + auditItemId + " failed");
             }
           );
         } else {
@@ -128,7 +133,10 @@ export class SixsScoreRecordDetailComponent implements OnInit {
   }
   chkImage(uploadPicture) {
     if (uploadPicture != null) {
-      if (uploadPicture.split(".").pop() == "mp4") {
+      if (
+        uploadPicture.split(".").pop() == "mp4" ||
+        uploadPicture.split(".").pop() == "MP4"
+      ) {
         return false;
       } else {
         return true;
