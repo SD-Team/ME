@@ -1,8 +1,8 @@
 import { AuditRateM } from './sme-record-question';
 
 
-export interface ScoreRecordDetail {
-    auditRateM: AuditRateM;
+export interface SmeScoreRecordDetail {
+    auditRateM: AuditRateM ;
     listAuditRateD: AuditRateDDetail[];
 }
 

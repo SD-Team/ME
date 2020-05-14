@@ -123,8 +123,8 @@ export class SmeScoreRecordListComponent implements OnInit {
     }
   }
 
-  detail(recordIdss) {
-    this.router.navigate(["/maintenance/sme-score-record/detail/" + recordIdss]);
+  detail(recordId) {
+    this.router.navigate(["/maintenance/sme-score-record/detail/" + recordId]);
   }
 
   exportExcel() {
