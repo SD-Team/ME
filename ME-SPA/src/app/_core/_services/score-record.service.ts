@@ -106,7 +106,6 @@ export class ScoreRecordService {
   }
 
   uploadPicture(formData: FormData) {
-    debugger
     return this.http.post(this.baseUrl + 'AuditRate/upload', formData);
   }
 }

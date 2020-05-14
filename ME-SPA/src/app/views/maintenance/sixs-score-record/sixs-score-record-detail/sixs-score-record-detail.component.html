@@ -12,23 +12,23 @@
           <div class="form-group row">
             <label class="col-md-1 col-form-label" for="hf-email">Date: </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.record_Date" />
+              <input type="text" class="form-control" disabled [value]="auditRateM.record_Date | date : 'yyyy/MM/dd'" />
             </div>
             <label class="col-md-1 col-form-label" for="hf-password">PDC</label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.pdc"/>
+              <input type="text" class="form-control" disabled [value]="auditRateM.pdc"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-email"
               >Building:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.building"/>
+              <input type="text" class="form-control" disabled [value]="auditRateM.building"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Line</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.line"/>
+              <input type="text" class="form-control" disabled [value]="auditRateM.line"/>
             </div>
           </div>
           <div class="form-group row">
@@ -36,25 +36,25 @@
               >Audit_Type_1:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.audit_Type1"/>
+              <input type="text" class="form-control" disabled [value]="auditRateM.audit_Type1"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Audit_Type_2</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.audit_Type2"/>
+              <input type="text" class="form-control" disabled [value]="auditRateM.audit_Type2"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-email"
               >Update_User:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.updated_By"/>
+              <input type="text" class="form-control" disabled [value]="auditRateM.updated_By"/>
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Update_Time</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled [(ngModel)]="auditRateM.updated_Time"/>
+              <input type="text" class="form-control" disabled [value]="auditRateM.updated_Time|date:'yyyy/MM/dd'"/>
             </div>
           </div>
           <div class="table-responsive">
@@ -77,10 +77,11 @@
                   <td>{{item.auditItemZW}}</td>
                   <td>{{item.auditItemEN}}</td>
                   <td >{{item.rating0 == 1 ? "0":item.rating1==1?"1":item.ratingNA==1?"NA":null}}</td>
-                  <td  *ngIf="chkRating(item)">{{item.remark}}</td>
-                  <td  *ngIf="!chkRating(item)"></td>
-                  <td *ngIf="chkRating(item)">
-                    <img [src]="url" width="100%" width="60" />
+                  <td  >{{item.remark}}</td>
+
+                  <td *ngIf="item.rating0 ==1">
+                    <img *ngIf="chkImage(item.uplloadPicture)" [src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture" width="100%" width="60" />
+                    <video  *ngIf="!chkImage(item.uplloadPicture)" width="100%"[src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture"controls ></video>
                     <label class="btn btn-primary upload">
                       Upload
                       <input
@@ -88,12 +89,12 @@
                         class="uploadFile img"
                         value="Upload Photo"
                         style="width: 0px; height: 0px; overflow: hidden;"
-                        (change)="onSelectFile($event)"
+                        (change)="onSelectFile($event,item.auditItemId)"
                         #fileImageB4
                       />
                     </label>
                   </td>
-                  <td  *ngIf="!chkRating(item)"></td>
+                  <td  *ngIf="item.rating0!=1"></td>
                 </tr>
               </tbody>
             </table>

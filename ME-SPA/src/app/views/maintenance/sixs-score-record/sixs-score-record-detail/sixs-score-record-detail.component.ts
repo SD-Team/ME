@@ -13,8 +13,8 @@ import { AlertifyService } from '../../../../_core/_services/alertify.service';
   styleUrls: ['./sixs-score-record-detail.component.scss']
 })
 export class SixsScoreRecordDetailComponent implements OnInit {
-  urlImage = environment.imageUrl;
-  url: any = '../../../../../assets/img/avatars/8.jpg';
+  urlImage = environment.imageUrl + 'no-image.jpg';
+  url:any = environment.imageUrl;
   recordId:string ='';
   auditRateM:AuditRateM={
     record_ID:'',
@@ -45,36 +45,85 @@ export class SixsScoreRecordDetailComponent implements OnInit {
     this.spinner.show();
     this.scoreRecordService.getDetailScoreRecord(this.recordId).subscribe(res=>{
       this.auditRateM =res.auditRateM;
-      debugger;
       this.listAuditRateD=res.listAuditRateD;
     },(error)=>{
       this.alertify.error(error);
     })
     this.spinner.hide();
   }
-  onSelectFile(event) {
+  onSelectFile(event,auditItemId) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
+      var title = event.target.files[0].name.split('.').pop();
+      var fileZise = event.target.files[0].size;
+      var file = event.target.files[0];
+      debugger
+    if(title=='jpg'|| title =='jpeg' || title=='png')
+      {
+      if(fileZise<=2097152){
+        // reader.readAsDataURL(event.target.files[0]); // read file as data url
+        // reader.onload = (event) => { // called once readAsDataURL is completed
+        //   this.url = event.target.result;
+        // };
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('recordId', this.recordId);
+        formData.append('auditItemId', auditItemId);
+        this.scoreRecordService.uploadPicture(formData).subscribe(()=>{
+          this.loadData();
+        });
+      }
+      else
+      {
+        this.alertify.error("Images cannot be larger than 2MB");
+      }
+      }
+      else if(title=='mp4')
+      {
+        if(fileZise<=5242880){
+          // reader.readAsDataURL(event.target.files[0]); // read file as data url
+          // reader.onload = (event) => { // called once readAsDataURL is completed
+          //   this.url = (<FileReader>event.target).result;
 
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
+          //  };
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('recordId', this.recordId);
+          formData.append('auditItemId', auditItemId);
+          this.scoreRecordService.uploadPicture(formData).subscribe(()=>{
+            this.loadData();
+          } );
+        }
+        else{
+          this.alertify.error("Video cannot be larger than 5MB");
+        }
+      }
+      else{
+        this.alertify.error("Incorrect format");
+      }
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-      };
     }
   }
 back()
 {
   this.router.navigate(['maintenance/6s-score-record'])
 }
-chkRating(item){
-  //check hide Remake
-  if(item.rating0 == 1)
+chkImage(uploadPicture)
+{
+  if(uploadPicture!=null)
+  {
+    debugger;
+    if(uploadPicture.split('.').pop() =="mp4"){
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+  else
   {
     return true;
-  }
-  else{
-    return false;
   }
 }
 }
