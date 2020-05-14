@@ -12,12 +12,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SmeScoreRecordDetailComponent implements OnInit {
   url: any = '../../../../../assets/img/avatars/8.jpg';
-  pagination: Pagination = {
-    currentPage: 1,
-    itemsPerPage: 3,
-    totalItems: 1,
-    totalPages: 1,
-  };
   recordId: string = '';
   auditRateM: AuditRateM = {
     record_ID: '',
@@ -54,7 +48,6 @@ export class SmeScoreRecordDetailComponent implements OnInit {
   }
 
   loadDetail(recordId: string) {
-    debugger;
     this.activeRouter.params.subscribe((params) => {
       // tslint:disable-next-line:prefer-const
       let recordId = params['recordId'];
@@ -67,10 +60,6 @@ export class SmeScoreRecordDetailComponent implements OnInit {
     });
   }
 
-  pageChanged(event: any): void {
-    this.pagination.currentPage = event.page;
-    this.loadDetail(this.recordId);
-  }
 
 
   back() {

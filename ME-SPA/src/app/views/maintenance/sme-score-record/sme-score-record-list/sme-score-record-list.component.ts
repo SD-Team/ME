@@ -1,3 +1,4 @@
+import { AuditRateSearch } from './../../../../_core/_models/audit-rate-search';
 import { SmeScoreRecordService } from './../../../../_core/_services/sme-score-record.service';
 import { AlertifyService } from './../../../../_core/_services/alertify.service';
 import { AuditRateSme } from './../../../../_core/_models/audit-rate-sme';
@@ -32,6 +33,8 @@ export class SmeScoreRecordListComponent implements OnInit {
   buildings: any[] = [];
   auditType2List: any[] = [];
   aududitRateSme: AuditRateSme[] = [];
+  searchKey = false;
+  text: string;
   constructor(
     private smeScoreRecordService: SmeScoreRecordService,
     private spinner: NgxSpinnerService,
@@ -110,17 +113,10 @@ export class SmeScoreRecordListComponent implements OnInit {
   }
   search() {
     debugger;
-    if (this.timeStart == "" || this.timeEnd == "") {
-      this.alertify.error("Please option start and end time");
-    } else {
       this.spinner.show();
-      this.fromTime = new Date(this.timeStart).toLocaleDateString();
-      // tslint:disable-next-line:prefer-const
-      this.toTime = new Date(this.timeEnd).toLocaleDateString();
-      this.pagination.currentPage=1;
+      this.pagination.currentPage = 1;
       this.loadData();
       this.spinner.hide();
-    }
   }
 
   detail(recordId) {

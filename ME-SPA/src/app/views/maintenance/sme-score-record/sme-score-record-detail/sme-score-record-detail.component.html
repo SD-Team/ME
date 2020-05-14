@@ -12,7 +12,7 @@
           <div class="form-group row">
             <label class="col-md-1 col-form-label" for="hf-email">Date: </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" [(ngModel)]="auditRateM.record_Date" disabled />
+              <input type="text" class="form-control" [value]="auditRateM.record_Date | date: 'yyyy/MM/dd' " disabled />
             </div>
             <label class="col-md-1 col-form-label" for="hf-password">PDC</label>
             <div class="col-md-2">
@@ -54,7 +54,7 @@
               >Update_Time</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" [(ngModel)]="auditRateM.updated_Time" disabled />
+              <input type="text" class="form-control" [value]="auditRateM.updated_Time | date: 'yyyy/MM/dd'" disabled />
             </div>
           </div>
           <div class="table-responsive">
@@ -99,20 +99,6 @@
               </tbody>
             </table>
           </div>
-        </div>
-        <div class="d-flex">
-          <pagination
-            [boundaryLinks]="true"
-            [totalItems]="pagination.totalItems"
-            [(ngModel)]="pagination.currentPage"
-            [itemsPerPage]="pagination.itemsPerPage"
-            (pageChanged)="pageChanged($event)"
-            previousText="&lsaquo;"
-            nextText="&rsaquo;"
-            firstText="&laquo;"
-            lastText="&raquo;"
-            [maxSize]=5>
-          </pagination>
         </div>
       </div>
     </div>
