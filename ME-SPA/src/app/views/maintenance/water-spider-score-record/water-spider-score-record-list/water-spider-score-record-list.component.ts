@@ -110,6 +110,15 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
     this.spinner.hide();
   }
   exportExcel() {
+    this.spinner.show();
+    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null ) {
+      this.toTime = '';
+      this.fromTime = '';
+    }
+    else {
+      this.fromTime = new Date(this.timeStart).toLocaleDateString();
+      this.toTime = new Date(this.timeEnd).toLocaleDateString();
+    }
     let object = {
       pdc: this.pdc,
       building: this.building,
@@ -119,6 +128,10 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       auditType2: ''
     };
     this.waterSpiderService.exportExcel(object);
+  }
+
+  detail(recordId: string) {
+    this.router.navigate(['/maintenance/water-spider-score-record/detail', recordId]);
   }
 
 }

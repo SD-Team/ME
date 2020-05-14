@@ -60,6 +60,18 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
   back() {
     this.router.navigate(['maintenance/water-spider-score-record']);
   }
+
+  saveAndNew() {
+    this.save();
+    // load lại giá trị ban đầu
+    this.pdc = this.pdcs[0];
+    this.building = this.buildings[0];
+    this.lineID = this.lineIDs[0];
+  }
+  saveNoNew() {
+    this.save();
+    this.router.navigate(['/maintenance/water-spider-score-record']);
+  }
   save() {
     let auditRateM = new AuditRateM();
     auditRateM.pdc = this.pdc;
@@ -83,10 +95,11 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
       }
     }
     this.scoreService.saveScoreRecord(param).subscribe(() => {
-      this.alertifyService.success('success');
+      this.alertifyService.success('Add Success!');
     }, (error) => {
       this.alertifyService.error(error);
     });
+
   }
 
   loadQuestion() {

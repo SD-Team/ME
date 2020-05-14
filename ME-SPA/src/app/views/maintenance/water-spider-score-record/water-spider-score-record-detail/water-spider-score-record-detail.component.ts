@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from '../../../../_core/_services/alertify.service';
 import { ScoreRecordService } from '../../../../_core/_services/score-record.service';
+import { environment } from '../../../../../environments/environment';
+import { AuditRateM } from 'src/app/_core/_models/score-record-question';
+import { AuditRateDDetail } from 'src/app/_core/_models/score-record-detail';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-water-spider-score-record-detail',
@@ -8,34 +12,87 @@ import { ScoreRecordService } from '../../../../_core/_services/score-record.ser
   styleUrls: ['./water-spider-score-record-detail.component.scss']
 })
 export class WaterSpiderScoreRecordDetailComponent implements OnInit {
-  url: any = '../../../../../assets/img/avatars/8.jpg';
-  constructor(private alertifyService: AlertifyService, private scoreRecordService: ScoreRecordService) { }
+  urlNoImage: string = environment.imageUrl + 'no-image.jpg';
+  url: any = environment.imageUrl;
+  recordId: string = '';
+  auditRateM: AuditRateM = {
+    record_ID: '',
+    audit_Type_ID: '',
+    pdc: '',
+    building: '',
+    line: '',
+    audit_Type1: '',
+    audit_Type2: '',
+    me_Pic: '',
+    pd_Resp: '',
+    updated_By: '',
+    updated_Time: '',
+    record_Date: null,
+  };
+  listAuditRateD: AuditRateDDetail[] = [];
+
+  constructor(private alertifyService: AlertifyService,
+    private scoreRecordService: ScoreRecordService, private route: ActivatedRoute, 
+    private router: Router) { }
 
   ngOnInit() {
+    this.route.params.subscribe(param => {
+      this.recordId = param['recordId'];
+    });
+    this.loadData();
   }
-  onSelectFile(event) {
+  onSelectFile(event, auditItemId) {
     if (event.target.files && event.target.files[0]) {
-      debugger
       const reader = new FileReader();
-      var c = event.target.files[0];
-      var b = event.target.files[0].name.split('.').pop();
-      var a = event.target.files[0].size;
-      var file = event.target.files[0];
-      // if (a > 2000) {
-      //   this.alertifyService.error('hình ảnh bạn up lên dung lượng quá lớn');
-      //   return;
-      // }
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      const title = event.target.files[0].name.split('.').pop();
+      const fileZise = event.target.files[0].size;
+      const file = event.target.files[0];
+      // kiểm tra đuôi file
+      if (title === 'jpg' || title === 'jpeg' || title === 'png' || title === 'JPG' || title === 'JPEG' || title === 'PNG') {
+        // nếu là hình phải nhỏ hơn 2MB
+        if (fileZise <= 2097152) {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('recordId', this.recordId);
+          formData.append('auditItemId', auditItemId);
+          this.scoreRecordService.uploadPicture(formData).subscribe(() => {
+            this.loadData();
+          });
+        }
+        else {
+          this.alertifyService.error('Images cannot be larger than 2MB');
+        }
+      }
+      else if (title === 'mp4' || title === 'MP4') {
+        if (fileZise <= 5242880) {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('recordId', this.recordId);
+          formData.append('auditItemId', auditItemId);
+          this.scoreRecordService.uploadPicture(formData).subscribe(() => {
+            this.loadData();
+          });
+        }
+        else {
+          this.alertifyService.error('Video cannot be larger than 5MB');
+        }
+      }
+      else {
+        this.alertifyService.error('Incorrect format');
+      }
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-      };
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('recordId', 'RA20010001');
-      formData.append('auditItemId', '1.0');
-      this.scoreRecordService.uploadPicture(formData).subscribe();
     }
+
   }
 
+  loadData() {
+    this.scoreRecordService.getDetailScoreRecord(this.recordId).subscribe(res => {
+      this.auditRateM = res.auditRateM;
+      this.listAuditRateD = res.listAuditRateD;
+    });
+  }
+
+  back(){
+    this.router.navigate(['/maintenance/water-spider-score-record'])
+  }
 }
