@@ -12,5 +12,8 @@ namespace ME_API.DTO
         public int? RatingNA { get; set; }
         public string Remark { get; set; }
         public string UplloadPicture { get; set; }
+        public string Rating { get {
+            return Rating0 == 1 ? "0" : Rating1 == 1 ? "1" : Rating2 == 1 ? "2" : "NA";
+        }}
     }
 }

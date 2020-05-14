@@ -104,4 +104,26 @@ export class SmeScoreRecordService {
   getDetailScoreRecord(recordId: string) {
     return this.http.get<ScoreRecordDetail>(this.baseUrl + 'AuditRate/detail/' + recordId);
   }
+
+  exportExcelDetail(recordId: string){
+    return this.http.get(this.baseUrl + 'SMERecord/ExportExcelScoreRecordDetail', { responseType: 'blob', params: {
+      recordId: recordId
+    } })
+      .subscribe((result: Blob) => {
+        if (result.type !== 'application/xlsx') {
+          alert(result.type);
+        }
+        const blob = new Blob([result]);
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const currentTime = new Date();
+        const filename = 'Sme_Score_Record_Detail_' + currentTime.getFullYear().toString() +
+          (currentTime.getMonth() + 1) + currentTime.getDate() +
+          currentTime.toLocaleTimeString().replace(/[ ]|[,]|[:]/g, '').trim() + '.xlsx';
+        link.href = url;
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+      });
+  }
 }

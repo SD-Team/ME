@@ -105,9 +105,7 @@ namespace ME_API.Controllers
                                    .Parse(file.ContentDisposition)
                                    .FileName
                                    .Trim('"');
-                Random rnd = new Random();
-                int ramdom = rnd.Next(0, 999999);
-                var uploadPicture = "AuditRateDRemark_" + recordId + "_" + auditItemId + "_" + ramdom + Path.GetExtension(filename);
+                var uploadPicture = "AuditRateDRemark_" + recordId + "_" + auditItemId + Path.GetExtension(filename);
 
                 string folder = _webHostEnvironment.WebRootPath + "\\uploaded\\images";
                 if (!Directory.Exists(folder))
@@ -115,6 +113,12 @@ namespace ME_API.Controllers
                     Directory.CreateDirectory(folder);
                 }
                 string filePath = Path.Combine(folder, uploadPicture);
+
+                // kiểm tra file cũ có chưa xóa đi
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
 
                 using (FileStream fs = System.IO.File.Create(filePath))
                 {
@@ -129,8 +133,6 @@ namespace ME_API.Controllers
             }
             return NoContent();
         }
-
-
 
     }
 }
