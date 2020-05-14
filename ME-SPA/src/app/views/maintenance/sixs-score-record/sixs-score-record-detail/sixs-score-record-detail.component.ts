@@ -57,7 +57,6 @@ export class SixsScoreRecordDetailComponent implements OnInit {
       var title = event.target.files[0].name.split('.').pop();
       var fileZise = event.target.files[0].size;
       var file = event.target.files[0];
-      debugger
     if(title=='jpg'|| title =='jpeg' || title=='png')
       {
       if(fileZise<=2097152){
@@ -112,7 +111,6 @@ chkImage(uploadPicture)
 {
   if(uploadPicture!=null)
   {
-    debugger;
     if(uploadPicture.split('.').pop() =="mp4"){
       return false;
     }

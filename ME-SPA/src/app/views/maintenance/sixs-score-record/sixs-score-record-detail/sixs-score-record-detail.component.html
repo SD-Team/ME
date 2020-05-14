@@ -81,7 +81,7 @@
 
                   <td *ngIf="item.rating0 ==1">
                     <img *ngIf="chkImage(item.uplloadPicture)" [src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture" width="100%" width="60" />
-                    <video  *ngIf="!chkImage(item.uplloadPicture)" width="100%"[src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture"controls ></video>
+                    <video  *ngIf="!chkImage(item.uplloadPicture)" width="100%"[src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture"controls width="100" ></video>
                     <label class="btn btn-primary upload">
                       Upload
                       <input
