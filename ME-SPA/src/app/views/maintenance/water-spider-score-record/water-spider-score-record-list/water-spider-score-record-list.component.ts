@@ -86,7 +86,6 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
     };
     this.waterSpiderService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
       (res: PaginatedResult<AuditRateWaterSpider[]>) => {
-        debugger
         this.auditRateWaterSpider = res.result;
         this.pagination = res.pagination;
       },
@@ -97,16 +96,18 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
   }
 
   search() {
-    if (this.timeStart === '' || this.timeEnd === '') {
-      this.alertifyService.error('Please option start and end time');
-    } else {
-      this.spinner.show();
+    this.spinner.show();
+    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null ) {
+      this.toTime = '';
+      this.fromTime = '';
+    }
+    else {
       this.fromTime = new Date(this.timeStart).toLocaleDateString();
       this.toTime = new Date(this.timeEnd).toLocaleDateString();
-      this.pagination.currentPage = 1;
-      this.loadData();
-      this.spinner.hide();
     }
+    this.pagination.currentPage = 1;
+    this.loadData();
+    this.spinner.hide();
   }
   exportExcel() {
     let object = {

@@ -40,7 +40,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     private alertify: AlertifyService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.spinner.show();
@@ -112,11 +112,18 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.router.navigate(["/record/record-add/sms-scored-record-add"]);
   }
   search() {
-    debugger;
-      this.spinner.show();
-      this.pagination.currentPage = 1;
-      this.loadData();
-      this.spinner.hide();
+    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null) {
+      this.toTime = '';
+      this.fromTime = '';
+    }
+    else {
+      this.fromTime = new Date(this.timeStart).toLocaleDateString();
+      this.toTime = new Date(this.timeEnd).toLocaleDateString();
+    }
+    this.spinner.show();
+    this.pagination.currentPage = 1;
+    this.loadData();
+    this.spinner.hide();
   }
 
   detail(recordId) {

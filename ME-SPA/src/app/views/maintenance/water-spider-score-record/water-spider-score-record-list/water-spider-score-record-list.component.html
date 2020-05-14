@@ -32,7 +32,7 @@
 
               </div>
               <label class="badge badge-warning font-lable">Line</label>
-              <select class="form-control" name="" id="" [(ngModel)]="line">
+              <select class="form-control" name="line" [(ngModel)]="line">
                 <option value="{{ item.id }}" *ngFor="let item of lines">{{
                   item.text
                 }}</option>
@@ -52,7 +52,7 @@
               <div class="col-1"></div>
               <div class="col-3 ml-5">
                 <div class="col-1 ml-4 ">
-                  <button type="button" class="btn btn-block btn-query1 float-right btn-secondary">
+                  <button type="button" class="btn btn-block btn-query1 float-right btn-secondary" (click)="search()">
                     <i class="fa fa-search"></i> Search
                   </button>
                 </div>
@@ -65,15 +65,15 @@
             </div>
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">PDC</label>
-              <select class="form-control" name="" [(ngModel)]="pdc" id="">
-                <option value="{{ item.item }}" *ngFor="let item of pdcList">{{
+              <select class="form-control" name="pdc" [(ngModel)]="pdc">
+                <option value="{{ item.id }}" *ngFor="let item of pdcList">{{
                   item.text
                 }}</option>
               </select>
             </div>
             <div class="font-row col-3">
               <label class="badge badge-warning font-lable">Building</label>
-              <select class="form-control" name="" [(ngModel)]="building" id="">
+              <select class="form-control" name="building" [(ngModel)]="building">
                 <option value="{{ item.id }}" *ngFor="let item of buildings">{{
                   item.text
                 }}</option>
@@ -116,7 +116,7 @@
               </tbody>
             </table>
           </div>
-          <div class="d-flex" *ngIf="pagination.totalPages > 1">
+          <div class="d-flex" *ngIf="pagination.totalPages > 0">
             <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
               [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
               nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NgxSpinnerService } from "ngx-spinner";
-import { Pagination, PaginatedResult,} from "../../../../_core/_models/pagination";
+import { Pagination, PaginatedResult, } from "../../../../_core/_models/pagination";
 import { ScoreRecordService } from "../../../../_core/_services/score-record.service";
 import { Router } from "@angular/router";
 import { AuditRate6S } from "../../../../_core/_models/audit-rate-6s";
@@ -36,7 +36,7 @@ export class SixsScoreRecordListComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     private alertify: AlertifyService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.spinner.show();
@@ -104,24 +104,25 @@ export class SixsScoreRecordListComponent implements OnInit {
 
     this.pagination.currentPage = event.page;
 
-   this.loadData();
+    this.loadData();
 
   }
   addNew() {
     this.router.navigate(["/record/record-add/6s-scored-record-add"]);
   }
   search() {
-    if (this.timeStart == "" || this.timeEnd == "") {
-      this.alertify.error("Please option start and end time");
-    } else {
-      this.spinner.show();
-      this.fromTime = new Date(this.timeStart).toLocaleDateString();
-      // tslint:disable-next-line:prefer-const
-      this.toTime = new Date(this.timeEnd).toLocaleDateString();
-      this.pagination.currentPage=1;
-      this.loadData();
-      this.spinner.hide();
+    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null) {
+      this.toTime = '';
+      this.fromTime = '';
     }
+    else {
+      this.fromTime = new Date(this.timeStart).toLocaleDateString();
+      this.toTime = new Date(this.timeEnd).toLocaleDateString();
+    }
+    this.spinner.show();
+    this.pagination.currentPage = 1;
+    this.loadData();
+    this.spinner.hide();
   }
 
   exportExcel() {
@@ -135,7 +136,7 @@ export class SixsScoreRecordListComponent implements OnInit {
     };
     this.scoreRecordService.exportExcel(object);
   }
-  changeToDetail(recordId){
+  changeToDetail(recordId) {
     this.scoreRecordService.changeRecordId(recordId);
     this.router.navigate(["maintenance/6s-score-record/detail"]);
   }
