@@ -100,4 +100,8 @@ export class SmeScoreRecordService {
   saveScoreRecord(param: AuditRateModel) {
     return this.http.post(this.baseUrl + 'AuditRate/save', param);
   }
+
+  getDetailScoreRecord(recordId: string) {
+    return this.http.get<ScoreRecordDetail>(this.baseUrl + 'AuditRate/detail/' + recordId);
+  }
 }

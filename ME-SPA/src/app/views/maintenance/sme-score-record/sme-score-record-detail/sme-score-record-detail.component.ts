@@ -1,6 +1,8 @@
+import { Pagination } from './../../../../_core/_models/pagination';
+import { SmeScoreRecordService } from './../../../../_core/_services/sme-score-record.service';
 import { AuditRateDDetail } from './../../../../_core/_models/score-record-detail';
 import { AuditRateM } from './../../../../_core/_models/sme-record-question';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,12 +12,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SmeScoreRecordDetailComponent implements OnInit {
   url: any = '../../../../../assets/img/avatars/8.jpg';
+  pagination: Pagination = {
+    currentPage: 1,
+    itemsPerPage: 3,
+    totalItems: 1,
+    totalPages: 1,
+  };
   recordId: string = '';
-  auditRateM: AuditRateM;
+  auditRateM: AuditRateM = {
+    record_ID: '',
+    audit_Type_ID: '',
+    pdc: '',
+    building: '',
+    line: '',
+    audit_Type1: '',
+    audit_Type2: '',
+    me_Pic: '',
+    pd_Resp: '',
+    updated_By: '',
+    updated_Time: '',
+    record_Date: null,
+  };
   listAuditRateD: AuditRateDDetail[];
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private activeRouter: ActivatedRoute,
+              private smeScoreRecordService: SmeScoreRecordService) { }
 
   ngOnInit() {
+    this.loadDetail(this.recordId);
   }
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
@@ -28,6 +52,26 @@ export class SmeScoreRecordDetailComponent implements OnInit {
       };
     }
   }
+
+  loadDetail(recordId: string) {
+    debugger;
+    this.activeRouter.params.subscribe((params) => {
+      // tslint:disable-next-line:prefer-const
+      let recordId = params['recordId'];
+      this.smeScoreRecordService.getDetailScoreRecord(recordId)
+      .subscribe(data => {
+        console.log(data);
+        this.auditRateM = data.auditRateM;
+        this.listAuditRateD = data.listAuditRateD;
+        });
+    });
+  }
+
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadDetail(this.recordId);
+  }
+
 
   back() {
     this.router.navigate(['/maintenance/sme-score-record']);

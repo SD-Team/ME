@@ -1,6 +1,5 @@
 import { AlertifyService } from "./../../../_core/_services/alertify.service";
-import { AuditRateModel } from "./../../../_core/_models/score-record-question";
-import {SmeRecordQuestion, AuditRateM } from "./../../../_core/_models/sme-record-question";
+import {SmeRecordQuestion, AuditRateM, AuditRateModel } from "./../../../_core/_models/sme-record-question";
 import { MesOrgService } from "./../../../_core/_services/mes-org.service";
 import { SmeScoreRecordService } from "./../../../_core/_services/sme-score-record.service";
 import { Component, OnInit } from "@angular/core";

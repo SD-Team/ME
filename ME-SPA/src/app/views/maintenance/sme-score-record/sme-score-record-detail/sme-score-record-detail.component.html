@@ -12,23 +12,23 @@
           <div class="form-group row">
             <label class="col-md-1 col-form-label" for="hf-email">Date: </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" [(ngModel)]="auditRateM.record_Date" disabled />
             </div>
             <label class="col-md-1 col-form-label" for="hf-password">PDC</label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" [(ngModel)]="auditRateM.pdc" disabled />
             </div>
             <label class="col-md-1 col-form-label" for="hf-email"
               >Building:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" [(ngModel)]="auditRateM.building" disabled />
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Line</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" [(ngModel)]="auditRateM.line" disabled />
             </div>
           </div>
           <div class="form-group row">
@@ -36,25 +36,25 @@
               >Audit_Type_1:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" [(ngModel)]="auditRateM.audit_Type1" disabled />
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Audit_Type_2</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" [(ngModel)]="auditRateM.audit_Type2" disabled />
             </div>
             <label class="col-md-1 col-form-label" for="hf-email"
               >Update_User:
             </label>
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" [(ngModel)]="auditRateM.updated_By" disabled />
             </div>
             <label class="col-md-1 col-form-label" for="hf-password"
               >Update_Time</label
             >
             <div class="col-md-2">
-              <input type="text" class="form-control" disabled />
+              <input type="text" class="form-control" [(ngModel)]="auditRateM.updated_Time" disabled />
             </div>
           </div>
           <div class="table-responsive">
@@ -71,16 +71,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1.0</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>0</td>
-                  <td>Remark rating 0</td>
+                <tr *ngFor="let item of listAuditRateD">
+                  <td>{{item.auditItemId}}</td>
+                  <td>{{item.auditItemLL}}</td>
+                  <td>{{item.auditItemZW}}</td>
+                  <td>{{item.auditItemEN}}</td>
+                  <td >{{item.rating0 == 1 ? "0":item.rating1==1?"1":item.ratingNA==1?"NA": "2"}}</td>
+                  <td >{{item.remark}}</td>
                   <td>
-                    <img [src]="url" width="100%" width="60" />
-                    <label class="btn btn-primary upload">
+                    <div *ngIf="item.rating0 == 1" >
+                      <img [src]="url" width="100%" width="60" />
+                      <label class="btn btn-primary upload">
                       Upload
                       <input
                         type="file"
@@ -91,38 +92,27 @@
                         #fileImageB4
                       />
                     </label>
+                    </div>
+                    {{item.uplloadPicture}}
                   </td>
-                </tr>
-                <tr>
-                  <td>2.0</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>2</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>3.0</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>1</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>4.0</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>Healthy & Safety</td>
-                  <td>NA</td>
-                  <td></td>
-                  <td></td>
                 </tr>
               </tbody>
             </table>
           </div>
+        </div>
+        <div class="d-flex">
+          <pagination
+            [boundaryLinks]="true"
+            [totalItems]="pagination.totalItems"
+            [(ngModel)]="pagination.currentPage"
+            [itemsPerPage]="pagination.itemsPerPage"
+            (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;"
+            nextText="&rsaquo;"
+            firstText="&laquo;"
+            lastText="&raquo;"
+            [maxSize]=5>
+          </pagination>
         </div>
       </div>
     </div>
