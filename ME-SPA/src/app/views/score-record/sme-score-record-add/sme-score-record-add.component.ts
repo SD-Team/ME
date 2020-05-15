@@ -127,7 +127,7 @@ export class SmeScoreRecordAddComponent implements OnInit {
     // kiểm tra phải trả lời hết các câu hỏi mới được lưu
     for (let index = 0; index < this.questions.length; index++) {
       if (this.questions[index].rate_Na === undefined) {
-        this.alertifyService.error("Mời bạn trả lời tất cả các câu hỏi");
+        this.alertifyService.error("Please answer all the questions");
         return;
       }
     }
@@ -161,7 +161,7 @@ export class SmeScoreRecordAddComponent implements OnInit {
     // kiểm tra phải trả lời hết các câu hỏi mới được lưu
     for (let index = 0; index < this.questions.length; index++) {
       if (this.questions[index].rate_Na === undefined) {
-        this.alertifyService.error("Mời bạn trả lời tất cả các câu hỏi");
+        this.alertifyService.error("Please answer all the questions");
         return;
       }
     }

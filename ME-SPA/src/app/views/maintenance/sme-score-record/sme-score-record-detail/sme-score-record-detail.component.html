@@ -75,25 +75,55 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of listAuditRateD">
-                  <td>{{item.auditItemId}}</td>
-                  <td>{{item.auditItemLL}}</td>
-                  <td>{{item.auditItemZW}}</td>
-                  <td>{{item.auditItemEN}}</td>
-                  <td >{{item.rating0 == 1 ? "0":item.rating1==1?"1":item.ratingNA==1?"NA": "2"}}</td>
-                  <td >{{item.remark}}</td>
-                  <td *ngIf="item.rating0 ==1">
-                    <img *ngIf="chkImage(item.uplloadPicture)"
-                      [src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture" width="100%" width="60" />
-                    <video *ngIf="!chkImage(item.uplloadPicture)" width="100%"
-                      [src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture" controls width="100"></video>
+                  <td>{{ item.auditItemId }}</td>
+                  <td>{{ item.auditItemLL }}</td>
+                  <td>{{ item.auditItemZW }}</td>
+                  <td>{{ item.auditItemEN }}</td>
+                  <td>
+                    {{
+                      item.rating0 == 1
+                        ? "0"
+                        : item.rating1 == 1
+                        ? "1"
+                        : item.ratingNA == 1
+                        ? "NA"
+                        : null
+                    }}
+                  </td>
+                  <td>{{ item.remark }}</td>
+
+                  <td *ngIf="item.rating0 == 1">
+                    <img
+                      *ngIf="chkImage(item.uplloadPicture)"
+                      [src]="
+                        item.uplloadPicture === null
+                          ? urlImage
+                          : url + item.uplloadPicture
+                      "
+                      width="100%"
+                      width="60"
+                    />
+                    <video
+                      *ngIf="!chkImage(item.uplloadPicture)"
+                      width="100%"
+                      [src]="
+                        item.uplloadPicture === null
+                          ? urlImage
+                          : url + item.uplloadPicture
+                      "
+                      controls
+                      width="100"
+                    ></video>
                     <label class="btn btn-primary upload">
                       Upload
                       <input type="file" class="uploadFile img" value="Upload Photo"
                         style="width: 0px; height: 0px; overflow: hidden;"
-                        (change)="onSelectFile($event,item.auditItemId)" #fileImageB4 />
+                        (change)="onSelectFile($event, item.auditItemId)"
+                        #fileImageB4
+                      />
                     </label>
                   </td>
-                  <td *ngIf="item.rating0!=1"></td>
+                  <td *ngIf="item.rating0 != 1"></td>
                 </tr>
               </tbody>
             </table>

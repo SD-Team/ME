@@ -1,9 +1,9 @@
+import { AuditRateM } from './../../../../_core/_models/score-record-question';
+import { AuditRateDDetail } from './../../../../_core/_models/score-record-detail';
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from '../../../../_core/_services/alertify.service';
 import { ScoreRecordService } from '../../../../_core/_services/score-record.service';
 import { environment } from '../../../../../environments/environment';
-import { AuditRateM } from 'src/app/_core/_models/score-record-question';
-import { AuditRateDDetail } from 'src/app/_core/_models/score-record-detail';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -32,7 +32,7 @@ export class WaterSpiderScoreRecordDetailComponent implements OnInit {
   listAuditRateD: AuditRateDDetail[] = [];
 
   constructor(private alertifyService: AlertifyService,
-    private scoreRecordService: ScoreRecordService, private route: ActivatedRoute, 
+    private scoreRecordService: ScoreRecordService, private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
