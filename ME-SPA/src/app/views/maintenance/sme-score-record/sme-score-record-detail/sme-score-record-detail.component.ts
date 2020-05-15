@@ -60,8 +60,6 @@ export class SmeScoreRecordDetailComponent implements OnInit {
   }
 
   onSelectFile(event, auditItemId) {
-    debugger
-    console.log(event);
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       var title = event.target.files[0].name.split(".").pop();

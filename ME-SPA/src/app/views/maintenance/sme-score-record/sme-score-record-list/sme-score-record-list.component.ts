@@ -32,7 +32,7 @@ export class SmeScoreRecordListComponent implements OnInit {
   lines: any[] = [];
   buildings: any[] = [];
   auditType2List: any[] = [];
-  aududitRateSme: AuditRateSme[] = [];
+  auditRateSme: AuditRateSme[] = [];
   searchKey = false;
   text: string;
   constructor(
@@ -63,7 +63,7 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.smeScoreRecordService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
       (res: PaginatedResult<AuditRateSme[]>) => {
         console.log(res);
-        this.aududitRateSme = res.result;
+        this.auditRateSme = res.result;
         this.pagination = res.pagination;
       },
       (error) => {
@@ -142,6 +142,6 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.smeScoreRecordService.exportExcel(object);
   }
 
-  
+
 
 }
