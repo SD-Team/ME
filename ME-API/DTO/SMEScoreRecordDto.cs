@@ -40,7 +40,8 @@ namespace ME_API.DTO
                 }
                 else
                 {
-                    return ((decimal)Rating1 / (decimal)NeedToDoQty * 2) + ((decimal)Rating2 / (decimal)NeedToDoQty);
+                    // return ((decimal)Rating1 / (decimal)NeedToDoQty * 2) + ((decimal)Rating2 / (decimal)NeedToDoQty);
+                    return ((decimal)Rating1 + 4 * (decimal)Rating2) / (decimal)NeedToDoQty;
                 }
             }
         }
