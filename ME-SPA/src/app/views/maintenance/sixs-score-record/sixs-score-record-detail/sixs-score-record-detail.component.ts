@@ -36,7 +36,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
     private scoreRecordService: ScoreRecordService,
     private spinner: NgxSpinnerService,
     private alertify: AlertifyService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.scoreRecordService.currentRecordId.subscribe(
@@ -63,14 +63,14 @@ export class SixsScoreRecordDetailComponent implements OnInit {
       var title = event.target.files[0].name.split(".").pop();
       var fileZise = event.target.files[0].size;
       var file = event.target.files[0];
-        if (
-          title == "jpg" ||
-          title == "jpeg" ||
-          title == "png" ||
-          title == "JPG" ||
-          title == "IPEG" ||
-          title == "PNG"
-        ) {
+      if (
+        title == "jpg" ||
+        title == "jpeg" ||
+        title == "png" ||
+        title == "JPG" ||
+        title == "IPEG" ||
+        title == "PNG"
+      ) {
         if (fileZise <= 2097152) {
           // reader.readAsDataURL(event.target.files[0]); // read file as data url
           // reader.onload = (event) => { // called once readAsDataURL is completed
@@ -88,7 +88,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
               );
             },
             (error) => {
-              this.alertify.success(
+              this.alertify.error(
                 "Upload image of " + auditItemId + " failed"
               );
             }
@@ -106,6 +106,9 @@ export class SixsScoreRecordDetailComponent implements OnInit {
           formData.append("file", file);
           formData.append("recordId", this.recordId);
           formData.append("auditItemId", auditItemId);
+          this.scoreRecordService.uploadPicture(formData).subscribe(() => {
+            this.loadData();
+          });
           this.scoreRecordService.uploadPicture(formData).subscribe(
             () => {
               this.loadData();
@@ -128,9 +131,6 @@ export class SixsScoreRecordDetailComponent implements OnInit {
   back() {
     this.router.navigate(["maintenance/6s-score-record"]);
   }
-  exportExcel() {
-    this.scoreRecordService.exportExcelDetail(this.recordId);
-  }
   chkImage(uploadPicture) {
     if (uploadPicture != null) {
       if (
@@ -144,5 +144,9 @@ export class SixsScoreRecordDetailComponent implements OnInit {
     } else {
       return true;
     }
+  }
+
+  exportExcel() {
+    this.scoreRecordService.exportExcelDetail(this.recordId);
   }
 }
