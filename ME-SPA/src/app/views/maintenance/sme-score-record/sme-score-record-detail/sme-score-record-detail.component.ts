@@ -32,27 +32,34 @@ export class SmeScoreRecordDetailComponent implements OnInit {
   listAuditRateD: AuditRateDDetail[];
   constructor(
     private router: Router,
-    private activeRouter: ActivatedRoute,
+    private route: ActivatedRoute,
     private alertifyService: AlertifyService,
     private smeScoreRecordService: SmeScoreRecordService
   ) {}
 
   ngOnInit() {
-    this.loadDetail(this.recordId);
+    this.route.params.subscribe(param => {
+      this.recordId = param['recordId'];
+    });
+    this.loadDetail();
   }
 
-  loadDetail(recordId: string) {
-    this.activeRouter.params.subscribe((params) => {
-      let recordId = params["recordId"];
-      this.recordId = recordId;
-      this.smeScoreRecordService
-        .getDetailScoreRecord(recordId)
-        .subscribe((data) => {
-          console.log(this.url);
-          this.auditRateM = data.auditRateM;
-          this.listAuditRateD = data.listAuditRateD;
-        });
+  loadDetail() {
+    this.smeScoreRecordService.getDetailScoreRecord(this.recordId).subscribe(res => {
+      this.auditRateM = res.auditRateM;
+      this.listAuditRateD = res.listAuditRateD;
     });
+    // this.activeRouter.params.subscribe((params) => {
+    //   let recordId = params["recordId"];
+    //   this.recordId = recordId;
+    //   this.smeScoreRecordService
+    //     .getDetailScoreRecord(recordId)
+    //     .subscribe((data) => {
+    //       console.log(this.url);
+    //       this.auditRateM = data.auditRateM;
+    //       this.listAuditRateD = data.listAuditRateD;
+    //     });
+    // });
   }
 
   exportExcelDetail() {
@@ -85,7 +92,7 @@ export class SmeScoreRecordDetailComponent implements OnInit {
           this.smeScoreRecordService.uploadPicture(formData).subscribe(
             () => {
               console.log(formData);
-              this.loadDetail(this.recordId);
+              this.loadDetail();
               this.alertifyService.success(
                 "Upload image of " + auditItemId + " successfully"
               );
@@ -111,7 +118,7 @@ export class SmeScoreRecordDetailComponent implements OnInit {
           formData.append("auditItemId", auditItemId);
           this.smeScoreRecordService.uploadPicture(formData).subscribe(
             () => {
-              this.loadDetail(this.recordId);
+              this.loadDetail();
               this.alertifyService.success(
                 "Upload video of " + auditItemId + " successfully"
               );

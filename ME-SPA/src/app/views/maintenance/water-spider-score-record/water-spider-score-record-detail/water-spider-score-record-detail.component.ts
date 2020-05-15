@@ -120,6 +120,7 @@ export class WaterSpiderScoreRecordDetailComponent implements OnInit {
       this.auditRateM = res.auditRateM;
       this.listAuditRateD = res.listAuditRateD;
     });
+    
   }
 
   back() {
