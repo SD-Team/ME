@@ -4,15 +4,11 @@
       <div class="card">
         <div class="card-header">
           <i class="fa fa-align-justify"></i> 6S Record Detail
-<<<<<<< HEAD
-          <button type="button" class="btn btn-sm btn-primary float-right" (click)="back()">
-=======
           <button
             type="button"
             class="btn btn-sm btn-primary float-right"
             (click)="back()"
           >
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
             <i class="fa fa-chevron-left"></i> Back
           </button>
 
@@ -37,99 +33,71 @@
             </div>
             <label class="col-md-1 col-form-label" for="hf-password">PDC</label>
             <div class="col-md-2">
-<<<<<<< HEAD
-              <input type="text" class="form-control" disabled [value]="auditRateM.pdc" />
-=======
               <input
                 type="text"
                 class="form-control"
                 disabled
                 [value]="auditRateM.pdc"
               />
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
             </div>
             <label class="col-md-1 col-form-label" for="hf-email">Building:
             </label>
             <div class="col-md-2">
-<<<<<<< HEAD
-              <input type="text" class="form-control" disabled [value]="auditRateM.building" />
-=======
               <input
                 type="text"
                 class="form-control"
                 disabled
                 [value]="auditRateM.building"
               />
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
             </div>
             <label class="col-md-1 col-form-label" for="hf-password">Line</label>
             <div class="col-md-2">
-<<<<<<< HEAD
-              <input type="text" class="form-control" disabled [value]="auditRateM.line" />
-=======
               <input
                 type="text"
                 class="form-control"
                 disabled
                 [value]="auditRateM.line"
               />
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-1 col-form-label" for="hf-email">Audit_Type_1:
             </label>
             <div class="col-md-2">
-<<<<<<< HEAD
-              <input type="text" class="form-control" disabled [value]="auditRateM.audit_Type1" />
-=======
               <input
                 type="text"
                 class="form-control"
                 disabled
                 [value]="auditRateM.audit_Type1"
               />
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
             </div>
             <label class="col-md-1 col-form-label" for="hf-password">Audit_Type_2</label>
             <div class="col-md-2">
-<<<<<<< HEAD
-              <input type="text" class="form-control" disabled [value]="auditRateM.audit_Type2" />
-=======
               <input
                 type="text"
                 class="form-control"
                 disabled
                 [value]="auditRateM.audit_Type2"
               />
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
             </div>
             <label class="col-md-1 col-form-label" for="hf-email">Update_User:
             </label>
             <div class="col-md-2">
-<<<<<<< HEAD
-              <input type="text" class="form-control" disabled [value]="auditRateM.updated_By" />
-=======
               <input
                 type="text"
                 class="form-control"
                 disabled
                 [value]="auditRateM.updated_By"
               />
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
             </div>
             <label class="col-md-1 col-form-label" for="hf-password">Update_Time</label>
             <div class="col-md-2">
-<<<<<<< HEAD
-              <input type="text" class="form-control" disabled [value]="auditRateM.updated_Time|date:'yyyy/MM/dd'" />
-=======
               <input
                 type="text"
                 class="form-control"
                 disabled
                 [value]="auditRateM.updated_Time | date: 'yyyy/MM/dd hh:mm:ss'"
               />
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
             </div>
           </div>
           <div class="table-responsive">
@@ -147,20 +115,6 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of listAuditRateD">
-<<<<<<< HEAD
-                  <td>{{item.auditItemId}}</td>
-                  <td>{{item.auditItemLL}}</td>
-                  <td>{{item.auditItemZW}}</td>
-                  <td>{{item.auditItemEN}}</td>
-                  <td>{{item.rating0 == 1 ? "0":item.rating1==1?"1":item.ratingNA==1?"NA":null}}</td>
-                  <td>{{item.remark}}</td>
-
-                  <td *ngIf="item.rating0 ==1">
-                    <img *ngIf="chkImage(item.uplloadPicture)"
-                      [src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture" width="100%" width="60" />
-                    <video *ngIf="!chkImage(item.uplloadPicture)" width="100%"
-                      [src]="item.uplloadPicture===null?urlImage:url+item.uplloadPicture" controls width="100"></video>
-=======
                   <td>{{ item.auditItemId }}</td>
                   <td>{{ item.auditItemLL }}</td>
                   <td>{{ item.auditItemZW }}</td>
@@ -200,24 +154,16 @@
                       controls
                       width="100"
                     ></video>
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
                     <label class="btn btn-primary upload">
                       Upload
                       <input type="file" class="uploadFile img" value="Upload Photo"
                         style="width: 0px; height: 0px; overflow: hidden;"
-<<<<<<< HEAD
-                        (change)="onSelectFile($event,item.auditItemId)" #fileImageB4 />
-                    </label>
-                  </td>
-                  <td *ngIf="item.rating0!=1"></td>
-=======
                         (change)="onSelectFile($event, item.auditItemId)"
                         #fileImageB4
                       />
                     </label>
                   </td>
                   <td *ngIf="item.rating0 != 1"></td>
->>>>>>> 02b715eeec9c00f6f3cadf5c018e97e8f01ca3c6
                 </tr>
               </tbody>
             </table>

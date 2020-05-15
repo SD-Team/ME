@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from '../../../../_core/_services/alertify.service';
 import { ScoreRecordService } from '../../../../_core/_services/score-record.service';
 import { environment } from '../../../../../environments/environment';
-import { AuditRateM } from 'src/app/_core/_models/score-record-question';
-import { AuditRateDDetail } from 'src/app/_core/_models/score-record-detail';
+import { AuditRateM } from '../../../../_core/_models/score-record-question';
+import { AuditRateDDetail } from '../../../../_core/_models/score-record-detail';
 import { ActivatedRoute, Router } from '@angular/router';
+import { WaterSpiderScoreRecordService } from '../../../../_core/_services/water-spider-score-record.service';
 
 @Component({
   selector: 'app-water-spider-score-record-detail',
@@ -32,8 +33,8 @@ export class WaterSpiderScoreRecordDetailComponent implements OnInit {
   listAuditRateD: AuditRateDDetail[] = [];
 
   constructor(private alertifyService: AlertifyService,
-    private scoreRecordService: ScoreRecordService, private route: ActivatedRoute, 
-    private router: Router) { }
+    private scoreRecordService: ScoreRecordService, private route: ActivatedRoute,
+    private router: Router, private waterSpiderService: WaterSpiderScoreRecordService) { }
 
   ngOnInit() {
     this.route.params.subscribe(param => {
@@ -57,7 +58,15 @@ export class WaterSpiderScoreRecordDetailComponent implements OnInit {
           formData.append('auditItemId', auditItemId);
           this.scoreRecordService.uploadPicture(formData).subscribe(() => {
             this.loadData();
-          });
+            this.alertifyService.success(
+              'Upload image of ' + auditItemId + ' successfully'
+            );
+          },
+            (error) => {
+              this.alertifyService.error(
+                'Upload image of ' + auditItemId + ' failed'
+              );
+            });
         }
         else {
           this.alertifyService.error('Images cannot be larger than 2MB');
@@ -71,7 +80,15 @@ export class WaterSpiderScoreRecordDetailComponent implements OnInit {
           formData.append('auditItemId', auditItemId);
           this.scoreRecordService.uploadPicture(formData).subscribe(() => {
             this.loadData();
-          });
+            this.alertifyService.success(
+              'Upload video of ' + auditItemId + ' successfully'
+            );
+          },
+            (error) => {
+              this.alertifyService.error(
+                'Upload video of ' + auditItemId + ' failed'
+              );
+            });
         }
         else {
           this.alertifyService.error('Video cannot be larger than 5MB');
@@ -80,9 +97,22 @@ export class WaterSpiderScoreRecordDetailComponent implements OnInit {
       else {
         this.alertifyService.error('Incorrect format');
       }
-
     }
+  }
 
+  chkImage(uploadPicture) {
+    if (uploadPicture != null) {
+      if (
+        uploadPicture.split('.').pop() === 'mp4' ||
+        uploadPicture.split('.').pop() === 'MP4'
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
   }
 
   loadData() {
@@ -92,7 +122,11 @@ export class WaterSpiderScoreRecordDetailComponent implements OnInit {
     });
   }
 
-  back(){
+  back() {
     this.router.navigate(['/maintenance/water-spider-score-record'])
+  }
+
+  exportExcel() {
+    this.waterSpiderService.exportExcelDetail(this.recordId);
   }
 }
