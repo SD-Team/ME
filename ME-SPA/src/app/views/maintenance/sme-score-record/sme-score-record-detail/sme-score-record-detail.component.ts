@@ -12,21 +12,20 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./sme-score-record-detail.component.scss"],
 })
 export class SmeScoreRecordDetailComponent implements OnInit {
-  urlImage = environment.imageUrl + "no-image.jpg";
   url: any = environment.imageUrl;
-  recordId: string = "";
+  recordId: string = '';
   auditRateM: AuditRateM = {
-    record_ID: "",
-    audit_Type_ID: "",
-    pdc: "",
-    building: "",
-    line: "",
-    audit_Type1: "",
-    audit_Type2: "",
-    me_Pic: "",
-    pd_Resp: "",
-    updated_By: "",
-    updated_Time: "",
+    record_ID: '',
+    audit_Type_ID: '',
+    pdc: '',
+    building: '',
+    line: '',
+    audit_Type1: '',
+    audit_Type2: '',
+    me_Pic: '',
+    pd_Resp: '',
+    updated_By: '',
+    updated_Time: '',
     record_Date: null,
   };
   listAuditRateD: AuditRateDDetail[];
@@ -49,17 +48,6 @@ export class SmeScoreRecordDetailComponent implements OnInit {
       this.auditRateM = res.auditRateM;
       this.listAuditRateD = res.listAuditRateD;
     });
-    // this.activeRouter.params.subscribe((params) => {
-    //   let recordId = params["recordId"];
-    //   this.recordId = recordId;
-    //   this.smeScoreRecordService
-    //     .getDetailScoreRecord(recordId)
-    //     .subscribe((data) => {
-    //       console.log(this.url);
-    //       this.auditRateM = data.auditRateM;
-    //       this.listAuditRateD = data.listAuditRateD;
-    //     });
-    // });
   }
 
   exportExcelDetail() {
@@ -81,10 +69,6 @@ export class SmeScoreRecordDetailComponent implements OnInit {
           title == "PNG"
         ) {
         if (fileZise <= 2097152) {
-          // reader.readAsDataURL(event.target.files[0]); // read file as data url
-          // reader.onload = (event) => { // called once readAsDataURL is completed
-          //   this.url = event.target.result;
-          // };
           const formData = new FormData();
           formData.append("file", file);
           formData.append("recordId", this.recordId);
@@ -108,10 +92,6 @@ export class SmeScoreRecordDetailComponent implements OnInit {
         }
       } else if (title == "mp4" || title == "MP4") {
         if (fileZise <= 5242880) {
-          // reader.readAsDataURL(event.target.files[0]); // read file as data url
-          // reader.onload = (event) => { // called once readAsDataURL is completed
-          //   this.url = (<FileReader>event.target).result;
-          //  };
           const formData = new FormData();
           formData.append("file", file);
           formData.append("recordId", this.recordId);

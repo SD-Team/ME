@@ -79,16 +79,7 @@
                   <td>{{ item.auditItemLL }}</td>
                   <td>{{ item.auditItemZW }}</td>
                   <td>{{ item.auditItemEN }}</td>
-                  <td>
-                    {{
-                      item.rating0 == 1
-                        ? "0"
-                        : item.rating1 == 1
-                        ? "1"
-                        : item.ratingNA == 1
-                        ? "NA"
-                        : null
-                    }}
+                  <td>{{item.rating2 == 1 ? "2" : item.rating1 == 1 ? "1" : item.rating0 == 1 ? "0" : "NA"}}
                   </td>
                   <td>{{ item.remark }}</td>
 
@@ -97,7 +88,7 @@
                       *ngIf="chkImage(item.uplloadPicture)"
                       [src]="
                         item.uplloadPicture === null
-                          ? urlImage
+                          ? url + 'no-image.jpg'
                           : url + item.uplloadPicture
                       "
                       width="100%"
@@ -108,7 +99,7 @@
                       width="100%"
                       [src]="
                         item.uplloadPicture === null
-                          ? urlImage
+                          ? url + 'no-image.jpg'
                           : url + item.uplloadPicture
                       "
                       controls
