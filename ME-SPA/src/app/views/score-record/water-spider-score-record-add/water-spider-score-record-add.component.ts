@@ -8,6 +8,7 @@ import {
   AuditRateModel,
 } from '../../../_core/_models/score-record-question';
 import { AlertifyService } from '../../../_core/_services/alertify.service';
+import { FunctionUtility } from '../../../_core/_utility/function-utility';
 @Component({
   selector: 'app-water-spider-score-record-add',
   templateUrl: './water-spider-score-record-add.component.html',
@@ -30,7 +31,8 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
     private router: Router,
     private mesOrgService: MesOrgService,
     private scoreService: ScoreRecordService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private functionUtility: FunctionUtility
   ) { }
 
   ngOnInit() {
@@ -80,7 +82,7 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
     auditRateM.audit_Type1 = '精實系統/WS';
     auditRateM.audit_Type2 = '';
     auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
-    auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
+    auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
     auditRateM.updated_By = this.user.user_Name;
 
     let param = new AuditRateModel();

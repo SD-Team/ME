@@ -4,6 +4,7 @@ import { MesOrgService } from "./../../../_core/_services/mes-org.service";
 import { SmeScoreRecordService } from "./../../../_core/_services/sme-score-record.service";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { FunctionUtility } from './../../../_core/_utility/function-utility';
 
 @Component({
   selector: "app-sme-score-record-add",
@@ -29,7 +30,8 @@ export class SmeScoreRecordAddComponent implements OnInit {
     private router: Router,
     private mesOrgService: MesOrgService,
     private smeScoreRecordService: SmeScoreRecordService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private functionUtility: FunctionUtility
   ) {}
 
   ngOnInit() {
@@ -116,8 +118,7 @@ export class SmeScoreRecordAddComponent implements OnInit {
     auditRateM.audit_Type1 = "SME2.0";
     auditRateM.audit_Type2 = this.selectType2;
     auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
-    // auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
-    auditRateM.record_Date = this.recordDate;
+    auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
     auditRateM.updated_By = this.user.user_Name;
 
     let param = new AuditRateModel();
@@ -150,8 +151,7 @@ export class SmeScoreRecordAddComponent implements OnInit {
     auditRateM.audit_Type1 = "SME2.0";
     auditRateM.audit_Type2 = this.selectType2;
     auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
-    // auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
-    auditRateM.record_Date = this.recordDate;
+    auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
     auditRateM.updated_By = this.user.user_Name;
 
     let param = new AuditRateModel();
