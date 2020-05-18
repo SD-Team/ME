@@ -14,6 +14,7 @@ import { FunctionUtility } from './../../../_core/_utility/function-utility';
 export class SmeScoreRecordAddComponent implements OnInit {
   questions: SmeRecordQuestion[] = [];
   user: any = JSON.parse(localStorage.getItem("user"));
+  lang: string = 'en';
   today: Date = new Date();
   recordDate: Date = new Date();
   pdcs: string[];
@@ -195,5 +196,9 @@ export class SmeScoreRecordAddComponent implements OnInit {
 
   back() {
     this.router.navigate(["maintenance/sme-score-record"]);
+  }
+  changeLanguage(event) {
+    this.lang = event;
+    this.loadQuestion();
   }
 }

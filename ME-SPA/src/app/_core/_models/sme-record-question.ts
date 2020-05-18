@@ -2,6 +2,9 @@ export class SmeRecordQuestion {
   audit_Type_ID: string;
   audit_Item_ID: string;
   quesion: string;
+  quesionLL: string;
+  quesionEN: string;
+  quesionZW: string;
   rating_0: number;
   rating_1: number;
   rating_2: number;

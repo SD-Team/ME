@@ -17,6 +17,7 @@ import { FunctionUtility } from '../../../_core/_utility/function-utility';
 export class SixsScoreRecordAddComponent implements OnInit {
   questions: ScoreRecordQuestion[] = [];
   user: any = JSON.parse(localStorage.getItem("user"));
+  lang: string = 'en';
   today: Date = new Date();
   recordDate: Date = new Date();
   pdcs: string[];
@@ -189,6 +190,10 @@ export class SixsScoreRecordAddComponent implements OnInit {
     this.loadQuestion();
   }
   cancel() {
+    this.loadQuestion();
+  }
+  changeLanguage(event) {
+    this.lang = event;
     this.loadQuestion();
   }
 }

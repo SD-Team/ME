@@ -17,6 +17,7 @@ import { FunctionUtility } from '../../../_core/_utility/function-utility';
 export class WaterSpiderScoreRecordAddComponent implements OnInit {
   questions: ScoreRecordQuestion[] = [];
   user: any = JSON.parse(localStorage.getItem('user'));
+  lang: string = 'en';
   today: Date = new Date();
   recordDate: Date = new Date();
   pdcs: string[];
@@ -141,5 +142,10 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
       item.rate_Na = 1;
       item.remark = null;
     }
+  }
+
+  changeLanguage(event) {
+    this.lang = event;
+    this.loadQuestion();
   }
 }

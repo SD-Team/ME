@@ -65,7 +65,7 @@ export class SmeScoreRecordDetailComponent implements OnInit {
           title == "jpeg"||
           title == "png" ||
           title == "JPG" ||
-          title == "IPEG"||
+          title == "JPEG"||
           title == "PNG"
         ) {
         if (fileZise <= 2097152) {
