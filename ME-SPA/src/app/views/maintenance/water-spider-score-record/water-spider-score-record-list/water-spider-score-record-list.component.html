@@ -57,8 +57,13 @@
                   </button>
                 </div>
                 <div class="col-1 ml-5">
-                  <button type="button" class="btn btn-block btn-query1  btn-success" (click)="exportExcel()">
-                    <i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span>
+                  <button
+                    type="button"
+                    class="btn btn-block btn-query1 btn-danger"
+                    (click)="clearSearch()"
+                  >
+                  <i class="fa fa-ban" ></i>
+                    <span style="margin-left: 2px;">Clear Search</span>
                   </button>
                 </div>
               </div>
@@ -78,6 +83,11 @@
                   item.text
                 }}</option>
               </select>
+              <div class="col-1 ml-5">
+                <button type="button" class="btn btn-block btn-query1  btn-success" (click)="exportExcel()">
+                  <i class="fa fa-file-excel-o"></i> <span style="margin-left: 2px;">Excel</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

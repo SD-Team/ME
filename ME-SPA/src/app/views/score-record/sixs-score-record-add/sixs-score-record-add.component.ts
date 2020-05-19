@@ -123,7 +123,7 @@ export class SixsScoreRecordAddComponent implements OnInit {
       auditRateM.updated_By = this.user.user_Name;
 
       auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
-
+debugger;
       let param = new AuditRateModel();
       param.listAuditRateD = this.questions;
       param.auditRateM = auditRateM;

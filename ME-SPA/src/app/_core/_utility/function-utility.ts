@@ -37,4 +37,14 @@ export class FunctionUtility {
         return tmp;
     }
 
+    /**
+     *Trả ra ngày với tham số truyền vào là ngày muốn format, chỉ lấy năm tháng ngày: yyyy/MM/dd
+     */
+    getDateFormat(day: Date) {
+        const dateFormat = day.getFullYear().toString() +
+            '/' + (day.getMonth() + 1).toString() +
+            '/' + day.getDate().toString();
+        return dateFormat;
+    }
+
 }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { WaterSpiderScoreRecordService } from '../../../../_core/_services/water-spider-score-record.service';
 import { AuditRateWaterSpider } from '../../../../_core/_models/audit-rate-water-spider';
 import { AlertifyService } from '../../../../_core/_services/alertify.service';
+import { FunctionUtility } from '../../../../_core/_utility/function-utility';
 
 @Component({
   selector: 'app-water-spider-score-record-list',
@@ -35,7 +36,8 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService,
     private waterSpiderService: WaterSpiderScoreRecordService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private functionUtility: FunctionUtility
   ) { }
 
   ngOnInit() {
@@ -116,8 +118,8 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       this.fromTime = '';
     }
     else {
-      this.fromTime = new Date(this.timeStart).toLocaleDateString();
-      this.toTime = new Date(this.timeEnd).toLocaleDateString();
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
     }
     let object = {
       pdc: this.pdc,
@@ -133,6 +135,14 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
 
   detail(recordId: string) {
     this.router.navigate(['/maintenance/water-spider-score-record/detail', recordId]);
+  }
+
+  clearSearch(){
+   this.pdc = "";
+    this.building = "";
+    this.line = "";
+    this.timeEnd = "";
+    this.timeStart = "";
   }
 
 }

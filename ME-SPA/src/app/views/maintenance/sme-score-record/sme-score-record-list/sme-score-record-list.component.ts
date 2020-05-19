@@ -6,6 +6,7 @@ import { Pagination, PaginatedResult } from './../../../../_core/_models/paginat
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FunctionUtility } from '../../../../_core/_utility/function-utility';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class SmeScoreRecordListComponent implements OnInit {
     private smeScoreRecordService: SmeScoreRecordService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private functionUtility: FunctionUtility
   ) { }
 
   ngOnInit() {
@@ -81,7 +83,8 @@ export class SmeScoreRecordListComponent implements OnInit {
   getListBuilding() {
     this.smeScoreRecordService.getListBuilding().subscribe((res) => {
       this.buildings = res.map((item) => {
-        return { id: item, text: item };
+        if (item.trim() != "")
+          return { id: item, text: item };
       });
       this.buildings.unshift({ id: "", text: "All" });
     });
@@ -89,7 +92,8 @@ export class SmeScoreRecordListComponent implements OnInit {
   getListLine() {
     this.smeScoreRecordService.getListLine().subscribe((res) => {
       this.lines = res.map((item) => {
-        return { id: item, text: item };
+        if (item.trim() != "")
+          return { id: item, text: item };
       });
       this.lines.unshift({ id: "", text: "All" });
     });
@@ -97,7 +101,9 @@ export class SmeScoreRecordListComponent implements OnInit {
   optionAuditType2() {
     this.smeScoreRecordService.getAuditType2().subscribe((res) => {
       this.auditType2List = res.map((item) => {
-        return { id: item, text: item };
+        if (item.trim() != "") {
+          return { id: item, text: item };
+        }
       });
       this.auditType2List.unshift({ id: "", text: "All" });
     });
@@ -115,8 +121,8 @@ export class SmeScoreRecordListComponent implements OnInit {
       this.fromTime = '';
     }
     else {
-      this.fromTime = new Date(this.timeStart).toLocaleDateString();
-      this.toTime = new Date(this.timeEnd).toLocaleDateString();
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
     }
     this.spinner.show();
     this.pagination.currentPage = 1;
@@ -140,6 +146,13 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.smeScoreRecordService.exportExcel(object);
   }
 
-
+  clearSearch() {
+    this.pdc = "";
+    this.building = "";
+    this.line = "";
+    this.auditType2 = "";
+    this.timeEnd = "";
+    this.timeStart = "";
+  }
 
 }

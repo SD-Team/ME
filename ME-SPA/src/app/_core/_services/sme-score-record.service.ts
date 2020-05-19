@@ -80,7 +80,7 @@ export class SmeScoreRecordService {
   }
   getAuditType2()
   {
-    return this.http.get<any>(this.baseUrl + 'AuditType/audittype2');
+    return this.http.get<any>(this.baseUrl + 'AuditRate/audittype2bysme');
   }
 
   getAuditType2Score() {

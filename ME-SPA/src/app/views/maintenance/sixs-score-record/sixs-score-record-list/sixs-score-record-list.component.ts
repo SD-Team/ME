@@ -5,6 +5,7 @@ import { ScoreRecordService } from "../../../../_core/_services/score-record.ser
 import { Router } from "@angular/router";
 import { AuditRate6S } from "../../../../_core/_models/audit-rate-6s";
 import { AlertifyService } from "../../../../_core/_services/alertify.service";
+import { FunctionUtility } from '../../../../_core/_utility/function-utility';
 
 @Component({
   selector: "app-sixs-score-record-list",
@@ -20,7 +21,7 @@ export class SixsScoreRecordListComponent implements OnInit {
   };
   timeStart: string = "";
   timeEnd: string = "";
-  fromTime: string = "";
+  fromTime: string="" ;
   toTime: string = "";
   pdc: string = "";
   line: string = "";
@@ -35,7 +36,8 @@ export class SixsScoreRecordListComponent implements OnInit {
     private scoreRecordService: ScoreRecordService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private functionUtility: FunctionUtility
   ) { }
 
   ngOnInit() {
@@ -116,8 +118,8 @@ export class SixsScoreRecordListComponent implements OnInit {
       this.fromTime = '';
     }
     else {
-      this.fromTime = new Date(this.timeStart).toLocaleDateString();
-      this.toTime = new Date(this.timeEnd).toLocaleDateString();
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
     }
     this.spinner.show();
     this.pagination.currentPage = 1;
@@ -140,4 +142,16 @@ export class SixsScoreRecordListComponent implements OnInit {
     this.scoreRecordService.changeRecordId(recordId);
     this.router.navigate(["maintenance/6s-score-record/detail"]);
   }
+
+
+  clearSearch() {
+    debugger;
+    this.pdc = "";
+    this.building = "";
+    this.line = "";
+    this.auditType2 = "";
+    this.timeEnd= "";
+    this.timeStart= "";
+  }
+
 }
