@@ -8,5 +8,6 @@ namespace ME_API._Repositories.Interface
         int SumRating0(string recordId);
         int SumRating1(string recordId);
         int? SumRatingNa(string recordId);
+        int SumEachRating1InAuditTypeDAndAuditRateD(string recordId);
     }
 }

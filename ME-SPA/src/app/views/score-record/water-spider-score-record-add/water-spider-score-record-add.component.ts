@@ -70,6 +70,7 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
     this.pdc = this.pdcs[0];
     this.building = this.buildings[0];
     this.lineID = this.lineIDs[0];
+    this.loadQuestion();
   }
   saveNoNew() {
     this.save();
