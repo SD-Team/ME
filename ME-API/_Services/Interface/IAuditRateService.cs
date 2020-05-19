@@ -12,5 +12,8 @@ namespace ME_API._Services.Interface {
 
         Task<string> GetRecordIdRate ();
         Task<ScoreRecordDetailDto> GetScoreRecordDetail (string recordId);
+
+        Task<object> GetMEPIC();
+        Task<object> GetPDRESP();
     }
 }

@@ -178,9 +178,6 @@ export class SmeScoreRecordAddComponent implements OnInit {
   }
 
   loadSelectSaveAndNext() {
-    this.pdc = this.pdcs[0];
-    this.building = this.buildings[0];
-    this.lineID = this.lineIDs[0];
     this.questions = [];
     this.selectType2 = '';
   }
