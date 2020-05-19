@@ -1,17 +1,18 @@
 <div>
   <div class="choose-question">
     <div class="row">
-      <div class="col-9">
+      <div class="col-md-9 col-12">
         <p class="title-head">SME 稽核評分紀錄</p>
       </div>
-      <div class="col-2">
+      <div class="col-md-2 col-6 mb-3 mb-md-0">
+        <label class="badge badge-primary">Language</label>
         <select class="form-control" [(ngModel)]="lang" (ngModelChange)="changeLanguage($event)">
           <option value="vn">Vietnamese</option>
           <option value="en">English</option>
           <option value="zw">Chinese</option>
         </select>
       </div>
-      <div class="col-1">
+      <div class="col-md-1 col-6">
         <button
           type="button"
           class="btn btn-sm btn-primary float-right"

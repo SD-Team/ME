@@ -109,7 +109,7 @@ export class SixsScoreRecordAddComponent implements OnInit {
       item.remark = null;
     }
   }
-  save() {
+  saveAll(check) {
     if (this.auditType2 == "") {
       this.alertifyService.error("Please option auditType2");
     } else {
@@ -121,7 +121,6 @@ export class SixsScoreRecordAddComponent implements OnInit {
       auditRateM.audit_Type2 = this.auditType2;
       auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
       auditRateM.updated_By = this.user.user_Name;
-      debugger
 
       auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
 
@@ -138,47 +137,15 @@ export class SixsScoreRecordAddComponent implements OnInit {
       }
       this.scoreService.saveScoreRecord(param).subscribe(
         () => {
+        
+          if(check==2){
+            this.router.navigate(["maintenance/6s-score-record"]);
+          }
+          else{
+            this.questions = [];
+            this.auditType2 = "";
+          }
           this.alertifyService.success("success");
-          this.router.navigate(["maintenance/6s-score-record"]);
-        },
-        (error) => {
-          this.alertifyService.error(error);
-        }
-      );
-    }
-  }
-  saveAndNew() {
-    if (this.auditType2 == "") {
-      this.alertifyService.error("Please option auditType2");
-    } else {
-      let auditRateM = new AuditRateM();
-      auditRateM.pdc = this.pdc;
-      auditRateM.building = this.building;
-      auditRateM.line = this.lineID;
-      auditRateM.audit_Type1 = "6S";
-      auditRateM.audit_Type2 = this.auditType2;
-      auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
-      auditRateM.updated_By = this.user.user_Name;
-
-      debugger
-      auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
-
-      let param = new AuditRateModel();
-      param.listAuditRateD = this.questions;
-      param.auditRateM = auditRateM;
-
-      // kiểm tra phải trả lời hết các câu hỏi mới được lưu
-      for (let index = 0; index < this.questions.length; index++) {
-        if (this.questions[index].rate_Na === undefined) {
-          this.alertifyService.error("Please answer all the questions");
-          return;
-        }
-      }
-      this.scoreService.saveScoreRecord(param).subscribe(
-        () => {
-          this.alertifyService.success("success");
-          this.questions = [];
-          this.auditType2 = "";
         },
         (error) => {
           this.alertifyService.error(error);
