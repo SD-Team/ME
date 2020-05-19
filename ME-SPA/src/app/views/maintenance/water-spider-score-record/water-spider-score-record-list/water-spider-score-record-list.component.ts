@@ -128,6 +128,7 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       auditType2: ''
     };
     this.waterSpiderService.exportExcel(object);
+   this.spinner.hide();
   }
 
   detail(recordId: string) {
