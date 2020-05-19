@@ -39,8 +39,6 @@ export class SmeScoreRecordService {
     return this.http.post<any>(url, auditRateSearch, { observe: 'response', params })
       .pipe(
         map(response => {
-          debugger;
-          console.log(response);
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
             paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
@@ -52,7 +50,6 @@ export class SmeScoreRecordService {
   exportExcel(auditRateSearch?: AuditRateSearch) {
     return this.http.post(this.baseUrl + 'SMERecord/ExportExcelSME', auditRateSearch, { responseType: 'blob' })
       .subscribe((result: Blob) => {
-        console.log(result);
         if (result.type !== 'application/xlsx') {
           alert(result.type);
         }
