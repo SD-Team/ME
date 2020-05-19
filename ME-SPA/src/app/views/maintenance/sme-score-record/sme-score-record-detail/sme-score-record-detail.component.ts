@@ -75,7 +75,6 @@ export class SmeScoreRecordDetailComponent implements OnInit {
           formData.append("auditItemId", auditItemId);
           this.smeScoreRecordService.uploadPicture(formData).subscribe(
             () => {
-              console.log(formData);
               this.loadDetail();
               this.alertifyService.success(
                 "Upload image of " + auditItemId + " successfully"

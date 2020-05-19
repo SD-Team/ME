@@ -62,7 +62,6 @@ export class SmeScoreRecordListComponent implements OnInit {
     };
     this.smeScoreRecordService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
       (res: PaginatedResult<AuditRateSme[]>) => {
-        console.log(res);
         this.auditRateSme = res.result;
         this.pagination = res.pagination;
       },
@@ -73,7 +72,6 @@ export class SmeScoreRecordListComponent implements OnInit {
   }
   getListPDCs() {
     this.smeScoreRecordService.getListPDC().subscribe((res) => {
-      console.log(res);
       this.pdcList = res.map((item) => {
         return { id: item, text: item };
       });
