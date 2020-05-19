@@ -134,5 +134,27 @@ namespace ME_API.Controllers
             return NoContent();
         }
 
+
+        [HttpGet("getmepic")]
+        public async Task<ActionResult> GetMEPIC()
+        {
+            var data = await _auditRateService.GetMEPIC();
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            return NoContent();
+        }
+
+        [HttpGet("getpdresp")]
+        public async Task<ActionResult> GetPDRESP()
+        {
+            var data = await _auditRateService.GetPDRESP();
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            return NoContent();
+        }
     }
 }

@@ -20,8 +20,8 @@ export class AuditRateM {
     line: string;
     audit_Type1: string;
     audit_Type2: string;
-    me_Pic: string;
-    pd_Resp: string;
+    mE_PIC: string;
+    pD_RESP: string;
     updated_By: string;
     updated_Time: string;
     record_Date: Date;
