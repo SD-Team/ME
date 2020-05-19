@@ -104,8 +104,8 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       this.fromTime = '';
     }
     else {
-      this.fromTime = new Date(this.timeStart).toLocaleDateString();
-      this.toTime = new Date(this.timeEnd).toLocaleDateString();
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
     }
     this.pagination.currentPage = 1;
     this.loadData();
