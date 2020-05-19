@@ -13,6 +13,27 @@ namespace ME_API._Repositories.Repositories
             _context = context;
         }
 
+        public int SumEachRating1InAuditTypeDAndAuditRateD(string recordId)
+        {
+            var auditTypeM = _context.MES_Audit_Type_M.Where(x => x.Audit_Type1.Trim() == "精實系統/WS").FirstOrDefault();
+            var listAuditTypeD = _context.MES_Audit_Type_D.Where(x => x.Audit_Type_ID.Trim() == auditTypeM.Audit_Type_ID.Trim()).ToList();
+            var listAuditRateD = _context.MES_Audit_Rate_D.Where(x => x.Record_ID == recordId).ToList();
+
+            // biến lưu tổng của tích từng phần tử 
+            int result = 0;
+            foreach (var i in listAuditTypeD)
+            {
+                foreach (var j in listAuditRateD)
+                {
+                    if (i.Audit_Item_ID == j.Audit_Item_ID)
+                    {
+                        result += i.Rating_1 * j.Rating_1;
+                    }
+                }
+            }
+            return result;
+        }
+
         public int SumRating0(string recordId)
         {
             return _context.MES_Audit_Rate_D.Where(x => x.Record_ID == recordId).Sum(x => x.Rating_0);

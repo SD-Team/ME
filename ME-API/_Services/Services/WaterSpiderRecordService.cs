@@ -53,11 +53,31 @@ namespace ME_API._Services.Services
                 AuditType = x.Audit_Type1,
                 AuditDate = x.Record_Date,
                 LineId = x.PDC + " + " + x.Building + " + " + x.Line,
-                Loss = 100 - queryAuditRateD.Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rating_1),
-                Score = queryAuditRateD.Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rating_0)
+                Score = _auditRateDRepository.SumEachRating1InAuditTypeDAndAuditRateD(x.Record_ID)
             });
 
             return await PagedList<WaterSpiderScoreRecordDto>.CreateAsync(data, paginationParams.PageNumber, paginationParams.PageSize, isPaging);
+        }
+
+        public int SumEachRating1InAuditTypeDAndAuditRateD(string recordId)
+        {
+            var auditTypeM = _auditTypeMRepository.FindAll().Where(x => x.Audit_Type1.Trim() == "精實系統/WS").FirstOrDefault();
+            var listAuditTypeD = _auditTypeDRepository.FindAll().Where(x => x.Audit_Type_ID.Trim() == auditTypeM.Audit_Type_ID.Trim()).ToList();
+            var listAuditRateD = _auditRateDRepository.FindAll().Where(x => x.Record_ID == recordId).ToList();
+
+            // biến lưu tổng của tích từng phần tử 
+            int result = 0;
+            foreach (var i in listAuditTypeD)
+            {
+                foreach (var j in listAuditRateD)
+                {
+                    if (i.Audit_Item_ID == j.Audit_Item_ID)
+                    {
+                        result += i.Rating_1 * j.Rating_1;
+                    }
+                }
+            }
+            return result;
         }
 
     }
