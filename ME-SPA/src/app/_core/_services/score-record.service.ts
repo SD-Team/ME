@@ -37,7 +37,6 @@ export class ScoreRecordService {
     return this.http.post<any>(url, auditRateSearch, { observe: 'response', params })
       .pipe(
         map(response => {
-          console.log(response);
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
             paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
