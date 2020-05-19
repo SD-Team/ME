@@ -21,7 +21,7 @@ export class SixsScoreRecordListComponent implements OnInit {
   };
   timeStart: string = "";
   timeEnd: string = "";
-  fromTime: string="" ;
+  fromTime: string = "";
   toTime: string = "";
   pdc: string = "";
   line: string = "";
@@ -128,6 +128,14 @@ export class SixsScoreRecordListComponent implements OnInit {
   }
 
   exportExcel() {
+    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null) {
+      this.toTime = '';
+      this.fromTime = '';
+    }
+    else {
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
+    }
     let object = {
       pdc: this.pdc,
       building: this.building,
@@ -150,8 +158,8 @@ export class SixsScoreRecordListComponent implements OnInit {
     this.building = "";
     this.line = "";
     this.auditType2 = "";
-    this.timeEnd= "";
-    this.timeStart= "";
+    this.timeEnd = "";
+    this.timeStart = "";
   }
 
 }

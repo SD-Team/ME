@@ -1,18 +1,18 @@
 <div>
   <div class="choose-question">
     <div class="row">
-      <div class="col-md-9 col-12">
-        <p class="title-head">Water Spider 稽核評分紀錄</p>
-      </div>
-      <div class="col-md-2 col-6 mb-3 mb-md-2">
-        <label class="badge badge-primary">Language</label>
+      <div class="col-md-2 col-6  mb-md-5">
+        <label class="badge badge-primary">Language Quesion</label>
         <select class="form-control" [(ngModel)]="lang" (ngModelChange)="changeLanguage($event)">
           <option value="vn">Vietnamese</option>
           <option value="en">English</option>
           <option value="zw">Chinese</option>
         </select>
       </div>
-      <div class="col-md-1 col-6">
+      <div class="col-md-8 col-12">
+        <p class="title-head">Water Spider 稽核評分紀錄</p>
+      </div>
+      <div class="col-md-2 col-12">
         <button
           type="button"
           class="btn btn-sm btn-primary float-right"
@@ -60,6 +60,24 @@
           <option value="{{ item }}" *ngFor="let item of lineIDs">{{ item }}</option>
         </select>
       </div>
+      <div class="col-6 col-md-2">
+        <label class="badge badge-warning">ME_PIC</label>
+        <select class="form-control" name="" id="" [(ngModel)]="MEPIC">
+          <option value="{{ item.resp_ID }}" *ngFor="let item of MEPICS">
+            {{ item.resp_ID }} - {{ item.resp_ZW }}
+          </option>
+        </select>
+      </div>
+      <div class="col-6 col-md-2">
+        <label class="badge badge-warning">PD_RESP</label>
+        <select class="form-control" name="" id="" [(ngModel)]="PDRESP">
+          <option value="{{ item.resp_ID }}" *ngFor="let item of PDRESPS">
+            {{ item.resp_ID }} - {{ item.resp_ZW }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
       <div class="col-6 col-md-2">
         <label class="badge badge-warning">Update By</label>
         <input

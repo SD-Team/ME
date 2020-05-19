@@ -5,6 +5,7 @@ import { SmeScoreRecordService } from "./../../../_core/_services/sme-score-reco
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FunctionUtility } from './../../../_core/_utility/function-utility';
+import { ScoreRecordService } from './../../../_core/_services/score-record.service';
 
 @Component({
   selector: "app-sme-score-record-add",
@@ -27,12 +28,17 @@ export class SmeScoreRecordAddComponent implements OnInit {
   pdc: string;
   building: string;
   lineID: string;
+  MEPIC: string = '';
+  MEPICS: any[] = [];
+  PDRESP: string = '';
+  PDRESPS: any[] = [];
   constructor(
     private router: Router,
     private mesOrgService: MesOrgService,
     private smeScoreRecordService: SmeScoreRecordService,
     private alertifyService: AlertifyService,
-    private functionUtility: FunctionUtility
+    private functionUtility: FunctionUtility,
+    private scoreService: ScoreRecordService
   ) {}
 
   ngOnInit() {
@@ -40,6 +46,8 @@ export class SmeScoreRecordAddComponent implements OnInit {
     this.getAllPdc();
     this.getAllLineId();
     this.getAllType2();
+    this.getMEPIC();
+    this.getPDRESP();
   }
   getAllPdc() {
     this.mesOrgService.getAllPdc().subscribe((res) => {
@@ -68,6 +76,19 @@ export class SmeScoreRecordAddComponent implements OnInit {
       });
       this.auditType2s.unshift({ id: "", text: "Select AuditType2" });
       this.loadQuestion();
+    });
+  }
+
+  getMEPIC() {
+    this.scoreService.getListMEPIC().subscribe((res) => {
+      this.MEPICS = res;
+      this.MEPIC = this.MEPICS[0].resp_ID;
+    });
+  }
+  getPDRESP() {
+    this.scoreService.getListPDRESP().subscribe((res) => {
+      this.PDRESPS = res;
+      this.PDRESP = this.PDRESPS[0].resp_ID;
     });
   }
 
@@ -127,8 +148,9 @@ export class SmeScoreRecordAddComponent implements OnInit {
       auditRateM.audit_Type2 = this.auditType2;
       auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
       auditRateM.updated_By = this.user.user_Name;
-
-      auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
+      auditRateM.mE_PIC = this.MEPIC;
+      auditRateM.pD_RESP = this.PDRESP;
+      auditRateM.record_Date = this.functionUtility.returnDayNotTime(this.recordDate);
 
       let param = new AuditRateModel();
       param.listAuditRateD = this.questions;

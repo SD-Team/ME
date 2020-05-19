@@ -12,13 +12,6 @@
             <i class="fa fa-chevron-left"></i> Back
           </button>
 
-          <button
-            type="button"
-            class="btn btn-sm btn-success float-right mr-1"
-            (click)="exportExcel()"
-          >
-            <i class="fa fa-file-excel-o"></i> Excel
-          </button>
         </div>
         <div class="card-body">
           <div class="form-group row">
@@ -98,6 +91,26 @@
                 disabled
                 [value]="auditRateM.updated_Time | date: 'yyyy/MM/dd hh:mm:ss'"
               />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-1 col-form-label" for="hf-email">
+              ME_PIC:
+            </label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled [value]="auditRateM.mE_PIC" />
+            </div>
+            <label class="col-md-1 col-form-label" for="hf-password">
+              PD_RESP:
+            </label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled [value]="auditRateM.pD_RESP" />
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-success"
+                (click)="exportExcel()">
+                <i class="fa fa-file-excel-o"></i> Excel
+              </button>
             </div>
           </div>
           <div class="table-responsive">

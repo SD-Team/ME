@@ -22,17 +22,10 @@
       <div class="col-6 col-md-2">
         <label class="badge badge-warning">Date</label>
         <div class="input-group">
-          <input
-            class="form-control"
-            placeholder="Start"
-            type="text"
-            bsDatepicker
-            [bsConfig]="{
+          <input class="form-control" placeholder="Start" type="text" bsDatepicker [bsConfig]="{
               isAnimated: true,
               dateInputFormat: 'YYYY/MM/DD'
-            }"
-            [(ngModel)]="recordDate"
-          />
+            }" [(ngModel)]="recordDate" />
           <span class="input-group-text">
             <span class="fa fa-calendar"></span>
           </span>
@@ -62,56 +55,65 @@
           </option>
         </select>
       </div>
-      <div class="col-12 col-md-2">
-        <label class="badge badge-warning">Audit Type 2</label>
-        <select
-        [(ngModel)]="auditType2"
-        name="auditType2"
-        id="auditType2"
-        class="select-list form-control"
-        (ngModelChange)="auditType2Change()">
-        <option
-          *ngFor="let item of auditType2s"
-          value="{{ item.id }}">
-          {{ item.text }}
-        </option>
-      </select>
+      <div class="col-6 col-md-2">
+        <label class="badge badge-warning">ME_PIC</label>
+        <select class="form-control" name="" id="" [(ngModel)]="MEPIC">
+          <option value="{{ item.resp_ID }}" *ngFor="let item of MEPICS">
+            {{ item.resp_ID }} - {{ item.resp_ZW }}
+          </option>
+        </select>
+      </div>
+      <div class="col-6 col-md-2">
+        <label class="badge badge-warning">PD_RESP</label>
+        <select class="form-control" name="" id="" [(ngModel)]="PDRESP">
+          <option value="{{ item.resp_ID }}" *ngFor="let item of PDRESPS">
+            {{ item.resp_ID }} - {{ item.resp_ZW }}
+          </option>
+        </select>
       </div>
     </div>
     <div class="form-group row">
+      <div class="col-12 col-md-2">
+        <label class="badge badge-warning">Audit Type 2</label>
+        <select [(ngModel)]="auditType2" name="auditType2" id="auditType2" class="select-list form-control"
+          (ngModelChange)="auditType2Change()">
+          <option *ngFor="let item of auditType2s" value="{{ item.id }}">
+            {{ item.text }}
+          </option>
+        </select>
+      </div>
       <div class="col-6 col-md-2">
         <label class="badge badge-warning">Update By</label>
         <input class="form-control" type="text" name="model_name" [value]="user.user_Name" disabled />
       </div>
       <div class="col-6 col-md-2">
         <label class="badge badge-warning">Update Time</label>
-        <input class="form-control" type="text" name="model_name" disabled [value]="today | date: 'yyyy/MM/dd HH:mm:ss'" />
+        <input class="form-control" type="text" name="model_name" disabled
+          [value]="today | date: 'yyyy/MM/dd HH:mm:ss'" />
       </div>
     </div>
   </div>
   <div class="question">
     <div *ngFor="let item of questions; let i = index">
-      <p><b>{{item.audit_Item_ID}}. {{lang === 'en' ? item.quesionEN : lang === 'zw' ? item.quesionZW : item.quesionLL}}</b></p>
-      <label class="container"
-        >N/A
-        <input type="radio" name="{{i}}" (click)="checkChange(item, 3)"/>
+      <p><b>{{item.audit_Item_ID}}.
+          {{lang === 'en' ? item.quesionEN : lang === 'zw' ? item.quesionZW : item.quesionLL}}</b></p>
+      <label class="container">N/A
+        <input type="radio" name="{{i}}" (click)="checkChange(item, 3)" />
         <span class="checkmark"></span>
       </label>
       <label class="container">
         0
-        <input type="radio" name="{{i}}" (click)="checkChange(item, 0)"  />
+        <input type="radio" name="{{i}}" (click)="checkChange(item, 0)" />
         <span class="checkmark"></span>
       </label>
-      <label class="container"
-        >1
-        <input type="radio" name="{{i}}" (click)="checkChange(item, 1)"/>
+      <label class="container">1
+        <input type="radio" name="{{i}}" (click)="checkChange(item, 1)" />
         <span class="checkmark"></span>
       </label>
-      <label class="container"
-      >2
-      <input type="radio" name="{{i}}" (click)="checkChange(item, 2)"/>
-      <span class="checkmark"></span>
-    </label>
+      <label class="container">2
+        <input type="radio" name="{{i}}" (click)="checkChange(item, 2)" />
+        <span class="checkmark"></span>
+      </label>
       <div *ngIf="item.rating_0 == 1" class="row">
         <div class="col-12">
           <label>Remake :</label>

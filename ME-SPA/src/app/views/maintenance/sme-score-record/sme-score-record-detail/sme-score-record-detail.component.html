@@ -7,9 +7,6 @@
           <button type="button" class="btn btn-sm btn-primary float-right" (click)="back()">
             <i class="fa fa-chevron-left"></i> Back
           </button>
-          <button type="button" class="btn btn-sm btn-query1 btn-success float-right mr-3" (click)="exportExcelDetail()">
-            <i class="fa fa-file-excel-o"></i> Excel
-          </button>
         </div>
         <div class="card-body">
           <div class="form-group row">
@@ -21,43 +18,55 @@
             <div class="col-md-2">
               <input type="text" class="form-control" [(ngModel)]="auditRateM.pdc" disabled />
             </div>
-            <label class="col-md-1 col-form-label" for="hf-email"
-              >Building:
+            <label class="col-md-1 col-form-label" for="hf-email">Building:
             </label>
             <div class="col-md-2">
               <input type="text" class="form-control" [(ngModel)]="auditRateM.building" disabled />
             </div>
-            <label class="col-md-1 col-form-label" for="hf-password"
-              >Line</label
-            >
+            <label class="col-md-1 col-form-label" for="hf-password">Line</label>
             <div class="col-md-2">
               <input type="text" class="form-control" [(ngModel)]="auditRateM.line" disabled />
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-md-1 col-form-label" for="hf-email"
-              >Audit_Type_1:
+            <label class="col-md-1 col-form-label" for="hf-email">Audit_Type_1:
             </label>
             <div class="col-md-2">
               <input type="text" class="form-control" [(ngModel)]="auditRateM.audit_Type1" disabled />
             </div>
-            <label class="col-md-1 col-form-label" for="hf-password"
-              >Audit_Type_2</label
-            >
+            <label class="col-md-1 col-form-label" for="hf-password">Audit_Type_2</label>
             <div class="col-md-2">
               <input type="text" class="form-control" [(ngModel)]="auditRateM.audit_Type2" disabled />
             </div>
-            <label class="col-md-1 col-form-label" for="hf-email"
-              >Update_User:
+            <label class="col-md-1 col-form-label" for="hf-email">Update_User:
             </label>
             <div class="col-md-2">
               <input type="text" class="form-control" [(ngModel)]="auditRateM.updated_By" disabled />
             </div>
-            <label class="col-md-1 col-form-label" for="hf-password"
-              >Update_Time</label
-            >
+            <label class="col-md-1 col-form-label" for="hf-password">Update_Time</label>
             <div class="col-md-2">
-              <input type="text" class="form-control" [value]="auditRateM.updated_Time | date: 'yyyy/MM/dd HH:mm:ss'" disabled />
+              <input type="text" class="form-control" [value]="auditRateM.updated_Time | date: 'yyyy/MM/dd HH:mm:ss'"
+                disabled />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-1 col-form-label" for="hf-email">
+              ME_PIC:
+            </label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled [value]="auditRateM.mE_PIC" />
+            </div>
+            <label class="col-md-1 col-form-label" for="hf-password">
+              PD_RESP:
+            </label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" disabled [value]="auditRateM.pD_RESP" />
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-success"
+                (click)="exportExcelDetail()">
+                <i class="fa fa-file-excel-o"></i> Excel
+              </button>
             </div>
           </div>
           <div class="table-responsive">
@@ -84,34 +93,21 @@
                   <td>{{ item.remark }}</td>
 
                   <td *ngIf="item.rating0 == 1">
-                    <img
-                      *ngIf="chkImage(item.uplloadPicture)"
-                      [src]="
+                    <img *ngIf="chkImage(item.uplloadPicture)" [src]="
                         item.uplloadPicture === null
                           ? url + 'no-image.jpg'
                           : url + item.uplloadPicture
-                      "
-                      width="100%"
-                      width="60"
-                    />
-                    <video
-                      *ngIf="!chkImage(item.uplloadPicture)"
-                      width="100%"
-                      [src]="
+                      " width="100%" width="60" />
+                    <video *ngIf="!chkImage(item.uplloadPicture)" width="100%" [src]="
                         item.uplloadPicture === null
                           ? url + 'no-image.jpg'
                           : url + item.uplloadPicture
-                      "
-                      controls
-                      width="100"
-                    ></video>
+                      " controls width="100"></video>
                     <label class="btn btn-primary upload">
                       Upload
                       <input type="file" class="uploadFile img" value="Upload Photo"
                         style="width: 0px; height: 0px; overflow: hidden;"
-                        (change)="onSelectFile($event, item.auditItemId)"
-                        #fileImageB4
-                      />
+                        (change)="onSelectFile($event, item.auditItemId)" #fileImageB4 />
                     </label>
                   </td>
                   <td *ngIf="item.rating0 != 1"></td>

@@ -84,6 +84,13 @@ export class ScoreRecordService {
     return this.http.get<any>(this.baseUrl + 'AuditType/audittype2by6s', {});
   }
 
+  getListMEPIC() {
+    return this.http.get<any>(this.baseUrl + 'AuditRate/getmepic', {});
+  }
+  getListPDRESP() {
+    return this.http.get<any>(this.baseUrl + 'AuditRate/getpdresp', {});
+  }
+
   getQuestion(auditType1: string, auditType2: string) {
     debugger
     return this.http.get<ScoreRecordQuestion[]>(this.baseUrl + 'AuditRate/GetListQuesRecord', {params : {

@@ -135,6 +135,14 @@ export class SmeScoreRecordListComponent implements OnInit {
   }
 
   exportExcel() {
+    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null ) {
+      this.toTime = '';
+      this.fromTime = '';
+    }
+    else {
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
+    }
     let object = {
       pdc: this.pdc,
       building: this.building,

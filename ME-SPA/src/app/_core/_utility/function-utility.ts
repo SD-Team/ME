@@ -14,7 +14,8 @@ export class FunctionUtility {
      * Nhận vào DateTime
      * Trả ra ngày không lấy giờ
      */
-    ReturnDayNotTime(date: Date) {
+    returnDayNotTime(date: Date) {
+        debugger
         const tmp = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
         return new Date(tmp);
     }
@@ -23,7 +24,7 @@ export class FunctionUtility {
      * Nhận vào DateTime
      * Trả ra chuỗi chỉ có ngày tháng
      */
-    ReturnStringDay(date: Date) {
+    returnStringDay(date: Date) {
         const tmp = String(date).substr(0, 15);
         return tmp;
     }
@@ -32,7 +33,7 @@ export class FunctionUtility {
      * Nhận vào DateTime
      * Trả ra chuỗi có ngày tháng giờ phút mà ko lấy múi giờ
      */
-    ReturnStringDateTime(date: Date) {
+    returnStringDateTime(date: Date) {
         const tmp = String(date).substr(0, 24);
         return tmp;
     }

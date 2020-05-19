@@ -127,8 +127,6 @@ namespace ME_API._Services.Services
             DateTime timeNow = DateTime.Now;
 
             param.auditRateM.Record_ID = record_Id;
-            param.auditRateM.ME_PIC = "HCE";
-            param.auditRateM.PD_RESP = "HCE";
             param.auditRateM.Updated_Time = timeNow;
 
             //Set value record and updateBy  all object in list  

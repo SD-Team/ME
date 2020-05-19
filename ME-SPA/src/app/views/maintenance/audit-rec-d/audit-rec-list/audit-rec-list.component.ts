@@ -10,6 +10,7 @@ import { AuditRecMService } from '../../../../_core/_services/audit-rec-m.servic
 import { AuditTypeService } from '../../../../_core/_services/audit-type.service';
 import { AuditType } from '../../../../_core/_models/audit-type';
 import * as _ from 'lodash';
+import { FunctionUtility } from '../../../../_core/_utility/function-utility';
 
 @Component({
   selector: 'app-audit-rec-list',
@@ -45,7 +46,8 @@ export class AuditRecListComponent implements OnInit {
               private alertify: AlertifyService,
               private router: Router,
               private route: ActivatedRoute,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService,
+              private functionUtility: FunctionUtility) { }
 
   ngOnInit() {
       this.spinner.show();
@@ -91,9 +93,9 @@ export class AuditRecListComponent implements OnInit {
       this.alertify.error('Please option start and end time');
     } else {
       // tslint:disable-next-line:prefer-const
-      let form_date = new Date(this.time_start).toLocaleDateString();
+      let form_date = this.functionUtility.getDateFormat(new Date(this.time_start));
       // tslint:disable-next-line:prefer-const
-      let to_date = new Date(this.time_end).toLocaleDateString();
+      let to_date = this.functionUtility.getDateFormat(new Date(this.time_end));
       this.searchKey = true;
       // tslint:disable-next-line:prefer-const
       let object = {
@@ -120,9 +122,8 @@ export class AuditRecListComponent implements OnInit {
   exportExcel() {
     if (this.searchKey) {
       // tslint:disable-next-line:prefer-const
-      let form_date = new Date(this.time_start).toLocaleDateString();
-      // tslint:disable-next-line:prefer-const
-      let to_date = new Date(this.time_end).toLocaleDateString();
+      let form_date = this.functionUtility.getDateFormat(new Date(this.time_start));
+      let to_date = this.functionUtility.getDateFormat(new Date(this.time_end));
       this.searchKey = true;
       // tslint:disable-next-line:prefer-const
       let object = {

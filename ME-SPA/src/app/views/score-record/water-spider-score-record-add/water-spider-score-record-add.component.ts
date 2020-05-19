@@ -28,6 +28,10 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
   building: string;
   lineID: string;
   auditType2: string;
+  MEPIC: string = '';
+  MEPICS: any[] = [];
+  PDRESP: string = '';
+  PDRESPS: any[] = [];
   constructor(
     private router: Router,
     private mesOrgService: MesOrgService,
@@ -41,6 +45,8 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
     this.getAllPdc();
     this.getAllLineId();
     this.loadQuestion();
+    this.getMEPIC();
+    this.getPDRESP();
   }
   getAllPdc() {
     this.mesOrgService.getAllPdc().subscribe((res) => {
@@ -60,6 +66,18 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
       this.lineID = this.lineIDs[0];
     });
   }
+  getMEPIC() {
+    this.scoreService.getListMEPIC().subscribe((res) => {
+      this.MEPICS = res;
+      this.MEPIC = this.MEPICS[0].resp_ID;
+    });
+  }
+  getPDRESP() {
+    this.scoreService.getListPDRESP().subscribe((res) => {
+      this.PDRESPS = res;
+      this.PDRESP = this.PDRESPS[0].resp_ID;
+    });
+  }
   back() {
     this.router.navigate(['maintenance/water-spider-score-record']);
   }
@@ -73,8 +91,9 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
       auditRateM.audit_Type2 = "";
       auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
       auditRateM.updated_By = this.user.user_Name;
-
-      auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
+      auditRateM.mE_PIC = this.MEPIC;
+      auditRateM.pD_RESP = this.PDRESP;
+      auditRateM.record_Date = this.functionUtility.returnDayNotTime(this.recordDate);
 
       let param = new AuditRateModel();
       param.listAuditRateD = this.questions;
