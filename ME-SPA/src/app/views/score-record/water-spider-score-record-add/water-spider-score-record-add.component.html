@@ -114,16 +114,16 @@
     <button type="button" class="btn btn-add-new btn-primary">
       <i class="fa fa-envelope"></i><span style="margin-left: 2px;"> E-mail</span>
     </button>
-  
-    <button type="button" class="btn btn-add-new btn-danger">
+
+    <button type="button" class="btn btn-add-new btn-danger" (click)="cancel()">
       <i class="fa fa-ban"></i> Cancel
     </button>
-  
-    <button type="button" class="btn btn-add-new btn-success" (click)="saveAndNew()">
+
+    <button type="button" class="btn btn-add-new btn-success" (click)="saveAll(1)">
       <i class="fa fa-check"></i> Save & New
     </button>
-  
-    <button type="button" class="btn btn-add-new btn-success" (click)="saveNoNew()">
+
+    <button type="button" class="btn btn-add-new btn-success" (click)="saveAll(2)">
       <i class="fa fa-check"></i> Save
     </button>
   </div>

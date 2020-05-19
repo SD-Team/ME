@@ -63,48 +63,49 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
   back() {
     this.router.navigate(['maintenance/water-spider-score-record']);
   }
+  saveAll(check) {
 
-  saveAndNew() {
-    this.save();
-    // load lại giá trị ban đầu
-    this.pdc = this.pdcs[0];
-    this.building = this.buildings[0];
-    this.lineID = this.lineIDs[0];
-  }
-  saveNoNew() {
-    this.save();
-    this.router.navigate(['/maintenance/water-spider-score-record']);
-  }
-  save() {
-    let auditRateM = new AuditRateM();
-    auditRateM.pdc = this.pdc;
-    auditRateM.building = this.building;
-    auditRateM.line = this.lineID;
-    auditRateM.audit_Type1 = '精實系統/WS';
-    auditRateM.audit_Type2 = '';
-    auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
-    auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
-    auditRateM.updated_By = this.user.user_Name;
+      let auditRateM = new AuditRateM();
+      auditRateM.pdc = this.pdc;
+      auditRateM.building = this.building;
+      auditRateM.line = this.lineID;
+      auditRateM.audit_Type1 = "精實系統/WS";
+      auditRateM.audit_Type2 = "";
+      auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
+      auditRateM.updated_By = this.user.user_Name;
 
-    let param = new AuditRateModel();
-    param.listAuditRateD = this.questions;
-    param.auditRateM = auditRateM;
+      auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
 
-    // kiểm tra phải trả lời hết các câu hỏi mới được lưu
-    for (let index = 0; index < this.questions.length; index++) {
-      if (this.questions[index].rate_Na === undefined) {
-        this.alertifyService.error('You must not leave any questions blank!');
-        return;
+      let param = new AuditRateModel();
+      param.listAuditRateD = this.questions;
+      param.auditRateM = auditRateM;
+
+      // kiểm tra phải trả lời hết các câu hỏi mới được lưu
+      for (let index = 0; index < this.questions.length; index++) {
+        if (this.questions[index].rate_Na === undefined) {
+          this.alertifyService.error("Please answer all the questions");
+          return;
+        }
       }
-    }
-    this.scoreService.saveScoreRecord(param).subscribe(() => {
-      this.alertifyService.success('Add Success!');
-    }, (error) => {
-      this.alertifyService.error(error);
-    });
+      this.scoreService.saveScoreRecord(param).subscribe(
+        () => {
 
+          if(check==2){
+            this.router.navigate(["/maintenance/water-spider-score-record"]);
+          }
+          else{
+            this.pdc = this.pdcs[0];
+            this.building = this.buildings[0];
+            this.lineID = this.lineIDs[0];
+            this.loadQuestion();
+          }
+          this.alertifyService.success("success");
+        },
+        (error) => {
+          this.alertifyService.error(error);
+        }
+      );
   }
-
   loadQuestion() {
     const auditType1 = '精實系統/WS';
     const auditType2 = '';
@@ -146,6 +147,12 @@ export class WaterSpiderScoreRecordAddComponent implements OnInit {
 
   changeLanguage(event) {
     this.lang = event;
+    this.loadQuestion();
+  }
+  cancel() {
+    this.pdc = this.pdcs[0];
+    this.building = this.buildings[0];
+    this.lineID = this.lineIDs[0];
     this.loadQuestion();
   }
 }

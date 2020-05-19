@@ -15,7 +15,7 @@ import { AlertifyService } from '../../../../_core/_services/alertify.service';
 export class WaterSpiderScoreRecordListComponent implements OnInit {
   pagination: Pagination = {
     currentPage: 1,
-    itemsPerPage: 1,
+    itemsPerPage: 3,
     totalItems: 1,
     totalPages: 1,
   };
