@@ -8,6 +8,7 @@ import {
   AuditRateModel,
 } from "../../../_core/_models/score-record-question";
 import { AlertifyService } from "../../../_core/_services/alertify.service";
+import { FunctionUtility } from '../../../_core/_utility/function-utility';
 @Component({
   selector: "app-sixs-score-record-add",
   templateUrl: "./sixs-score-record-add.component.html",
@@ -16,6 +17,7 @@ import { AlertifyService } from "../../../_core/_services/alertify.service";
 export class SixsScoreRecordAddComponent implements OnInit {
   questions: ScoreRecordQuestion[] = [];
   user: any = JSON.parse(localStorage.getItem("user"));
+  lang: string = 'en';
   today: Date = new Date();
   recordDate: Date = new Date();
   pdcs: string[];
@@ -30,7 +32,8 @@ export class SixsScoreRecordAddComponent implements OnInit {
     private router: Router,
     private mesOrgService: MesOrgService,
     private scoreService: ScoreRecordService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private functionUtility: FunctionUtility
   ) {}
 
   ngOnInit() {
@@ -118,8 +121,9 @@ export class SixsScoreRecordAddComponent implements OnInit {
       auditRateM.audit_Type2 = this.auditType2;
       auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
       auditRateM.updated_By = this.user.user_Name;
+      debugger
 
-      auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
+      auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
 
       let param = new AuditRateModel();
       param.listAuditRateD = this.questions;
@@ -156,7 +160,8 @@ export class SixsScoreRecordAddComponent implements OnInit {
       auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
       auditRateM.updated_By = this.user.user_Name;
 
-      auditRateM.record_Date = new Date(this.recordDate.toLocaleDateString());
+      debugger
+      auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
 
       let param = new AuditRateModel();
       param.listAuditRateD = this.questions;
@@ -185,6 +190,10 @@ export class SixsScoreRecordAddComponent implements OnInit {
     this.loadQuestion();
   }
   cancel() {
+    this.loadQuestion();
+  }
+  changeLanguage(event) {
+    this.lang = event;
     this.loadQuestion();
   }
 }

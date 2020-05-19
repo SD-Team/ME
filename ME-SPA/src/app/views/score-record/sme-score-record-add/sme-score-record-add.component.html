@@ -1,8 +1,15 @@
 <div>
   <div class="choose-question">
     <div class="row">
-      <div class="col-11">
+      <div class="col-9">
         <p class="title-head">SME 稽核評分紀錄</p>
+      </div>
+      <div class="col-2">
+        <select class="form-control" [(ngModel)]="lang" (ngModelChange)="changeLanguage($event)">
+          <option value="vn">Vietnamese</option>
+          <option value="en">English</option>
+          <option value="zw">Chinese</option>
+        </select>
       </div>
       <div class="col-1">
         <button
@@ -87,7 +94,7 @@
   </div>
   <div class="question">
     <div *ngFor="let item of questions; let i = index">
-      <p><b>{{item.audit_Item_ID}}. {{item.quesion}}</b></p>
+      <p><b>{{item.audit_Item_ID}}. {{lang === 'en' ? item.quesionEN : lang === 'zw' ? item.quesionZW : item.quesionLL}}</b></p>
       <label class="container"
         >N/A
         <input type="radio" name="{{i}}" (click)="checkChange(item, 3)"/>

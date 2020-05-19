@@ -56,7 +56,10 @@ namespace ME_API._Services.Services
                 {
                     Audit_Type_ID = x.Audit_Type_ID,
                     Audit_Item_ID = x.Audit_Item_ID,
-                    Quesion = x.Audit_Item_LL
+                    Quesion = x.Audit_Item_LL,
+                    QuesionLL = x.Audit_Item_LL,
+                    QuesionEN = x.Audit_Item_EN,
+                    QuesionZW = x.Audit_Item_ZW
                 }).ToListAsync();
 
             }

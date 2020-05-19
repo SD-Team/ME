@@ -13,6 +13,11 @@ export class ScopeRecordLayoutComponent implements OnInit {
   ngOnInit() {
   }
 
+  changeLanguage(lang) {
+    localStorage.setItem('language', lang);
+    window.location.reload();
+  }
+
 
   backList() {
       this.router.navigate(['/maintenance/sme-score-record']);
