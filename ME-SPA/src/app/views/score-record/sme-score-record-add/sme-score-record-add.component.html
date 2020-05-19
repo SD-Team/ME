@@ -1,23 +1,19 @@
 <div>
   <div class="choose-question">
     <div class="row">
-      <div class="col-md-9 col-12">
-        <p class="title-head">SME 稽核評分紀錄</p>
-      </div>
-      <div class="col-md-2 col-6 mb-3 mb-md-0">
-        <label class="badge badge-primary">Language</label>
+      <div class="col-md-2 col-6  mb-md-5">
+        <label class="badge badge-primary">Language Quesion</label>
         <select class="form-control" [(ngModel)]="lang" (ngModelChange)="changeLanguage($event)">
           <option value="vn">Vietnamese</option>
           <option value="en">English</option>
           <option value="zw">Chinese</option>
         </select>
       </div>
-      <div class="col-md-1 col-6">
-        <button
-          type="button"
-          class="btn btn-sm btn-primary float-right"
-          (click)="back()"
-        >
+      <div class="col-md-8 col-12">
+        <p class="title-head">SME 稽核評分紀錄</p>
+      </div>
+      <div class="col-md-2 col-12">
+        <button type="button" class="btn btn-sm btn-primary float-right" (click)="back()">
           <i class="fa fa-chevron-left"></i> Back
         </button>
       </div>
@@ -66,16 +62,16 @@
           </option>
         </select>
       </div>
-      <div class="col-6 col-md-2">
+      <div class="col-12 col-md-2">
         <label class="badge badge-warning">Audit Type 2</label>
         <select
-        [(ngModel)]="selectType2"
+        [(ngModel)]="auditType2"
         name="auditType2"
         id="auditType2"
         class="select-list form-control"
         (ngModelChange)="auditType2Change()">
         <option
-          *ngFor="let item of selectType2s"
+          *ngFor="let item of auditType2s"
           value="{{ item.id }}">
           {{ item.text }}
         </option>
@@ -126,7 +122,7 @@
       </div>
     </div>
   </div>
-  <div class="ml-1 mt-2"  *ngIf="questions.length !=0" >
+  <div class="ml-1 mt-2" *ngIf="questions.length !=0">
     <button type="button" class="btn btn-add-new btn-primary">
       <i class="fa fa-envelope"></i><span style="margin-left: 2px;"> E-mail</span>
     </button>
@@ -135,13 +131,12 @@
       <i class="fa fa-ban"></i> Cancel
     </button>
 
-    <button type="button" class="btn btn-add-new btn-success" (click)="SaveAndNext()">
+    <button type="button" class="btn btn-add-new btn-success" (click)="saveAll(1)">
       <i class="fa fa-check"></i> Save & New
     </button>
 
-    <button type="button" class="btn btn-add-new btn-success"  (click)="save()" >
+    <button type="button" class="btn btn-add-new btn-success" (click)="saveAll(2)">
       <i class="fa fa-check"></i> Save
     </button>
-
   </div>
 </div>

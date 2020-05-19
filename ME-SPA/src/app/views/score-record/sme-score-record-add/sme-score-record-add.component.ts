@@ -20,8 +20,8 @@ export class SmeScoreRecordAddComponent implements OnInit {
   pdcs: string[];
   buildings: string[];
   lineIDs: string[];
-  selectType2s: any[] = [];
-  selectType2: string = "";
+  auditType2s: any[] = [];
+  auditType2: string = "";
   btAuditType2: boolean;
   isShow: true;
   pdc: string;
@@ -62,23 +62,27 @@ export class SmeScoreRecordAddComponent implements OnInit {
 
   getAllType2() {
     this.smeScoreRecordService.getAuditType2Score().subscribe((res) => {
-      this.selectType2s = res.map((item) => {
+      this.auditType2s = res.map((item) => {
         console.log(res);
         return { id: item, text: item };
       });
-      this.selectType2s.unshift({ id: "", text: "Select AuditType2" });
+      this.auditType2s.unshift({ id: "", text: "Select AuditType2" });
       this.loadQuestion();
     });
   }
 
   loadQuestion() {
     const auditType1 = "SME2.0";
-    const auditType2 = this.selectType2;
+    const auditType2 = this.auditType2;
     this.smeScoreRecordService
       .getQuestion(auditType1, auditType2)
       .subscribe((res) => {
         this.questions = res;
       });
+  }
+
+  back() {
+    this.router.navigate(["maintenance/sme-score-record"]);
   }
 
   checkChange(item: SmeRecordQuestion, number) {
@@ -111,75 +115,49 @@ export class SmeScoreRecordAddComponent implements OnInit {
       item.remark = null;
     }
   }
-  save() {
-    let auditRateM = new AuditRateM();
-    auditRateM.pdc = this.pdc;
-    auditRateM.building = this.building;
-    auditRateM.line = this.lineID;
-    auditRateM.audit_Type1 = "SME2.0";
-    auditRateM.audit_Type2 = this.selectType2;
-    auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
-    auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
-    auditRateM.updated_By = this.user.user_Name;
+  saveAll(check) {
+    if (this.auditType2 == "") {
+      this.alertifyService.error("Please option auditType2");
+    } else {
+      let auditRateM = new AuditRateM();
+      auditRateM.pdc = this.pdc;
+      auditRateM.building = this.building;
+      auditRateM.line = this.lineID;
+      auditRateM.audit_Type1 = "SME2.0";
+      auditRateM.audit_Type2 = this.auditType2;
+      auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
+      auditRateM.updated_By = this.user.user_Name;
 
-    let param = new AuditRateModel();
-    param.listAuditRateD = this.questions;
-    param.auditRateM = auditRateM;
+      auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
 
-    // kiểm tra phải trả lời hết các câu hỏi mới được lưu
-    for (let index = 0; index < this.questions.length; index++) {
-      if (this.questions[index].rate_Na === undefined) {
-        this.alertifyService.error("Please answer all the questions");
-        return;
+      let param = new AuditRateModel();
+      param.listAuditRateD = this.questions;
+      param.auditRateM = auditRateM;
+
+      // kiểm tra phải trả lời hết các câu hỏi mới được lưu
+      for (let index = 0; index < this.questions.length; index++) {
+        if (this.questions[index].rate_Na === undefined) {
+          this.alertifyService.error("Please answer all the questions");
+          return;
+        }
       }
+      this.smeScoreRecordService.saveScoreRecord(param).subscribe(
+        () => {
+
+          if (check==2){
+            this.router.navigate(["maintenance/sme-score-record"]);
+          }
+          else{
+            this.questions = [];
+            this.auditType2 = "";
+          }
+          this.alertifyService.success("success");
+        },
+        (error) => {
+          this.alertifyService.error(error);
+        }
+      );
     }
-    this.smeScoreRecordService.saveScoreRecord(param).subscribe(
-      () => {
-        this.alertifyService.success("Add Success");
-        this.router.navigate(["maintenance/sme-score-record"]);
-      },
-      (error) => {
-        this.alertifyService.error(error);
-      }
-    );
-  }
-
-  SaveAndNext() {
-    let auditRateM = new AuditRateM();
-    auditRateM.pdc = this.pdc;
-    auditRateM.building = this.building;
-    auditRateM.line = this.lineID;
-    auditRateM.audit_Type1 = "SME2.0";
-    auditRateM.audit_Type2 = this.selectType2;
-    auditRateM.audit_Type_ID = this.questions[0].audit_Type_ID;
-    auditRateM.record_Date = this.functionUtility.ReturnDayNotTime(this.recordDate);
-    auditRateM.updated_By = this.user.user_Name;
-
-    let param = new AuditRateModel();
-    param.listAuditRateD = this.questions;
-    param.auditRateM = auditRateM;
-
-    // kiểm tra phải trả lời hết các câu hỏi mới được lưu
-    for (let index = 0; index < this.questions.length; index++) {
-      if (this.questions[index].rate_Na === undefined) {
-        this.alertifyService.error("Please answer all the questions");
-        return;
-      }
-    }
-    this.smeScoreRecordService.saveScoreRecord(param).subscribe(
-      () => {
-        this.alertifyService.success("Add Success");
-        this.loadSelectSaveAndNext();
-      },
-      (error) => {
-        this.alertifyService.error(error);
-      }
-    );
-  }
-
-  loadSelectSaveAndNext() {
-    this.questions = [];
-    this.selectType2 = '';
   }
 
 
@@ -189,10 +167,6 @@ export class SmeScoreRecordAddComponent implements OnInit {
 
   cancel() {
     this.loadQuestion();
-  }
-
-  back() {
-    this.router.navigate(["maintenance/sme-score-record"]);
   }
   changeLanguage(event) {
     this.lang = event;
