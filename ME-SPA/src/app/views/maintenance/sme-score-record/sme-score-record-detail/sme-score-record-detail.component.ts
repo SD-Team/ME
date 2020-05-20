@@ -86,6 +86,7 @@ export class SmeScoreRecordDetailComponent implements OnInit {
               );
             }
           );
+          this.loadDetail();
         } else {
           this.alertifyService.error("Images cannot be larger than 2MB");
         }

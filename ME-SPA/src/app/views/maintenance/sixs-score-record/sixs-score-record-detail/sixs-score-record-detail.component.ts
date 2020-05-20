@@ -82,17 +82,20 @@ export class SixsScoreRecordDetailComponent implements OnInit {
           formData.append("auditItemId", auditItemId);
           this.scoreRecordService.uploadPicture(formData).subscribe(
             () => {
-              this.loadData();
+              
               this.alertify.success(
                 "Upload image of " + auditItemId + " successfully"
               );
+              this.loadData();
             },
             (error) => {
               this.alertify.error(
                 "Upload image of " + auditItemId + " failed"
               );
             }
+           
           );
+          this.loadData();
         } else {
           this.alertify.error("Images cannot be larger than 2MB");
         }

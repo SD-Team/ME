@@ -47,7 +47,7 @@ namespace ME_API._Services.Services
                 queryAuditRateM = queryAuditRateM.Where(x => x.Record_Date >= d1 && x.Record_Date <= d2);
             }
 
-            var data = queryAuditRateM.Select(x => new WaterSpiderScoreRecordDto
+            var data = queryAuditRateM.OrderByDescending(x => x.Updated_Time).Select(x => new WaterSpiderScoreRecordDto
             {
                 RecordId = x.Record_ID,
                 AuditType = x.Audit_Type1,

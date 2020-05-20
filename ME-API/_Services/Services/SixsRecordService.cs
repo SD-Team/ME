@@ -53,7 +53,7 @@ namespace ME_API._Services.Services
                 queryAuditRateM = queryAuditRateM.Where(x => x.Record_Date >= d1 && x.Record_Date <= d2);
             }
 
-            var data = queryAuditRateM.Select(x => new SixsScoreRecordDto
+            var data = queryAuditRateM.OrderByDescending(x => x.Updated_Time).Select(x => new SixsScoreRecordDto
             {
                 RecordId = x.Record_ID,
                 AuditDate = x.Record_Date,

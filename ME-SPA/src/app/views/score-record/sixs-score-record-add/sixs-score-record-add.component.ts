@@ -157,12 +157,12 @@ export class SixsScoreRecordAddComponent implements OnInit {
       this.scoreService.saveScoreRecord(param).subscribe(
         () => {
         
-          if(check==2){
-            this.router.navigate(["maintenance/6s-score-record"]);
-          }
-          else{
+          if(check!=2){
             this.questions = [];
             this.auditType2 = "";
+          }
+          else{
+            this.router.navigate(["maintenance/6s-score-record"]);
           }
           this.alertifyService.success("success");
         },

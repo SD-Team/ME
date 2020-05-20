@@ -103,9 +103,7 @@ export class SixsScoreRecordListComponent implements OnInit {
     });
   }
   pageChanged(event: any): void {
-
     this.pagination.currentPage = event.page;
-
     this.loadData();
 
   }
@@ -113,14 +111,7 @@ export class SixsScoreRecordListComponent implements OnInit {
     this.router.navigate(["/record/record-add/6s-scored-record-add"]);
   }
   search() {
-    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null) {
-      this.toTime = '';
-      this.fromTime = '';
-    }
-    else {
-      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
-      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
-    }
+    this.checkTime();
     this.spinner.show();
     this.pagination.currentPage = 1;
     this.loadData();
@@ -128,14 +119,7 @@ export class SixsScoreRecordListComponent implements OnInit {
   }
 
   exportExcel() {
-    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null) {
-      this.toTime = '';
-      this.fromTime = '';
-    }
-    else {
-      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
-      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
-    }
+    this.checkTime();
     let object = {
       pdc: this.pdc,
       building: this.building,
@@ -153,13 +137,26 @@ export class SixsScoreRecordListComponent implements OnInit {
 
 
   clearSearch() {
-    debugger;
     this.pdc = "";
     this.building = "";
     this.line = "";
     this.auditType2 = "";
     this.timeEnd = "";
     this.timeStart = "";
+    this.toTime = "";
+    this.fromTime = "";
+    this.loadData();
+  }
+
+  checkTime() {
+    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null || new Date(this.timeStart).getTime() > new Date(this.timeEnd).getTime()) {
+      this.toTime = '';
+      this.fromTime = '';
+    }
+    else {
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
+    }
   }
 
 }

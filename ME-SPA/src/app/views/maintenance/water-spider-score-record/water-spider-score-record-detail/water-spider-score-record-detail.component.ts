@@ -67,6 +67,7 @@ export class WaterSpiderScoreRecordDetailComponent implements OnInit {
                 'Upload image of ' + auditItemId + ' failed'
               );
             });
+            this.loadData();
         }
         else {
           this.alertifyService.error('Images cannot be larger than 2MB');

@@ -99,28 +99,14 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
 
   search() {
     this.spinner.show();
-    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null ) {
-      this.toTime = '';
-      this.fromTime = '';
-    }
-    else {
-      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
-      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
-    }
+    this.checkTime();
     this.pagination.currentPage = 1;
     this.loadData();
     this.spinner.hide();
   }
   exportExcel() {
     this.spinner.show();
-    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null ) {
-      this.toTime = '';
-      this.fromTime = '';
-    }
-    else {
-      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
-      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
-    }
+    this.checkTime();
     let object = {
       pdc: this.pdc,
       building: this.building,
@@ -130,19 +116,33 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       auditType2: ''
     };
     this.waterSpiderService.exportExcel(object);
-   this.spinner.hide();
+    this.spinner.hide();
   }
 
   detail(recordId: string) {
     this.router.navigate(['/maintenance/water-spider-score-record/detail', recordId]);
   }
 
-  clearSearch(){
-   this.pdc = "";
+  clearSearch() {
+    this.pdc = "";
     this.building = "";
     this.line = "";
     this.timeEnd = "";
     this.timeStart = "";
+    this.fromTime="";
+    this.toTime="";
+    this.loadData();
+  }
+
+  checkTime() {
+    if (this.timeStart === '' || this.timeEnd === '' || this.timeStart === null || this.timeEnd === null || new Date(this.timeStart).getTime() > new Date(this.timeEnd).getTime()) {
+      this.toTime = '';
+      this.fromTime = '';
+    }
+    else {
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
+    }
   }
 
 }
