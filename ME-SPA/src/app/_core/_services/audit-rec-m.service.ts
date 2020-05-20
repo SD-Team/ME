@@ -36,6 +36,9 @@ export class AuditRecMService {
         }),
     );
   }
+  getListRecordID() {
+    return this.http.get<any>(this.baseUrl + 'auditRecM/recordIDs', {});
+  }
   getListBuilding() {
     return this.http.get<any>(this.baseUrl + 'auditRecM/buildings', {});
   }

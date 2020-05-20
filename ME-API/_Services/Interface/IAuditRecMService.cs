@@ -12,8 +12,9 @@ namespace ME_API._Services.Interface
         Task<List<string>> GetAllModelName();
         Task<List<string>> GetAllModelNo();
         Task<List<string>> GetAllPDC();
-       
         Task<bool> AddAuditRecM(AuditRecMViewModel model);
         Task<bool> ImportExcel(string filePath);
+        Task<string> GetRecordIdRate();
+        Task<List<string>> GetAllRecordID();
     }
 }

@@ -15,6 +15,7 @@ import { AlertifyService } from '../../../../_core/_services/alertify.service';
 export class AuditRecDAddComponent implements OnInit {
   auditRecD: any = {};
   flag: string;
+  recordIDs: any = [];
   auditType: any = [];
   auditItems: any = [];
   pdPics: any = [];
@@ -40,6 +41,7 @@ export class AuditRecDAddComponent implements OnInit {
     if (this.auditRecD.audit_Item !== undefined) {
       this.auditRecD.audit_Item =  this.auditRecD.audit_Item.trim();
     }
+    this.getListRecordID();
     this.getListAuditTypeVersion();
     this.getAllPdPic();
     this.getAllMePic();
@@ -96,6 +98,11 @@ export class AuditRecDAddComponent implements OnInit {
     this.auditTypeDService.searchauditItem(this.auditRecD.audit_Type_ID).subscribe(res => {
       this.auditItems = res;
       this.auditRecD.audit_Item = this.auditItems[0];
+    });
+  }
+  getListRecordID() {
+    this.auditRecMService.getListRecordID().subscribe(res => {
+      this.recordIDs = res;
     });
   }
   getAllPdPic() {

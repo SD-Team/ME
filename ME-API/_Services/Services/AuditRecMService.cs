@@ -39,7 +39,7 @@ namespace ME_API._Services.Services
         {
             var recored_Time = DateTime.Parse(model.Record_Time.ToString());
             AuditRecMDto data = new AuditRecMDto();
-            data.Record_ID = model.Record_ID.Trim();
+            data.Record_ID = await this.GetRecordIdRate();
             data.Record_Time = recored_Time;
             data.PDC = model.PDC.Trim();
             data.Building = model.Building.Trim();
@@ -92,10 +92,32 @@ namespace ME_API._Services.Services
             return await _repoAuditRecM.FindAll().GroupBy(x => x.PDC).Select(x => x.Key).ToListAsync();
         }
 
+        public async Task<List<string>> GetAllRecordID()
+        {
+            var lists = await _repoAuditRecM.GetAll().Select(x => x.Record_ID).Distinct().ToListAsync();
+            return lists;
+        }
 
         public AuditRecMDto GetById(object id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public async Task<string> GetRecordIdRate()
+        {
+            string record_Id = "RE" + DateTime.Now.Year.ToString().Substring(2) + (DateTime.Now.Month < 10 ? ("0" + DateTime.Now.Month) : DateTime.Now.Month.ToString());
+            var item = await _repoAuditRecM.FindAll(x => x.Record_ID.Contains(record_Id)).OrderByDescending(x => x.Record_ID).FirstOrDefaultAsync();
+            if (item != null)
+            {
+                var serinumber = item.Record_ID.Substring(7).ToInt();
+                var tmp = (serinumber >= 999) ? (serinumber + 1).ToString() : (serinumber >= 99) ? ("0" + (serinumber + 1)) : (serinumber < 9) ? ("000" + (serinumber + 1)) : ("00" + (serinumber + 1));
+                record_Id = "RE" + DateTime.Now.Year.ToString().Substring(2) + (DateTime.Now.Month < 10 ? ("0" + DateTime.Now.Month) : DateTime.Now.Month.ToString()) + tmp;
+            }
+            else
+            {
+                record_Id = "RE" + DateTime.Now.Year.ToString().Substring(2) + (DateTime.Now.Month < 10 ? ("0" + DateTime.Now.Month) : DateTime.Now.Month.ToString()) + "0001";
+            }
+            return record_Id;
         }
 
         public async Task<PagedList<AuditRecMDto>> GetWithPaginations(PaginationParams param)

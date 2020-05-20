@@ -51,8 +51,12 @@ namespace ME_API.Controllers
             return Ok(data);
         }
 
+        [HttpGet("recordIDs")]
+        public async Task<IActionResult> GetAllRecordID() {
+            var data = await _service.GetAllRecordID();
+            return Ok(data);
+        }
         
-
         [HttpGet("modelNames")]
         public async Task<IActionResult> GetAllModelName() {
             var data = await _service.GetAllModelName();
