@@ -4,7 +4,6 @@ namespace ME_API.ViewModel
 {
     public class AuditRecDViewModel
     {
-         public long ID {get;set;}
         public string Record_ID {get;set;}
         public int Item_no {get;set;}
         public string ERCS {get;set;}

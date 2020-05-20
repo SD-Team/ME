@@ -12,6 +12,14 @@
             <form class="form-horizontal" #addAuditRecDForm="ngForm" (ngSubmit)="addAuditRecDForm.valid && saveAndNext()">
                 <div class="card-body">
                     <div class="form-group row">
+                        <label class="col-md-1 col-form-label" for="Record_ID">Record_ID</label>
+                        <div class="col-md-2">
+                            <select name="" [(ngModel)]="auditRecD.record_ID" id="" name="record_ID" class="form-control" required>
+                                <option *ngFor="let item of recordIDs" value="{{item}}">{{item}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                     <label class="col-md-1 col-form-label" for="Model_No">Item_No</label>
                     <div class="col-md-2">
                         <input type="number" [(ngModel)]="auditRecD.item_no" class="form-control" name="item_no" placeholder="Item No" required>

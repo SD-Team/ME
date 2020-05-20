@@ -31,9 +31,6 @@ export class AuditRecMAddComponent implements OnInit {
   saveAndNext() {
     this.auditRecM.model_No = this.modelNo;
     this.auditRecM.model_Name = this.modelName;
-    // const arrTime = new Date(this.record_Time);
-    // this.auditRecM.record_Time = (arrTime.getFullYear() + '/' + (arrTime.getMonth() + 1) + '/' + arrTime.getDate());
-    this.auditRecM.record_ID = this.auditRecMService.setStringRecordID(this.auditRecM.record_Time);
     this.auditRecMService.create(this.auditRecM).subscribe(res => {
       this.alertifyService.success('Add succed!');
     }, error => {
@@ -43,7 +40,6 @@ export class AuditRecMAddComponent implements OnInit {
   save() {
     this.auditRecM.model_No = this.modelNo;
     this.auditRecM.model_Name = this.modelName;
-    this.auditRecM.record_ID = 'REC' + this.auditRecMService.setStringRecordID(this.auditRecM.record_Time);
     this.auditRecMService.create(this.auditRecM).subscribe(res => {
       this.alertifyService.success('Add succed!');
       this.router.navigate(['/maintenance/audit-rec/audit-recM-list']);
