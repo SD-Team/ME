@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using Aspose.Cells;
 using ME_API._Services.Interface;
 using ME_API.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ME_API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class SixsRecordController : ControllerBase

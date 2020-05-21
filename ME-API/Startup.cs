@@ -22,96 +22,91 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ME_API
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
+namespace ME_API {
+    public class Startup {
+        public Startup (IConfiguration configuration) {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCors();
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers();
+        public void ConfigureServices (IServiceCollection services) {
+            services.AddCors ();
+            services.AddCors (o => o.AddPolicy ("CorsPolicy", builder => {
+                builder.AllowAnyOrigin ()
+                    .AllowAnyHeader ()
+                    .AllowAnyMethod ().Build ();
+            }));
+            services.AddDbContext<DataContext> (options => options.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
+            services.AddControllers ();
             //Auto Mapper
-            services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IMapper>(sp =>
-            {
-                return new Mapper(AutoMapperConfig.RegisterMappings());
+            services.AddAutoMapper (typeof (Startup));
+            services.AddScoped<IMapper> (sp => {
+                return new Mapper (AutoMapperConfig.RegisterMappings ());
             });
-            services.AddSingleton(AutoMapperConfig.RegisterMappings());
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-                {
+            services.AddSingleton (AutoMapperConfig.RegisterMappings ());
+            services.AddAuthentication (JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer (options => {
                     options.RequireHttpsMetadata = false;
                     options.SaveToken = true;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
+                    options.TokenValidationParameters = new TokenValidationParameters {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        IssuerSigningKey = new SymmetricSecurityKey (Encoding.ASCII
+                        .GetBytes (Configuration.GetSection ("AppSettings:Token").Value)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
                 });
 
             //Repository
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IBrandRepository, BrandRepository>();
-            services.AddScoped<IAuditTypeRepository, AuditTypeRepository>();
-            services.AddScoped<IAuditTypeDRepository, AuditTypeDRepository>();
-            services.AddScoped<IAuditPicMRepository, AuditPicMRepository>();
-            services.AddScoped<IAuditPicDRepository, AuditPicDRepository>();
-            services.AddScoped<IAuditRecMRepository, AuditRecMRepository>();
-            services.AddScoped<IAuditRecDRepository, AuditRecDRepository>();
-            services.AddScoped<IMesOrgRepository, MesOrgRepository>();
-            services.AddScoped<IMesMoRepository, MesMoRepository>();
-            services.AddScoped<IAuditRateDRepository, AuditRateDRepository>();
-            services.AddScoped<IAuditRateMRepository, AuditRateMRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository> ();
+            services.AddScoped<IBrandRepository, BrandRepository> ();
+            services.AddScoped<IAuditTypeRepository, AuditTypeRepository> ();
+            services.AddScoped<IAuditTypeDRepository, AuditTypeDRepository> ();
+            services.AddScoped<IAuditPicMRepository, AuditPicMRepository> ();
+            services.AddScoped<IAuditPicDRepository, AuditPicDRepository> ();
+            services.AddScoped<IAuditRecMRepository, AuditRecMRepository> ();
+            services.AddScoped<IAuditRecDRepository, AuditRecDRepository> ();
+            services.AddScoped<IMesOrgRepository, MesOrgRepository> ();
+            services.AddScoped<IMesMoRepository, MesMoRepository> ();
+            services.AddScoped<IAuditRateDRepository, AuditRateDRepository> ();
+            services.AddScoped<IAuditRateMRepository, AuditRateMRepository> ();
 
             //Services
-            services.AddScoped<IBrandService, BrandService>();
-            services.AddScoped<IAuditTypeService, AuditTypeService>();
-            services.AddScoped<IAuditTypeDService, AuditTypeDService>();
-            services.AddScoped<IAuditPicMService, AuditPicMService>();
-            services.AddScoped<IAuditPicDService, AuditPicDService>();
-            services.AddScoped<IAuditRecMService, AuditRecMService>();
-            services.AddScoped<IAuditRecDService, AuditRecDService>();
-            services.AddScoped<IMesOrgService, MesOrgService>();
-            services.AddScoped<IMesMoService, MesMoService>();
-            services.AddScoped<IAuditRateDService, AuditRateDService>();
-            services.AddScoped<IAuditRateMService, AuditRateMService>();
-            services.AddScoped<IAuditRateService, AuditRateService>();
-            services.AddScoped<ISMERecordService,SMERecordService>();
-            services.AddScoped<ISixsRecordService, SixsRecordService>();
-            services.AddScoped<IWaterSpiderRecordService, WaterSpiderRecordService>();
+            services.AddScoped<IBrandService, BrandService> ();
+            services.AddScoped<IAuditTypeService, AuditTypeService> ();
+            services.AddScoped<IAuditTypeDService, AuditTypeDService> ();
+            services.AddScoped<IAuditPicMService, AuditPicMService> ();
+            services.AddScoped<IAuditPicDService, AuditPicDService> ();
+            services.AddScoped<IAuditRecMService, AuditRecMService> ();
+            services.AddScoped<IAuditRecDService, AuditRecDService> ();
+            services.AddScoped<IMesOrgService, MesOrgService> ();
+            services.AddScoped<IMesMoService, MesMoService> ();
+            services.AddScoped<IAuditRateDService, AuditRateDService> ();
+            services.AddScoped<IAuditRateMService, AuditRateMService> ();
+            services.AddScoped<IAuditRateService, AuditRateService> ();
+            services.AddScoped<ISMERecordService, SMERecordService> ();
+            services.AddScoped<ISixsRecordService, SixsRecordService> ();
+            services.AddScoped<IWaterSpiderRecordService, WaterSpiderRecordService> ();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
+        public void Configure (IApplicationBuilder app, IWebHostEnvironment env) {
+            if (env.IsDevelopment ()) {
+                app.UseDeveloperExceptionPage ();
             }
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-            app.UseHttpsRedirection();
-            app.UseRouting();
+            app.UseCors (x => x.AllowAnyHeader ().AllowAnyMethod ().AllowAnyOrigin ());
+            app.UseHttpsRedirection ();
+            app.UseRouting ();
+            app.UseCors ("CorsPolicy");
+            app.UseStaticFiles ();
 
-            app.UseStaticFiles();
+            app.UseAuthentication ();
+            app.UseAuthorization ();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
+            app.UseEndpoints (endpoints => {
+                endpoints.MapControllers ();
             });
         }
     }
