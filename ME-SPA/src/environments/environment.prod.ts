@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'api/',
-  imageUrl: 'http//10.4.5.67/uploaded/image',
+  apiUrl: 'http://10.4.4.151:1010/api/',
+  imageUrl: 'http://10.4.4.151:1010/uploaded/images/',
+  
 };
