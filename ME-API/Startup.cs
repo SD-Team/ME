@@ -59,6 +59,8 @@ namespace ME_API {
                     };
                 });
 
+            
+
             //Repository
             services.AddScoped<IAuthRepository, AuthRepository> ();
             services.AddScoped<IBrandRepository, BrandRepository> ();
