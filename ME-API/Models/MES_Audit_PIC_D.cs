@@ -21,5 +21,6 @@ namespace ME_API.Models
         public string PDC { get; set; }
         public string Building { get; set; }
         public string Language { get; set; }
+        public string Language1 { get; set; }
     }
 }
